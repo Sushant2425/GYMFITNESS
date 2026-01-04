@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">जिम व्यवस्थापन प्रणाली</string>
+
+    <!-- Toolbar / Common -->
+    <string name="welcome">स्वागत आहे</string>
+
+    <!-- Bottom Navigation -->
+    <string name="menu_home">मुख्य</string>
+    <string name="menu_members">सदस्य</string>
+    <string name="menu_payments">पेमेंट</string>
+    <string name="menu_profile">प्रोफाइल</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_dashboard">डॅशबोर्ड</string>
+    <string name="nav_add_member">नवीन सदस्य</string>
+    <string name="nav_all_members">सर्व सदस्य</string>
+    <string name="nav_settings">सेटिंग्स</string>
+    <string name="nav_logout">लॉगआउट</string>
+
+    <string name="nav_reports">अहवाल</string>
+    <string name="nav_inventory">स्टॉक / साठा</string>
+    <string name="nav_inventory_list">स्टॉक पहा</string>
+
+    <string name="navigation_drawer_open">नेव्हिगेशन मेनू उघडा</string>
+    <string name="navigation_drawer_close">नेव्हिगेशन मेनू बंद करा</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">सर्व्हिस कंट्रोल मॅनेजर</string>
+    <string name="forgot_password">पासवर्ड विसरलात?</string>
+    <string name="login">लॉगिन</string>
+    <string name="no_account">खाते नाहीये?</string>
+
+    <!-- Errors / Messages -->
+    <string name="error_enter_email">ईमेल टाका</string>
+    <string name="login_success">लॉगिन यशस्वी</string>
+    <string name="owner_not_found">मालकाची माहिती सापडली नाही</string>
+    <string name="reset_link_sent">पासवर्ड रीसेट लिंक ईमेलवर पाठवली आहे</string>
+
+    <!-- Errors / Messages -->
+    <string name="error_enter_password">पासवर्ड टाका</string>
+    <string name="account_disabled">खाते निष्क्रिय आहे. कृपया अ‍ॅडमिनशी संपर्क करा</string>
+    <string name="login_failed">लॉगिन अयशस्वी: </string>
+    <string name="error_enter_email_reset">पासवर्ड रीसेटसाठी ईमेल टाका</string>
+    <string name="failed_prefix">अयशस्वी: </string>
+
+    <!-- Register Screen -->
+    <string name="register_title">खाते तयार करा</string>
+
+    <string name="error_enter_phone">मोबाईल नंबर टाका</string>
+
+
+
+
+    <!-- Splash Screen -->
+    <string name="splash_title">सर्व्हिस कंट्रोल मॅनेजर</string>
+
+    <!-- Splash Messages -->
+    <string name="no_internet">इंटरनेट कनेक्शन नाही</string>
+    <string name="account_disabled_login">खाते निष्क्रिय आहे! कृपया लॉगिन करा.</string>
+    <string name="login_expired">लॉगिन कालबाह्य झाले आहे, पुन्हा लॉगिन करा</string>
+
+    <string name="settings">सेटिंग्स</string>
+    <string name="language">भाषा</string>
+    <string name="lang_english">इंग्रजी</string>
+    <string name="lang_marathi">मराठी</string>
+    <string name="gym_registration">जिम नोंदणी</string>
+    <string name="join_fitness_journey">आजच तुमचा फिटनेस प्रवास सुरू करा</string>
+    <string name="hint_full_name">पूर्ण नाव</string>
+    <string name="hint_phone">मोबाईल नंबर</string>
+    <string name="hint_email">ई-मेल पत्ता</string>
+    <string name="hint_age">वय</string>
+    <string name="hint_address">पत्ता</string>
+    <string name="hint_emergency_contact">आपत्कालीन संपर्क क्रमांक</string>
+    <string name="hint_password">पासवर्ड</string>
+    <string name="hint_confirm_password">पासवर्ड पुन्हा टाका</string>
+
+    <!-- Gender -->
+    <string name="gender">लिंग</string>
+    <string name="male">पुरुष</string>
+    <string name="female">स्त्री</string>
+    <string name="other">इतर</string>
+
+    <!-- Membership Plans -->
+    <string name="membership_plan">सदस्यत्व योजना</string>
+    <string name="select_plan">सदस्यत्व योजना निवडा</string>
+    <string name="plan_monthly">मासिक - ₹1000</string>
+    <string name="plan_quarterly">त्रैमासिक (3 महिने) - ₹2700</string>
+    <string name="plan_half_yearly">सहा महिने (6 महिने) - ₹5000</string>
+    <string name="plan_yearly">वार्षिक (12 महिने) - ₹9000</string>
+
+    <!-- Terms & Buttons -->
+    <string name="agree_terms">मी अटी व शर्ती आणि गोपनीयता धोरणास सहमत आहे</string>
+    <string name="register">आता नोंदणी करा</string>
+    <string name="already_member">आधीच सदस्य आहात?</string>
+    <string name="back_to_login">लॉगिन</string>
+
+    <!-- Validation Errors -->
+    <string name="error_enter_name">कृपया आपले पूर्ण नाव टाका</string>
+    <string name="error_enter_valid_phone">कृपया वैध 10 अंकी मोबाईल नंबर टाका</string>
+    <string name="error_enter_valid_email">कृपया वैध ई-मेल पत्ता टाका</string>
+    <string name="error_enter_age">कृपया आपले वय टाका</string>
+    <string name="error_age_range">वय 16 ते 80 दरम्यान असावे</string>
+    <string name="error_select_plan">कृपया सदस्यत्व योजना निवडा</string>
+    <string name="error_enter_address">कृपया आपला पत्ता टाका</string>
+    <string name="error_enter_valid_emergency">कृपया वैध 10 अंकी आपत्कालीन संपर्क क्रमांक टाका</string>
+    <string name="error_password_min">पासवर्ड किमान 6 अक्षरांचा असावा</string>
+    <string name="error_password_mismatch">दोन्ही पासवर्ड जुळत नाहीत</string>
+    <string name="error_accept_terms">कृपया अटी व शर्ती स्वीकारा</string>
+
+    <!-- Success & Error Messages -->
+    <string name="register_success">नोंदणी यशस्वी झाली! कृपया लॉगिन करा.</string>
+    <string name="register_failed">नोंदणी अयशस्वी: </string>
+    <string name="register_data_failed">वापरकर्त्याची माहिती जतन करण्यात अयशस्वी</string>
+    <string name="error_prefix">त्रुटी: </string>
+    <string name="gym_name">जिम मास्टर</string>
+    <string name="welcome_back">परत स्वागत आहे! पुढे जाण्यासाठी लॉगिन करा</string>
+
+    <string name="register_now">आता नोंदणी करा</string>
+    <string name="failed_reset">रीसेट ईमेल पाठवण्यात अयशस्वी</string>
+    <string name="open_24_7">२४/७ उपलब्ध</string>
+    <string name="expert_trainers">तज्ञ प्रशिक्षक</string>
+    <string name="modern_equipment">आधुनिक उपकरणे</string>
+    <string name="register_your_gym">आपले जिम आमच्यासोबत नोंदवा</string>
+    <string name="error_enter_gym_name">कृपया जिमचे नाव प्रविष्ट करा</string>
+    <string name="hint_gym_name">जिमचे नाव</string>
+    <string name="hint_owner_name">मालकाचे नाव</string>
+
+    <string name="welcome_app">स्वागत आहे!</string>
+    <string name="select_language">कृपया आपली पसंतीची भाषा निवडा</string>
+    <string name="choose_language">भाषा निवडा</string>
+    <string name="english">English (इंग्रजी)</string>
+    <string name="marathi">मराठी</string>
+    <string name="continue_text">पुढे जा</string>
+
+    <!-- Settings Screen -->
+    <string name="language_settings">भाषा</string>
+
+    <string name="powered_by">द्वारे संचालित</string>
+    <string name="company_name">कोडर्स पिक्सेल इनोव्हेशन</string>
+
+
+</resources>
