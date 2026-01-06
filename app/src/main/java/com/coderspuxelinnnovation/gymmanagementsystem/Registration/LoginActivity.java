@@ -181,7 +181,7 @@ public class LoginActivity extends BaseActivity {
     private void updatePasswordInDatabase(String email, String password) {
         String safeEmailKey = email.replace(".", ",");
         FirebaseDatabase.getInstance()
-                .getReference("ServiceCenter")
+                .getReference("GYM")
                 .child(safeEmailKey)
                 .child("ownerInfo")
                 .child("password")

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -69,18 +70,61 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         if (mAuth.getCurrentUser() != null) {
             userEmail = mAuth.getCurrentUser().getEmail();
             if (userEmail != null) {
-                databaseReference = FirebaseDatabase.getInstance().getReference("GYM")
-                        .child(userEmail.replace(".", ","));
+                String emailKey = userEmail.replace(".", ",");
+                databaseReference = FirebaseDatabase.getInstance().getReference("GYM").child(emailKey);
+                Log.d("Dashboard", "Firebase path: GYM/" + emailKey);
             }
         }
     }
 
+
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(getString(R.string.app_name));
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            // Temporary app name
+            getSupportActionBar().setTitle("Loading...");
         }
+        loadGymNameToToolbar(); // 🔥 Add this
     }
+    private void loadGymNameToToolbar() {
+        if (databaseReference == null) {
+            Log.e("Dashboard", "Database null for toolbar");
+            return;
+        }
+
+        Log.d("Toolbar", "Loading gym name for toolbar");
+
+        databaseReference.child("ownerInfo").child("gymName")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String gymName = snapshot.getValue(String.class);
+                        Log.d("Toolbar", "Toolbar gymName raw: '" + gymName + "'");
+
+                        if (gymName != null && !gymName.trim().isEmpty()) {
+                            if (getSupportActionBar() != null) {
+                                getSupportActionBar().setTitle(gymName);
+                                Log.d("Toolbar", "✅ Toolbar SET: " + gymName);
+                            }
+                        } else {
+                            if (getSupportActionBar() != null) {
+                                getSupportActionBar().setTitle("My Gym");
+                            }
+                            Log.w("Toolbar", "gymName empty, fallback used");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("Toolbar", "Failed: " + error.getMessage());
+                        if (getSupportActionBar() != null) {
+                            getSupportActionBar().setTitle("Gym Manager");
+                        }
+                    }
+                });
+    }
+
 
     private void setupNavigationDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -105,31 +149,56 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
     }
 
     private void loadNavigationHeader() {
-        if (databaseReference == null) return;
+        if (databaseReference == null) {
+            Log.e("Dashboard", "Database reference is null");
+            return;
+        }
 
         View headerView = navigationView.getHeaderView(0);
         TextView tvGymName = headerView.findViewById(R.id.nav_header_gym_name);
         TextView tvEmail = headerView.findViewById(R.id.nav_header_email);
 
+        // Set fallback text
+        tvGymName.setText("Loading...");
+        tvEmail.setText("Loading...");
+
+        Log.d("Dashboard", "Loading header for email: " + userEmail);
+
         databaseReference.child("ownerInfo").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("Dashboard", "ownerInfo snapshot exists: " + snapshot.exists());
+
                 if (snapshot.exists()) {
+                    // Safe null checks
                     String gymName = snapshot.child("gymName").getValue(String.class);
                     String email = snapshot.child("email").getValue(String.class);
 
-                    if (gymName != null) {
+                    Log.d("Dashboard", "Raw gymName: '" + gymName + "', email: '" + email + "'");
+
+                    if (gymName != null && !gymName.isEmpty()) {
                         tvGymName.setText(gymName);
+                        Log.d("Dashboard", "Gym name set: " + gymName);
+                    } else {
+                        tvGymName.setText("My Gym"); // Fallback
+                        Log.w("Dashboard", "gymName null/empty, using fallback");
                     }
-                    if (email != null) {
+
+                    if (email != null && !email.isEmpty()) {
                         tvEmail.setText(email);
                     }
+                } else {
+                    Log.w("Dashboard", "ownerInfo node not found");
+                    tvGymName.setText("My Gym");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+                Log.e("Dashboard", "Failed to load ownerInfo: " + error.getMessage());
+                View headerViewRetry = navigationView.getHeaderView(0);
+                TextView tvGymNameRetry = headerViewRetry.findViewById(R.id.nav_header_gym_name);
+                tvGymNameRetry.setText("Error loading");
             }
         });
     }
