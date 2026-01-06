@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <!-- Header Row: Amount and Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="₹500"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAID"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/spinner_bg"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <!-- Payment Mode and Date Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mode: "
+                android:textSize="14sp"
+                android:textColor="#757575"/>
+
+            <TextView
+                android:id="@+id/tvMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cash"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
+
+        <!-- Date Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:textSize="13sp"
+                android:textColor="#757575"/>
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/01/2026 10:30 AM"
+                android:textSize="13sp"
+                android:textColor="#424242"/>
+
+        </LinearLayout>
+
+        <!-- Remaining Amount Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFF3E0"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Remaining After Payment:"
+                android:textSize="13sp"
+                android:textColor="#E65100"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹500"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#D84315"/>
+
+        </LinearLayout>
+
+        <!-- Divider for Payment ID -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Payment ID -->
+        <TextView
+            android:id="@+id/tvPaymentId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: abc-123-xyz"
+            android:textSize="11sp"
+            android:textColor="#9E9E9E"
+            android:fontFamily="monospace"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

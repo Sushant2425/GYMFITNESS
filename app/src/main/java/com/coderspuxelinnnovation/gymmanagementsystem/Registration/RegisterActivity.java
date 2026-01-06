@@ -39,7 +39,7 @@ public class RegisterActivity extends BaseActivity {
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("ServiceCenter");
+        databaseReference = FirebaseDatabase.getInstance().getReference("GYM");
 
         // Initialize Views
         initViews();

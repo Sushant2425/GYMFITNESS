@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        rootRef = FirebaseDatabase.getInstance().getReference("ServiceCenter");
+        rootRef = FirebaseDatabase.getInstance().getReference("GYM");
         prefManager = new PrefManager(this);
 
         new Handler().postDelayed(this::checkFirstTimeAndLogin, 1500);

@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity {
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
-        rootRef = FirebaseDatabase.getInstance().getReference("ServiceCenter");
+        rootRef = FirebaseDatabase.getInstance().getReference("GYM");
 
         // Initialize Views
         initViews();

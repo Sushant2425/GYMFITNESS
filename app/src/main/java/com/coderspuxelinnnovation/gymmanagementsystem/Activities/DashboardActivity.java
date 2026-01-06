@@ -3,7 +3,10 @@ package com.coderspuxelinnnovation.gymmanagementsystem.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -16,11 +19,16 @@ import com.coderspuxelinnnovation.gymmanagementsystem.Fragments.ReportsFragment;
 import com.coderspuxelinnnovation.gymmanagementsystem.Fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 
-// ✅ FIXED - Now extends BaseActivity instead of AppCompatActivity
 public class DashboardActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -28,15 +36,21 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
     private BottomNavigationView bottomNav;
     private Toolbar toolbar;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+    private String userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         initViews();
+        setupFirebase();
         setupToolbar();
         setupNavigationDrawer();
         setupBottomNavigation();
+        loadNavigationHeader();
 
         if (savedInstanceState == null) {
             loadFragment(new DashboardFragment());
@@ -48,6 +62,17 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         bottomNav = findViewById(R.id.bottom_navigation);
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    private void setupFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            userEmail = mAuth.getCurrentUser().getEmail();
+            if (userEmail != null) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("GYM")
+                        .child(userEmail.replace(".", ","));
+            }
+        }
     }
 
     private void setupToolbar() {
@@ -79,6 +104,36 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         });
     }
 
+    private void loadNavigationHeader() {
+        if (databaseReference == null) return;
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvGymName = headerView.findViewById(R.id.nav_header_gym_name);
+        TextView tvEmail = headerView.findViewById(R.id.nav_header_email);
+
+        databaseReference.child("ownerInfo").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String gymName = snapshot.child("gymName").getValue(String.class);
+                    String email = snapshot.child("email").getValue(String.class);
+
+                    if (gymName != null) {
+                        tvGymName.setText(gymName);
+                    }
+                    if (email != null) {
+                        tvEmail.setText(email);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
+    }
+
     private void loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
@@ -102,6 +157,14 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             fragment = new ProfileFragment();
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        else if (id == R.id.nav_add_member) {
+            startActivity(new Intent(this, MemberAddActivity.class));
+            return true;
+        }
+        else if (id == R.id.nav_member_list) {
+            startActivity(new Intent(this, MembersListActivity.class));
             return true;
         }
 

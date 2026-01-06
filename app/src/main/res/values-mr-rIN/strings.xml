@@ -140,5 +140,61 @@
     <string name="powered_by">द्वारे संचालित</string>
     <string name="company_name">कोडर्स पिक्सेल इनोव्हेशन</string>
 
+    <string name="add_member">नवीन सदस्य जोडा</string>
+    <string name="full_name">पूर्ण नाव *</string>
+    <string name="phone_number">मोबाईल नंबर *</string>
+    <string name="email_optional">ईमेल (ऐच्छिक)</string>
+    <string name="join_date">सदस्यत्व दिनांक *</string>
+    <string name="cancel">रद्द करा</string>
+    <string name="member_exists">सदस्य आधीपासून अस्तित्वात आहे!</string>
+    <string name="member_added_success">सदस्य यशस्वीरीत्या जोडला गेला!</string>
+    <string name="select_gender">लिंग निवडा</string>
+    <string name="select_join_date">सदस्यत्व दिनांक निवडा</string>
+    <string name="error_adding_member">सदस्य जोडण्यात अयशस्वी</string>
+
+    <string name="title_add_member">नवीन सदस्य जोडा</string>
+    <string name="hint_mobile_number">मोबाईल नंबर</string>
+    <string name="hint_email_optional">ईमेल (ऐच्छिक)</string>
+    <string name="hint_gender">लिंग</string>
+    <string name="hint_join_date">सदस्यत्व दिनांक</string>
+    <string name="btn_next_select_plan">पुढे → योजना निवडा</string>
+
+    <string name="total_fee">एकूण फी</string>
+    <string name="start_date">सुरुवातीची तारीख</string>
+    <string name="end_date">समाप्ती तारीख</string>
+    <string name="next_payment">पुढे → पेमेंट</string>
+
+    <string name="title_payment">पेमेंट</string>
+    <string name="paid_amount">भरलेली रक्कम</string>
+    <string name="remaining_amount">उरलेली रक्कम</string>
+    <string name="payment_mode">पेमेंट प्रकार</string>
+    <string name="save_payment">पेमेंट जतन करा</string>
+    <string name="payment_saved">पेमेंट यशस्वीरीत्या जतन झाले</string>
+    <string name="error_enter_amount">कृपया भरलेली रक्कम टाका</string>
+
+
+
+    <string name="dashboard">डॅशबोर्ड</string>
+    <string name="members_list">सदस्य यादी</string>
+    <string name="reports">अहवाल</string>
+    <string name="profile">प्रोफाइल</string>
+
+    <string name="overview">आढावा</string>
+
+    <string name="total_members">एकूण सदस्य</string>
+    <string name="active_members">सक्रिय सदस्य</string>
+    <string name="monthly_revenue">मासिक उत्पन्न</string>
+    <string name="pending_dues">थकबाकी रक्कम</string>
+
+    <string name="quick_actions">त्वरित कृती</string>
+    <string name="view_members">सदस्य पहा</string>
+    <string name="collect_payment">देयक वसूल करा</string>
+
+    <string name="expiring_soon">लवकरच कालबाह्य होणारे</string>
+    <string name="no_expiring_members">लवकरच कालबाह्य होणारे सदस्य नाहीत</string>
+    <string name="expires_on">कालबाह्य होण्याची तारीख</string>
+    <string name="gym_logo_desc">जिम लोगो</string>
+    <string name="nav_header_email">gmail</string>
+
 
 </resources>

@@ -1,32 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:minHeight="140dp"
+    android:background="@drawable/nav_header_bg"
+    android:elevation="4dp"
+    android:fitsSystemWindows="true"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/nav_header_image"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/ic_launcher_foreground"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
+    <!-- Logo + Text Container -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Owner Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/white" />
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/nav_header_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="owner@email.com"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="@android:color/white" />
+        <!-- Logo with 3D Effect -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="12dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="6dp"
+            android:layout_marginStart="5dp"
+            app:cardBackgroundColor="#FF0000">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/gym_logo_desc"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_gym_logo"
+                app:tint="#FFFFFF" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Name + Email VERTICAL -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+
+            <!-- Gym Name -->
+            <TextView
+                android:id="@+id/nav_header_gym_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/gym_name"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:shadowColor="#40000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
+
+            <!-- Owner Email -->
+            <TextView
+                android:id="@+id/nav_header_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/nav_header_email"
+                android:textColor="#E0E0E0"
+                android:textSize="12sp"
+                android:alpha="0.87" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

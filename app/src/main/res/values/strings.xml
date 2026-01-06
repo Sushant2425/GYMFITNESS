@@ -143,6 +143,58 @@
     <string name="powered_by">Powered by</string>
     <string name="company_name">Coders Pixel Innovation</string>
 
+    <string name="add_member">Add New Member</string>
+    <string name="full_name">Full Name *</string>
+    <string name="phone_number">Phone Number *</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="join_date">Join Date *</string>
+    <string name="cancel">Cancel</string>
+    <string name="member_exists">Member already exists!</string>
+    <string name="member_added_success">Member added successfully!</string>
+    <string name="select_gender">Select gender</string>
+    <string name="select_join_date">Select join date</string>
+    <string name="error_adding_member">Failed to add member</string>
+
+    <string name="title_add_member">Add Member</string>
+    <string name="hint_mobile_number">Mobile Number</string>
+    <string name="hint_email_optional">Email (Optional)</string>
+    <string name="hint_gender">Gender</string>
+    <string name="hint_join_date">Join Date</string>
+    <string name="btn_next_select_plan">Next → Select Plan</string>
+
+    <string name="total_fee">Total Fee</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="next_payment">Next → Payment</string>
+
+    <string name="title_payment">Payment</string>
+    <string name="paid_amount">Paid Amount</string>
+    <string name="remaining_amount">Remaining Amount</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="save_payment">Save Payment</string>
+    <string name="payment_saved">Payment saved successfully</string>
+    <string name="error_enter_amount">Enter paid amount</string>
+
+    <string name="dashboard">Dashboard</string>
+    <string name="members_list">Members List</string>
+    <string name="reports">Reports</string>
+    <string name="profile">Profile</string>
+
+    <string name="overview">Overview</string>
+    <string name="total_members">Total Members</string>
+    <string name="active_members">Active Members</string>
+    <string name="monthly_revenue">Monthly Revenue</string>
+    <string name="pending_dues">Pending Dues</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="view_members">View Members</string>
+    <string name="collect_payment">Collect Payment</string>
+    <string name="expiring_soon">Expiring Soon</string>
+    <string name="no_expiring_members">No memberships expiring soon</string>
+    <string name="expires_on">Expires On</string>
+    <!-- Add to your existing English strings.xml -->
+
+    <string name="gym_logo_desc">Gym Logo</string>
+    <string name="nav_header_email">gmail</string>
 
 
 </resources>
