@@ -4,88 +4,138 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
-    <LinearLayout
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:padding="18dp">
+
+        <!-- Name -->
         <TextView
             android:id="@+id/tvName"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#212121"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tvPhone"
-            android:textSize="14sp"
-            android:textColor="#616161"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tvPlan"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:textColor="#424242"/>
-            <TextView
-                android:id="@+id/tvEndDate"
-                android:textSize="14sp"
-                android:textColor="#D32F2F"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+            android:text="John Doe"
+            android:textColor="#1D1D1D"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Status Badge -->
+
+        <!-- Phone -->
+
         <com.google.android.material.chip.Chip
             android:id="@+id/chipStatus"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EXPIRED"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:text="TODAY"
+            android:textAllCaps="true"
             android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
-        <!-- New: Remaining days display -->
+            android:textSize="11sp"
+            app:chipBackgroundColor="#3F51B5"
+            app:chipCornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="+91 98765 43210"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"/>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="14dp"
+            android:background="#F5F5F5"
+            app:layout_constraintTop_toBottomOf="@id/tvPhone"/>
+
+        <!-- Plan -->
+        <TextView
+            android:id="@+id/tvPlan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Premium Plan"
+            android:textColor="#424242"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"/>
+
+        <!-- End Date -->
+
+        <!-- Remaining Days -->
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="31 Dec 2024"
+            android:textColor="#F44336"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
         <TextView
             android:id="@+id/tvRemaining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="#757575"/>
-        <!-- 🔥 NEW REMINDER BUTTONS -->
+            android:layout_marginTop="6dp"
+            android:text="5 days remaining"
+            android:textColor="#666666"
+            android:textSize="13sp"
+            android:drawablePadding="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPlan"/>
+
+        <!-- Action Buttons -->
         <LinearLayout
+            android:id="@+id/actionButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvRemaining">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSms"
-                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="📱 SMS"
-                app:iconTint="@android:color/white"
-                app:backgroundTint="#4CAF50"/>
+                android:text="SMS Reminder"
+                android:textSize="14sp"
+                app:iconSize="20dp"
+                app:backgroundTint="#4CAF50"
+                app:cornerRadius="8dp"
+                style="@style/Widget.Material3.Button"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWhatsapp"
-                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="💬 WhatsApp"
-                app:iconTint="@android:color/white"
-                app:backgroundTint="#25D366"/>
+                android:text="WhatsApp"
+                android:textSize="14sp"
+                app:iconSize="20dp"
+                app:backgroundTint="#25D366"
+                app:cornerRadius="8dp"
+                style="@style/Widget.Material3.Button"/>
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

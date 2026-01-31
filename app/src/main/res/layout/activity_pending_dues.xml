@@ -2,22 +2,26 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#FAFAFA">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
+        android:background="@android:color/transparent"
         app:elevation="0dp">
 
-        <!-- Compact Toolbar -->
+        <!-- Professional Toolbar with Gradient -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="56dp"
             android:background="@drawable/gradient_header"
+            android:elevation="4dp"
             app:contentInsetStart="0dp"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="@color/white">
@@ -27,8 +31,8 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp">
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp">
 
                 <TextView
                     android:layout_width="0dp"
@@ -36,33 +40,37 @@
                     android:layout_weight="1"
                     android:text="Payment Manager"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="0.01"
                     android:maxLines="1"
                     android:ellipsize="end" />
+
+                <!-- Optional: Add action icons here -->
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <!-- Compact Month Navigation Card -->
+        <!-- Modern Month Navigation Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_nav_background"
-                android:padding="12dp">
+                android:padding="16dp">
 
-                <!-- Compact Month Selector -->
+                <!-- Month Selector Row -->
                 <LinearLayout
                     android:id="@+id/monthContainer"
                     android:layout_width="match_parent"
@@ -72,13 +80,14 @@
 
                     <ImageButton
                         android:id="@+id/btnPrevMonth"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:contentDescription="Previous Month"
                         android:src="@drawable/ic_chevron_left"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:background="@drawable/bg_ripple_circle"
                         app:tint="@color/colorAccent"
-                        android:scaleType="center" />
+                        android:scaleType="centerInside"
+                        android:padding="8dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -86,46 +95,60 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:paddingHorizontal="4dp">
+                        android:paddingHorizontal="12dp">
 
                         <TextView
                             android:id="@+id/tvCurrentMonth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="January"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
+                            android:textColor="#212121"
+                            android:textSize="22sp"
                             android:textStyle="bold"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.02"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvMonthYear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2025"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:maxLines="1" />
+                            android:textColor="#757575"
+                            android:textSize="13sp"
+                            android:fontFamily="sans-serif"
+                            android:layout_marginTop="2dp"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <ImageButton
                         android:id="@+id/btnNextMonth"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_chevron_right"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:background="@drawable/bg_ripple_circle"
                         app:tint="@color/colorAccent"
                         android:contentDescription="Next Month"
-                        android:scaleType="center" />
+                        android:scaleType="centerInside"
+                        android:padding="8dp" />
                 </LinearLayout>
 
-                <!-- Compact Summary Cards in single row -->
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#E0E0E0" />
+
+                <!-- Summary Cards Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:orientation="horizontal"
-                    android:gravity="center">
+                    android:baselineAligned="false">
 
                     <!-- Pending Card -->
                     <LinearLayout
@@ -133,28 +156,42 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:background="@drawable/bg_card_white"
-                        android:padding="10dp"
+                        android:background="@drawable/bg_summary_card"
+                        android:padding="12dp"
                         android:gravity="center"
-                        android:layout_marginEnd="4dp">
+                        android:layout_marginEnd="6dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_pending"
+                            app:tint="#F44336"
+                            android:visibility="gone"
+                            android:contentDescription="Pending"
+                            android:layout_marginBottom="4dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pending"
-                            android:textColor="@color/grey"
+                            android:textColor="#9E9E9E"
                             android:textSize="11sp"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvPendingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/red"
-                            android:textSize="22sp"
+                            android:textColor="#F44336"
+                            android:textSize="24sp"
                             android:textStyle="bold"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Paid Card -->
@@ -163,49 +200,75 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:background="@drawable/bg_card_white"
-                        android:padding="10dp"
+                        android:background="@drawable/bg_summary_card"
+                        android:padding="12dp"
                         android:gravity="center"
-                        android:layout_marginStart="4dp">
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_payment"
+                            app:tint="#4CAF50"
+                            android:visibility="gone"
+                            android:contentDescription="Paid"
+                            android:layout_marginBottom="4dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Paid"
-                            android:textColor="@color/grey"
+                            android:textColor="#9E9E9E"
                             android:textSize="11sp"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvPaidCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="@color/green"
-                            android:textSize="22sp"
+                            android:textColor="#4CAF50"
+                            android:textSize="24sp"
                             android:textStyle="bold"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
 
                     <!-- Total Amount Card -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.2"
+                        android:layout_weight="1.1"
                         android:orientation="vertical"
-                        android:background="@drawable/bg_card_white"
-                        android:padding="10dp"
+                        android:background="@drawable/bg_summary_card_primary"
+                        android:padding="12dp"
                         android:gravity="center"
-                        android:layout_marginStart="8dp">
+                        android:layout_marginStart="6dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_money"
+                            android:visibility="gone"
+                            app:tint="@color/colorPrimary"
+                            android:contentDescription="Total"
+                            android:layout_marginBottom="4dp" />
 
                         <TextView
                             android:id="@+id/tvMemberCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0 members"
-                            android:textColor="@color/grey"
+                            android:textColor="#9E9E9E"
                             android:textSize="11sp"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:id="@+id/tvTotalAmount"
@@ -213,26 +276,32 @@
                             android:layout_height="wrap_content"
                             android:text="₹0"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
-                            android:maxLines="1" />
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginTop="4dp"
+                            android:maxLines="1"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Compact Tabs -->
+        <!-- Professional Tabs -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:background="@color/white"
+            android:elevation="2dp"
             app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/grey"
-            app:tabIndicatorHeight="2dp"
+            app:tabTextColor="#757575"
             app:tabMode="fixed"
-            app:tabGravity="fill" />
+            app:tabGravity="fill"
+            app:tabRippleColor="#1A000000" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -241,31 +310,36 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FAFAFA"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!-- Progress Bar -->
+    <!-- Loading Progress Bar -->
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="4dp"
         android:layout_gravity="top"
         android:indeterminate="true"
         android:visibility="gone"
         app:indicatorColor="@color/colorAccent"
-        app:trackColor="#FFE0E0" />
+        app:trackColor="#20000000"
+        app:trackCornerRadius="2dp" />
 
-    <!-- Compact FAB -->
+    <!-- Modern FAB -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="12dp"
-        android:contentDescription="Refresh"
+        android:layout_margin="16dp"
+        android:contentDescription="Refresh Data"
         app:backgroundTint="@color/colorPrimary"
         app:tint="@color/white"
         app:srcCompat="@drawable/ic_refresh"
-        app:elevation="4dp"
-        app:fabSize="mini" />
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:fabSize="normal"
+        app:rippleColor="#40FFFFFF"
+        app:borderWidth="0dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

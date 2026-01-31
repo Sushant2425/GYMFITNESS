@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#EF5350"
+        android:background="@drawable/gradient_header"
         android:elevation="4dp"
         app:title="Expired &amp; Expiring Plans"
         app:titleTextColor="@android:color/white"

@@ -75,11 +75,30 @@ public class PlanRenewalActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_renewal);
 
+        // 🔥 ADD TOOLBAR SETUP (Fixes your error)
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        // Your existing methods
         initViews();
         loadIntentData();
         setupPlanSpinner();
         loadMemberData();
         setupListeners();
+    }
+
+    // 🔥 ADD THIS for perfect back navigation
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void initViews() {

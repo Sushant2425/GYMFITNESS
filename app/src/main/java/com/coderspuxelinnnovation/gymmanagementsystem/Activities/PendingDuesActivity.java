@@ -26,6 +26,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.util.Pair;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
@@ -33,6 +34,8 @@ import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.PaymentTabsAdapter;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.PendingDueModel;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
@@ -55,6 +58,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.UUID;
 
 public class PendingDuesActivity extends AppCompatActivity {
@@ -132,6 +136,7 @@ public class PendingDuesActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_more_vert_white));
     }
 
     private void setupMonthNavigation() {
@@ -157,12 +162,64 @@ public class PendingDuesActivity extends AppCompatActivity {
             applyFilters();
         });
 
+        // Open calendar picker when clicking on month container
         View monthContainer = findViewById(R.id.monthContainer);
         monthContainer.setOnClickListener(v -> {
-            showAllMonths = !showAllMonths;
+            openMonthPicker();
+        });
+    }
+
+    /**
+     * Opens Material Date Picker for month selection
+     */
+    private void openMonthPicker() {
+        // Create calendar instance for selected month
+        Calendar calendar = Calendar.getInstance();
+        if (!showAllMonths) {
+            calendar.setTime(currentCalendar.getTime());
+        }
+
+        // Get start of month
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long selectedDate = calendar.getTimeInMillis();
+
+        // Build Material Date Picker
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Month")
+                .setSelection(selectedDate)
+                .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
+                .build();
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            // Convert selection to calendar
+            Calendar selectedCal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            selectedCal.setTimeInMillis(selection);
+
+            // Update current calendar to selected month
+            currentCalendar.set(Calendar.YEAR, selectedCal.get(Calendar.YEAR));
+            currentCalendar.set(Calendar.MONTH, selectedCal.get(Calendar.MONTH));
+            currentCalendar.set(Calendar.DAY_OF_MONTH, 1);
+
+            // Update UI and filters
+            showAllMonths = false;
+            selectedMonthYear = monthYearFormat.format(currentCalendar.getTime());
             updateMonthDisplay();
             applyFilters();
+
+            Toast.makeText(this,
+                    "Selected: " + monthFormat.format(currentCalendar.getTime()) + " " + yearFormat.format(currentCalendar.getTime()),
+                    Toast.LENGTH_SHORT).show();
         });
+
+        datePicker.addOnNegativeButtonClickListener(dialog -> {
+            // User cancelled
+        });
+
+        datePicker.show(getSupportFragmentManager(), "MONTH_PICKER");
     }
 
     private void updateMonthDisplay() {
@@ -258,7 +315,8 @@ public class PendingDuesActivity extends AppCompatActivity {
                 "All Months",
                 "This Month",
                 "Last Month",
-                "Last 3 Months"
+                "Last 3 Months",
+                "Custom Month (Calendar)"
         };
 
         new MaterialAlertDialogBuilder(this)
@@ -281,6 +339,10 @@ public class PendingDuesActivity extends AppCompatActivity {
                         case 3:
                             showAllMonths = false;
                             break;
+                        case 4:
+                            // Open calendar picker
+                            openMonthPicker();
+                            return; // Don't update immediately, wait for picker
                     }
                     selectedMonthYear = monthYearFormat.format(currentCalendar.getTime());
                     updateMonthDisplay();
@@ -548,14 +610,11 @@ public class PendingDuesActivity extends AppCompatActivity {
                 .show();
     }
 
-// In the collectPayment method of PendingDuesActivity, update the payment structure:
-
     private void collectPayment(PendingDueModel due, int amount, String mode, String notes) {
         progressBar.setVisibility(View.VISIBLE);
 
         DatabaseReference memberRef = rootRef.child("members").child(due.getMemberId());
 
-        // Get the payment details
         memberRef.child("payments").child(due.getPaymentId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -567,7 +626,6 @@ public class PendingDuesActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Get current values - SAME structure as PaymentActivity
                 Integer currentPaid = snapshot.child("amountPaid").getValue(Integer.class);
                 Integer currentRemaining = snapshot.child("remaining").getValue(Integer.class);
                 Integer totalFee = snapshot.child("totalFee").getValue(Integer.class);
@@ -583,15 +641,12 @@ public class PendingDuesActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Calculate new values
                 int newPaidAmount = (currentPaid != null ? currentPaid : 0) + amount;
                 int newRemaining = Math.max(0, currentRemaining - amount);
                 String status = newRemaining == 0 ? "PAID" : "PARTIAL";
 
-                // Generate transaction ID
                 String transactionId = UUID.randomUUID().toString();
 
-                // Prepare updates - SAME structure as PaymentActivity
                 HashMap<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("payments/" + due.getPaymentId() + "/amountPaid", newPaidAmount);
                 childUpdates.put("payments/" + due.getPaymentId() + "/remaining", newRemaining);
@@ -601,7 +656,6 @@ public class PendingDuesActivity extends AppCompatActivity {
                 childUpdates.put("payments/" + due.getPaymentId() + "/lastPaymentMode", mode);
                 childUpdates.put("payments/" + due.getPaymentId() + "/lastPaymentNotes", notes);
 
-                // Add transaction to paymentHistory
                 HashMap<String, Object> transactionData = new HashMap<>();
                 transactionData.put("transactionId", transactionId);
                 transactionData.put("amount", amount);
@@ -612,24 +666,19 @@ public class PendingDuesActivity extends AppCompatActivity {
 
                 childUpdates.put("payments/" + due.getPaymentId() + "/paymentHistory/" + transactionId, transactionData);
 
-                // Update all at once
                 memberRef.updateChildren(childUpdates)
                         .addOnSuccessListener(aVoid -> {
-                            // Update current plan if fully paid
                             if (newRemaining == 0 && planId != null) {
                                 updateCurrentPlanStatus(memberRef, planId);
                             }
 
-                            // Generate PDF receipt - SAME as PaymentActivity
                             Uri pdfUri = generatePaymentPdf(due, amount, mode, newRemaining);
-
-                            // Send notifications - SAME as PaymentActivity
                             sendPaymentNotifications(due, amount, mode, newRemaining, pdfUri);
 
                             runOnUiThread(() -> {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(PendingDuesActivity.this, "✓ Payment collected", Toast.LENGTH_SHORT).show();
-                                loadAllPayments(); // Refresh data
+                                loadAllPayments();
                             });
                         })
                         .addOnFailureListener(e -> {
@@ -658,7 +707,6 @@ public class PendingDuesActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         String currentPlanIdInDb = snapshot.child("planId").getValue(String.class);
                         if (currentPlanIdInDb != null && currentPlanIdInDb.equals(planId)) {
-                            // Update current plan status
                             HashMap<String, Object> planUpdate = new HashMap<>();
                             planUpdate.put("status", "ACTIVE");
                             memberRef.child("currentPlan").updateChildren(planUpdate);
@@ -668,7 +716,6 @@ public class PendingDuesActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // Ignore error for optional update
                 }
             });
         }
@@ -692,11 +739,9 @@ public class PendingDuesActivity extends AppCompatActivity {
 
             int y = 50;
 
-            // Title
             canvas.drawText("GYM PAYMENT RECEIPT", 150, y, titlePaint);
             y += 40;
 
-            // Lines
             canvas.drawLine(20, y, 575, y, paint);
             y += 30;
 
@@ -721,7 +766,6 @@ public class PendingDuesActivity extends AppCompatActivity {
 
             pdfDocument.finishPage(page);
 
-            // File
             File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Bills");
             if (!dir.exists()) dir.mkdirs();
 
@@ -743,10 +787,8 @@ public class PendingDuesActivity extends AppCompatActivity {
     }
 
     private void sendPaymentNotifications(PendingDueModel due, int amount, String mode, int remaining, Uri pdfUri) {
-        // Send SMS
         sendPaymentSMS(due, amount, mode, remaining);
 
-        // Send WhatsApp with PDF
         if (pdfUri != null) {
             sendPaymentWhatsApp(due, pdfUri);
         }
@@ -819,7 +861,6 @@ public class PendingDuesActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // Keep default
                 }
             });
 

@@ -20,6 +20,8 @@ import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.ExpiryPagerAdapter;
 import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.PlanExpiryModel;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -52,8 +54,25 @@ public class PlanExpiryReminderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_expiry_reminder);
 
-        tabLayout = findViewById(R.id.tabLayout);  // New: Assign tabLayout
-        viewPager = findViewById(R.id.viewPager);  // ← assigned here
+        // Initialize toolbar and set title
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Make sure title is shown
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setTitle("Plan Expiry Reminders");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }
+
+        // Set navigation click listener
+        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
+
+
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
         ExpiryPagerAdapter pagerAdapter = new ExpiryPagerAdapter(this, todayList, soonList, expiredList);
         viewPager.setAdapter(pagerAdapter);
@@ -74,7 +93,9 @@ public class PlanExpiryReminderActivity extends BaseActivity {
                     }
                 }).attach();
 
-        findViewById(R.id.fabSendAll).setOnClickListener(v -> {
+        // Find and setup FAB
+        FloatingActionButton fabSendAll = findViewById(R.id.fabSendAll);
+        fabSendAll.setOnClickListener(v -> {
             int total = todayList.size() + soonList.size() + expiredList.size();
             if (total == 0) {
                 Toast.makeText(this, "No members found!", Toast.LENGTH_SHORT).show();
@@ -88,9 +109,11 @@ public class PlanExpiryReminderActivity extends BaseActivity {
                     .show();
         });
 
+        // Make FAB visible
+        fabSendAll.setVisibility(View.INVISIBLE);
+
         fetchExpiringMembers();
     }
-
     private void sendAllReminders() {
         sendRemindersFromList(todayList);
         sendRemindersFromList(soonList);

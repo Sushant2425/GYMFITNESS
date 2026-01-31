@@ -2,23 +2,24 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#E0E0E0">
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#F1F8E9">
+        android:padding="14dp">
 
-        <!-- Header Row -->
+        <!-- Header Row: Name, Phone & Status -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,18 +37,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Member Name"
-                    android:textColor="@color/black"
+                    android:textColor="#212121"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/tvPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1234567890"
-                    android:textColor="@color/grey"
+                    android:textColor="#757575"
                     android:textSize="13sp"
-                    android:layout_marginTop="2dp" />
+                    android:layout_marginTop="2dp"
+                    android:maxLines="1"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <TextView
@@ -58,55 +65,62 @@
                 android:textColor="@color/white"
                 android:textSize="11sp"
                 android:textStyle="bold"
-                android:background="@drawable/bg_green"
-                android:padding="6dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp" />
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/bg_status_paid"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:elevation="1dp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Plan and Month -->
+        <!-- Thin Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#E0E0E0" />
+
+        <!-- Plan and Month Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/tvPlan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Plan: Monthly"
-                android:textColor="@color/grey"
+                android:text="Monthly Plan"
+                android:textColor="#616161"
                 android:textSize="13sp"
-                android:drawableStart="@drawable/ic_gym_logo"
-                android:drawableTint="@color/green"
-                android:drawablePadding="6dp"
-                android:gravity="center_vertical" />
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tvMonth"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Month: Jan 2025"
-                android:textColor="@color/grey"
+                android:text="Jan 2025"
+                android:textColor="#212121"
                 android:textSize="13sp"
-                android:drawableStart="@drawable/ic_calendar"
-                android:drawableTint="@color/green"
-                android:drawablePadding="6dp"
-                android:gravity="center_vertical" />
+                android:textStyle="bold"
+                android:maxLines="1"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Divider -->
+        <!-- Thin Divider -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:background="#C5E1A5" />
+            android:background="#E0E0E0" />
 
-        <!-- Payment Amount -->
+        <!-- Payment Amount Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,19 +137,21 @@
                     android:id="@+id/tvPaidAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid: ₹3000"
-                    android:textColor="@color/green"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:text="Paid Amount"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     android:id="@+id/tvPaymentDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid 5 days ago"
-                    android:textColor="@color/grey"
-                    android:textSize="12sp"
-                    android:layout_marginTop="4dp" />
+                    android:text="5 days ago"
+                    android:textColor="#4CAF50"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <TextView
@@ -143,25 +159,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹3000"
-                android:textColor="@color/green"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textColor="#4CAF50"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <!-- Check Icon -->
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Success Footer -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="✓ Payment Completed"
-            android:textColor="@color/green"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:drawableStart="@drawable/ic_check"
-            android:drawableTint="@color/green"
-            android:drawablePadding="6dp"
-            android:gravity="center_vertical" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:background="@drawable/bg_success_light">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_check_circle"
+                app:tint="#4CAF50"
+                android:contentDescription="Success" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Completed"
+                android:textColor="#4CAF50"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
     </LinearLayout>
 
