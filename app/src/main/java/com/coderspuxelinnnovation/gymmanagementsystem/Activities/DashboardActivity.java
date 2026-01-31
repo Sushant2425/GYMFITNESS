@@ -87,6 +87,8 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         }
         loadGymNameToToolbar(); // 🔥 Add this
     }
+
+
     private void loadGymNameToToolbar() {
         if (databaseReference == null) {
             Log.e("Dashboard", "Database null for toolbar");
@@ -236,6 +238,20 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             startActivity(new Intent(this, MembersListActivity.class));
             return true;
         }
+        else if (id == R.id.PlanExpiryReminder) {
+            startActivity(new Intent(this, PlanExpiryReminderActivity.class));
+            return true;
+        }
+        else if (id == R.id.nav_add_plan) {
+            startActivity(new Intent(this, AddPlanActivity.class));
+            return true;
+        }
+        else if (id == R.id.nav_inventory) {
+            startActivity(new Intent(this, PendingDuesActivity.class));
+            return true;
+        }
+
+
 
         loadFragment(fragment);
         return true;

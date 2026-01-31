@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardBackgroundColor="#2A2A2A"
-    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="#FDFBFB"
+    app:cardCornerRadius="10dp"
     app:cardElevation="2dp">
 
     <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Member Name"
-                android:textColor="#FFFFFF"
+                android:textColor="#3E3D3D"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Phone Number"
-                android:textColor="#CCCCCC"
+                android:textColor="#494848"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Expires On"
-                android:textColor="#CCCCCC"
+                android:textColor="#3A3A3A"
                 android:textSize="10sp" />
 
             <TextView

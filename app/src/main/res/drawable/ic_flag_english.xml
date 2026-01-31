@@ -1,0 +1,21 @@
+<!-- res/drawable/ic_flag_english.xml - Professional UK Flag -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="28dp"
+    android:viewportWidth="30"
+    android:viewportHeight="20">
+
+    <!-- Blue background -->
+    <path android:fillColor="#012169"
+        android:pathData="M0,0 L30,0 30,20 0,20 Z"/>
+
+    <!-- Red cross (St George's Cross) -->
+    <path android:fillColor="#C8102E"
+        android:pathData="M0,8 L30,8 M0,12 L30,12
+                          M15,0 L15,20 M12,0 L12,20"/>
+
+    <!-- White cross border -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M0,9 L30,9 M0,11 L30,11
+                          M16,0 L16,20 M13,0 L13,20"/>
+</vector>

@@ -3,7 +3,6 @@ package com.coderspuxelinnnovation.gymmanagementsystem.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Registration.LoginActivity;
@@ -14,7 +13,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class LanguageSelectionActivity extends BaseActivity {
 
-    private RadioGroup rgLanguage;
     private RadioButton rbEnglish, rbMarathi;
     private MaterialButton btnContinue;
     private PrefManager prefManager;
@@ -26,39 +24,65 @@ public class LanguageSelectionActivity extends BaseActivity {
 
         prefManager = new PrefManager(this);
 
-        rgLanguage = findViewById(R.id.rgLanguage);
+        // Direct RadioButton references (NO RadioGroup needed)
         rbEnglish = findViewById(R.id.rbEnglish);
         rbMarathi = findViewById(R.id.rbMarathi);
         btnContinue = findViewById(R.id.btnContinue);
 
         // Default to English
-        rbEnglish.setChecked(true);
+        if (rbEnglish != null) {
+            rbEnglish.setChecked(true);
+        }
 
-        btnContinue.setOnClickListener(v -> {
-            int selectedId = rgLanguage.getCheckedRadioButtonId();
-            String langCode = "en";
+        // Handle individual RadioButton clicks
+        if (rbEnglish != null) {
+            rbEnglish.setOnClickListener(v -> {
+                rbMarathi.setChecked(false);
+                rbEnglish.setChecked(true);
+            });
+        }
 
-            if (selectedId == R.id.rbMarathi) {
-                langCode = "mr";
-            }
+        if (rbMarathi != null) {
+            rbMarathi.setOnClickListener(v -> {
+                rbEnglish.setChecked(false);
+                rbMarathi.setChecked(true);
+            });
+        }
 
-            // Save language preference
-            prefManager.setLanguage(langCode);
-            prefManager.setFirstTimeLaunch(false);
+        if (btnContinue != null) {
+            btnContinue.setOnClickListener(v -> {
+                // Check which button is selected
+                boolean isEnglish = rbEnglish != null && rbEnglish.isChecked();
+                boolean isMarathi = rbMarathi != null && rbMarathi.isChecked();
 
-            // Apply language
-            LocaleHelper.setLocale(this, langCode);
+                if (!isEnglish && !isMarathi) {
+                    // No selection - show validation
+                    btnContinue.setText("Please select a language first");
+                    btnContinue.postDelayed(() ->
+                            btnContinue.setText(getString(R.string.continue_text)), 2000);
+                    return;
+                }
 
-            // Go to Login
-            Intent intent = new Intent(LanguageSelectionActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        });
+                String langCode = isEnglish ? "en" : "mr";
+
+                // Save language preference
+                prefManager.setLanguage(langCode);
+                prefManager.setFirstTimeLaunch(false);
+
+                // Apply language with smooth transition
+                LocaleHelper.setLocale(this, langCode);
+
+                // Navigate to Login
+                Intent intent = new Intent(LanguageSelectionActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finishAffinity();
+            });
+        }
     }
 
     @Override
     public void onBackPressed() {
-        // Prevent back press on language selection
-        // User must select a language
+        // Prevent back press - user must select language
     }
 }

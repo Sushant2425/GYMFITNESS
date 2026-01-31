@@ -13,21 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#000000">
+        android:background="#FBF8F8">
 
         <!-- App Bar -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:background="#F4F0F0"
             android:elevation="4dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#DC143C"
+                android:layout_height="55dp"
+                android:background="@drawable/nav_header_bg"
                 app:title="@string/app_name"
+                app:navigationIconTint="@color/white"
                 app:titleTextColor="@android:color/white"
                 app:navigationIcon="@drawable/ic_menu" />
 
@@ -38,14 +39,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#000000" />
+            android:background="@color/white" />
 
-        <!-- Bottom Navigation -->
+        <!-- Compact Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1A1A1A"
+            android:minHeight="56dp"
+            android:background="#EBEAEA"
+            app:itemHorizontalTranslationEnabled="false"
+            app:itemIconSize="24dp"
             app:itemIconTint="@color/bottom_nav_color"
             app:itemTextColor="@color/bottom_nav_color"
             app:itemRippleColor="#DC143C"
@@ -60,9 +64,9 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#1A1A1A"
-        app:itemIconTint="@color/nav_drawer_color"
-        app:itemTextColor="@color/nav_drawer_color"
+        android:background="#F6F4F4"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer_menu" />
 

@@ -1,41 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <!-- Main Gym Features -->
+    <group
+        android:id="@+id/group_main"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
             android:title="@string/nav_dashboard" />
 
         <item
-            android:id="@+id/nav_reports"
-            android:title="@string/nav_reports" />
+            android:id="@+id/nav_add_member"
+            android:icon="@drawable/ic_add_member"
+            android:title="@string/nav_add_member" />
 
         <item
-            android:id="@+id/nav_profile"
-            android:title="@string/menu_profile" />
+            android:id="@+id/nav_member_list"
+            android:icon="@drawable/ic_person"
+            android:title="@string/nav_member_list" />
+        <item
+            android:id="@+id/PlanExpiryReminder"
+            android:icon="@drawable/ic_person"
+            android:title="PlanExpiryReminder" />
+
+    </group>
+
+    <!-- Management Features -->
+    <group
+        android:id="@+id/group_management"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_inventory"
+            android:icon="@drawable/ic_payment"
             android:title="@string/nav_inventory" />
 
         <item
             android:id="@+id/nav_inventory_list"
+            android:icon="@drawable/ic_location"
             android:title="@string/nav_inventory_list" />
 
         <item
-            android:id="@+id/nav_settings"
-            android:title="@string/nav_settings" />
-        <item
-            android:id="@+id/nav_add_member"
-            android:title="@string/nav_settings" />
-        <item
-            android:id="@+id/nav_member_list"
-            android:title="@string/nav_settings" />
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/ic_reports"
+            android:title="@string/nav_reports" />
+
     </group>
 
+    <!-- User Section -->
+    <group
+        android:id="@+id/group_user"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/menu_profile" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_language"
+            android:title="@string/language" />
+        <item
+            android:id="@+id/nav_add_plan"
+            android:icon="@drawable/ic_gym_logo"
+            android:title="@string/membership_plan" />
+
+
+    </group>
+
+    <!-- Logout (separate item) -->
     <item
         android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_lock"
         android:title="@string/nav_logout" />
 
 </menu>

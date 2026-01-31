@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.CollectPaymentActivity;
+import com.coderspuxelinnnovation.gymmanagementsystem.Activities.ExpiredMembersActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.MemberAddActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.MembersListActivity;
 
@@ -113,7 +114,7 @@ public class DashboardFragment extends Fragment {
         });
 
         cardViewMembers.setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), MembersListActivity.class));
+            startActivity(new Intent(getContext(), ExpiredMembersActivity.class));
         });
 
         cardCollectPayment.setOnClickListener(v -> {
@@ -123,12 +124,8 @@ public class DashboardFragment extends Fragment {
 
         cardReports.setOnClickListener(v -> {
             // Navigate to Reports Fragment
-            if (getActivity() != null) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, new ReportsFragment())
-                        .addToBackStack(null)
-                        .commit();
-            }
+            startActivity(new Intent(getContext(), MembersListActivity.class));
+            Toast.makeText(getContext(), "Select a member to collect payment", Toast.LENGTH_SHORT).show();
         });
     }
 

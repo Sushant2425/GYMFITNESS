@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
@@ -20,10 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class MemberEditActivity extends BaseActivity {
@@ -51,6 +50,7 @@ public class MemberEditActivity extends BaseActivity {
         }
 
         initViews();
+        setupToolbar();
         setupGenderSpinner();
         setupClickListeners();
         loadMemberData();
@@ -64,6 +64,15 @@ public class MemberEditActivity extends BaseActivity {
         spinnerGender = findViewById(R.id.spinnerGender);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void setupGenderSpinner() {
@@ -92,7 +101,8 @@ public class MemberEditActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists() || !snapshot.child("info").exists()) {
-                    Toast.makeText(MemberEditActivity.this, "Member not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MemberEditActivity.this,
+                            "Member not found", Toast.LENGTH_SHORT).show();
                     finish();
                     return;
                 }
@@ -117,7 +127,8 @@ public class MemberEditActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MemberEditActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MemberEditActivity.this,
+                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -129,21 +140,25 @@ public class MemberEditActivity extends BaseActivity {
         String gender = spinnerGender.getText().toString().trim();
         String joinDate = etJoinDate.getText().toString().trim();
 
-        // SKIP PHONE VALIDATION - it's locked
+        // Validation
         if (TextUtils.isEmpty(name)) {
             etName.setError("Name is required");
+            etName.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(email) || !Pattern.matches(EMAIL_PATTERN, email)) {
             etEmail.setError("Valid email required");
+            etEmail.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(gender)) {
             spinnerGender.setError("Gender required");
+            spinnerGender.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(joinDate)) {
             etJoinDate.setError("Join date required");
+            etJoinDate.requestFocus();
             return;
         }
 
@@ -156,16 +171,18 @@ public class MemberEditActivity extends BaseActivity {
             return;
         }
 
-        updateMemberInfo(name, memberPhone, email, gender, joinDate);
+        updateMemberInfo(name, email, gender, joinDate);
     }
 
-    private void updateMemberInfo(String name, String phone, String email, String gender, String joinDate) {
+    private void updateMemberInfo(String name, String email, String gender, String joinDate) {
         btnUpdate.setEnabled(false);
+        btnUpdate.setText("Updating...");
 
         String ownerEmail = new PrefManager(this).getUserEmail().replace(".", ",");
 
         HashMap<String, Object> infoUpdates = new HashMap<>();
         infoUpdates.put("name", name);
+        infoUpdates.put("phone", memberPhone);
         infoUpdates.put("email", email);
         infoUpdates.put("gender", gender);
         infoUpdates.put("joinDate", joinDate);
@@ -181,12 +198,16 @@ public class MemberEditActivity extends BaseActivity {
         ref.updateChildren(infoUpdates)
                 .addOnSuccessListener(unused -> {
                     btnUpdate.setEnabled(true);
-                    Toast.makeText(this, "✅ Member updated successfully!", Toast.LENGTH_LONG).show();
+                    btnUpdate.setText(getString(R.string.update_member));
+                    Toast.makeText(this,
+                            "✅ Member updated successfully!", Toast.LENGTH_LONG).show();
                     finish();
                 })
                 .addOnFailureListener(e -> {
                     btnUpdate.setEnabled(true);
-                    Toast.makeText(this, "❌ Update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    btnUpdate.setText(getString(R.string.update_member));
+                    Toast.makeText(this,
+                            "❌ Update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -200,6 +221,8 @@ public class MemberEditActivity extends BaseActivity {
     }
 
     private void deleteMember() {
+        btnDelete.setEnabled(false);
+
         String ownerEmail = new PrefManager(this).getUserEmail().replace(".", ",");
 
         FirebaseDatabase.getInstance()
@@ -209,11 +232,14 @@ public class MemberEditActivity extends BaseActivity {
                 .child(memberPhone)
                 .removeValue()
                 .addOnSuccessListener(unused -> {
-                    Toast.makeText(this, "✅ Member deleted permanently!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,
+                            "✅ Member deleted successfully!", Toast.LENGTH_LONG).show();
                     finish();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "❌ Delete failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    btnDelete.setEnabled(true);
+                    Toast.makeText(this,
+                            "❌ Delete failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -222,7 +248,8 @@ public class MemberEditActivity extends BaseActivity {
         new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
             String formattedDate = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
             etJoinDate.setText(formattedDate);
-        }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
+        }, currentDate.get(Calendar.YEAR),
+                currentDate.get(Calendar.MONTH),
                 currentDate.get(Calendar.DAY_OF_MONTH)).show();
     }
 }

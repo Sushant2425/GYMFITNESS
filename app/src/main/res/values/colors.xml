@@ -9,4 +9,106 @@
     <color name="red">#F44336</color>
     <color name="grey">#757575</color>
     <color name="colorPrimary">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+
+    <color name="chip_background">@android:color/transparent</color>
+
+    <color name="tab_selected_bg">#1976D2</color>      <!-- deep blue -->
+    <color name="tab_unselected_bg">#1565C0</color>    <!-- darker blue -->
+    <color name="tab_text_selected">#FFFFFF</color>
+    <color name="tab_text_unselected">#B0FFFFFF</color> <!-- 70% white -->
+    <color name="tab_indicator">#FFEB3B</color>         <!-- yellow indicator -->
+
+        <!-- Status Colors -->
+        <color name="status_active_bg">#E8F5E9</color>
+        <color name="status_active_text">#2E7D32</color>
+        <color name="status_active_icon">#4CAF50</color>
+
+        <color name="status_inactive_bg">#FFEBEE</color>
+        <color name="status_inactive_text">#C62828</color>
+        <color name="status_inactive_icon">#F44336</color>
+
+        <color name="status_pending_bg">#FFF3E0</color>
+        <color name="status_pending_text">#EF6C00</color>
+        <color name="status_pending_icon">#FF9800</color>
+
+        <!-- Duration Colors -->
+        <color name="duration_bg">#F3E5F5</color> <!-- Light Purple background -->
+        <color name="duration_1_month">#8E24AA</color> <!-- Purple -->
+        <color name="duration_3_months">#5E35B1</color> <!-- Deep Purple -->
+        <color name="duration_6_months">#3949AB</color> <!-- Indigo -->
+        <color name="duration_12_months">#1A237E</color> <!-- Dark Indigo -->
+
+        <!-- Fee Amount Colors -->
+        <color name="fee_low">#2E7D32</color> <!-- Green -->
+        <color name="fee_medium">#F57C00</color> <!-- Orange -->
+        <color name="fee_high">#D32F2F</color> <!-- Red -->
+
+        <!-- Card Background Variants (for different plan types) -->
+        <color name="card_bg_standard">#FFFFFF</color>
+        <color name="card_bg_premium">#FFFDE7</color> <!-- Light Yellow -->
+        <color name="card_bg_basic">#F5F5F5</color> <!-- Light Gray -->
+
+        <!-- Button Colors (light variants) -->
+        <color name="btn_edit_bg">#E3F2FD</color>
+        <color name="btn_edit_text">#1565C0</color>
+
+        <color name="btn_delete_bg">#FFEBEE</color>
+        <color name="btn_delete_text">#C62828</color>
+
+        <!-- Border Colors (light) -->
+        <color name="border_light">#EEEEEE</color>
+        <color name="border_accent">#BDBDBD</color>
+        <color name="colorPrimaryDark">#000051</color>
+        <color name="colorAccent">#D32F2F</color>
+        <color name="colorSecondary">#FF6F00</color>
+
+        <!-- Background Colors -->
+        <color name="background">#F5F5F5</color>
+        <color name="surface">#FFFFFF</color>
+        <color name="card_background">#FFFFFF</color>
+
+        <!-- Text Colors -->
+        <color name="text_primary">#212121</color>
+        <color name="text_secondary">#757575</color>
+        <color name="text_white">#FFFFFF</color>
+        <color name="text_dark_blue">#1A237E</color>
+        <color name="text_red">#D32F2F</color>
+        <color name="text_orange">#FF6F00</color>
+
+        <!-- Status Colors -->
+        <color name="status_pending">#FFEBEE</color>
+        <color name="status_warning">#FFF3E0</color>
+        <color name="status_overdue">#F44336</color>
+        <color name="status_success">#E8F5E8</color>
+
+        <!-- Border/Stroke Colors -->
+        <color name="card_stroke_color">#E0E0E0</color>
+        <color name="border_light_blue">#C5CAE9</color>
+        <color name="border_light_orange">#FFE0B2</color>
+        <color name="border_light_red">#FFCDD2</color>
+
+        <!-- Button Colors -->
+        <color name="button_primary">#1A237E</color>
+        <color name="button_danger">#D32F2F</color>
+        <color name="button_warning">#FF6F00</color>
+        <color name="button_success">#4CAF50</color>
+
+        <!-- Chip Colors -->
+        <color name="chip_blue_bg">#E8EAF6</color>
+        <color name="chip_orange_bg">#FFF3E0</color>
+        <color name="chip_red_bg">#FFEBEE</color>
+
+        <!-- Progress Colors -->
+        <color name="progress_indicator">#D32F2F</color>
+        <color name="progress_track">#FFCDD2</color>
+
+        <!-- Icon Colors -->
+        <color name="icon_primary">#1A237E</color>
+        <color name="icon_white">#FFFFFF</color>
+        <color name="icon_red">#D32F2F</color>
+
+        <!-- Divider Colors -->
+        <color name="divider">#E0E0E0</color>
+
 </resources>

@@ -3,8 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:gravity="center">
+    android:background="@drawable/splash_gradient_background">
+
+    <!-- Animated Background Circles -->
+    <View
+        android:id="@+id/circle1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="-150dp"
+        android:layout_marginTop="-150dp"
+        android:background="@drawable/circle_background_1"
+        android:alpha="0.1"/>
+
+    <View
+        android:id="@+id/circle2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-100dp"
+        android:layout_marginBottom="-100dp"
+        android:background="@drawable/circle_background_2"
+        android:alpha="0.1"/>
 
     <!-- Main Content Container -->
     <LinearLayout
@@ -12,83 +33,192 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="24dp">
 
-        <!-- App Logo with Glow Effect -->
+        <!-- App Logo with Modern Card -->
         <androidx.cardview.widget.CardView
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            app:cardCornerRadius="70dp"
-            app:cardElevation="12dp"
-            app:cardBackgroundColor="#1A1A1A"
-            android:layout_marginBottom="24dp">
+            android:id="@+id/logoCard"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginBottom="32dp">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_gravity="center"
-                android:scaleType="centerInside"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Subtle gradient overlay -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/logo_card_gradient"/>
+
+                <!-- App Icon -->
+                <ImageView
+                    android:id="@+id/appLogo"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/logogym"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerInside"/>
+
+                <!-- Animated Pulse Ring -->
+                <View
+                    android:id="@+id/pulseRing"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/pulse_ring"
+                    android:alpha="0"/>
+
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <!-- App Name -->
+        <!-- App Name with Animation -->
         <TextView
+            android:id="@+id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="#DC143C"
-            android:textSize="28sp"
+            android:textColor="#212121"
+            android:textSize="25sp"
             android:textStyle="bold"
-            android:letterSpacing="0.05"
-            android:layout_marginBottom="8dp"/>
+            android:letterSpacing="0.02"
+            android:layout_marginBottom="8dp"
+            android:alpha="0"/>
 
-        <!-- Tagline -->
+        <!-- Tagline with Animation -->
         <TextView
+            android:id="@+id/tagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/splash_title"
-            android:textColor="#FFFFFF"
+            android:textColor="#EF5350"
             android:textSize="16sp"
-            android:alpha="0.8"
-            android:layout_marginBottom="32dp"/>
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:layout_marginBottom="48dp"
+            android:alpha="0"/>
 
-        <!-- Loading Indicator -->
-        <ProgressBar
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:indeterminateTint="#32CD32"
-            style="?android:attr/progressBarStyle"/>
+        <!-- Modern Loading Indicator -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="gone"
+                android:indeterminateTint="#EF5350"
+                style="?android:attr/progressBarStyle"
+                android:alpha="0"/>
+
+            <!-- Loading dots animation placeholder -->
+            <LinearLayout
+                android:id="@+id/loadingDots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="60dp">
+
+                <View
+                    android:id="@+id/dot1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/loading_dot"/>
+
+                <View
+                    android:id="@+id/dot2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/loading_dot"/>
+
+                <View
+                    android:id="@+id/dot3"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/loading_dot"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
-    <!-- Bottom Branding (Optional) -->
+    <!-- Bottom Branding with Modern Style -->
     <LinearLayout
+        android:id="@+id/bottomBranding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:alpha="0">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/powered_by"
-            android:textColor="#FFFFFF"
+            android:textColor="#757575"
             android:textSize="12sp"
-            android:alpha="0.6"/>
+            android:letterSpacing="0.1"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company_name"
-            android:textColor="#32CD32"
-            android:textSize="14sp"
+            android:textColor="#EF5350"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:letterSpacing="0.05"/>
 
     </LinearLayout>
+
+    <!-- Gym Themed Floating Icons -->
+    <ImageView
+        android:id="@+id/floatingIcon1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/expire"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="32dp"
+        android:alpha="0.15"
+        app:tint="#EF5350"/>
+
+    <ImageView
+        android:id="@+id/floatingIcon2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_timer"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="40dp"
+        android:alpha="0.15"
+        app:tint="#EF5350"/>
+
+    <ImageView
+        android:id="@+id/floatingIcon3"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:src="@drawable/ic_equipment"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="48dp"
+        android:alpha="0.15"
+        app:tint="#EF5350"/>
 
 </RelativeLayout>

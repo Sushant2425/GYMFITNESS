@@ -4,17 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <!-- TOOLBAR -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:title="@string/title_payment"
-        android:titleTextColor="@android:color/white"
-        app:navigationIcon="@drawable/ic_back" />
+android:background="@color/white"    >
 
     <!-- PROGRESS BAR -->
     <ProgressBar
@@ -22,13 +12,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:indeterminateTint="#EF5350"
         android:visibility="gone" />
 
+    <!-- Modern AppBar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/gradient_header"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="#FDFCFC">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.01"
+                    android:text="@string/title_payment"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/payment_subtitle"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <!-- CONTENT -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:background="#FFF7F7"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true">
 
         <LinearLayout
@@ -37,78 +74,265 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- TOTAL FEE -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            <!-- Info Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/total_fee">
+                android:layout_marginBottom="24dp"
+                android:background="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTotalFee"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
 
-            <!-- PAID AMOUNT -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_money"
+                        app:tint="#2D2E2D" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="@string/payment_info_hint"
+                        android:textColor="#ABADAB"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="2dp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Payment Details Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/paid_amount"
-                android:layout_marginTop="16dp">
+                android:layout_marginBottom="24dp"
+                android:background="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPaidAmount"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:orientation="vertical"
+                    android:padding="28dp">
 
-            <!-- REMAINING AMOUNT -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_information"
+                        android:textColor="#212121"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="20dp" />
+
+                    <!-- TOTAL FEE -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/total_fee"
+                        android:layout_marginBottom="18dp"
+                        app:startIconDrawable="@drawable/ic_money"
+                        app:startIconTint="#757575"
+                        app:boxStrokeColor="#ABAAAA"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:hintTextColor="#EF5350">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTotalFee"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="number"
+                            android:textColor="#212121"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:padding="14dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- PAID AMOUNT -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/paid_amount"
+                        android:layout_marginBottom="18dp"
+                        app:startIconDrawable="@drawable/ic_payment"
+                        app:startIconTint="#757575"
+                        app:boxStrokeColor="#ABAAAA"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:hintTextColor="#EF5350">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPaidAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="#212121"
+                            android:textSize="15sp"
+                            android:padding="14dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- REMAINING AMOUNT -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/remaining_amount"
+                        android:layout_marginBottom="18dp"
+                        app:startIconDrawable="@drawable/ic_pending"
+                        app:startIconTint="#757575"
+                        app:boxStrokeColor="#ABAAAA"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:hintTextColor="#EF5350">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etRemainingAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="number"
+                            android:textColor="#EF5350"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:padding="14dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- PAYMENT MODE -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/payment_mode"
+                        android:layout_marginBottom="8dp"
+                        app:boxStrokeColor="#ABAAAA"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:hintTextColor="#EF5350"
+                        app:endIconTint="#757575">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/spinnerPaymentMode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:textColor="#212121"
+                            android:textSize="15sp"
+                            android:padding="14dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+            <!-- SMS CHECKBOX -->
+            <CheckBox
+                android:id="@+id/checkbox_sms"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/remaining_amount"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:text="Send SMS confirmation"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:checked="true"
+                app:buttonTint="#4CAF50" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etRemainingAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- PAYMENT MODE -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
+            <!-- WHATSAPP CHECKBOX -->
+            <CheckBox
+                android:id="@+id/checkbox_whatsapp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/payment_mode"
-                android:layout_marginTop="16dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/spinnerPaymentMode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:text="Send WhatsApp"
+                android:textColor="#212121"
+                android:textSize="14sp"
+                app:buttonTint="#25D366" />
 
             <!-- SAVE BUTTON -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSavePayment"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="58dp"
                 android:text="@string/save_payment"
                 android:textSize="16sp"
-                app:cornerRadius="12dp" />
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                app:backgroundTint="#FDE9E9"
+                app:cornerRadius="10dp"
+                app:strokeColor="@color/red"
+                app:strokeWidth="1dp"
+                app:elevation="4dp"
+                android:textColor="#F60303"
+                android:letterSpacing="0.05"
+                app:icon="@drawable/ic_check"
+                app:iconGravity="start"
+                app:iconTint="#F60303"
+                app:iconPadding="8dp" />
+
+            <!-- Progress Indicator -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp">
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="4dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/progress_indicator_active" />
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="4dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/progress_indicator_active" />
+
+                <View
+                    android:layout_width="32dp"
+                    android:layout_height="4dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/progress_indicator_active" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/step_3_of_3"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
-    </ScrollView>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

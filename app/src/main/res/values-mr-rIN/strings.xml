@@ -20,7 +20,7 @@
     <string name="nav_logout">लॉगआउट</string>
 
     <string name="nav_reports">अहवाल</string>
-    <string name="nav_inventory">स्टॉक / साठा</string>
+    <string name="nav_inventory">उर्वरित पेमेंट</string>
     <string name="nav_inventory_list">स्टॉक पहा</string>
 
     <string name="navigation_drawer_open">नेव्हिगेशन मेनू उघडा</string>
@@ -188,13 +188,192 @@
 
     <string name="quick_actions">त्वरित कृती</string>
     <string name="view_members">सदस्य पहा</string>
-    <string name="collect_payment">देयक वसूल करा</string>
+    <string name="expire_plan">कालबाह्य सदस्यत्व</string>
 
+    <string name="collect_payment">देयक वसूल करा</string>
     <string name="expiring_soon">लवकरच कालबाह्य होणारे</string>
     <string name="no_expiring_members">लवकरच कालबाह्य होणारे सदस्य नाहीत</string>
     <string name="expires_on">कालबाह्य होण्याची तारीख</string>
     <string name="gym_logo_desc">जिम लोगो</string>
     <string name="nav_header_email">gmail</string>
+
+    <string name="nav_member_list">सदस्यांची यादी</string>
+
+    <string name="add_member_title">नवीन सदस्य जोडा</string>
+    <string name="hint_phone_number">फोन नंबर</string>
+
+    <string name="btn_next_plan">पुढे: प्लॅन निवडा</string>
+    <string name="gender_male">पुरुष</string>
+    <string name="gender_female">स्त्री</string>
+    <string name="gender_other">इतर</string>
+    <string name="error_name_required">नाव आवश्यक आहे</string>
+    <string name="error_phone_valid">वैध १० अंकी फोन आवश्यक</string>
+    <string name="error_email_valid">वैध ईमेल आवश्यक</string>
+    <string name="error_gender_required">लिंग आवश्यक आहे</string>
+    <string name="error_date_required">जोडण्याची तारीख आवश्यक</string>
+    <string name="error_member_exists">सदस्य आधीच अस्तित्वात आहे!</string>
+    <string name="error_generic">त्रुटी: %1$s</string>
+
+    <string name="logout_confirm">लॉगआउट करत आहे...</string>
+
+    <string name="logout_dialog_title">लॉगआउट</string>
+    <string name="logout_dialog_message">तुम्हाला खरंच लॉगआउट करायचे आहे का?</string>
+
+    <!-- Add Member Screen - Marathi -->
+
+    <string name="add_member_subtitle">सदस्याची माहिती भरा</string>
+    <string name="member_info_hint">कृपया नोंदणीसाठी अचूक सदस्य माहिती प्रविष्ट करा</string>
+    <string name="personal_details">वैयक्तिक माहिती</string>
+
+    <string name="step_1_of_3">पायरी 1 पैकी 3 - सदस्य माहिती</string>
+
+
+    <!-- Select Plan Screen -->
+    <string name="select_plan_subtitle">तुमची फिटनेस योजना निवडा</string>
+    <string name="plan_selection_hint">तुमच्या फिटनेस उद्दिष्टांनुसार सदस्यत्व योजना निवडा</string>
+    <string name="plan_details">योजनेचे तपशील</string>
+
+    <string name="step_2_of_3">पायरी 2 पैकी 3 - योजना निवड</string>
+
+    <string name="payment_subtitle">तुमचे पेमेंट पूर्ण करा</string>
+    <string name="payment_info_hint">सदस्य नोंदणी पूर्ण करण्यासाठी पेमेंट तपशील भरा</string>
+    <string name="payment_information">पेमेंट माहिती</string>
+
+    <string name="step_3_of_3">पायरी 3 पैकी 3 - पेमेंट पूर्ण</string>
+
+    <!-- Payment Modes -->
+    <string name="payment_mode_cash">रोख</string>
+    <string name="payment_mode_card">कार्ड</string>
+    <string name="payment_mode_upi">यूपीआय</string>
+    <string name="payment_mode_bank_transfer">बँक हस्तांतरण</string>
+    <string name="payment_mode_cheque">धनादेश</string>
+
+    <!-- Members List Strings -->
+    <string name="error_loading_members">सदस्यांची माहिती लोड करताना त्रुटी आली</string>
+
+    <!-- Members List Screen -->
+    <string name="manage_members_subtitle">सर्व सदस्य पहा आणि व्यवस्थापित करा</string>
+    <string name="all_members">सर्व</string>
+    <string name="active_only">सक्रिय</string>
+    <string name="expired_only">कालबाह्य</string>
+    <string name="no_members_found">कोणतेही सदस्य आढळले नाहीत</string>
+    <string name="add_first_member">सुरुवात करण्यासाठी तुमचा पहिला सदस्य जोडा</string>
+    <string name="search_members">सदस्य शोधा...</string>
+
+
+    <!-- Member Detail Screen -->
+    <string name="member_detail_subtitle">सदस्याची माहिती पहा</string>
+    <string name="personal_info">वैयक्तिक माहिती</string>
+    <string name="current_plan">सध्याची योजना</string>
+    <string name="edit_member">संपादित करा</string>
+    <string name="view_payments">पेमेंट्स</string>
+    <string name="delete_member">सदस्य हटवा</string>
+
+    <!-- Member Edit Screen -->
+    <string name="edit_member_subtitle">सदस्याची माहिती अद्ययावत करा</string>
+    <string name="edit_info_hint">फोन नंबर बदलता येणार नाही कारण तो अद्वितीय ओळख म्हणून वापरला जातो</string>
+    <string name="member_information">सदस्य माहिती</string>
+    <string name="phone_locked_hint">फोन नंबर लॉक आहे</string>
+    <string name="update_member">अद्ययावत करा</string>
+
+    <!-- Collect Payment Screen -->
+    <string name="collect_payment_subtitle">पेमेंट शोधा आणि जमा करा</string>
+    <string name="search_member_hint">फोन नंबर किंवा नाव टाका</string>
+    <string name="search_member">सदस्य शोधा</string>
+    <string name="member_details">सदस्य तपशील</string>
+    <string name="payment_amount">पेमेंट रक्कम (₹)</string>
+
+
+    <string name="collect_payment_button">पेमेंट जमा करा</string>
+
+
+    <!-- Settings Screen -->
+    <string name="settings_subtitle">अ‍ॅप प्राधान्ये कॉन्फिगर करा</string>
+
+    <string name="language_info">भाषा बदल लागू करण्यासाठी अ‍ॅप पुन्हा सुरू होईल</string>
+    <string name="app_info">अ‍ॅप माहिती</string>
+    <string name="app_version">आवृत्ती</string>
+    <string name="developed_by">विकसित केले</string>
+
+
+    <!-- Add Plan Screen -->
+    <string name="add_plan">जिम योजना जोडा</string>
+    <string name="add_plan_subtitle">नवीन सदस्यत्व योजना तयार करा</string>
+    <string name="plan_duration">योजनेचा कालावधी</string>
+    <string name="fee_amount">शुल्क रक्कम</string>
+    <string name="save_plan">योजना जतन करा</string>
+    <string name="plan_info">लवचिक कालावधी आणि किंमतीसह सदस्यत्व योजना तयार करा</string>
+    <string name="plan_tip_title">💡 झटपट टिप</string>
+    <string name="plan_tips">• 1 ते 12 महिन्यांच्या योजना तयार करू शकता\n• अधिक सदस्य आकर्षित करण्यासाठी स्पर्धात्मक दर ठेवा\n• योजना लगेचच सदस्य नोंदणीसाठी उपलब्ध होतील</string>
+    <string name="select_plan_duration">कृपया योजनेचा कालावधी निवडा</string>
+    <string name="fee_required">शुल्क रक्कम आवश्यक आहे</string>
+    <string name="fee_invalid">कृपया वैध संख्या प्रविष्ट करा</string>
+    <string name="fee_positive">शुल्क 0 पेक्षा जास्त असणे आवश्यक आहे</string>
+    <string name="plan_saved">योजना यशस्वीरित्या जतन झाली!</string>
+    <string name="plan_save_failed">योजना जतन करण्यात अयशस्वी</string>
+    <string name="saving">जतन करत आहे...</string>
+    <string name="fee_helper">इस योजना के लिए सदस्यता शुल्क दर्ज करें</string>
+
+
+    <string name="change_app_language">अ‍ॅपची भाषा बदला</string>
+
+    <string name="manage_plans">योजना व्यवस्थापन</string>
+    <string name="add_edit_plans">सदस्यत्व योजना जोडा किंवा संपादित करा</string>
+
+
+    <string name="view_edit_profile">तुमचे प्रोफाइल पहा आणि संपादित करा</string>
+
+    <string name="about">अ‍ॅपबद्दल</string>
+    <string name="app_version_info">अ‍ॅप आवृत्ती आणि माहिती</string>
+
+    <string name="logout">लॉगआउट</string>
+    <string name="my_gym">माझे जिम</string>
+x
+
+    <string name="version">आवृत्ती</string>
+
+    <string name="logout_confirmation">तुम्हाला नक्की लॉगआउट करायचे आहे का?</string>
+
+    <string name="ok">ठीक आहे</string>
+
+    <string name="profile_coming_soon">प्रोफाइल सुविधा लवकरच येत आहे!</string>
+
+    <string name="app_description">
+        सदस्य, योजना आणि पेमेंट व्यवस्थापनासाठी संपूर्ण जिम व्यवस्थापन प्रणाली.
+    </string>
+
+
+    <string name="hindi">हिंदी</string>
+
+    <string name="loading">लोड होत आहे...</string>
+    <string name="error_loading_data">माहिती लोड करताना त्रुटी आली</string>
+
+
+
+    <!-- View Plans Activity -->
+    <string name="all_plans">सर्व प्लॅन</string>
+    <string name="loading_plans">प्लॅन लोड होत आहेत...</string>
+    <string name="no_plans_found">कोणतेही प्लॅन सापडले नाहीत</string>
+    <string name="add_first_plan">आपला पहिला प्लॅन तयार करण्यासाठी + बटणावर टॅप करा</string>
+    <string name="fee">फी</string>
+    <string name="duration">कालावधी</string>
+    <string name="status">स्थिती</string>
+    <string name="active">सक्रिय</string>
+    <string name="inactive">निष्क्रिय</string>
+    <string name="edit">सुधारणे</string>
+    <string name="delete">काढून टाका</string>
+    <string name="plan_details_title">प्लॅन तपशील</string>
+
+    <string name="plan_saved_success">प्लॅन यशस्वीरित्या सेव केला!</string>
+    <string name="view_all_plans_prompt">तुम्हाला तुमचे सर्व प्लॅन पहायचे आहेत का?</string>
+    <string name="view_plans">प्लॅन पहा</string>
+    <string name="add_more">अजून जोडा</string>
+
+    <string name="plan_name">योजनेचे नाव :</string>
+    <string name="one_month_short">१मा</string>
+    <string name="one_month">१ महिना</string>
+    <string name="status_label">स्थिती</string>
+    <string name="close">बंद करा</string>
 
 
 </resources>
