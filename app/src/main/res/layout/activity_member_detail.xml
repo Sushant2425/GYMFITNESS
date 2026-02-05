@@ -210,6 +210,7 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
+                        android:visibility="gone"
                         android:background="@drawable/detail_item_background">
 
                         <ImageView
@@ -329,6 +330,7 @@
 
                     </LinearLayout>
 
+
                     <!-- Plan Type -->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -391,6 +393,116 @@
 
                     </LinearLayout>
 
+
+                    <!-- Amount Paid -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp"
+                        android:padding="12dp"
+                        android:background="@drawable/detail_item_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Amount Paid"
+                            android:textSize="13sp"
+                            android:textColor="#757575" />
+
+                        <TextView
+                            android:id="@+id/tvAmountPaid"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="₹0"
+                            android:textSize="15sp"
+                            android:textColor="#4CAF50"
+                            android:textStyle="bold"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                    <!-- Remaining Amount -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp"
+                        android:padding="12dp"
+                        android:background="@drawable/detail_item_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Remaining"
+                            android:textSize="13sp"
+                            android:textColor="#757575" />
+
+                        <TextView
+                            android:id="@+id/tvRemaining"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:text="₹500"
+                            android:textSize="15sp"
+                            android:textColor="#F44336"
+                            android:textStyle="bold"
+                            android:gravity="end" />
+
+                    </LinearLayout>
+
+                    <!-- Payment Progress Bar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="12dp"
+                        android:padding="12dp"
+                        android:background="@drawable/detail_item_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="4dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Payment Progress"
+                                android:textSize="13sp"
+                                android:textColor="#757575" />
+
+                            <TextView
+                                android:id="@+id/tvProgressPercentage"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="0%"
+                                android:textSize="13sp"
+                                android:textColor="#2196F3"
+                                android:textStyle="bold"
+                                android:gravity="end" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progressPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:layout_marginTop="4dp"
+                            app:trackColor="#E0E0E0"
+                            app:trackThickness="8dp"
+                            app:indicatorColor="#4CAF50" />
+
+                    </LinearLayout>
+
                     <!-- Start Date -->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -449,6 +561,83 @@
                             android:gravity="end" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- OLD PLANS SECTION -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOldPlans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_expired"
+                            app:tint="#EF5350" />
+
+                        <TextView
+                            android:id="@+id/tvOldPlansTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="12dp"
+                            android:text="Previous Plans"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:id="@+id/tvOldPlansCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(0)"
+                            android:textSize="14sp"
+                            android:textColor="#757575" />
+
+                    </LinearLayout>
+
+                    <!-- Old Plans Container -->
+                    <LinearLayout
+                        android:id="@+id/llOldPlansContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <!-- Old plans will be added here programmatically -->
+
+                    </LinearLayout>
+
+                    <!-- No Plans Message -->
+                    <TextView
+                        android:id="@+id/tvNoOldPlans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No previous plans found"
+                        android:textSize="14sp"
+                        android:textColor="#9E9E9E"
+                        android:gravity="center"
+                        android:padding="16dp" />
 
                 </LinearLayout>
 

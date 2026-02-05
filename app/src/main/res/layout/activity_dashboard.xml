@@ -26,7 +26,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@drawable/nav_header_bg"
+                android:background="@drawable/gradient_header_premium"
                 app:title="@string/app_name"
                 app:navigationIconTint="@color/white"
                 app:titleTextColor="@android:color/white"

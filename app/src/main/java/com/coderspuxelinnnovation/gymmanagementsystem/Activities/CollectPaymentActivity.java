@@ -1,6 +1,7 @@
 package com.coderspuxelinnnovation.gymmanagementsystem.Activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +28,7 @@ import androidx.core.content.FileProvider;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
+import com.coderspuxelinnnovation.gymmanagementsystem.models.MemberSearchResult;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.Membercollet;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -41,8 +43,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -50,7 +54,7 @@ public class CollectPaymentActivity extends BaseActivity {
 
     private EditText etSearchMember, etAmount;
     private MaterialButton btnSearchMember, btnCollectPayment;
-    private TextView tvMemberName, tvMemberPhone, tvPlanType, tvTotalFee, tvTotalPaid, tvRemaining;
+    private TextView tvMemberName, tvMemberPhone, tvPlanType, tvTotalFee, tvTotalPaid, tvRemaining, tvPlanDates;
     private ChipGroup rgPaymentMode;
     private Chip rbCash, rbUPI, rbCard;
     private MaterialCardView cardMemberDetails, cardPaymentForm;
@@ -104,6 +108,7 @@ public class CollectPaymentActivity extends BaseActivity {
         rbCash = findViewById(R.id.rbCash);
         rbUPI = findViewById(R.id.rbUPI);
         rbCard = findViewById(R.id.rbCard);
+        tvPlanDates = findViewById(R.id.tvPlanDates); // Add this line
 
         cardMemberDetails = findViewById(R.id.cardMemberDetails);
         cardPaymentForm = findViewById(R.id.cardPaymentForm);
@@ -140,7 +145,6 @@ public class CollectPaymentActivity extends BaseActivity {
             return;
         }
 
-        // Show loading
         btnSearchMember.setEnabled(false);
         btnSearchMember.setText("Searching...");
 
@@ -153,7 +157,7 @@ public class CollectPaymentActivity extends BaseActivity {
                 btnSearchMember.setEnabled(true);
                 btnSearchMember.setText(getString(R.string.search_member));
 
-                boolean found = false;
+                List<MemberSearchResult> searchResults = new ArrayList<>();
 
                 for (DataSnapshot memberSnapshot : snapshot.getChildren()) {
                     String memberId = memberSnapshot.getKey();
@@ -166,20 +170,31 @@ public class CollectPaymentActivity extends BaseActivity {
                         if ((phone != null && phone.contains(searchQuery)) ||
                                 (name != null && name.toLowerCase().contains(searchQuery.toLowerCase()))) {
 
-                            currentMemberId = memberId;
-                            currentMemberPhone = phone;
-                            displayMemberDetails(memberSnapshot, phone, name, memberId);
-                            found = true;
-                            break;
+                            // Add to results list
+                            MemberSearchResult result = new MemberSearchResult();
+                            result.memberId = memberId;
+                            result.phone = phone;
+                            result.name = name;
+                            result.snapshot = memberSnapshot;
+                            searchResults.add(result);
                         }
                     }
                 }
 
-                if (!found) {
+                if (searchResults.isEmpty()) {
                     Toast.makeText(CollectPaymentActivity.this,
-                            "❌ Member not found", Toast.LENGTH_SHORT).show();
+                            "❌ No members found", Toast.LENGTH_SHORT).show();
                     cardMemberDetails.setVisibility(View.GONE);
                     cardPaymentForm.setVisibility(View.GONE);
+                } else if (searchResults.size() == 1) {
+                    // Only one result - show directly
+                    MemberSearchResult result = searchResults.get(0);
+                    currentMemberId = result.memberId;
+                    currentMemberPhone = result.phone;
+                    displayMemberDetails(result.snapshot, result.phone, result.name, result.memberId);
+                } else {
+                    // Multiple results - show dialog to choose
+                    showMemberSelectionDialog(searchResults);
                 }
             }
 
@@ -192,7 +207,27 @@ public class CollectPaymentActivity extends BaseActivity {
             }
         });
     }
+    private void showMemberSelectionDialog(List<MemberSearchResult> results) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Member (" + results.size() + " found)");
 
+        // Create array of display strings
+        String[] items = new String[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            MemberSearchResult result = results.get(i);
+            items[i] = result.name + " - " + result.phone;
+        }
+
+        builder.setItems(items, (dialog, which) -> {
+            MemberSearchResult selected = results.get(which);
+            currentMemberId = selected.memberId;
+            currentMemberPhone = selected.phone;
+            displayMemberDetails(selected.snapshot, selected.phone, selected.name, selected.memberId);
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
     private void displayMemberDetails(DataSnapshot memberSnapshot, String phone, String name, String memberId) {
         DataSnapshot currentPlanSnap = memberSnapshot.child("currentPlan");
 
@@ -205,6 +240,7 @@ public class CollectPaymentActivity extends BaseActivity {
 
         // Get plan details
         planStartDate = currentPlanSnap.child("startDate").getValue(String.class);
+        String planEndDate = currentPlanSnap.child("endDate").getValue(String.class);
         Integer fee = currentPlanSnap.child("totalFee").getValue(Integer.class);
         totalFee = fee != null ? fee : 0;
         planId = currentPlanSnap.child("planId").getValue(String.class);
@@ -214,22 +250,27 @@ public class CollectPaymentActivity extends BaseActivity {
         memberName = name;
         forMonth = getForMonth(planStartDate);
 
-        // Calculate total paid from payments (same as PaymentActivity structure)
-        int totalPaid = 0;
+        // Calculate total paid for CURRENT PLAN ONLY
+        int totalPaidForCurrentPlan = 0;
         int remaining = totalFee;
 
         DataSnapshot paymentsSnap = memberSnapshot.child("payments");
         if (paymentsSnap.exists()) {
             for (DataSnapshot paymentSnap : paymentsSnap.getChildren()) {
-                Integer amountPaid = paymentSnap.child("amountPaid").getValue(Integer.class);
-                if (amountPaid != null) {
-                    totalPaid += amountPaid;
-                }
+                String paymentPlanId = paymentSnap.child("planId").getValue(String.class);
 
-                // Get remaining from latest payment
-                Integer rem = paymentSnap.child("remaining").getValue(Integer.class);
-                if (rem != null) {
-                    remaining = rem;
+                // Check if this payment belongs to CURRENT PLAN
+                if (paymentPlanId != null && paymentPlanId.equals(planId)) {
+                    Integer amountPaid = paymentSnap.child("amountPaid").getValue(Integer.class);
+                    if (amountPaid != null) {
+                        totalPaidForCurrentPlan += amountPaid;
+                    }
+
+                    // Get remaining from this current plan's payment
+                    Integer rem = paymentSnap.child("remaining").getValue(Integer.class);
+                    if (rem != null) {
+                        remaining = rem;
+                    }
                 }
             }
         }
@@ -238,8 +279,14 @@ public class CollectPaymentActivity extends BaseActivity {
         tvMemberName.setText(name);
         tvMemberPhone.setText(phone);
         tvPlanType.setText(planType != null ? planType : "Regular");
+
+        // Show both dates if available
+        String startDateDisplay = planStartDate != null ? planStartDate : "N/A";
+        String endDateDisplay = planEndDate != null ? planEndDate : "N/A";
+        tvPlanDates.setText(startDateDisplay + " to " + endDateDisplay); // Shows "01/02/2026 to 28/02/2026"
+
         tvTotalFee.setText("₹" + totalFee);
-        tvTotalPaid.setText("₹" + totalPaid);
+        tvTotalPaid.setText("₹" + totalPaidForCurrentPlan);
         tvRemaining.setText("₹" + remaining);
 
         // Show cards with animation
@@ -255,6 +302,9 @@ public class CollectPaymentActivity extends BaseActivity {
             Toast.makeText(this, "✅ This member has fully paid!", Toast.LENGTH_SHORT).show();
             btnCollectPayment.setEnabled(false);
         }
+
+        // Debug log
+        Log.d("PaymentDebug", "Plan: " + planStartDate + " to " + planEndDate);
     }
 
     private void collectPayment() {
@@ -590,8 +640,9 @@ public class CollectPaymentActivity extends BaseActivity {
             // Get gym name
             String gymName = getGymName();
 
-            String message = String.format("Payment Received: ₹%d via %s for %s. Remaining: ₹%d. Thank you from %s!",
-                    amount, mode, forMonth, remaining, gymName);
+            // Create better message with plan details
+            String message = String.format("Payment Received: ₹%d via %s for plan %s to %s. Remaining: ₹%d. Thank you from %s!",
+                    amount, mode, planStartDate, getForMonth(planStartDate), remaining, gymName);
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                 SmsManager.getDefault().sendTextMessage(currentMemberPhone, null, message, null, null);
@@ -604,7 +655,6 @@ public class CollectPaymentActivity extends BaseActivity {
             Log.e("SMS", "Error: " + e.getMessage());
         }
     }
-
     private void sendPaymentWhatsApp(Uri pdfUri) {
         try {
             if (currentMemberPhone == null || currentMemberPhone.length() < 10) {

@@ -13,6 +13,19 @@
 
     <color name="chip_background">@android:color/transparent</color>
 
+    <!-- Payment Mode Colors -->
+    <color name="cash_mode_bg">#FFF3E0</color>
+    <color name="cash_mode_text">#F57C00</color>
+    <color name="online_mode_bg">#E8F5E9</color>
+    <color name="online_mode_text">#4CAF50</color>
+    <color name="card_mode_bg">#E3F2FD</color>
+    <color name="card_mode_text">#2196F3</color>
+
+    <!-- Status Colors -->
+    <color name="status_active">#4CAF50</color>
+    <color name="status_expired">#F44336</color>
+    <color name="status_paid">#4CAF50</color>
+
     <color name="tab_selected_bg">#1976D2</color>      <!-- deep blue -->
     <color name="tab_unselected_bg">#1565C0</color>    <!-- darker blue -->
     <color name="tab_text_selected">#FFFFFF</color>

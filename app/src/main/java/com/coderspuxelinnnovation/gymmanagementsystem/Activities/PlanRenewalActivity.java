@@ -32,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -157,10 +158,8 @@ public class PlanRenewalActivity extends BaseActivity {
     }
 
     private void setupPlanSpinner() {
-
         String ownerEmail = new PrefManager(this).getUserEmail();
         if (ownerEmail == null) return;
-
         ownerEmail = ownerEmail.replace(".", ",");
 
         plansRef = FirebaseDatabase.getInstance()
@@ -171,49 +170,72 @@ public class PlanRenewalActivity extends BaseActivity {
         plansRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 planNames.clear();
                 planFeeMap.clear();
                 planMonthMap.clear();
 
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    Plan plan = snap.getValue(Plan.class);
-                    if (plan != null) {
-                        planNames.add(plan.getPlanName());
-                        planFeeMap.put(plan.getPlanName(), plan.getFee());
-                        planMonthMap.put(plan.getPlanName(), plan.getDuration());
+                if (snapshot.exists() && snapshot.hasChildren()) {
+                    // Load from Firebase
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        Plan plan = snap.getValue(Plan.class);
+                        if (plan != null) {
+                            planNames.add(plan.getPlanName());
+                            planFeeMap.put(plan.getPlanName(), plan.getFee());
+                            planMonthMap.put(plan.getPlanName(), plan.getDuration());
+                        }
                     }
+
+                    if (planNames.isEmpty()) {
+                        loadDefaultPlans();
+                    }
+                } else {
+                    // No plans in Firebase, use defaults
+                    loadDefaultPlans();
                 }
 
+                // Setup spinner
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                         PlanRenewalActivity.this,
                         android.R.layout.simple_dropdown_item_1line,
                         planNames
                 );
                 spinnerNewPlanType.setAdapter(adapter);
+
+                // Auto-select first plan if exists
+                if (!planNames.isEmpty()) {
+                    String firstPlan = planNames.get(0);
+                    spinnerNewPlanType.setText(firstPlan, false);
+
+                    // Auto-set fee and calculate dates
+                    if (planFeeMap.containsKey(firstPlan)) {
+                        newPlanFee = planFeeMap.get(firstPlan);
+                        etNewPlanFee.setText(String.valueOf(newPlanFee));
+
+                        if (planMonthMap.containsKey(firstPlan)) {
+                            calculateEndDate(planMonthMap.get(firstPlan));
+                        }
+                    }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(PlanRenewalActivity.this,
                         "Failed to load plans", Toast.LENGTH_SHORT).show();
+                // Fallback to default plans
+                loadDefaultPlans();
             }
         });
-
-        spinnerNewPlanType.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedPlan = planNames.get(position);
-
-            int fee = planFeeMap.get(selectedPlan);
-            int months = planMonthMap.get(selectedPlan);
-
-            newPlanFee = fee;
-            etNewPlanFee.setText(String.valueOf(fee));
-
-            calculateEndDate(months);
-            updateSummary();
-        });
     }
-    private void updateSummary() {
+
+    private void loadDefaultPlans() {
+        // Fallback to hardcoded plans
+        for (int i = 0; i < planTypes.length; i++) {
+            planNames.add(planTypes[i]);
+            planFeeMap.put(planTypes[i], planFees[i]);
+            planMonthMap.put(planTypes[i], planMonths[i]);
+        }
+    }    private void updateSummary() {
         // Show new plan fee
         tvSummaryNewPlan.setText("₹" + newPlanFee);
 
@@ -226,7 +248,7 @@ public class PlanRenewalActivity extends BaseActivity {
         }
 
         // Calculate total payable = new plan fee + old due
-        int total = newPlanFee + outstandingBalance;
+        int total = newPlanFee ;
         tvTotalPayable.setText("₹" + total);
     }
 
@@ -329,20 +351,38 @@ public class PlanRenewalActivity extends BaseActivity {
     private void setDefaultStartDate() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String today = sdf.format(cal.getTime());
 
-        // If previous end date exists, start from next day
-        if (previousEndDate != null) {
+        // If previous plan exists and has end date
+        if (previousEndDate != null && !previousEndDate.isEmpty()) {
             try {
-                cal.setTime(sdf.parse(previousEndDate));
-                cal.add(Calendar.DAY_OF_MONTH, 1);
+                Date prevEndDate = sdf.parse(previousEndDate);
+                Date currentDate = sdf.parse(today);
+
+                if (prevEndDate.before(currentDate)) {
+                    // If previous plan ended in past, start from today
+                    etNewStartDate.setText(today);
+                } else {
+                    // If previous plan ends today or in future, start from next day
+                    cal.setTime(prevEndDate);
+                    cal.add(Calendar.DAY_OF_MONTH, 1);
+                    etNewStartDate.setText(sdf.format(cal.getTime()));
+                }
             } catch (ParseException e) {
                 Log.e(TAG, "Date parse error: " + e.getMessage());
+                etNewStartDate.setText(today);
             }
+        } else {
+            // No previous plan, start from today
+            etNewStartDate.setText(today);
         }
 
-        etNewStartDate.setText(sdf.format(cal.getTime()));
+        // After setting start date, calculate end date if plan is selected
+        String planType = spinnerNewPlanType.getText().toString().trim();
+        if (!TextUtils.isEmpty(planType) && planMonthMap.containsKey(planType)) {
+            calculateEndDate(planMonthMap.get(planType));
+        }
     }
-
     private void setupListeners() {
         // Quick Renew Button
         btnQuickRenew.setOnClickListener(v -> quickRenewSamePlan());
@@ -352,9 +392,16 @@ public class PlanRenewalActivity extends BaseActivity {
 
         // Plan Type Selection
         spinnerNewPlanType.setOnItemClickListener((parent, view, position, id) -> {
-            newPlanFee = planFees[position];
-            etNewPlanFee.setText(String.valueOf(newPlanFee));
-            calculateEndDate(planMonths[position]);
+            String selectedPlan = planNames.get(position);
+
+            if (planFeeMap.containsKey(selectedPlan)) {
+                newPlanFee = planFeeMap.get(selectedPlan);
+                etNewPlanFee.setText(String.valueOf(newPlanFee));
+
+                if (planMonthMap.containsKey(selectedPlan)) {
+                    calculateEndDate(planMonthMap.get(selectedPlan));
+                }
+            }
             updateTotalPayable();
         });
 
@@ -389,26 +436,49 @@ public class PlanRenewalActivity extends BaseActivity {
             return;
         }
 
-        // Find plan index
-        int index = -1;
-        for (int i = 0; i < planTypes.length; i++) {
-            if (planTypes[i].equals(previousPlanType)) {
-                index = i;
-                break;
-            }
-        }
+        // Check if previous plan exists in available plans
+        if (planNames.contains(previousPlanType)) {
+            spinnerNewPlanType.setText(previousPlanType, false);
 
-        if (index != -1) {
-            spinnerNewPlanType.setText(planTypes[index], false);
-            newPlanFee = previousTotalFee; // Use previous fee
-            etNewPlanFee.setText(String.valueOf(newPlanFee));
-            calculateEndDate(planMonths[index]);
+            if (planFeeMap.containsKey(previousPlanType)) {
+                newPlanFee = planFeeMap.get(previousPlanType);
+                etNewPlanFee.setText(String.valueOf(newPlanFee));
+
+                if (planMonthMap.containsKey(previousPlanType)) {
+                    calculateEndDate(planMonthMap.get(previousPlanType));
+                }
+            }
             updateTotalPayable();
 
             Toast.makeText(this, "✅ Same plan selected", Toast.LENGTH_SHORT).show();
+        } else {
+            // If previous plan not in list, try to match by duration
+            for (String plan : planNames) {
+                if (plan.contains("1 Month") && previousPlanType.contains("1 Month") ||
+                        plan.contains("3 Months") && previousPlanType.contains("3 Months") ||
+                        plan.contains("6 Months") && previousPlanType.contains("6 Months") ||
+                        plan.contains("1 Year") && previousPlanType.contains("1 Year")) {
+
+                    spinnerNewPlanType.setText(plan, false);
+
+                    if (planFeeMap.containsKey(plan)) {
+                        newPlanFee = planFeeMap.get(plan);
+                        etNewPlanFee.setText(String.valueOf(newPlanFee));
+
+                        if (planMonthMap.containsKey(plan)) {
+                            calculateEndDate(planMonthMap.get(plan));
+                        }
+                    }
+                    updateTotalPayable();
+
+                    Toast.makeText(this, "✅ Similar plan selected", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            Toast.makeText(this, "Previous plan type not available", Toast.LENGTH_SHORT).show();
         }
     }
-
     private void showDatePicker() {
         Calendar cal = Calendar.getInstance();
         DatePickerDialog picker = new DatePickerDialog(this,
@@ -435,6 +505,12 @@ public class PlanRenewalActivity extends BaseActivity {
 
     private void calculateEndDate(int months) {
         String startDate = etNewStartDate.getText().toString().trim();
+        if (TextUtils.isEmpty(startDate)) {
+            // If start date is empty, set it first
+            setDefaultStartDate();
+            startDate = etNewStartDate.getText().toString().trim();
+        }
+
         if (TextUtils.isEmpty(startDate)) return;
 
         try {
@@ -442,16 +518,16 @@ public class PlanRenewalActivity extends BaseActivity {
             Calendar cal = Calendar.getInstance();
             cal.setTime(sdf.parse(startDate));
             cal.add(Calendar.MONTH, months);
-            cal.add(Calendar.DAY_OF_MONTH, -1); // Subtract 1 day for proper end date
+            // DON'T subtract 1 day if you want same day end
+            // Example: Start 02/02, 1 month = 02/03
 
             etNewEndDate.setText(sdf.format(cal.getTime()));
         } catch (ParseException e) {
             Log.e(TAG, "Date calculation error: " + e.getMessage());
         }
     }
-
     private void updateTotalPayable() {
-        int total = newPlanFee + outstandingBalance;
+        int total = newPlanFee ;
         tvSummaryNewPlan.setText("₹" + newPlanFee);
         tvTotalPayable.setText("₹" + total);
     }
@@ -492,7 +568,7 @@ public class PlanRenewalActivity extends BaseActivity {
 
         // Generate Plan ID
         String planId = generatePlanId(startDate, planType);
-        int totalPayable = newPlanFee + outstandingBalance;
+        int totalPayable = newPlanFee;
 
         // Navigate to Payment Activity
         Intent intent = new Intent(this, PaymentActivity.class);
@@ -513,23 +589,64 @@ public class PlanRenewalActivity extends BaseActivity {
         finish();
     }
 
+//    private String generatePlanId(String startDate, String planType) {
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTime(sdf.parse(startDate));
+//
+//            String month = new SimpleDateFormat("MMM", Locale.getDefault())
+//                    .format(cal.getTime()).toUpperCase();
+//            int year = cal.get(Calendar.YEAR);
+//
+//            String planCode = "";
+//            if (planType.contains("1 Month")) planCode = "1M";
+//            else if (planType.contains("3 Months")) planCode = "3M";
+//            else if (planType.contains("6 Months")) planCode = "6M";
+//            else if (planType.contains("1 Year")) planCode = "1Y";
+//
+//            return month + "-" + year + "-" + planCode;
+//
+//        } catch (ParseException e) {
+//            Log.e(TAG, "Plan ID generation error: " + e.getMessage());
+//            return "PLAN-" + System.currentTimeMillis();
+//        }
+//    }
+
     private String generatePlanId(String startDate, String planType) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(sdf.parse(startDate));
+            SimpleDateFormat monthYearFormat = new SimpleDateFormat("MMM-yyyy", Locale.US);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            Date date = dateFormat.parse(startDate);
 
-            String month = new SimpleDateFormat("MMM", Locale.getDefault())
-                    .format(cal.getTime()).toUpperCase();
-            int year = cal.get(Calendar.YEAR);
+            String monthYear = monthYearFormat.format(date).toUpperCase();
 
+            // Get plan code
             String planCode = "";
             if (planType.contains("1 Month")) planCode = "1M";
             else if (planType.contains("3 Months")) planCode = "3M";
             else if (planType.contains("6 Months")) planCode = "6M";
             else if (planType.contains("1 Year")) planCode = "1Y";
+            else {
+                // Extract number from plan name
+                planCode = planType.replaceAll("[^0-9]", "") + "M";
+            }
 
-            return month + "-" + year + "-" + planCode;
+            // Add sequence number (like -01, -02)
+            String planId = monthYear + "-" + planCode + "-01";
+
+            // Check if plan ID already exists and increment if needed
+            DatabaseReference paymentsRef = FirebaseDatabase.getInstance()
+                    .getReference("GYM")
+                    .child(ownerEmail)
+                    .child("members")
+                    .child(memberPhone)
+                    .child("payments");
+
+            // Note: For simplicity, using -01. You might need to query existing plans
+            // and increment the sequence number if same month-year-planCode exists
+
+            return planId;
 
         } catch (ParseException e) {
             Log.e(TAG, "Plan ID generation error: " + e.getMessage());
