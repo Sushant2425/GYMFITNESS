@@ -123,5 +123,6 @@
 
         <!-- Divider Colors -->
         <color name="divider">#E0E0E0</color>
+    <color name="blue_800">#0F172A</color>
 
 </resources>

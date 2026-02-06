@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="#F5F7FA" />
-    <corners
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Main background rectangle -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F5F7FA" />
+        </shape>
+    </item>
+
+    <!-- Top rounded corners -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F5F7FA" />
+            <corners
+                android:topLeftRadius="25dp"
+                android:topRightRadius="25dp" />
+        </shape>
+    </item>
+
+</layer-list>

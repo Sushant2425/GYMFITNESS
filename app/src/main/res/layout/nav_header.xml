@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="140dp"
-    android:background="@drawable/nav_header_bg"
+    android:background="@drawable/gradient_header_premium"
     android:elevation="4dp"
     android:fitsSystemWindows="true"
     android:padding="16dp"
@@ -26,7 +26,7 @@
             app:cardCornerRadius="28dp"
             app:cardElevation="6dp"
             android:layout_marginStart="5dp"
-            app:cardBackgroundColor="#FF0000">
+            app:cardBackgroundColor="#FBFAFA">
 
             <ImageView
                 android:layout_width="32dp"
@@ -34,8 +34,8 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/gym_logo_desc"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_gym_logo"
-                app:tint="#FFFFFF" />
+                android:src="@drawable/logogym"
+               />
 
         </androidx.cardview.widget.CardView>
 

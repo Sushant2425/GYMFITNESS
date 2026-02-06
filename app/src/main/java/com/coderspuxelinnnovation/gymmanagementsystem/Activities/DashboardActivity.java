@@ -19,6 +19,7 @@ import com.coderspuxelinnnovation.gymmanagementsystem.Fragments.ProfileFragment;
 import com.coderspuxelinnnovation.gymmanagementsystem.Fragments.ReportsFragment;
 import com.coderspuxelinnnovation.gymmanagementsystem.Fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
     private NavigationView navigationView;
     private BottomNavigationView bottomNav;
     private Toolbar toolbar;
+    private FloatingActionButton fabAddMember;
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -51,6 +53,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         setupToolbar();
         setupNavigationDrawer();
         setupBottomNavigation();
+        setupFAB();
         loadNavigationHeader();
 
         if (savedInstanceState == null) {
@@ -63,6 +66,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         bottomNav = findViewById(R.id.bottom_navigation);
         toolbar = findViewById(R.id.toolbar);
+        fabAddMember = findViewById(R.id.fab_add_member);
     }
 
     private void setupFirebase() {
@@ -77,17 +81,14 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         }
     }
 
-
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-            // Temporary app name
             getSupportActionBar().setTitle("Loading...");
         }
-        loadGymNameToToolbar(); // 🔥 Add this
+        loadGymNameToToolbar();
     }
-
 
     private void loadGymNameToToolbar() {
         if (databaseReference == null) {
@@ -127,7 +128,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
                 });
     }
 
-
     private void setupNavigationDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar,
@@ -145,8 +145,19 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             } else if (item.getItemId() == R.id.nav_settings) {
                 loadFragment(new SettingsFragment());
                 return true;
+            } else if (item.getItemId() == R.id.nav_placeholder) {
+                // This is the placeholder for FAB, do nothing
+                return false;
             }
             return false;
+        });
+    }
+
+    private void setupFAB() {
+        fabAddMember.setOnClickListener(v -> {
+            // Open Add Member Activity
+            Intent intent = new Intent(DashboardActivity.this, MemberAddActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -160,7 +171,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         TextView tvGymName = headerView.findViewById(R.id.nav_header_gym_name);
         TextView tvEmail = headerView.findViewById(R.id.nav_header_email);
 
-        // Set fallback text
         tvGymName.setText("Loading...");
         tvEmail.setText("Loading...");
 
@@ -172,7 +182,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
                 Log.d("Dashboard", "ownerInfo snapshot exists: " + snapshot.exists());
 
                 if (snapshot.exists()) {
-                    // Safe null checks
                     String gymName = snapshot.child("gymName").getValue(String.class);
                     String email = snapshot.child("email").getValue(String.class);
 
@@ -182,7 +191,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
                         tvGymName.setText(gymName);
                         Log.d("Dashboard", "Gym name set: " + gymName);
                     } else {
-                        tvGymName.setText("My Gym"); // Fallback
+                        tvGymName.setText("My Gym");
                         Log.w("Dashboard", "gymName null/empty, using fallback");
                     }
 
@@ -229,29 +238,22 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        }
-        else if (id == R.id.nav_add_member) {
+        } else if (id == R.id.nav_add_member) {
             startActivity(new Intent(this, MemberAddActivity.class));
             return true;
-        }
-        else if (id == R.id.nav_member_list) {
+        } else if (id == R.id.nav_member_list) {
             startActivity(new Intent(this, MembersListActivity.class));
             return true;
-        }
-        else if (id == R.id.PlanExpiryReminder) {
+        } else if (id == R.id.PlanExpiryReminder) {
             startActivity(new Intent(this, PlanExpiryReminderActivity.class));
             return true;
-        }
-        else if (id == R.id.nav_add_plan) {
+        } else if (id == R.id.nav_add_plan) {
             startActivity(new Intent(this, AddPlanActivity.class));
             return true;
-        }
-        else if (id == R.id.nav_inventory) {
+        } else if (id == R.id.nav_inventory) {
             startActivity(new Intent(this, PendingDuesActivity.class));
             return true;
         }
-
-
 
         loadFragment(fragment);
         return true;

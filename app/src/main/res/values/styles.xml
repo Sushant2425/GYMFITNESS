@@ -5,4 +5,18 @@
         <item name="colorPrimary">#1A237E</item>
         <item name="colorAccent">#D32F2F</item>
     </style>
+    <!-- Circular FAB Style -->
+    <style name="CircularFAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Optional: Custom FAB Style with Shadow -->
+    <style name="CustomFABStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="elevation">12dp</item>
+        <item name="pressedTranslationZ">16dp</item>
+        <item name="hoveredFocusedTranslationZ">14dp</item>
+        <item name="borderWidth">0dp</item>
+        <item name="fabSize">normal</item>
+    </style>
 </resources>

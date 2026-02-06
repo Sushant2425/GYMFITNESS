@@ -9,54 +9,88 @@
     tools:context=".Activities.DashboardActivity">
 
     <!-- Main Content -->
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#FBF8F8">
+        android:background="#FFFFFF">
 
-        <!-- App Bar -->
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F4F0F0"
-            android:elevation="4dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
+            <!-- App Bar -->
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/gradient_header_premium"
-                app:title="@string/app_name"
-                app:navigationIconTint="@color/white"
-                app:titleTextColor="@android:color/white"
-                app:navigationIcon="@drawable/ic_menu" />
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:elevation="4dp">
 
-        </com.google.android.material.appbar.AppBarLayout>
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:visibility="gone"
+                    android:background="@drawable/gradient_header_premium"
+                    app:title="@string/app_name"
+                    app:navigationIconTint="@color/white"
+                    app:titleTextColor="@android:color/white"
+                    app:navigationIcon="@drawable/ic_menu" />
 
-        <FrameLayout
-            android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/white" />
+            </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Compact Bottom Navigation -->
+            <FrameLayout
+                android:id="@+id/frame_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF" />
+
+            <!-- Spacer for bottom navigation -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+        </LinearLayout>
+
+        <!-- Bottom Navigation Bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="56dp"
-            android:background="#EBEAEA"
+            android:layout_height="65dp"
+            android:paddingTop="10dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bottom_nav_background"
+            android:elevation="10dp"
             app:itemHorizontalTranslationEnabled="false"
-            app:itemIconSize="24dp"
-            app:itemIconTint="@color/bottom_nav_color"
-            app:itemTextColor="@color/bottom_nav_color"
-            app:itemRippleColor="#DC143C"
-            app:labelVisibilityMode="labeled"
+            app:itemIconSize="25dp"
+            app:itemIconTint="@color/bottom_nav_color_white_theme"
+            app:itemTextColor="@color/bottom_nav_color_white_theme"
+            app:itemRippleColor="#ffffff"
             app:menu="@menu/bottom_nav_menu" />
 
-    </LinearLayout>
+        <!-- Floating Action Button with 3D Shadow Effect -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="35dp"
+            android:src="@drawable/ic_add_member"
+            android:contentDescription="Add Member"
+            android:stateListAnimator="@animator/fab_elevation"
+            app:tint="@android:color/white"
+            app:backgroundTint="#1E293B"
+            app:elevation="12dp"
+            app:pressedTranslationZ="16dp"
+            app:hoveredFocusedTranslationZ="14dp"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:maxImageSize="28dp"
+            app:rippleColor="#8B5CF6"
+            app:shapeAppearanceOverlay="@style/CircularFAB" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
@@ -64,7 +98,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#F6F4F4"
+        android:background="#FFFFFF"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
         app:headerLayout="@layout/nav_header"
