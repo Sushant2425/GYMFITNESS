@@ -26,6 +26,7 @@ import androidx.work.WorkManager;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.DashboardActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.LanguageSelectionActivity;
+import com.coderspuxelinnnovation.gymmanagementsystem.Activities.PremiumSelectionActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
@@ -276,6 +277,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void checkLoginStatus() {
+
         if (!isConnected()) {
             Toast.makeText(this,
                     getString(R.string.no_internet),
@@ -288,41 +290,88 @@ public class SplashActivity extends BaseActivity {
         String email = prefManager.getUserEmail();
 
         if (email == null) {
-            // Not logged in - go to Login
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        } else {
-            // Logged in - verify account status
-            String safeEmail = email.replace(".", ",");
+            return;
+        }
 
-            rootRef.child(safeEmail)
-                    .child("ownerInfo")
-                    .child("status")
-                    .get()
-                    .addOnSuccessListener(snapshot -> {
-                        Boolean status = snapshot.getValue(Boolean.class);
+        String safeEmail = email.replace(".", ",");
 
-                        if (status != null && status) {
-                            startActivity(new Intent(this, DashboardActivity.class));
-                            finish();
-                        } else {
-                            prefManager.logout();
-                            Toast.makeText(this,
-                                    getString(R.string.account_disabled_login),
-                                    Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(this, LoginActivity.class));
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this,
-                                getString(R.string.login_expired),
-                                Toast.LENGTH_SHORT).show();
+        // 1️⃣ owner status check
+        rootRef.child(safeEmail)
+                .child("ownerInfo")
+                .child("status")
+                .get()
+                .addOnSuccessListener(statusSnap -> {
+
+                    Boolean status = statusSnap.getValue(Boolean.class);
+
+                    if (status == null || !status) {
                         prefManager.logout();
+                        Toast.makeText(this,
+                                getString(R.string.account_disabled_login),
+                                Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(this, LoginActivity.class));
                         finish();
-                    });
-        }
+                        return;
+                    }
+
+                    // 2️⃣ subscription check
+                    rootRef.child(safeEmail)
+                            .child("subscription")
+                            .child("currentPlan")
+                            .get()
+                            .addOnSuccessListener(planSnap -> {
+
+                                if (!planSnap.exists()) {
+                                    // 🔥 No plan selected yet
+                                    goToPremium();
+                                    return;
+                                }
+
+                                Boolean active =
+                                        planSnap.child("active").getValue(Boolean.class);
+
+                                Long endMillis =
+                                        planSnap.child("endMillis").getValue(Long.class);
+
+                                // 🔹 LIFETIME case
+                                if (endMillis != null && endMillis == -1) {
+                                    goToDashboard();
+                                    return;
+                                }
+
+                                // 🔹 Valid plan
+                                if (active != null && active &&
+                                        endMillis != null &&
+                                        System.currentTimeMillis() <= endMillis) {
+
+                                    goToDashboard();
+                                } else {
+                                    // ❌ Trial / Premium expired
+                                    goToPremium();
+                                }
+                            });
+
+                })
+                .addOnFailureListener(e -> {
+                    prefManager.logout();
+                    Toast.makeText(this,
+                            getString(R.string.login_expired),
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                });
+    }
+
+    private void goToDashboard() {
+        startActivity(new Intent(this, DashboardActivity.class));
+        finish();
+    }
+
+    private void goToPremium() {
+        startActivity(new Intent(this, PremiumSelectionActivity.class));
+        finish();
     }
 
     private boolean isConnected() {

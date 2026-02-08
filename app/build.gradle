@@ -57,4 +57,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     // ... your existing dependencies
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.razorpay:checkout:1.6.40'
+
 }

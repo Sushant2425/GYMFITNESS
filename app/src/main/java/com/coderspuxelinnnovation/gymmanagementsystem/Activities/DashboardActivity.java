@@ -55,6 +55,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         setupBottomNavigation();
         setupFAB();
         loadNavigationHeader();
+        checkPlanAndHandleExpiry();
 
         if (savedInstanceState == null) {
             loadFragment(new DashboardFragment());
@@ -259,6 +260,96 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         return true;
     }
 
+
+
+
+    private void checkPlanAndHandleExpiry() {
+
+        if (databaseReference == null) return;
+
+        databaseReference
+                .child("subscription")
+                .get()
+                .addOnSuccessListener(snapshot -> {
+
+                    // 1️⃣ First time user
+                    if (!snapshot.exists()) {
+                        openPremiumScreen();
+                        return;
+                    }
+
+                    DataSnapshot currentPlanSnap =
+                            snapshot.child("currentPlan");
+
+                    DataSnapshot trialSnap =
+                            snapshot.child("trial");
+
+                    if (!currentPlanSnap.exists()) {
+                        openPremiumScreen();
+                        return;
+                    }
+
+                    Boolean active =
+                            currentPlanSnap.child("active").getValue(Boolean.class);
+
+                    Long endMillis =
+                            currentPlanSnap.child("endMillis").getValue(Long.class);
+
+                    Boolean trialUsed =
+                            trialSnap.child("used").getValue(Boolean.class);
+
+                    long now = System.currentTimeMillis();
+
+                    // 2️⃣ Lifetime plan
+                    if (endMillis != null && endMillis == -1) {
+                        return;
+                    }
+
+                    // 3️⃣ Active & valid
+                    if (active != null
+                            && active
+                            && endMillis != null
+                            && now <= endMillis) {
+                        return;
+                    }
+
+                    // 4️⃣ Trial / Premium expired (only if trial was used)
+                    if (trialUsed != null && trialUsed) {
+                        showTrialExpiredPopup();
+                    } else {
+                        openPremiumScreen();
+                    }
+                })
+                .addOnFailureListener(e -> openPremiumScreen());
+    }
+    private void showTrialExpiredPopup() {
+
+        androidx.appcompat.app.AlertDialog dialog =
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Trial Expired")
+                        .setMessage(
+                                "Your free trial has expired.\n\n" +
+                                        "To continue using all features,\n" +
+                                        "please upgrade to Premium."
+                        )
+                        .setCancelable(false)
+                        .setPositiveButton("Buy Premium", (d, which) -> {
+                            openPremiumScreen();
+                        })
+                        .create();
+
+        dialog.show();
+    }
+    private void openPremiumScreen() {
+        Intent intent =
+                new Intent(this, PremiumSelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -267,4 +358,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+
 }
