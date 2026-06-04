@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.Activities.AllPaymentsActivity;
@@ -24,8 +25,8 @@ public class AllPaymentsAdapter extends RecyclerView.Adapter<AllPaymentsAdapter.
         void onPaymentClick(AllPaymentsActivity.PaymentItem paymentItem);
     }
 
-    public AllPaymentsAdapter(List<AllPaymentsActivity.PaymentItem> paymentList, 
-                             OnPaymentClickListener listener) {
+    public AllPaymentsAdapter(List<AllPaymentsActivity.PaymentItem> paymentList,
+                              OnPaymentClickListener listener) {
         this.paymentList = paymentList;
         this.listener = listener;
     }
@@ -44,34 +45,36 @@ public class AllPaymentsAdapter extends RecyclerView.Adapter<AllPaymentsAdapter.
 
         holder.tvTitle.setText(item.getTitle());
         holder.tvDate.setText(item.getDate());
-        holder.tvAmount.setText("₹" + item.getAmount());
         holder.tvStatus.setText(item.getStatus());
 
-        // Show both: Paid/Total
+        // Show Paid/Total amount
         holder.tvAmount.setText("₹" + item.getAmountPaid() + " / ₹" + item.getTotalFee());
 
-        holder.tvStatus.setText(item.getStatus());
-        // Set status color
+        // Set status color based on status type
         int textColor, bgColor;
         switch (item.getStatus().toUpperCase()) {
             case "PAID":
-                textColor = holder.itemView.getContext().getColor(R.color.status_paid);
-                bgColor = holder.itemView.getContext().getColor(R.color.status_paid);
+                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_text);
+                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_bg);
                 break;
             case "ACTIVE":
-                textColor = holder.itemView.getContext().getColor(R.color.status_active);
-                bgColor = holder.itemView.getContext().getColor(R.color.status_active_bg);
+                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_text);
+                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_bg);
                 break;
             case "PENDING":
-                textColor = holder.itemView.getContext().getColor(R.color.status_pending);
-                bgColor = holder.itemView.getContext().getColor(R.color.status_pending_bg);
+                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_text);
+                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_bg);
+                break;
+            case "EXPIRED":
+                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_text);
+                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_bg);
                 break;
             default:
-                textColor = holder.itemView.getContext().getColor(R.color.status_expired);
-                bgColor = holder.itemView.getContext().getColor(R.color.status_expired);
+                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_text);
+                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_bg);
                 break;
         }
-        
+
         holder.tvStatus.setTextColor(textColor);
         holder.cvStatus.setCardBackgroundColor(bgColor);
 
@@ -79,9 +82,11 @@ public class AllPaymentsAdapter extends RecyclerView.Adapter<AllPaymentsAdapter.
         if (item.isCurrentPlan()) {
             holder.btnViewDetails.setText("Current");
             holder.btnViewDetails.setEnabled(false);
+            holder.btnViewDetails.setAlpha(0.5f);
         } else {
-            holder.btnViewDetails.setText("View Details");
+            holder.btnViewDetails.setText("View");
             holder.btnViewDetails.setEnabled(true);
+            holder.btnViewDetails.setAlpha(1f);
         }
 
         holder.btnViewDetails.setOnClickListener(v -> {

@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:fitsSystemWindows="true"
+    android:background="#000000">
 
     <!-- App Bar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -18,10 +19,9 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#FAF8F8"
-            app:titleTextColor="#FAF8F8">
-
-        </androidx.appcompat.widget.Toolbar>
+            app:navigationIconTint="#FFFFFF"
+            app:titleTextColor="#FFFFFF"
+            app:title="Payment History" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="#EF5350"
+        android:indeterminateTint="#FF6B00"
         android:visibility="gone" />
 
     <!-- Main Content -->
@@ -52,9 +52,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -70,7 +72,7 @@
                         android:text="DEC-2025-1M-01"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="#212121"
+                        android:textColor="#FFFFFF"
                         android:layout_marginBottom="12dp" />
 
                     <LinearLayout
@@ -85,7 +87,7 @@
                             android:layout_weight="1"
                             android:text="Total Fee:"
                             android:textSize="14sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvTotalFee"
@@ -93,7 +95,7 @@
                             android:layout_height="wrap_content"
                             android:text="₹200"
                             android:textSize="14sp"
-                            android:textColor="#212121"
+                            android:textColor="#FF6B00"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -109,7 +111,7 @@
                             android:layout_weight="1"
                             android:text="Amount Paid:"
                             android:textSize="14sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvAmountPaid"
@@ -117,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:text="₹200"
                             android:textSize="14sp"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FFC107"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -140,7 +142,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_payment"
-                    app:tint="#EF5350" />
+                    app:tint="#FF6B00" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -150,7 +152,7 @@
                     android:text="Payment History"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/tvPaymentCount"
@@ -158,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:text="(0 payments)"
                     android:textSize="12sp"
-                    android:textColor="#757575" />
+                    android:textColor="#9E9E9E" />
 
             </LinearLayout>
 

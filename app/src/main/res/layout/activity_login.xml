@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="#000000"
+    android:fitsSystemWindows="true"
     android:fillViewport="true">
 
     <LinearLayout
@@ -20,13 +21,23 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="32dp">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/logogym"
-                android:elevation="4dp"
-                />
+                app:cardCornerRadius="40dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logogym"
+                   />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,7 +45,7 @@
                 android:text="@string/gym_name"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
+                android:textColor="#FFFFFF"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="16dp"
                 android:letterSpacing="0.02" />
@@ -44,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/welcome_back"
                 android:textSize="15sp"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="8dp" />
         </LinearLayout>
@@ -54,9 +65,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="#1A1A1A"
             app:cardCornerRadius="24dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:strokeColor="#FF6B00"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +84,7 @@
                     android:textSize="26sp"
                     android:textStyle="bold"
                     android:visibility="gone"
-                    android:textColor="#212121"
+                    android:textColor="#FFFFFF"
                     android:paddingBottom="32dp" />
 
                 <!-- Email Input -->
@@ -80,15 +93,16 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxStrokeColor="#EF5350"
-                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="#FF6B00"
+                    app:boxStrokeWidth="1.5dp"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:hintTextColor="#EF5350"
+                    app:hintTextColor="#FF6B00"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="#757575"
+                    app:startIconTint="#FF9800"
+                    app:boxBackgroundColor="#2C2C2C"
                     android:layout_marginBottom="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -96,8 +110,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
-                        android:textColor="#212121"
-                        android:textColorHint="#BDBDBD"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#9E9E9E"
                         android:textSize="16sp"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -108,17 +122,18 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_password"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:boxStrokeColor="#EF5350"
-                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeColor="#FF6B00"
+                    app:boxStrokeWidth="1.5dp"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:hintTextColor="#EF5350"
+                    app:hintTextColor="#FF6B00"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="#757575"
+                    app:startIconTint="#FF9800"
                     app:endIconMode="password_toggle"
-                    app:endIconTint="#757575"
+                    app:endIconTint="#FF9800"
+                    app:boxBackgroundColor="#2C2C2C"
                     android:layout_marginBottom="12dp">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -126,8 +141,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:textColor="#212121"
-                        android:textColorHint="#BDBDBD"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#9E9E9E"
                         android:textSize="16sp"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -138,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_password"
-                    android:textColor="#EF5350"
+                    android:textColor="#FF9800"
                     android:textSize="14sp"
                     android:layout_gravity="end"
                     android:paddingTop="4dp"
@@ -153,7 +168,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:visibility="gone"
-                    android:indeterminateTint="#EF5350"
+                    android:indeterminateTint="#FF6B00"
                     android:layout_marginBottom="16dp" />
 
                 <!-- Login Button -->
@@ -165,7 +180,7 @@
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:backgroundTint="#EF5350"
+                    app:backgroundTint="#FF6B00"
                     app:cornerRadius="16dp"
                     app:elevation="4dp"
                     android:textColor="#FFFFFF"
@@ -187,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/no_account"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:textSize="15sp" />
 
             <TextView
@@ -195,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_now"
-                android:textColor="#EF5350"
+                android:textColor="#FF6B00"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:paddingStart="6dp"
@@ -223,23 +238,25 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    app:cardBackgroundColor="#FFEBEE"
+                    app:cardBackgroundColor="#332A1A"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_timer"
-                        app:tint="#EF5350" />
+                        app:tint="#FF6B00" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/open_24_7"
-                    android:textColor="#424242"
+                    android:textColor="#BDBDBD"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp"
@@ -257,23 +274,25 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    app:cardBackgroundColor="#FFEBEE"
+                    app:cardBackgroundColor="#332A1A"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_trainer"
-                        app:tint="#EF5350" />
+                        app:tint="#FF6B00" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/expert_trainers"
-                    android:textColor="#424242"
+                    android:textColor="#BDBDBD"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp"
@@ -291,23 +310,25 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    app:cardBackgroundColor="#FFEBEE"
+                    app:cardBackgroundColor="#332A1A"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp">
+                    app:cardElevation="2dp"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_equipment"
-                        app:tint="#EF5350" />
+                        app:tint="#FF6B00" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/modern_equipment"
-                    android:textColor="#424242"
+                    android:textColor="#BDBDBD"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp"

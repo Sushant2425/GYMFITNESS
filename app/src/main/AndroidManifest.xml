@@ -14,9 +14,9 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@drawable/logogym"
+        android:icon="@drawable/img_1"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logogym"
+        android:roundIcon="@drawable/img_1"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymManagementSystem">
 

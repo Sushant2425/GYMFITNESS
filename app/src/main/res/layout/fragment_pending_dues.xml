@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="#000000">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -19,9 +19,9 @@
         android:layout_gravity="center"
         android:text="No pending dues"
         android:textSize="16sp"
-        android:textColor="@color/grey"
+        android:textColor="#9E9E9E"
         android:drawableTop="@drawable/ic_check"
-        android:drawableTint="@color/green"
+        android:drawableTint="#FF6B00"
         android:drawablePadding="16dp"
         android:gravity="center"
         android:visibility="gone" />

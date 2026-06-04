@@ -31,18 +31,34 @@
     <color name="tab_text_selected">#FFFFFF</color>
     <color name="tab_text_unselected">#B0FFFFFF</color> <!-- 70% white -->
     <color name="tab_indicator">#FFEB3B</color>         <!-- yellow indicator -->
+    <!-- PAID Status - Green -->
+    <color name="status_paid_text">#4CAF50</color>
+    <color name="status_paid_bg">#1A2E1A</color>
 
+    <!-- ACTIVE Status - Orange -->
+    <color name="status_active_text">#FF6B00</color>
+    <color name="status_active_bg">#332A1A</color>
+
+    <!-- PENDING Status - Yellow/Amber -->
+    <color name="status_pending_text">#FFC107</color>
+    <color name="status_pending_bg">#332A1A</color>
+
+    <!-- EXPIRED Status - Red -->
+    <color name="status_expired_text">#F44336</color>
+    <color name="status_expired_bg">#331A1A</color>
+
+    <!-- DEFAULT Status - Gray -->
+    <color name="status_default_text">#9E9E9E</color>
+    <color name="status_default_bg">#2A2A2A</color>
         <!-- Status Colors -->
-        <color name="status_active_bg">#E8F5E9</color>
-        <color name="status_active_text">#2E7D32</color>
         <color name="status_active_icon">#4CAF50</color>
 
         <color name="status_inactive_bg">#FFEBEE</color>
         <color name="status_inactive_text">#C62828</color>
         <color name="status_inactive_icon">#F44336</color>
 
-        <color name="status_pending_bg">#FFF3E0</color>
-        <color name="status_pending_text">#EF6C00</color>
+
+
         <color name="status_pending_icon">#FF9800</color>
 
         <!-- Duration Colors -->

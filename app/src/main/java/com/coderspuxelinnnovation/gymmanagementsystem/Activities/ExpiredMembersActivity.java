@@ -1,10 +1,13 @@
 package com.coderspuxelinnnovation.gymmanagementsystem.Activities;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -133,12 +137,53 @@ public class ExpiredMembersActivity extends BaseActivity {
     }
 
     private void setupSortSpinner() {
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, sortOptions);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, sortOptions) {
+
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                if (view instanceof TextView) {
+                    TextView textView = (TextView) view;
+                    textView.setTextColor(Color.WHITE);
+                    textView.setBackgroundColor(Color.parseColor("#1A1A1A"));
+                    textView.setPadding(16, 10, 16, 10);
+                    textView.setTextSize(14f);
+                }
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                if (view instanceof TextView) {
+                    TextView textView = (TextView) view;
+                    textView.setTextColor(Color.WHITE);
+                    textView.setBackgroundColor(Color.parseColor("#2C2C2C"));
+                    textView.setPadding(16, 12, 16, 12);
+                    textView.setTextSize(14f);
+
+                    // Add separator line between items
+                    if (position < getCount() - 1) {
+                        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                    }
+                }
+                return view;
+            }
+        };
+
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(spinnerAdapter);
-    }
 
+        // Set custom background for spinner
+        spinnerSort.setBackground(ContextCompat.getDrawable(this, R.drawable.spinner_background_black));
+
+        // Set popup background color for dropdown (for API 16+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            spinnerSort.setPopupBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.spinner_popup_background));
+        }
+    }
     private void setupListeners() {
         // Toolbar back button
         toolbar.setNavigationOnClickListener(v -> finish());

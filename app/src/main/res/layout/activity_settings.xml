@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@color/white">
+    android:background="#000000">
 
     <!-- Modern AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#ffffff">
+            app:navigationIconTint="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.01"
                     android:text="@string/settings"
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/settings_subtitle"
-                    android:textColor="@color/white"
+                    android:textColor="#FFE0B2"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -67,9 +67,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,16 +90,18 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:cardBackgroundColor="#FDE2EB"
+                            app:cardBackgroundColor="#332A1A"
                             app:cardCornerRadius="12dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FF6B00"
+                            app:strokeWidth="1dp">
 
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_language"
-                                app:tint="#E91E2C" />
+                                app:tint="#FF6B00" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -109,7 +113,7 @@
                             android:text="@string/language"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -128,11 +132,13 @@
                             android:layout_height="56dp"
                             android:text="@string/lang_english"
                             android:textSize="15sp"
+                            android:textColor="#FFFFFF"
                             android:checked="true"
-                            app:chipBackgroundColor="@color/chip_background"
-                            app:chipStrokeColor="#090909"
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
                             app:chipStrokeWidth="1dp"
                             app:chipIcon="@drawable/ic_check"
+                            app:chipIconTint="#FF6B00"
                             app:checkedIconVisible="true"
                             android:layout_marginBottom="12dp" />
 
@@ -143,10 +149,12 @@
                             android:layout_height="56dp"
                             android:text="@string/lang_marathi"
                             android:textSize="15sp"
-                            app:chipBackgroundColor="@color/chip_background"
-                            app:chipStrokeColor="#0B0B0B"
+                            android:textColor="#FFFFFF"
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
                             app:chipStrokeWidth="1dp"
                             app:chipIcon="@drawable/ic_check"
+                            app:chipIconTint="#FF6B00"
                             app:checkedIconVisible="true" />
 
                     </com.google.android.material.chip.ChipGroup>
@@ -158,7 +166,7 @@
                         android:layout_marginTop="16dp"
                         android:text="@string/language_info"
                         android:textSize="12sp"
-                        android:textColor="#757575"
+                        android:textColor="#9E9E9E"
                         android:lineSpacingExtra="2dp" />
 
                 </LinearLayout>
@@ -171,9 +179,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,16 +202,18 @@
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            app:cardBackgroundColor="#FFEBEE"
+                            app:cardBackgroundColor="#332A1A"
                             app:cardCornerRadius="12dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FF6B00"
+                            app:strokeWidth="1dp">
 
                             <ImageView
                                 android:layout_width="28dp"
                                 android:layout_height="28dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/ic_gym"
-                                app:tint="#EF5350" />
+                                app:tint="#FF6B00" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -213,7 +225,7 @@
                             android:text="@string/app_info"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -223,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background"
+                        android:background="#2C2C2C"
                         android:layout_marginBottom="10dp">
 
                         <TextView
@@ -232,7 +244,7 @@
                             android:layout_weight="1"
                             android:text="@string/app_version"
                             android:textSize="14sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -240,7 +252,7 @@
                             android:text="1.0.0"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -249,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="0dp"
@@ -257,7 +269,7 @@
                             android:layout_weight="1"
                             android:text="@string/developed_by"
                             android:textSize="14sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -265,7 +277,7 @@
                             android:text="@string/company_name"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="#EF5350" />
+                            android:textColor="#FF6B00" />
 
                     </LinearLayout>
 

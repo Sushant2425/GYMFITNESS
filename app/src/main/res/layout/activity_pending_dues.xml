@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="#FAFAFA">
+    android:background="#000000">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -15,16 +16,16 @@
         android:background="@android:color/transparent"
         app:elevation="0dp">
 
-        <!-- Professional Toolbar with Gradient -->
+        <!-- Professional Toolbar with Orange Gradient -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@drawable/gradient_header"
-            android:elevation="4dp"
+            android:background="@drawable/gradient_orange_header"
+            android:elevation="0dp"
             app:contentInsetStart="0dp"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="@color/white">
+            app:navigationIconTint="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Payment Manager"
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
@@ -60,9 +61,10 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            app:strokeWidth="0dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardElevation="4dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#FF6B00"
+            app:cardBackgroundColor="#1A1A1A">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +87,7 @@
                         android:contentDescription="Previous Month"
                         android:src="@drawable/ic_chevron_left"
                         android:background="@drawable/bg_ripple_circle"
-                        app:tint="@color/colorAccent"
+                        app:tint="#FF6B00"
                         android:scaleType="centerInside"
                         android:padding="8dp" />
 
@@ -95,6 +97,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:gravity="center"
+                        android:backgroundTint="@color/black"
                         android:paddingHorizontal="12dp">
 
                         <TextView
@@ -102,7 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="January"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="22sp"
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
@@ -115,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2025"
-                            android:textColor="#757575"
+                            android:textColor="#9E9E9E"
                             android:textSize="13sp"
                             android:fontFamily="sans-serif"
                             android:layout_marginTop="2dp"
@@ -129,7 +132,7 @@
                         android:layout_height="40dp"
                         android:src="@drawable/ic_chevron_right"
                         android:background="@drawable/bg_ripple_circle"
-                        app:tint="@color/colorAccent"
+                        app:tint="#FF6B00"
                         android:contentDescription="Next Month"
                         android:scaleType="centerInside"
                         android:padding="8dp" />
@@ -141,7 +144,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="#E0E0E0" />
+                    android:background="#332A2A2A" />
 
                 <!-- Summary Cards Row -->
                 <LinearLayout
@@ -161,15 +164,6 @@
                         android:gravity="center"
                         android:layout_marginEnd="6dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_pending"
-                            app:tint="#F44336"
-                            android:visibility="gone"
-                            android:contentDescription="Pending"
-                            android:layout_marginBottom="4dp" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -185,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="#F44336"
+                            android:textColor="#FFC107"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
@@ -206,15 +200,6 @@
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_payment"
-                            app:tint="#4CAF50"
-                            android:visibility="gone"
-                            android:contentDescription="Paid"
-                            android:layout_marginBottom="4dp" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -230,7 +215,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FF6B00"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
@@ -250,21 +235,12 @@
                         android:gravity="center"
                         android:layout_marginStart="6dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_money"
-                            android:visibility="gone"
-                            app:tint="@color/colorPrimary"
-                            android:contentDescription="Total"
-                            android:layout_marginBottom="4dp" />
-
                         <TextView
                             android:id="@+id/tvMemberCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0 members"
-                            android:textColor="#9E9E9E"
+                            android:textColor="#BDBDBD"
                             android:textSize="11sp"
                             android:fontFamily="sans-serif"
                             android:maxLines="1"
@@ -275,7 +251,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹0"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#FF6B00"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
@@ -292,16 +268,16 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/white"
+            android:background="#1A1A1A"
             android:elevation="2dp"
-            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorColor="#FF6B00"
             app:tabIndicatorHeight="3dp"
             app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="#757575"
+            app:tabSelectedTextColor="#FF6B00"
+            app:tabTextColor="#9E9E9E"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabRippleColor="#1A000000" />
+            app:tabRippleColor="#33FF6B00" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -310,7 +286,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FAFAFA"
+        android:background="#000000"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <!-- Loading Progress Bar -->
@@ -321,8 +297,8 @@
         android:layout_gravity="top"
         android:indeterminate="true"
         android:visibility="gone"
-        app:indicatorColor="@color/colorAccent"
-        app:trackColor="#20000000"
+        app:indicatorColor="#FF6B00"
+        app:trackColor="#332A2A2A"
         app:trackCornerRadius="2dp" />
 
     <!-- Modern FAB -->
@@ -333,8 +309,8 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="Refresh Data"
-        app:backgroundTint="@color/colorPrimary"
-        app:tint="@color/white"
+        app:backgroundTint="#FF6B00"
+        app:tint="#FFFFFF"
         app:srcCompat="@drawable/ic_refresh"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"

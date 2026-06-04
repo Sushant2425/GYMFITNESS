@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#1A1A1A">
 
     <TextView
         android:id="@+id/tvRemaining"
@@ -12,24 +14,35 @@
         android:text="Remaining: ₹500"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="#FFC107"
         android:layout_marginBottom="12dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Amount">
+        android:hint="Amount"
+        app:boxStrokeColor="#FF6B00"
+        app:hintTextColor="#FF6B00"
+        app:startIconDrawable="@drawable/ic_money"
+        app:startIconTint="#FF9800"
+        app:boxBackgroundColor="#2C2C2C"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9E9E9E" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
         android:id="@+id/spinnerMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:background="@drawable/spinner_background_black"
+        android:popupBackground="#2C2C2C" />
 
 </LinearLayout>

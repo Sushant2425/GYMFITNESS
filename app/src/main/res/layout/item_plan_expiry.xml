@@ -4,14 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:strokeWidth="1dp"
+    app:strokeColor="#FF6B00"
+    app:cardBackgroundColor="#1A1A1A">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="18dp">
+        android:padding="16dp">
 
         <!-- Name -->
         <TextView
@@ -19,36 +22,36 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="John Doe"
-            android:textColor="#1D1D1D"
+            android:textColor="#FFFFFF"
             android:textSize="17sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <!-- Status Badge -->
-
-        <!-- Phone -->
-
         <com.google.android.material.chip.Chip
             android:id="@+id/chipStatus"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="32dp"
             android:layout_marginTop="16dp"
             android:text="TODAY"
             android:textAllCaps="true"
-            android:textColor="@android:color/white"
+            android:textColor="#FFFFFF"
             android:textSize="11sp"
-            app:chipBackgroundColor="#3F51B5"
-            app:chipCornerRadius="14dp"
+            android:textStyle="bold"
+            app:chipBackgroundColor="#FF6B00"
+            app:chipCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Phone -->
         <TextView
             android:id="@+id/tvPhone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="+91 98765 43210"
-            android:textColor="#757575"
+            android:textColor="#BDBDBD"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvName"/>
@@ -58,8 +61,8 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="14dp"
-            android:background="#F5F5F5"
+            android:layout_marginVertical="12dp"
+            android:background="#332A2A2A"
             app:layout_constraintTop_toBottomOf="@id/tvPhone"/>
 
         <!-- Plan -->
@@ -68,14 +71,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Premium Plan"
-            android:textColor="#424242"
+            android:textColor="#FF9800"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider"/>
 
         <!-- End Date -->
-
-        <!-- Remaining Days -->
         <TextView
             android:id="@+id/tvEndDate"
             android:layout_width="wrap_content"
@@ -83,18 +85,20 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:text="31 Dec 2024"
-            android:textColor="#F44336"
+            android:textColor="#FF6B00"
             android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider" />
 
+        <!-- Remaining Days -->
         <TextView
             android:id="@+id/tvRemaining"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="5 days remaining"
-            android:textColor="#666666"
+            android:textColor="#9E9E9E"
             android:textSize="13sp"
             android:drawablePadding="6dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,9 +120,10 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
                 android:text="SMS Reminder"
-                android:textSize="14sp"
-                app:iconSize="20dp"
-                app:backgroundTint="#4CAF50"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:iconSize="18dp"
+                app:backgroundTint="#FF9800"
                 app:cornerRadius="8dp"
                 style="@style/Widget.Material3.Button"/>
 
@@ -129,8 +134,9 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:text="WhatsApp"
-                android:textSize="14sp"
-                app:iconSize="20dp"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:iconSize="18dp"
                 app:backgroundTint="#25D366"
                 app:cornerRadius="8dp"
                 style="@style/Widget.Material3.Button"/>

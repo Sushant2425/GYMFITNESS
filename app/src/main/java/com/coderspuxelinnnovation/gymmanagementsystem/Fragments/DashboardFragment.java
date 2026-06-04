@@ -101,7 +101,6 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         // Set status bar color - Works on all Android versions
-        setStatusBarColor();
 
         initViews(view);
         setupFirebase();
@@ -114,46 +113,8 @@ public class DashboardFragment extends Fragment {
     }
 
     // Method to set status bar color for all Android versions
-    private void setStatusBarColor() {
-        if (getActivity() != null) {
-            Activity activity = getActivity();
-
-            // For Android 5.0 (Lollipop) and above
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = activity.getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.setStatusBarColor(ContextCompat.getColor(activity, R.color.blue_800));
-            }
-            // For Android 4.4 (KitKat)
-            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-                // Create a status bar view
-                View statusBarView = new View(activity);
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        getStatusBarHeight(activity)
-                );
-
-                statusBarView.setBackgroundColor(ContextCompat.getColor(activity, R.color.blue_800));
-
-                // Add the status bar view to the decor view
-                ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-                decorView.addView(statusBarView);
-            }
-        }
-    }
 
     // Helper method to get status bar height
-    private int getStatusBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
 
     // Optional: Reset status bar when fragment is destroyed
     @Override

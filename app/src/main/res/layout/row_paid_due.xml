@@ -10,8 +10,9 @@
     android:layout_marginVertical="6dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/white">
+    app:strokeWidth="1dp"
+    app:strokeColor="#FF6B00"
+    app:cardBackgroundColor="#1A1A1A">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Member Name"
-                    android:textColor="#212121"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
@@ -50,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1234567890"
-                    android:textColor="#757575"
+                    android:textColor="#BDBDBD"
                     android:textSize="13sp"
                     android:layout_marginTop="2dp"
                     android:maxLines="1"
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PAID"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
@@ -79,7 +80,7 @@
             android:layout_height="0.5dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:background="#E0E0E0" />
+            android:background="#332A2A2A" />
 
         <!-- Plan and Month Row -->
         <LinearLayout
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Monthly Plan"
-                android:textColor="#616161"
+                android:textColor="#9E9E9E"
                 android:textSize="13sp"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -105,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jan 2025"
-                android:textColor="#212121"
+                android:textColor="#FF9800"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:maxLines="1"
@@ -118,7 +119,7 @@
             android:layout_height="0.5dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:background="#E0E0E0" />
+            android:background="#332A2A2A" />
 
         <!-- Payment Amount Section -->
         <LinearLayout
@@ -138,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Paid Amount"
-                    android:textColor="#757575"
+                    android:textColor="#9E9E9E"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
 
@@ -147,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5 days ago"
-                    android:textColor="#4CAF50"
+                    android:textColor="#FFC107"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:layout_marginTop="2dp"
@@ -159,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹3000"
-                android:textColor="#4CAF50"
+                android:textColor="#FF6B00"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"
@@ -180,14 +181,14 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_check_circle"
-                app:tint="#4CAF50"
+                app:tint="#FF6B00"
                 android:contentDescription="Success" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Payment Completed"
-                android:textColor="#4CAF50"
+                android:textColor="#FF6B00"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:layout_marginStart="6dp"

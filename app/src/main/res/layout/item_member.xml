@@ -4,26 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="#1A1A1A"
     app:cardCornerRadius="10dp"
-    app:cardElevation="4dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#FF6B00"
+    app:strokeWidth="1dp"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="14dp"
         android:gravity="center_vertical">
 
         <!-- Status Icon with Background -->
         <androidx.cardview.widget.CardView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="14dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#F1F8FD">
+            app:cardBackgroundColor="#332A1A">
 
             <ImageView
                 android:id="@+id/ivStatus"
@@ -31,7 +33,7 @@
                 android:layout_height="28dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_active"
-                app:tint="#2196F3" />
+                app:tint="#FF6B00" />
 
         </androidx.cardview.widget.CardView>
 
@@ -49,7 +51,7 @@
                 android:text="John Doe"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
+                android:textColor="#FFFFFF"
                 android:maxLines="1"
                 android:ellipsize="end" />
 
@@ -64,7 +66,7 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_phone"
-                    app:tint="#757575" />
+                    app:tint="#9E9E9E" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -73,7 +75,7 @@
                     android:layout_marginStart="4dp"
                     android:text="8547968574"
                     android:textSize="13sp"
-                    android:textColor="#757575" />
+                    android:textColor="#BDBDBD" />
 
             </LinearLayout>
 
@@ -84,7 +86,6 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical">
 
-
                 <TextView
                     android:id="@+id/tvPlan"
                     android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
                     android:layout_marginStart="4dp"
                     android:text="3 Months (₹2500)"
                     android:textSize="13sp"
-                    android:textColor="#EF5350"
+                    android:textColor="#FF9800"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -112,7 +113,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#E8F5E9">
+                app:cardBackgroundColor="#332A1A">
 
                 <TextView
                     android:id="@+id/tvStatus"
@@ -120,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="Active"
                     android:textSize="11sp"
-                    android:textColor="#4CAF50"
+                    android:textColor="#FF6B00"
                     android:textStyle="bold"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -136,9 +137,10 @@
                 android:layout_marginTop="6dp"
                 android:text="05/04/2026"
                 android:textSize="11sp"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:drawableStart="@drawable/ic_calendar_small"
-                android:drawablePadding="4dp" />
+                android:drawablePadding="4dp"
+                app:drawableTint="#9E9E9E" />
 
         </LinearLayout>
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_gradient_background">
+    android:background="#000000">
 
     <!-- Animated Background Circles -->
     <View
@@ -14,7 +14,7 @@
         android:layout_marginStart="-150dp"
         android:layout_marginTop="-150dp"
         android:background="@drawable/circle_background_1"
-        android:alpha="0.1"/>
+        android:alpha="0.15"/>
 
     <View
         android:id="@+id/circle2"
@@ -25,7 +25,7 @@
         android:layout_marginEnd="-100dp"
         android:layout_marginBottom="-100dp"
         android:background="@drawable/circle_background_2"
-        android:alpha="0.1"/>
+        android:alpha="0.15"/>
 
     <!-- Main Content Container -->
     <LinearLayout
@@ -43,7 +43,9 @@
             android:layout_height="160dp"
             app:cardCornerRadius="32dp"
             app:cardElevation="16dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="#1A1A1A"
+            app:strokeColor="#FF6B00"
+            app:strokeWidth="1dp"
             android:layout_marginBottom="32dp">
 
             <RelativeLayout
@@ -63,7 +65,8 @@
                     android:layout_height="110dp"
                     android:src="@drawable/logogym"
                     android:layout_centerInParent="true"
-                    android:scaleType="centerInside"/>
+                    android:scaleType="centerInside"
+                />
 
                 <!-- Animated Pulse Ring -->
                 <View
@@ -84,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="#212121"
+            android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
             android:letterSpacing="0.02"
@@ -97,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/splash_title"
-            android:textColor="#EF5350"
+            android:textColor="#FF6B00"
             android:textSize="16sp"
             android:visibility="gone"
             android:textStyle="bold"
@@ -114,7 +117,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:visibility="gone"
-                android:indeterminateTint="#EF5350"
+                android:indeterminateTint="#FF6B00"
                 style="?android:attr/progressBarStyle"
                 android:alpha="0"/>
 
@@ -171,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/powered_by"
-            android:textColor="#757575"
+            android:textColor="#9E9E9E"
             android:textSize="12sp"
             android:letterSpacing="0.1"/>
 
@@ -179,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company_name"
-            android:textColor="#EF5350"
+            android:textColor="#FF6B00"
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_marginTop="4dp"
@@ -197,7 +200,7 @@
         android:layout_alignParentStart="true"
         android:layout_margin="32dp"
         android:alpha="0.15"
-        app:tint="#EF5350"/>
+        app:tint="#FF6B00"/>
 
     <ImageView
         android:id="@+id/floatingIcon2"
@@ -208,7 +211,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="40dp"
         android:alpha="0.15"
-        app:tint="#EF5350"/>
+        app:tint="#FF6B00"/>
 
     <ImageView
         android:id="@+id/floatingIcon3"
@@ -219,6 +222,6 @@
         android:layout_alignParentStart="true"
         android:layout_margin="48dp"
         android:alpha="0.15"
-        app:tint="#EF5350"/>
+        app:tint="#FF6B00"/>
 
 </RelativeLayout>

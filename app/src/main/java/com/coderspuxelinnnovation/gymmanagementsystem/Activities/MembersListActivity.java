@@ -1,8 +1,10 @@
 package com.coderspuxelinnnovation.gymmanagementsystem.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -117,10 +119,52 @@ public class MembersListActivity extends BaseActivity {
     }
 
     private void setupSearch() {
+        SearchView searchView = findViewById(R.id.searchView);
+
+        // Get the SearchView's EditText and style it
+        android.widget.EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+
+        if (searchEditText != null) {
+            // Set text color to WHITE for visibility on dark background
+            searchEditText.setTextColor(Color.WHITE);
+
+            // Set hint text color to light gray
+            searchEditText.setHintTextColor(Color.parseColor("#9E9E9E"));
+
+            // Set background color
+            searchEditText.setBackgroundColor(Color.TRANSPARENT);
+
+            // Set text size
+            searchEditText.setTextSize(14);
+        }
+
+        // Style the search plate background
+        View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
+        if (searchPlate != null) {
+            searchPlate.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+        // Style the close/clear button
+        ImageView closeButton = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        if (closeButton != null) {
+            closeButton.setColorFilter(Color.parseColor("#FF9800"));
+        }
+
+        // Style the search icon (if visible)
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+        if (searchIcon != null) {
+            searchIcon.setColorFilter(Color.parseColor("#FF9800"));
+        }
+
+        // Set query hint
+        searchView.setQueryHint("Search by name or phone");
+
+        // Handle search query
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                filterMembers(query);
+                return true;
             }
 
             @Override
@@ -130,6 +174,8 @@ public class MembersListActivity extends BaseActivity {
             }
         });
     }
+
+
 
     private void setupFilterChips() {
         chipAll.setOnCheckedChangeListener((buttonView, isChecked) -> {

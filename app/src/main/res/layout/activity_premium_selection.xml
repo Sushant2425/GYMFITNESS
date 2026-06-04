@@ -1,129 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA">
+    android:background="#000000">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <!-- AppBar with Back Arrow -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose Your Plan"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#1F2937"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        android:background="@drawable/gradient_orange_header"
+        app:elevation="0dp">
 
-    <!-- Subtitle -->
-    <TextView
-        android:id="@+id/tvSubTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Unlock all features and manage your gym smoothly"
-        android:textSize="14sp"
-        android:textColor="#6B7280"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="32dp"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="#FFFFFF"
+            app:title="Choose Your Plan"
+            app:titleTextColor="#FFFFFF"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
-    <!-- CURRENT PLAN INFO -->
-    <TextView
-        android:id="@+id/tvCurrentPlan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#059669"
-        app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Card Container -->
-    <LinearLayout
-        android:id="@+id/planContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:background="@drawable/bg_card"
-        app:layout_constraintTop_toBottomOf="@id/tvCurrentPlan"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="24dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Trial -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnTrial"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="7 Days Free Trial (₹0)"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#10B981"/>
+            android:padding="16dp"
+            android:paddingBottom="32dp">
 
-        <!-- 6 Months -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn6Month"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="6 Months Premium – ₹499"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:layout_marginBottom="12dp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#2563EB"/>
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/tvSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Unlock all features and manage your gym smoothly"
+                android:textSize="14sp"
+                android:textColor="#9E9E9E"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="24dp"/>
 
-        <!-- 1 Year Recommended -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn1Year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1 Year Premium – ₹899 ⭐ Recommended"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:layout_marginBottom="12dp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#1D4ED8"/>
+            <!-- CURRENT PLAN INFO -->
+            <TextView
+                android:id="@+id/tvCurrentPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#FF9800"
+                app:layout_constraintTop_toBottomOf="@id/tvSubTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp"/>
 
-        <!-- Lifetime -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLifetime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lifetime Premium – ₹1999"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#111827"/>
+            <!-- Card Container -->
+            <LinearLayout
+                android:id="@+id/planContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@drawable/bg_card_premium"
+                app:layout_constraintTop_toBottomOf="@id/tvCurrentPlan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp">
 
-    </LinearLayout>
+                <!-- Trial -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnTrial"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="7 Days Free Trial (₹0)"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#FF6B00"
+                    android:textColor="#FFFFFF"
+                    app:icon="@drawable/ic_crown"
+                    app:iconGravity="textStart"
+                    app:iconTint="#FFFFFF"
+                    app:iconPadding="8dp"/>
 
-    <!-- Footer -->
-    <TextView
-        android:id="@+id/tvFooter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Upgrade anytime • Secure payments • No hidden charges"
-        android:textSize="12sp"
-        android:textColor="#6B7280"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"
-        android:layout_marginHorizontal="32dp"/>
+                <!-- 6 Months -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn6Month"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="6 Months Premium – ₹499"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#1A1A1A"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp"
+                    android:textColor="#FFFFFF"
+                    app:icon="@drawable/ic_rocket"
+                    app:iconGravity="textStart"
+                    app:iconTint="#FF9800"
+                    app:iconPadding="8dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 1 Year Recommended -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn1Year"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="1 Year Premium – ₹899 ⭐ Recommended"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#332A1A"
+                    app:strokeColor="#FFC107"
+                    app:strokeWidth="2dp"
+                    android:textColor="#FFC107"
+                    app:icon="@drawable/ic_star"
+                    app:iconGravity="textStart"
+                    app:iconTint="#FFC107"
+                    app:iconPadding="8dp"/>
+
+                <!-- Lifetime -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLifetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="Lifetime Premium – ₹1999"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    app:backgroundTint="#1A1A1A"
+                    app:strokeColor="#9E9E9E"
+                    app:strokeWidth="1dp"
+                    android:textColor="#FFFFFF"
+                    app:icon="@drawable/ic_infinity"
+                    app:iconGravity="textStart"
+                    app:iconTint="#9E9E9E"
+                    app:iconPadding="8dp"/>
+
+            </LinearLayout>
+
+            <!-- Footer -->
+            <TextView
+                android:id="@+id/tvFooter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Upgrade anytime • Secure payments • No hidden charges"
+                android:textSize="12sp"
+                android:textColor="#9E9E9E"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/planContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="32dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

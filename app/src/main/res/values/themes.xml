@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.GymManagementSystem" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Base application theme -->
+    <style name="Theme.GymManagementSystem" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Other attributes -->
+        <item name="android:statusBarColor">#FF6B00</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="Theme.GymManagementSystem" parent="Base.Theme.GymManagementSystem" />
 </resources>

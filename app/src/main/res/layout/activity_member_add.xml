@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    android:background="#000000">
 
     <!-- Progress Bar -->
     <ProgressBar
@@ -13,14 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="#EF5350"
+        android:indeterminateTint="#FF6B00"
         android:visibility="gone" />
 
     <!-- Modern AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -29,7 +29,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#FFFEFE">
+            app:navigationIconTint="#FFFFFF">
 
             <!-- Custom Title Layout -->
             <LinearLayout
@@ -44,10 +44,9 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.01"
                     android:text="@string/add_member_title"
-                    android:textColor="@color/white"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold" />
-
 
             </LinearLayout>
 
@@ -59,7 +58,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF7F7"
+        android:background="#000000"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true">
 
@@ -75,8 +74,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="10dp"
-                android:background="@color/white"
-                app:cardElevation="0dp">
+                app:cardElevation="2dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,12 +86,20 @@
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
-                    <ImageView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_person"
-                        app:tint="#0B0B0B"
-                        android:padding="8dp"/>
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="#332A1A">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_person"
+                            app:tint="#FF6B00" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:layout_width="0dp"
@@ -98,7 +107,7 @@
                         android:layout_weight="1"
                         android:layout_marginStart="12dp"
                         android:text="@string/member_info_hint"
-                        android:textColor="#7E8080"
+                        android:textColor="#FFE0B2"
                         android:textSize="13sp"
                         android:lineSpacingExtra="2dp"/>
 
@@ -111,21 +120,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="10dp"
-                android:background="@color/white"
-                app:cardElevation="8dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/personal_details"
-                        android:textColor="#212121"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="20dp" />
@@ -138,25 +149,27 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_full_name"
                         app:startIconDrawable="@drawable/ic_person"
-                        app:endIconMode="custom"
+                        app:startIconTint="#FF9800"
                         android:layout_marginBottom="18dp"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
-                        app:boxStrokeColor="#959595"
-                        app:boxStrokeWidth="0.5dp"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:endIconDrawable="@drawable/baseline_mic_none_24"
-                        app:endIconTint="#EF5350">
+                        app:boxStrokeColor="#FF6B00"
+                        app:boxStrokeWidth="1.5dp"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C">
 
-
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etMemberName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName"/>
+                            android:inputType="textPersonName"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#9E9E9E"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- Phone -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilMemberPhone"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -168,50 +181,22 @@
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeWidth="1.5dp"
                         app:startIconDrawable="@drawable/ic_phone"
-                        app:startIconTint="#757575"
-                        app:endIconMode="custom"
-                        app:endIconDrawable="@drawable/baseline_contact_phone_24"
-                        app:endIconTint="#EF5350"
-                        app:boxStrokeColor="#929090">
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etMemberPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:padding="14dp"/>
                     </com.google.android.material.textfield.TextInputLayout>
-
-<!--                    &lt;!&ndash; Email &ndash;&gt;-->
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:hint="@string/hint_email"-->
-<!--                        android:layout_marginBottom="18dp"-->
-<!--                        app:startIconDrawable="@drawable/ic_email"-->
-<!--                        app:startIconTint="#757575"-->
-<!--                        app:boxStrokeColor="#EF5350"-->
-<!--                        app:boxStrokeWidth="2dp"-->
-<!--                        app:boxCornerRadiusBottomEnd="12dp"-->
-<!--                        app:boxCornerRadiusBottomStart="12dp"-->
-<!--                        app:boxCornerRadiusTopEnd="12dp"-->
-<!--                        app:boxCornerRadiusTopStart="12dp"-->
-<!--                        app:hintTextColor="#EF5350">-->
-
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:id="@+id/etMemberEmail"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:inputType="textEmailAddress"-->
-<!--                            android:textColor="#212121"-->
-<!--                            android:textSize="15sp"-->
-<!--                            android:padding="14dp" />-->
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                     <!-- Gender Dropdown -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -220,21 +205,22 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_gender"
                         android:layout_marginBottom="18dp"
-                        app:boxStrokeColor="#A0A0A0"
-                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeColor="#FF6B00"
+                        app:boxStrokeWidth="1.5dp"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:hintTextColor="#EF5350"
-                        app:endIconTint="#757575">
+                        app:hintTextColor="#FF6B00"
+                        app:endIconTint="#FF9800"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/spinnerGender"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:padding="12dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -247,14 +233,15 @@
                         android:hint="@string/hint_join_date"
                         android:layout_marginBottom="8dp"
                         app:startIconDrawable="@drawable/ic_calendar"
-                        app:startIconTint="#757575"
-                        app:boxStrokeColor="#9E9D9D"
-                        app:boxStrokeWidth="0.5dp"
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
+                        app:boxStrokeWidth="1.5dp"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:hintTextColor="#EF5350">
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etJoinDate"
@@ -262,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:focusable="false"
                             android:clickable="true"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:padding="14dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -275,22 +262,20 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnNext"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="55dp"
                 android:text="@string/btn_next_plan"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
-                app:backgroundTint="#FDE9E9"
+                app:backgroundTint="#FF6B00"
                 app:cornerRadius="10dp"
-                app:strokeColor="@color/red"
-                app:strokeWidth="1dp"
                 app:elevation="4dp"
-                android:layout_marginTop="19dp"
-                android:textColor="#F60B0B"
+                android:layout_marginTop="8dp"
+                android:textColor="#FFFFFF"
                 android:letterSpacing="0.05"
                 app:icon="@drawable/ic_arrow_forward"
                 app:iconGravity="end"
-                app:iconTint="#F60B0B"
+                app:iconTint="#FFFFFF"
                 app:iconPadding="8dp" />
 
             <!-- Optional: Progress Indicator -->
@@ -326,7 +311,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/step_1_of_3"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:textSize="12sp"
                 android:layout_gravity="center_horizontal" />
 

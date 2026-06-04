@@ -4,20 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:fitsSystemWindows="true"
+    android:background="#000000">
 
     <!-- Modern Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@drawable/gradient_header"
-        android:elevation="4dp"
+        android:background="@drawable/gradient_orange_header"
+        android:elevation="0dp"
         app:title="Expired &amp; Expiring Plans"
-        app:titleTextColor="@android:color/white"
+        app:titleTextColor="#FFFFFF"
         app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="@android:color/white" />
+        app:navigationIconTint="#FFFFFF" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="3"
             android:paddingBottom="16dp">
 
             <!-- Compact Stats Dashboard -->
@@ -49,23 +49,24 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="#FFF7F7">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="14dp"
+                        android:padding="12dp"
                         android:gravity="center_vertical">
-
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:layout_marginStart="12dp">
+                            android:layout_marginStart="8dp">
 
                             <TextView
                                 android:id="@+id/tvTotalExpired"
@@ -74,33 +75,37 @@
                                 android:text="0"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:textColor="#212121" />
+                                android:textColor="#FF6B00" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Expired"
                                 android:textSize="11sp"
-                                android:textColor="#757575" />
+                                android:textColor="#9E9E9E" />
 
                         </LinearLayout>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <!-- With Dues Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="#FCF3FD">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    app:strokeColor="#FFC107"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="14dp">
+                        android:padding="12dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -108,13 +113,12 @@
                             android:orientation="horizontal"
                             android:gravity="center_vertical">
 
-
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
-                                android:layout_marginStart="12dp">
+                                android:layout_marginStart="8dp">
 
                                 <TextView
                                     android:id="@+id/tvWithDues"
@@ -123,39 +127,39 @@
                                     android:text="0"
                                     android:textSize="18sp"
                                     android:textStyle="bold"
-                                    android:textColor="#212121" />
+                                    android:textColor="#FFC107" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Dues"
                                     android:textSize="11sp"
-                                    android:textColor="#757575" />
+                                    android:textColor="#9E9E9E" />
 
                             </LinearLayout>
 
                         </LinearLayout>
 
-
-
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Pending Dues Card -->
+                <!-- Total Dues Amount Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="#F4F8F4">
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="13dp">
+                        android:padding="12dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -163,34 +167,32 @@
                             android:orientation="horizontal"
                             android:gravity="center_vertical">
 
-
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical"
-                                android:layout_marginStart="12dp">
+                                android:layout_marginStart="8dp">
 
                                 <TextView
                                     android:id="@+id/tvTotalDuesAmount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="0"
-                                    android:textSize="18sp"
+                                    android:text="₹0"
+                                    android:textSize="16sp"
                                     android:textStyle="bold"
-                                    android:textColor="#212121" />
+                                    android:textColor="#FF6B00" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" Amount"
+                                    android:text="Amount"
                                     android:textSize="11sp"
-                                    android:textColor="#757575" />
+                                    android:textColor="#9E9E9E" />
 
                             </LinearLayout>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -205,22 +207,24 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="3dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#1A1A1A"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="14dp">
+                    android:padding="12dp">
 
                     <!-- Search Bar -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="46dp"
-                        app:cardCornerRadius="23dp"
+                        android:layout_height="42dp"
+                        app:cardCornerRadius="21dp"
                         app:cardElevation="0dp"
-                        app:cardBackgroundColor="#F5F7FA">
+                        app:cardBackgroundColor="#2C2C2C">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -231,10 +235,10 @@
                             android:paddingEnd="16dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 android:src="@android:drawable/ic_menu_search"
-                                app:tint="#9E9E9E" />
+                                app:tint="#FF9800" />
 
                             <EditText
                                 android:id="@+id/etSearchExpired"
@@ -245,18 +249,18 @@
                                 android:background="@null"
                                 android:paddingStart="12dp"
                                 android:paddingEnd="8dp"
-                                android:textSize="14sp"
-                                android:textColor="#212121"
-                                android:textColorHint="#BDBDBD"
+                                android:textSize="13sp"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#9E9E9E"
                                 android:inputType="text"
                                 android:imeOptions="actionSearch" />
 
                             <ImageView
                                 android:id="@+id/btnClearSearch"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 android:src="@android:drawable/ic_menu_close_clear_cancel"
-                                app:tint="#BDBDBD"
+                                app:tint="#9E9E9E"
                                 android:visibility="gone"
                                 android:clickable="true"
                                 android:focusable="true"
@@ -270,7 +274,7 @@
                     <com.google.android.material.chip.ChipGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="10dp"
                         app:singleSelection="true"
                         app:selectionRequired="true"
                         app:chipSpacingHorizontal="8dp">
@@ -278,32 +282,44 @@
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipAll"
                             android:layout_width="wrap_content"
-                            android:layout_height="46dp"
+                            android:layout_height="36dp"
                             android:text="All Members"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:checked="true"
                             app:chipCornerRadius="18dp"
-                            app:chipMinHeight="36dp"
+                            app:chipMinHeight="32dp"
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="#FFFFFF"
                             style="@style/Widget.MaterialComponents.Chip.Choice" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipWithDues"
                             android:layout_width="wrap_content"
-                            android:layout_height="46dp"
+                            android:layout_height="36dp"
                             android:text="With Dues"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             app:chipCornerRadius="18dp"
-                            app:chipMinHeight="36dp"
+                            app:chipMinHeight="32dp"
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FFC107"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="#FFFFFF"
                             style="@style/Widget.MaterialComponents.Chip.Choice" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chipClearDues"
                             android:layout_width="wrap_content"
-                            android:layout_height="46dp"
+                            android:layout_height="36dp"
                             android:text="Clear Dues"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             app:chipCornerRadius="18dp"
-                            app:chipMinHeight="36dp"
+                            app:chipMinHeight="32dp"
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#4CAF50"
+                            app:chipStrokeWidth="1dp"
+                            android:textColor="#FFFFFF"
                             style="@style/Widget.MaterialComponents.Chip.Choice" />
 
                     </com.google.android.material.chip.ChipGroup>
@@ -318,7 +334,7 @@
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="8dp"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -326,16 +342,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Members List"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#FFFFFF" />
 
                 <ImageView
                     android:id="@+id/btnFilter"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@android:drawable/ic_menu_sort_by_size"
-                    app:tint="#757575"
+                    app:tint="#FF9800"
                     android:layout_marginEnd="12dp"
                     android:visibility="gone"
                     android:clickable="true"
@@ -346,8 +362,12 @@
                     android:id="@+id/spinnerSort"
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
-                    android:minWidth="130dp"
-                    android:popupBackground="#FFFFFF" />
+                    android:minWidth="120dp"
+                    android:theme="@style/CustomDropDownTheme"
+                    android:spinnerMode="dropdown"
+                    android:popupBackground="#2C2C2C"
+                    android:background="@drawable/spinner_background_black"
+                    android:dropDownSelector="#FF6B00" />
 
             </LinearLayout>
 
@@ -374,22 +394,24 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="40dp"
+                    android:padding="30dp"
                     android:visibility="gone">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        app:cardCornerRadius="50dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="40dp"
                         app:cardElevation="0dp"
-                        app:cardBackgroundColor="#E8F5E9">
+                        app:cardBackgroundColor="#1A1A1A"
+                        app:strokeColor="#FF6B00"
+                        app:strokeWidth="1dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="🎉"
-                            android:textSize="50sp" />
+                            android:textSize="40sp" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -397,18 +419,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="All Clear!"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="#212121"
-                        android:layout_marginTop="20dp" />
+                        android:textColor="#FFFFFF"
+                        android:layout_marginTop="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No expired or expiring plans found"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textColor="#9E9E9E"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="6dp"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -419,7 +441,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminateTint="#EF5350"
+                    android:indeterminateTint="#FF6B00"
                     android:visibility="gone" />
 
             </FrameLayout>

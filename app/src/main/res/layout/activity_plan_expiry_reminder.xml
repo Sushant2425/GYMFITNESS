@@ -3,33 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+   android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#000000">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:title="Plan Expiry Reminders"
-            android:background="@drawable/gradient_header"
-            android:titleTextColor="@android:color/white"
+            android:background="@drawable/gradient_orange_header"
+            android:titleTextColor="#FFFFFF"
+            android:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="@android:color/white"/>
+            app:navigationIconTint="#FFFFFF"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#1A1A1A"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/black"
-            app:tabIndicatorHeight="5dp"
-            app:tabTextColor="@color/black"
-            app:tabSelectedTextColor="@color/black"/>
+            app:tabIndicatorColor="#FF6B00"
+            app:tabIndicatorHeight="3dp"
+            app:tabTextColor="#9E9E9E"
+            app:tabSelectedTextColor="#FF6B00"
+            app:tabRippleColor="#33FF6B00"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,6 +43,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#000000"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -47,6 +54,12 @@
         android:layout_margin="16dp"
         android:visibility="gone"
         android:src="@android:drawable/ic_menu_send"
-        app:backgroundTint="#4CAF50"/>
+        app:backgroundTint="#FF6B00"
+        app:tint="#FFFFFF"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:fabSize="normal"
+        app:rippleColor="#40FFFFFF"
+        app:borderWidth="0dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

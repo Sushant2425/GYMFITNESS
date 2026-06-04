@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
@@ -55,6 +56,11 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
     @Override
     public int getItemCount() {
         return members.size();
+    }
+
+    public void updateList(List<MemberModel> newList) {
+        this.members = newList;
+        notifyDataSetChanged();
     }
 
     class MemberViewHolder extends RecyclerView.ViewHolder {
@@ -105,41 +111,41 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
                 boolean isActive = "ACTIVE".equals(plan.getStatus());
                 boolean isExpiringSoon = isExpiringSoon(plan.getEndDate());
 
-                // Set status text and colors
+                // Set status text and colors - Black & Orange Theme
                 if (isActive) {
                     if (isExpiringSoon) {
-                        // Expiring soon
+                        // Expiring soon - Orange/Amber theme
                         tvStatus.setText("Expiring Soon");
-                        tvStatus.setTextColor(Color.parseColor("#FF9800"));
-                        cvStatusBadge.setCardBackgroundColor(Color.parseColor("#FFF3E0"));
+                        tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pending_text));
+                        cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_pending_bg));
 
                         ivStatus.setImageResource(R.drawable.ic_pending);
-                        ivStatus.setColorFilter(Color.parseColor("#FF9800"));
+                        ivStatus.setColorFilter(ContextCompat.getColor(context, R.color.status_pending_text));
                         if (cvIconBackground != null) {
-                            cvIconBackground.setCardBackgroundColor(Color.parseColor("#FFF3E0"));
+                            cvIconBackground.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_pending_bg));
                         }
                     } else {
-                        // Active
+                        // Active - Orange theme (instead of green)
                         tvStatus.setText("Active");
-                        tvStatus.setTextColor(Color.parseColor("#4CAF50"));
-                        cvStatusBadge.setCardBackgroundColor(Color.parseColor("#E8F5E9"));
+                        tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_active_text));
+                        cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_active_bg));
 
                         ivStatus.setImageResource(R.drawable.ic_active);
-                        ivStatus.setColorFilter(Color.parseColor("#4CAF50"));
+                        ivStatus.setColorFilter(ContextCompat.getColor(context, R.color.status_active_text));
                         if (cvIconBackground != null) {
-                            cvIconBackground.setCardBackgroundColor(Color.parseColor("#E8F5E9"));
+                            cvIconBackground.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_active_bg));
                         }
                     }
                 } else {
-                    // Expired
+                    // Expired - Red theme
                     tvStatus.setText("Expired");
-                    tvStatus.setTextColor(Color.parseColor("#F44336"));
-                    cvStatusBadge.setCardBackgroundColor(Color.parseColor("#FFEBEE"));
+                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_expired_text));
+                    cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_expired_bg));
 
                     ivStatus.setImageResource(R.drawable.ic_expired);
-                    ivStatus.setColorFilter(Color.parseColor("#F44336"));
+                    ivStatus.setColorFilter(ContextCompat.getColor(context, R.color.status_expired_text));
                     if (cvIconBackground != null) {
-                        cvIconBackground.setCardBackgroundColor(Color.parseColor("#FFEBEE"));
+                        cvIconBackground.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_expired_bg));
                     }
                 }
 
@@ -149,7 +155,14 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
             } else {
                 tvPlan.setText("No active plan");
                 tvStatus.setText("Inactive");
+                tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_default_text));
+                cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_default_bg));
                 tvExpiry.setText("--");
+                ivStatus.setImageResource(R.drawable.ic_expired);
+                ivStatus.setColorFilter(ContextCompat.getColor(context, R.color.status_default_text));
+                if (cvIconBackground != null) {
+                    cvIconBackground.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_default_bg));
+                }
             }
         }
 

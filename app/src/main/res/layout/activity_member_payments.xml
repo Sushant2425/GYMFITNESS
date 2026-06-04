@@ -2,21 +2,24 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000000">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:background="@drawable/gradient_header"
-        android:layout_height="wrap_content">
+        android:background="@drawable/gradient_orange_header"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="#FFFFFF"
             android:layout_height="?attr/actionBarSize"
             app:title="Payment History"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="#FFFFFF" />
 
-            app:navigationIcon="@drawable/ic_arrow_back" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -31,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:indeterminateTint="#FF6B00"
         android:visibility="gone" />
 
     <TextView
@@ -40,8 +44,8 @@
         android:layout_gravity="center"
         android:text="No payments found"
         android:textSize="16sp"
+        android:textColor="#9E9E9E"
         android:visibility="gone"
         android:layout_marginTop="100dp" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="#1A1A1A"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:strokeColor="#FF6B00"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 android:text="₹200"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#4CAF50" />
+                android:textColor="#FF6B00" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvPaymentMode"
@@ -38,7 +40,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="#E3F2FD">
+                app:cardBackgroundColor="#332A1A">
 
                 <TextView
                     android:id="@+id/tvPaymentMode"
@@ -46,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="Cash"
                     android:textSize="11sp"
-                    android:textColor="#2196F3"
+                    android:textColor="#FF9800"
                     android:textStyle="bold"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"
@@ -65,7 +67,7 @@
             android:layout_marginBottom="8dp"
             android:text="01/02/2026, 10:30 AM"
             android:textSize="13sp"
-            android:textColor="#757575" />
+            android:textColor="#BDBDBD" />
 
         <!-- Transaction ID -->
         <TextView
@@ -75,7 +77,7 @@
             android:layout_marginBottom="8dp"
             android:text="ID: 7251bd74-e585-47d4-805b-ba7d20fe41b5"
             android:textSize="12sp"
-            android:textColor="#757575" />
+            android:textColor="#9E9E9E" />
 
         <!-- Notes (if available) -->
         <LinearLayout
@@ -83,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#F9F9F9"
+            android:background="#2C2C2C"
             android:padding="8dp"
             android:visibility="gone">
 
@@ -93,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:text="Additional notes here"
                 android:textSize="12sp"
-                android:textColor="#616161"
+                android:textColor="#BDBDBD"
                 android:fontFamily="sans-serif" />
 
         </LinearLayout>
@@ -106,7 +108,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="8dp"
             android:paddingTop="8dp"
-            android:background="#F9F9F9"
+            android:background="#2C2C2C"
             android:padding="8dp">
 
             <TextView
@@ -115,7 +117,7 @@
                 android:layout_weight="1"
                 android:text="Balance After Payment:"
                 android:textSize="12sp"
-                android:textColor="#757575" />
+                android:textColor="#9E9E9E" />
 
             <TextView
                 android:id="@+id/tvRemainingAfter"
@@ -123,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="₹0"
                 android:textSize="14sp"
-                android:textColor="#212121"
+                android:textColor="#FFC107"
                 android:textStyle="bold" />
 
         </LinearLayout>

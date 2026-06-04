@@ -2,14 +2,15 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-  android:background="@color/white">
+    android:background="#000000">
 
     <!-- Modern AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -18,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#212121">
+            app:navigationIconTint="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Member Details"
-                    android:textColor="#FAF8F8"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.01" />
@@ -40,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/member_detail_subtitle"
-                    android:textColor="#B4B1B1"
+                    android:textColor="#FFE0B2"
                     android:textSize="12sp"
                     android:layout_marginTop="2dp" />
 
@@ -56,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="#EF5350"
+        android:indeterminateTint="#FF6B00"
         android:visibility="gone" />
 
     <androidx.core.widget.NestedScrollView
@@ -76,9 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="6dp">
+                app:cardElevation="6dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -91,7 +94,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        app:cardBackgroundColor="#FFEBEE"
+                        app:cardBackgroundColor="#332A1A"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="3dp">
 
@@ -100,7 +103,7 @@
                             android:layout_height="32dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_person"
-                            app:tint="#EF5350" />
+                            app:tint="#FF6B00" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -118,7 +121,7 @@
                             android:text="John Doe"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                         <TextView
                             android:id="@+id/tvPhone"
@@ -127,10 +130,10 @@
                             android:layout_marginTop="4dp"
                             android:text="8547968574"
                             android:textSize="14sp"
-                            android:textColor="#757575"
+                            android:textColor="#BDBDBD"
                             android:drawableStart="@drawable/ic_phone"
                             android:drawablePadding="6dp"
-                            android:drawableTint="#757575" />
+                            android:drawableTint="#BDBDBD" />
 
                     </LinearLayout>
 
@@ -141,7 +144,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp"
-                        app:cardBackgroundColor="#E8F5E9">
+                        app:cardBackgroundColor="#332A1A">
 
                         <TextView
                             android:id="@+id/tvPlanStatus"
@@ -149,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:text="ACTIVE"
                             android:textSize="12sp"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FF6B00"
                             android:textStyle="bold"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
@@ -167,9 +170,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -188,7 +193,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_person"
-                            app:tint="#EF5350" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -198,7 +203,7 @@
                             android:text="@string/personal_info"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -211,13 +216,13 @@
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
                         android:visibility="gone"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_email"
-                            app:tint="#757575" />
+                            app:tint="#FF9800" />
 
                         <TextView
                             android:id="@+id/tvEmail"
@@ -227,7 +232,7 @@
                             android:layout_marginStart="12dp"
                             android:text="john@example.com"
                             android:textSize="15sp"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -239,13 +244,13 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_gender"
-                            app:tint="#757575" />
+                            app:tint="#FF9800" />
 
                         <TextView
                             android:id="@+id/tvGender"
@@ -255,7 +260,7 @@
                             android:layout_marginStart="12dp"
                             android:text="Male"
                             android:textSize="15sp"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -266,13 +271,13 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_calendar"
-                            app:tint="#757575" />
+                            app:tint="#FF9800" />
 
                         <TextView
                             android:id="@+id/tvJoinDate"
@@ -282,7 +287,7 @@
                             android:layout_marginStart="12dp"
                             android:text="Joined: 01/01/2026"
                             android:textSize="15sp"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -295,9 +300,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,7 +323,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_gym"
-                            app:tint="#EF5350" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -326,10 +333,9 @@
                             android:text="@string/current_plan"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
-
 
                     <!-- Plan Type -->
                     <LinearLayout
@@ -339,14 +345,14 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Plan Type"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvPlanType"
@@ -357,7 +363,7 @@
                             android:text="3 Months"
                             android:textSize="15sp"
                             android:textStyle="bold"
-                            android:textColor="#212121"
+                            android:textColor="#FF9800"
                             android:gravity="end" />
 
                     </LinearLayout>
@@ -370,14 +376,14 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total Fee"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvTotalFee"
@@ -388,11 +394,10 @@
                             android:text="₹2500"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FF6B00"
                             android:gravity="end" />
 
                     </LinearLayout>
-
 
                     <!-- Amount Paid -->
                     <LinearLayout
@@ -402,14 +407,14 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Amount Paid"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvAmountPaid"
@@ -419,7 +424,7 @@
                             android:layout_marginStart="16dp"
                             android:text="₹0"
                             android:textSize="15sp"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FFC107"
                             android:textStyle="bold"
                             android:gravity="end" />
 
@@ -433,14 +438,14 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Remaining"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvRemaining"
@@ -450,7 +455,7 @@
                             android:layout_marginStart="16dp"
                             android:text="₹500"
                             android:textSize="15sp"
-                            android:textColor="#F44336"
+                            android:textColor="#FF6B00"
                             android:textStyle="bold"
                             android:gravity="end" />
 
@@ -463,7 +468,7 @@
                         android:orientation="vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -477,7 +482,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Payment Progress"
                                 android:textSize="13sp"
-                                android:textColor="#757575" />
+                                android:textColor="#9E9E9E" />
 
                             <TextView
                                 android:id="@+id/tvProgressPercentage"
@@ -486,7 +491,7 @@
                                 android:layout_weight="1"
                                 android:text="0%"
                                 android:textSize="13sp"
-                                android:textColor="#2196F3"
+                                android:textColor="#FF6B00"
                                 android:textStyle="bold"
                                 android:gravity="end" />
 
@@ -497,9 +502,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="8dp"
                             android:layout_marginTop="4dp"
-                            app:trackColor="#E0E0E0"
+                            app:trackColor="#2C2C2C"
                             app:trackThickness="8dp"
-                            app:indicatorColor="#4CAF50" />
+                            app:indicatorColor="#FF6B00" />
 
                     </LinearLayout>
 
@@ -511,14 +516,14 @@
                         android:gravity="center_vertical"
                         android:layout_marginBottom="12dp"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Start Date"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvStartDate"
@@ -528,7 +533,7 @@
                             android:layout_marginStart="16dp"
                             android:text="01/01/2026"
                             android:textSize="15sp"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:gravity="end" />
 
                     </LinearLayout>
@@ -540,14 +545,14 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:padding="12dp"
-                        android:background="@drawable/detail_item_background">
+                        android:background="#2C2C2C">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="End Date"
                             android:textSize="13sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                         <TextView
                             android:id="@+id/tvEndDate"
@@ -557,7 +562,8 @@
                             android:layout_marginStart="16dp"
                             android:text="31/03/2026"
                             android:textSize="15sp"
-                            android:textColor="#212121"
+                            android:textColor="#FF6B00"
+                            android:textStyle="bold"
                             android:gravity="end" />
 
                     </LinearLayout>
@@ -572,9 +578,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -593,7 +601,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_expired"
-                            app:tint="#EF5350" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:id="@+id/tvOldPlansTitle"
@@ -604,7 +612,7 @@
                             android:text="Previous Plans"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                         <TextView
                             android:id="@+id/tvOldPlansCount"
@@ -612,7 +620,7 @@
                             android:layout_height="wrap_content"
                             android:text="(0)"
                             android:textSize="14sp"
-                            android:textColor="#757575" />
+                            android:textColor="#9E9E9E" />
 
                     </LinearLayout>
 
@@ -658,7 +666,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="@string/edit_member"
                     android:textAllCaps="false"
-                    app:backgroundTint="#2196F3"
+                    app:backgroundTint="#FF6B00"
                     app:cornerRadius="10dp"
                     app:iconGravity="start"
                     app:iconTint="#FFFFFF"
@@ -672,7 +680,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/view_payments"
                     android:textAllCaps="false"
-                    app:backgroundTint="#4CAF50"
+                    app:backgroundTint="#FF6B00"
                     app:cornerRadius="10dp"
                     app:iconGravity="start"
                     app:iconTint="#FFFFFF"
@@ -687,12 +695,12 @@
                 android:layout_height="48dp"
                 android:text="@string/delete_member"
                 android:textAllCaps="false"
-                android:textColor="#F44336"
-                app:strokeColor="#F44336"
+                android:textColor="#FF6B00"
+                app:strokeColor="#FF6B00"
                 app:strokeWidth="2dp"
                 app:cornerRadius="10dp"
                 app:iconGravity="start"
-                app:iconTint="#F44336" />
+                app:iconTint="#FF6B00" />
 
         </LinearLayout>
 

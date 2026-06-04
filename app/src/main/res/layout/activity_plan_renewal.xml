@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5">
 
-    <!-- Professional Header with Back Arrow - All White -->
+   android:fitsSystemWindows="true" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <!-- Professional Header with Back Arrow - Orange Gradient -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -19,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="@android:color/white"
+            app:navigationIconTint="#FFFFFF"
             app:title="Membership Renewal"
-            app:titleTextColor="@android:color/white"
+            app:titleTextColor="#FFFFFF"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -39,7 +40,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Header Member Info Card - Orange with proper dividers -->
+            <!-- Header Member Info Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardMemberHeader"
                 android:layout_width="match_parent"
@@ -47,14 +48,13 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="8dp"
-                app:strokeColor="#FF8A65"
+                app:strokeColor="#FF6B00"
                 app:strokeWidth="1dp"
-                >
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="vertical"
                     android:padding="20dp">
 
@@ -64,7 +64,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="John Doe"
-                        android:textColor="@color/black"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
@@ -75,8 +75,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Phone: +91 98765 43210"
-                        android:textColor="#595757"
-                        android:textSize="16sp"
+                        android:textColor="#BDBDBD"
+                        android:textSize="14sp"
                         android:layout_marginBottom="16dp" />
 
                     <!-- Horizontal Divider -->
@@ -84,7 +84,7 @@
                         android:id="@+id/dividerHeader1"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#66FFFFFF"
+                        android:background="#332A2A2A"
                         android:layout_marginBottom="12dp" />
 
                     <!-- Plan Status -->
@@ -93,39 +93,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Plan Status: EXPIRED"
-                        android:textColor="@android:color/white"
+                        android:textColor="#FFFFFF"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:background="#E64A19"
+                        android:background="#FF6B00"
                         android:paddingHorizontal="12dp"
-                        android:paddingVertical="6dp"
-                        />
+                        android:paddingVertical="6dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Previous Plan Details Card with Key-Value Rows and Dividers -->
+            <!-- Previous Plan Details Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPreviousPlan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/white"
-
                     android:padding="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📋 Previous Plan Details"
-                        android:textColor="#212121"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="20dp" />
@@ -144,25 +144,25 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Plan Type"
-                            android:textColor="#757575"
-                            android:textSize="15sp" />
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvPreviousPlanType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1 Month"
-                            android:textColor="#212121"
+                            android:textColor="#FF9800"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <!-- Horizontal Divider between rows -->
+                    <!-- Divider -->
                     <View
                         android:id="@+id/dividerPrevious1"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#E0E0E0"
+                        android:background="#332A2A2A"
                         android:layout_marginBottom="12dp" />
 
                     <!-- Start Date Row -->
@@ -179,23 +179,24 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Start Date"
-                            android:textColor="#757575"
-                            android:textSize="15sp"/>
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvPreviousStartDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10/01/2026"
-                            android:textColor="#212121"
-                            android:textSize="16sp" />
+                            android:textColor="#BDBDBD"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
+                    <!-- Divider -->
                     <View
                         android:id="@+id/dividerPrevious2"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#E0E0E0"
+                        android:background="#332A2A2A"
                         android:layout_marginBottom="12dp" />
 
                     <!-- End Date Row -->
@@ -212,24 +213,25 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="End Date"
-                            android:textColor="#757575"
-                            android:textSize="15sp"/>
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvPreviousEndDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10/02/2026"
-                            android:textColor="#FF5722"
-                            android:textSize="16sp"
+                            android:textColor="#FF6B00"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
+                    <!-- Divider -->
                     <View
                         android:id="@+id/dividerPrevious3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#E0E0E0"
+                        android:background="#332A2A2A"
                         android:layout_marginBottom="12dp" />
 
                     <!-- Previous Fee Row -->
@@ -245,15 +247,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Previous Fee"
-                            android:textColor="#757575"
-                            android:textSize="15sp" />
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvPreviousFee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹200"
-                            android:textColor="#4CAF50"
+                            android:textColor="#FFC107"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -261,24 +263,24 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Outstanding Balance Card - Warning Style -->
+            <!-- Outstanding Balance Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardOutstandingBalance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="#FFF3E0"
-                app:strokeColor="#FF9800"
-                app:strokeWidth="2dp"
+                app:cardBackgroundColor="#332A1A"
+                app:strokeColor="#FFC107"
+                app:strokeWidth="1dp"
                 android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -286,8 +288,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="⚠️ Outstanding Balance"
-                        android:textColor="#E65100"
-                        android:textSize="16sp"
+                        android:textColor="#FFC107"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -295,50 +297,51 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="₹164"
-                        android:textColor="#E65100"
+                        android:textColor="#FFC107"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- New Plan Selection Card - React Native Style Clean -->
+            <!-- New Plan Selection Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardNewPlan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/white"
-                app:cardCornerRadius="10dp"
-
-                app:cardElevation="4dp">
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/white"
                     android:padding="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🔄 Renew / New Plan"
-                        android:textColor="#212121"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="24dp" />
+                        android:layout_marginBottom="20dp" />
 
-                    <!-- Quick Renew Button - Prominent Primary -->
+                    <!-- Quick Renew Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnQuickRenew"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="50dp"
                         android:text="Quick Renew (Same Plan)"
                         android:textAllCaps="false"
-                        android:textSize="16sp"
-                        app:iconTint="@color/white"
-                        app:cardCornerRadius="10dp"
-                        app:backgroundTint="#4CAF50"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:iconTint="#FFFFFF"
+                        app:cornerRadius="10dp"
+                        app:backgroundTint="#FF6B00"
                         android:layout_marginBottom="16dp" />
 
                     <TextView
@@ -346,9 +349,9 @@
                         android:layout_height="wrap_content"
                         android:text="OR Select New Plan"
                         android:textColor="#9E9E9E"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:layout_gravity="center"
-                        android:layout_marginVertical="16dp" />
+                        android:layout_marginVertical="12dp" />
 
                     <!-- Plan Type Dropdown -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -357,16 +360,19 @@
                         android:layout_height="wrap_content"
                         android:hint="Select New Plan"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        app:boxStrokeColor="#FF6B00"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/spinnerNewPlanType"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-                            android:textSize="16sp" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                     <!-- Start Date Input -->
                     <com.google.android.material.textfield.TextInputLayout
@@ -376,7 +382,10 @@
                         android:hint="New Start Date"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
-                        app:startIconTint="#757575"
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C"
                         android:layout_marginBottom="16dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -385,7 +394,8 @@
                             android:layout_height="wrap_content"
                             android:focusable="false"
                             android:clickable="true"
-                            android:textSize="16sp" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- End Date Input -->
@@ -396,7 +406,10 @@
                         android:hint="End Date (Auto-calculated)"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         app:startIconDrawable="@android:drawable/ic_menu_today"
-                        app:startIconTint="#757575"
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C"
                         android:layout_marginBottom="16dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -404,7 +417,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:focusable="false"
-                            android:textSize="16sp" />
+                            android:textColor="#BDBDBD"
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Plan Fee Input -->
@@ -415,29 +429,35 @@
                         android:hint="Plan Fee"
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         app:prefixText="₹"
-                        app:prefixTextColor="#4CAF50"
+                        app:prefixTextColor="#FF6B00"
+                        app:boxStrokeColor="#FF6B00"
+                        app:hintTextColor="#FF6B00"
+                        app:boxBackgroundColor="#2C2C2C"
                         android:layout_marginBottom="8dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etNewPlanFee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal|numberSigned"
+                            android:inputType="numberDecimal"
+                            android:textColor="#FFFFFF"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Payment Summary Card - Blue Theme with Dividers -->
+            <!-- Payment Summary Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPaymentSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#E3F2FD">
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="#1A1A1A">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -449,10 +469,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="💰 Payment Summary"
-                        android:textColor="#1976D2"
+                        android:textColor="#FF9800"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="20dp" />
+                        android:layout_marginBottom="16dp" />
 
                     <!-- New Plan Fee Row -->
                     <LinearLayout
@@ -468,15 +488,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="New Plan Fee"
-                            android:textColor="#616161"
-                            android:textSize="15sp" />
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvSummaryNewPlan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹0"
-                            android:textColor="#212121"
+                            android:textColor="#FFC107"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -496,15 +516,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="+ Previous Due"
-                            android:textColor="#E65100"
-                            android:textSize="15sp" />
+                            android:textColor="#FFC107"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tvSummaryPreviousDue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹0"
-                            android:textColor="#E65100"
+                            android:textColor="#FFC107"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -513,10 +533,10 @@
                         android:id="@+id/dividerSummary"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:background="#2196F3"
-                        android:layout_marginVertical="16dp" />
+                        android:background="#FF6B00"
+                        android:layout_marginVertical="12dp" />
 
-                    <!-- Total Payable - Prominent -->
+                    <!-- Total Payable -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -528,7 +548,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Total Payable"
-                            android:textColor="#1976D2"
+                            android:textColor="#FFFFFF"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -537,29 +557,29 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="₹0"
-                            android:textColor="#1976D2"
+                            android:textColor="#FF6B00"
                             android:textSize="24sp"
-                            android:textStyle="bold"
-                            android:textAllCaps="false" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Primary Action Button - Full Width Prominent -->
+            <!-- Primary Action Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnProceedToPayment"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="52dp"
                 android:text="Proceed to Payment"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 app:icon="@android:drawable/ic_menu_send"
-                app:iconTint="@color/white"
+                app:iconTint="#FFFFFF"
                 app:iconGravity="start"
-                app:cardCornerRadius="10dp"
-                app:backgroundTint="#2196F3"
-                android:layout_marginBottom="24dp" />
+                app:cornerRadius="10dp"
+                app:backgroundTint="#FF6B00"
+                android:layout_marginBottom="16dp" />
 
             <!-- Progress Indicator -->
             <ProgressBar
@@ -568,6 +588,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:indeterminateTint="#FF6B00"
                 android:visibility="gone" />
 
         </LinearLayout>

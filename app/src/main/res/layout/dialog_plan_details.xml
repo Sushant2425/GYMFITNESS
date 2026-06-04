@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#1A1A1A">
 
     <!-- Plan Icon and Name -->
     <LinearLayout
@@ -22,18 +23,18 @@
             android:text="Plan Name"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#212121"/>
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/tvDialogStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#E8F5E9"
+            android:background="#332A1A"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:text="Active"
             android:textSize="12sp"
-            android:textColor="#4CAF50"
+            android:textColor="#FF6B00"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -42,7 +43,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#EEEEEE"
+        android:background="#332A2A2A"
         android:layout_marginBottom="20dp"/>
 
     <!-- Plan Details Grid -->
@@ -63,15 +64,16 @@
             android:layout_rowWeight="1"
             android:orientation="vertical"
             android:padding="12dp"
-            android:background="#F5F5F5"
+            android:background="#2C2C2C"
             android:layout_margin="4dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:minHeight="100dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@drawable/ic_calendar_small"
-                app:tint="#F57C00"
+                app:tint="#FF9800"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
@@ -79,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/duration"
                 android:textSize="12sp"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:layout_marginBottom="4dp"/>
 
             <TextView
@@ -89,7 +91,7 @@
                 android:text="1 Month"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#F57C00"/>
+                android:textColor="#FF9800"/>
 
         </LinearLayout>
 
@@ -101,15 +103,16 @@
             android:layout_rowWeight="1"
             android:orientation="vertical"
             android:padding="12dp"
-            android:background="#F5F5F5"
+            android:background="#2C2C2C"
             android:layout_margin="4dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:minHeight="100dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@drawable/ic_money"
-                app:tint="#2E7D32"
+                app:tint="#FF6B00"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
@@ -117,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fee"
                 android:textSize="12sp"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:layout_marginBottom="4dp"/>
 
             <TextView
@@ -127,7 +130,7 @@
                 android:text="₹ 1500"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#2E7D32"/>
+                android:textColor="#FF6B00"/>
 
         </LinearLayout>
 
@@ -140,15 +143,15 @@
             android:layout_columnSpan="2"
             android:orientation="vertical"
             android:padding="12dp"
-            android:background="#F5F5F5"
+            android:background="#2C2C2C"
             android:layout_margin="4dp"
             android:gravity="center">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@android:drawable/ic_input_add"
-                app:tint="#2196F3"
+                app:tint="#FFC107"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
@@ -156,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:text="Created On"
                 android:textSize="12sp"
-                android:textColor="#757575"
+                android:textColor="#9E9E9E"
                 android:layout_marginBottom="4dp"/>
 
             <TextView
@@ -166,7 +169,7 @@
                 android:text="Jan 25, 2024"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#2196F3"/>
+                android:textColor="#FFC107"/>
 
         </LinearLayout>
 
@@ -181,6 +184,7 @@
         android:text="Plan ID: PL12345"
         android:textSize="10sp"
         android:textColor="#9E9E9E"
+        android:fontFamily="monospace"
         android:visibility="gone"/>
 
 </LinearLayout>

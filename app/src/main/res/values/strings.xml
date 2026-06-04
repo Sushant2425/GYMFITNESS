@@ -141,7 +141,7 @@
     <!-- Settings Screen -->
     <string name="language_settings">Language</string>
     <string name="powered_by">Powered by</string>
-    <string name="company_name">Coders Pixel Innovation</string>
+    <string name="company_name">Sandhya Softtech Pvt Ltd</string>
 
     <string name="add_member">Add New Member</string>
     <string name="full_name">Full Name *</string>
@@ -347,17 +347,17 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="plan_details_title">Plan Details</string>
-
+    <string name="update_plan">Update Plan</string>
     <string name="plan_saved_success">Plan Saved Successfully!</string>
     <string name="view_all_plans_prompt">Do you want to view all your plans?</string>
     <string name="view_plans">View Plans</string>
     <string name="add_more">Add More</string>
     <string name="close">Close</string>
-
+    <string name="edit_plan">Edit Plan</string>
     <string name="plan_name">Plan Name :</string>
     <string name="one_month_short">1M</string>
     <string name="one_month">1 Month</string>
     <string name="status_label">Status</string>
-
+    <string name="duration_in_months">Duration (in Months)</string>
 
 </resources>

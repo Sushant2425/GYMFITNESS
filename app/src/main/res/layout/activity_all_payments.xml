@@ -2,13 +2,14 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#000000">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -17,8 +18,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#FAF8F8"
-            app:titleTextColor="#FAF8F8" />
+            app:navigationIconTint="#FFFFFF"
+            app:titleTextColor="#FFFFFF" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -27,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="#EF5350"
+        android:indeterminateTint="#FF6B00"
         android:visibility="gone" />
 
     <androidx.core.widget.NestedScrollView
@@ -46,9 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#4CAF50"
+                app:cardBackgroundColor="#1A1A1A"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:text="Total Amount Paid"
                         android:textSize="14sp"
-                        android:textColor="#E8F5E9"
+                        android:textColor="#FFE0B2"
                         android:textStyle="bold" />
 
                     <TextView
@@ -72,7 +75,7 @@
                         android:layout_marginTop="8dp"
                         android:text="₹0"
                         android:textSize="28sp"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#FF6B00"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -96,7 +99,7 @@
                     android:text="All Payment Plans"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#212121" />
+                    android:textColor="#FFFFFF" />
 
             </LinearLayout>
 

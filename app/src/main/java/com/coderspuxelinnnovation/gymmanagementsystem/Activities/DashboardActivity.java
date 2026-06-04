@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.util.Log;
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -48,6 +49,9 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        // Force status bar color to orange
+        forceStatusBarColor();
+
         initViews();
         setupFirebase();
         setupToolbar();
@@ -60,6 +64,31 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         if (savedInstanceState == null) {
             loadFragment(new DashboardFragment());
         }
+    }
+
+    // Force status bar color method - sets orange color
+    private void forceStatusBarColor() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            // Change color here
+            getWindow().setStatusBarColor(Color.parseColor("#FF8C42" +
+                    ""));
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        getWindow().getDecorView().getSystemUiVisibility()
+                                & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                );
+            }
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Ensure status bar color is set when returning to activity
+        forceStatusBarColor();
     }
 
     private void initViews() {
@@ -147,7 +176,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
                 loadFragment(new SettingsFragment());
                 return true;
             } else if (item.getItemId() == R.id.nav_placeholder) {
-                // This is the placeholder for FAB, do nothing
                 return false;
             }
             return false;
@@ -156,7 +184,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
 
     private void setupFAB() {
         fabAddMember.setOnClickListener(v -> {
-            // Open Add Member Activity
             Intent intent = new Intent(DashboardActivity.this, MemberAddActivity.class);
             startActivity(intent);
         });
@@ -260,60 +287,39 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         return true;
     }
 
-
-
-
     private void checkPlanAndHandleExpiry() {
-
         if (databaseReference == null) return;
 
         databaseReference
                 .child("subscription")
                 .get()
                 .addOnSuccessListener(snapshot -> {
-
-                    // 1️⃣ First time user
                     if (!snapshot.exists()) {
                         openPremiumScreen();
                         return;
                     }
 
-                    DataSnapshot currentPlanSnap =
-                            snapshot.child("currentPlan");
-
-                    DataSnapshot trialSnap =
-                            snapshot.child("trial");
+                    DataSnapshot currentPlanSnap = snapshot.child("currentPlan");
+                    DataSnapshot trialSnap = snapshot.child("trial");
 
                     if (!currentPlanSnap.exists()) {
                         openPremiumScreen();
                         return;
                     }
 
-                    Boolean active =
-                            currentPlanSnap.child("active").getValue(Boolean.class);
-
-                    Long endMillis =
-                            currentPlanSnap.child("endMillis").getValue(Long.class);
-
-                    Boolean trialUsed =
-                            trialSnap.child("used").getValue(Boolean.class);
-
+                    Boolean active = currentPlanSnap.child("active").getValue(Boolean.class);
+                    Long endMillis = currentPlanSnap.child("endMillis").getValue(Long.class);
+                    Boolean trialUsed = trialSnap.child("used").getValue(Boolean.class);
                     long now = System.currentTimeMillis();
 
-                    // 2️⃣ Lifetime plan
                     if (endMillis != null && endMillis == -1) {
                         return;
                     }
 
-                    // 3️⃣ Active & valid
-                    if (active != null
-                            && active
-                            && endMillis != null
-                            && now <= endMillis) {
+                    if (active != null && active && endMillis != null && now <= endMillis) {
                         return;
                     }
 
-                    // 4️⃣ Trial / Premium expired (only if trial was used)
                     if (trialUsed != null && trialUsed) {
                         showTrialExpiredPopup();
                     } else {
@@ -322,33 +328,26 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
                 })
                 .addOnFailureListener(e -> openPremiumScreen());
     }
-    private void showTrialExpiredPopup() {
 
+    private void showTrialExpiredPopup() {
         androidx.appcompat.app.AlertDialog dialog =
                 new androidx.appcompat.app.AlertDialog.Builder(this)
                         .setTitle("Trial Expired")
-                        .setMessage(
-                                "Your free trial has expired.\n\n" +
-                                        "To continue using all features,\n" +
-                                        "please upgrade to Premium."
-                        )
+                        .setMessage("Your free trial has expired.\n\nTo continue using all features,\nplease upgrade to Premium.")
                         .setCancelable(false)
                         .setPositiveButton("Buy Premium", (d, which) -> {
                             openPremiumScreen();
                         })
                         .create();
-
         dialog.show();
     }
+
     private void openPremiumScreen() {
-        Intent intent =
-                new Intent(this, PremiumSelectionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this, PremiumSelectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
-
 
     @Override
     public void onBackPressed() {
@@ -358,6 +357,4 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
-
 }

@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="#1A1A1A"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:strokeColor="#FF6B00"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +32,7 @@
                 android:text="DEC-2025-1M-01"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textColor="#FFFFFF" />
 
             <!-- Status Badge -->
             <androidx.cardview.widget.CardView
@@ -38,7 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="4dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#332A1A">
 
                 <TextView
                     android:id="@+id/tvPlanStatus"
@@ -47,6 +50,7 @@
                     android:text="PAID"
                     android:textSize="10sp"
                     android:textStyle="bold"
+                    android:textColor="#FF6B00"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"
                     android:paddingTop="2dp"
@@ -57,7 +61,6 @@
         </LinearLayout>
 
         <!-- Plan Details Row 1 -->
-        <!-- Plan Dates Row 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,7 +73,7 @@
                 android:layout_weight="1"
                 android:text="Duration:"
                 android:textSize="12sp"
-                android:textColor="#757575" />
+                android:textColor="#9E9E9E" />
 
             <TextView
                 android:id="@+id/tvPlanDates"
@@ -78,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="01/12 - 31/12/2025"
                 android:textSize="12sp"
-                android:textColor="#212121" />
+                android:textColor="#BDBDBD" />
 
         </LinearLayout>
 
@@ -95,7 +98,7 @@
                 android:layout_weight="1"
                 android:text="Total Fee:"
                 android:textSize="12sp"
-                android:textColor="#757575" />
+                android:textColor="#9E9E9E" />
 
             <TextView
                 android:id="@+id/tvTotalFee"
@@ -103,7 +106,8 @@
                 android:layout_height="wrap_content"
                 android:text="₹200"
                 android:textSize="12sp"
-                android:textColor="#212121" />
+                android:textColor="#FF9800"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -112,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="#F5F5F5"
+            android:background="#2C2C2C"
             android:padding="8dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical">
@@ -123,7 +127,7 @@
                 android:layout_weight="1"
                 android:text="Paid:"
                 android:textSize="12sp"
-                android:textColor="#757575" />
+                android:textColor="#9E9E9E" />
 
             <TextView
                 android:id="@+id/tvAmountPaid"
@@ -132,7 +136,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="₹200"
                 android:textSize="12sp"
-                android:textColor="#4CAF50"
+                android:textColor="#FFC107"
                 android:textStyle="bold" />
 
             <TextView
@@ -140,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mode:"
                 android:textSize="12sp"
-                android:textColor="#757575" />
+                android:textColor="#9E9E9E" />
 
             <TextView
                 android:id="@+id/tvPaymentMode"
@@ -149,7 +153,7 @@
                 android:layout_marginStart="4dp"
                 android:text="Cash"
                 android:textSize="12sp"
-                android:textColor="#212121" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

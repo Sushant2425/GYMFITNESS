@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardBackgroundColor="#FDFBFB"
+    app:cardBackgroundColor="#1A1A1A"
     app:cardCornerRadius="10dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:strokeColor="#FF6B00"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +22,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_person"
             android:padding="8dp"
-            android:background="@drawable/circle_red_bg"
+            android:background="@drawable/circle_orange_bg"
             app:tint="#FFFFFF" />
 
         <LinearLayout
@@ -35,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Member Name"
-                android:textColor="#3E3D3D"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -45,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Phone Number"
-                android:textColor="#494848"
+                android:textColor="#BDBDBD"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -60,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Expires On"
-                android:textColor="#3A3A3A"
+                android:textColor="#9E9E9E"
                 android:textSize="10sp" />
 
             <TextView
@@ -69,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="05/02/2026"
-                android:textColor="#DC143C"
+                android:textColor="#FF6B00"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

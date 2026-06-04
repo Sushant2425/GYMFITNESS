@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="140dp"
-    android:background="@drawable/gradient_header_premium"
+    android:background="@drawable/gradient_orange_header"
     android:elevation="4dp"
     android:fitsSystemWindows="true"
     android:padding="16dp"
@@ -26,7 +26,9 @@
             app:cardCornerRadius="28dp"
             app:cardElevation="6dp"
             android:layout_marginStart="5dp"
-            app:cardBackgroundColor="#FBFAFA">
+            app:cardBackgroundColor="#1A1A1A"
+            app:strokeColor="#FF6B00"
+            app:strokeWidth="1dp">
 
             <ImageView
                 android:layout_width="32dp"
@@ -35,7 +37,7 @@
                 android:contentDescription="@string/gym_logo_desc"
                 android:scaleType="centerInside"
                 android:src="@drawable/logogym"
-               />
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -72,7 +74,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/nav_header_email"
-                android:textColor="#E0E0E0"
+                android:textColor="#FFE0B2"
                 android:textSize="12sp"
                 android:alpha="0.87" />
 

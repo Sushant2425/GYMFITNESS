@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
->
+    android:fitsSystemWindows="true"
+    android:background="#000000">
 
-    <!-- Modern AppBar -->
+    <!-- Modern AppBar with Orange Gradient -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-
-            app:subtitleTextColor="@color/white"
-            app:titleTextColor="@color/white"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIconTint="#ffffff">
+            app:subtitleTextColor="#FFFFFF"
+            app:titleTextColor="#FFFFFF"
+            app:navigationIconTint="#ffffff"
+            android:background="@android:color/transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Collect Payment"
-                    android:textColor="#FDFCFC"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.01" />
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Search and collect payment"
-                    android:textColor="#DEDDDD"
+                    android:textColor="#FFE0B2"
                     android:textSize="12sp"
                     android:layout_marginTop="2dp" />
 
@@ -69,9 +69,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp">
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,7 +92,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_search"
-                            app:tint="#EF5350" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -100,7 +102,7 @@
                             android:text="Search Member"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -111,21 +113,22 @@
                         android:hint="Enter phone number or name"
                         android:layout_marginBottom="16dp"
                         app:startIconDrawable="@drawable/ic_search"
-                        app:startIconTint="#757575"
-                        app:boxStrokeColor="#EF5350"
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
                         app:boxStrokeWidth="2dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
-                        app:hintTextColor="#EF5350">
+                        app:hintTextColor="#FF9800"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etSearchMember"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:padding="14dp"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +140,7 @@
                         android:text="Search Member"
                         android:textAllCaps="false"
                         android:textStyle="bold"
-                        app:backgroundTint="#EF5350"
+                        app:backgroundTint="#FF6B00"
                         app:cornerRadius="10dp"
                         app:icon="@drawable/ic_search"
                         app:iconGravity="start"
@@ -155,9 +158,11 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp">
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -176,7 +181,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_person"
-                            app:tint="#2196F3" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -186,7 +191,7 @@
                             android:text="Member Details"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -202,7 +207,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -210,7 +215,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Name"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvMemberName"
@@ -220,7 +225,7 @@
                                 android:text="John Doe"
                                 android:textSize="15sp"
                                 android:textStyle="bold"
-                                android:textColor="#212121"/>
+                                android:textColor="#FFFFFF"/>
                         </LinearLayout>
 
                         <!-- Phone -->
@@ -229,7 +234,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -237,7 +242,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Phone"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvMemberPhone"
@@ -246,7 +251,7 @@
                                 android:layout_weight="1"
                                 android:text="9876543210"
                                 android:textSize="15sp"
-                                android:textColor="#212121"/>
+                                android:textColor="#FFFFFF"/>
                         </LinearLayout>
 
                         <!-- Plan -->
@@ -255,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -263,7 +268,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Plan"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvPlanType"
@@ -272,15 +277,16 @@
                                 android:layout_weight="1"
                                 android:text="3 Months"
                                 android:textSize="15sp"
-                                android:textColor="#212121"/>
+                                android:textColor="#FFFFFF"/>
                         </LinearLayout>
+
                         <!-- Plan Dates -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -288,7 +294,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Plan Period"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvPlanDates"
@@ -297,15 +303,16 @@
                                 android:layout_weight="1"
                                 android:text="01/02/2026 - 28/02/2026"
                                 android:textSize="15sp"
-                                android:textColor="#212121"/>
+                                android:textColor="#FFFFFF"/>
                         </LinearLayout>
+
                         <!-- Total Fee -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -313,7 +320,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Total Fee"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvTotalFee"
@@ -323,7 +330,7 @@
                                 android:text="₹2500"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#4CAF50"/>
+                                android:textColor="#FF6B00"/>
                         </LinearLayout>
 
                         <!-- Total Paid -->
@@ -332,7 +339,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="12dp"
-                            android:background="@drawable/detail_item_background"
+                            android:background="#2C2C2C"
                             android:layout_marginBottom="10dp">
 
                             <TextView
@@ -340,7 +347,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Total Paid"
                                 android:textSize="13sp"
-                                android:textColor="#757575"/>
+                                android:textColor="#FF9800"/>
 
                             <TextView
                                 android:id="@+id/tvTotalPaid"
@@ -350,16 +357,18 @@
                                 android:text="₹1000"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#2196F3"/>
+                                android:textColor="#FFC107"/>
                         </LinearLayout>
 
                         <!-- Remaining -->
                         <com.google.android.material.card.MaterialCardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:cardBackgroundColor="#FFEBEE"
+                            app:cardBackgroundColor="#331A1A1A"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="0dp"
+                            app:strokeColor="#FF6B00"
+                            app:strokeWidth="1dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -375,7 +384,7 @@
                                     android:text="Remaining Balance"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
-                                    android:textColor="#212121"/>
+                                    android:textColor="#FFFFFF"/>
 
                                 <TextView
                                     android:id="@+id/tvRemaining"
@@ -384,7 +393,7 @@
                                     android:text="₹1500"
                                     android:textSize="22sp"
                                     android:textStyle="bold"
-                                    android:textColor="#F44336"/>
+                                    android:textColor="#FF6B00"/>
                             </LinearLayout>
 
                         </com.google.android.material.card.MaterialCardView>
@@ -402,9 +411,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="6dp">
+                app:cardBackgroundColor="#1A1A1A"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -423,7 +434,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_payment"
-                            app:tint="#4CAF50" />
+                            app:tint="#FF6B00" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -433,7 +444,7 @@
                             android:text="Add Payment"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -445,22 +456,23 @@
                         android:hint="Payment Amount"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_money"
-                        app:startIconTint="#757575"
-                        app:boxStrokeColor="#4CAF50"
+                        app:startIconTint="#FF9800"
+                        app:boxStrokeColor="#FF6B00"
                         app:boxStrokeWidth="2dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
-                        app:hintTextColor="#4CAF50"
-                        app:prefixText="₹ ">
+                        app:hintTextColor="#FF9800"
+                        app:prefixText="₹ "
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etAmount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:padding="14dp"/>
@@ -473,7 +485,7 @@
                         android:text="Payment Mode"
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:textColor="#212121"
+                        android:textColor="#FFFFFF"
                         android:layout_marginBottom="12dp"/>
 
                     <!-- Payment Mode Chips -->
@@ -492,9 +504,10 @@
                             android:layout_height="wrap_content"
                             android:text="Cash"
                             android:checked="true"
-                            app:chipBackgroundColor="@color/chip_background"
-                            app:chipStrokeColor="#4CAF50"
-                            app:chipStrokeWidth="2dp" />
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
+                            app:chipStrokeWidth="2dp"
+                            android:textColor="#FFFFFF" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/rbUPI"
@@ -502,9 +515,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="UPI"
-                            app:chipBackgroundColor="@color/chip_background"
-                            app:chipStrokeColor="#2196F3"
-                            app:chipStrokeWidth="2dp" />
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
+                            app:chipStrokeWidth="2dp"
+                            android:textColor="#FFFFFF" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/rbCard"
@@ -512,9 +526,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Card"
-                            app:chipBackgroundColor="@color/chip_background"
-                            app:chipStrokeColor="#FF9800"
-                            app:chipStrokeWidth="2dp" />
+                            app:chipBackgroundColor="#2C2C2C"
+                            app:chipStrokeColor="#FF6B00"
+                            app:chipStrokeWidth="2dp"
+                            android:textColor="#FFFFFF" />
 
                     </com.google.android.material.chip.ChipGroup>
 
@@ -526,7 +541,7 @@
                         android:text="Collect Payment"
                         android:textAllCaps="false"
                         android:textStyle="bold"
-                        app:backgroundTint="#4CAF50"
+                        app:backgroundTint="#FF6B00"
                         app:cornerRadius="10dp"
                         android:textColor="#FFFFFF"/>
 

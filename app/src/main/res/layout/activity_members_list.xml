@@ -2,15 +2,15 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    android:background="#000000">
 
     <!-- Modern AppBar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:navigationIconTint="#212121">
+            app:navigationIconTint="#FFFFFF">
 
             <!-- Custom Title Layout -->
             <LinearLayout
@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Members (0)"
-                    android:textColor="#FDFBFB"
+                    android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.01" />
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/manage_members_subtitle"
-                    android:textColor="#E2E1E1"
+                    android:textColor="#FFE0B2"
                     android:textSize="12sp"
                     android:layout_marginTop="2dp" />
 
@@ -70,13 +70,15 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="#FFFFFF"
+            app:cardBackgroundColor="#1A1A1A"
             app:cardCornerRadius="10dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            app:strokeColor="#FF6B00"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="4dp"
                 android:gravity="center_vertical">
@@ -86,12 +88,12 @@
                     android:layout_height="40dp"
                     android:src="@drawable/ic_search"
                     android:padding="10dp"
-                    app:tint="#757575" />
+                    app:tint="#FF9800" />
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:queryHint="Search by name or phone"
                     app:iconifiedByDefault="false"
@@ -103,7 +105,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Filter Chips (Optional) -->
+        <!-- Filter Chips -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,9 +127,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/all_members"
                     android:checked="true"
-                    app:chipBackgroundColor="@color/chip_background"
-                    app:chipStrokeColor="#EF5350"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="#2C2C2C"
+                    app:chipStrokeColor="#FF6B00"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="#FFFFFF" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipActive"
@@ -135,9 +138,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/active_only"
-                    app:chipBackgroundColor="@color/chip_background"
+                    app:chipBackgroundColor="#2C2C2C"
                     app:chipStrokeColor="#4CAF50"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="#FFFFFF" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipExpired"
@@ -145,9 +149,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/expired_only"
-                    app:chipBackgroundColor="@color/chip_background"
-                    app:chipStrokeColor="#FF9800"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="#2C2C2C"
+                    app:chipStrokeColor="#FF6B00"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="#FFFFFF" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipExpiring"
@@ -155,9 +160,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/expiring_soon"
-                    app:chipBackgroundColor="@color/chip_background"
-                    app:chipStrokeColor="#F44336"
-                    app:chipStrokeWidth="1dp" />
+                    app:chipBackgroundColor="#2C2C2C"
+                    app:chipStrokeColor="#FFC107"
+                    app:chipStrokeWidth="1dp"
+                    android:textColor="#FFFFFF" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -169,63 +175,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="#EF5350"
+            android:indeterminateTint="#FF6B00"
             android:visibility="gone"
             android:layout_marginTop="40dp" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMembers"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
 
-                <!-- RecyclerView -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerMembers"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="12dp"
-                    android:clipToPadding="false" />
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/emptyState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="32dp">
 
-                <!-- Empty State -->
-                <LinearLayout
-                    android:id="@+id/emptyState"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:padding="32dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#1A1A1A"
+                    app:strokeColor="#FF6B00"
+                    app:strokeWidth="1dp">
 
                     <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_members"
-                        android:alpha="0.3"
-                        app:tint="#BDBDBD" />
+                        app:tint="#FF6B00" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/no_members_found"
-                        android:textColor="#9E9E9E"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/add_first_member"
-                        android:textColor="#BDBDBD"
-                        android:textSize="14sp"
-                        android:gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/no_members_found"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/add_first_member"
+                    android:textColor="#9E9E9E"
+                    android:textSize="14sp"
+                    android:gravity="center" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -236,11 +250,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
+        android:text="Add Member"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:icon="@drawable/ic_add_member"
         app:iconTint="#FFFFFF"
-        app:backgroundTint="#EF5350"
+        app:backgroundTint="#FF6B00"
         app:elevation="6dp"
         app:cornerRadius="16dp" />
 

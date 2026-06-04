@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="@color/white">
+    android:fitsSystemWindows="true"
+    android:background="#121212">
 
-    <!-- Modern AppBar -->
+    <!-- Modern AppBar with Orange Gradient -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
+        android:background="@drawable/gradient_orange_header"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -45,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.01"
                         android:text="@string/add_plan"
-                        android:textColor="@color/white"
+                        android:textColor="#FFFFFF"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -53,13 +54,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_plan_subtitle"
-                        android:textColor="@color/white"
+                        android:textColor="#FFE0B2"
                         android:textSize="12sp"
                         android:layout_marginTop="2dp" />
 
                 </LinearLayout>
 
-                <!-- View Plans Icon Button (No text, only icon) -->
+                <!-- View Plans Icon Button -->
                 <ImageView
                     android:id="@+id/btnViewPlans"
                     android:layout_width="40dp"
@@ -67,7 +68,7 @@
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_view_list"
                     android:scaleType="centerInside"
-                    app:tint="@color/white"
+                    app:tint="#FFFFFF"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true" />
@@ -94,9 +95,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="#F8E2E6"
+                app:cardBackgroundColor="#1E1E1E"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:strokeColor="#FF6B00"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,15 +108,13 @@
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
-
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="12dp"
                         android:text="@string/plan_info"
-                        android:textColor="#2E7D32"
+                        android:textColor="#FFC107"
                         android:textSize="13sp"
                         android:lineSpacingExtra="2dp"/>
 
@@ -126,9 +127,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="8dp">
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -146,8 +147,8 @@
                         <ImageView
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:src="@drawable/logogym"
-                            />
+                            android:src="@drawable/img_1"
+                        />
 
                         <TextView
                             android:layout_width="0dp"
@@ -157,7 +158,7 @@
                             android:text="@string/plan_details"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#212121" />
+                            android:textColor="#FFFFFF" />
 
                     </LinearLayout>
 
@@ -168,23 +169,24 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/plan_duration"
                         android:layout_marginBottom="20dp"
-                        app:boxStrokeColor="#BCBBBB"
-                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeColor="#FF6B00"
+                        app:boxStrokeWidth="1dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
-                        app:hintTextColor="#EF5350"
+                        app:hintTextColor="#FFC107"
                         app:startIconDrawable="@drawable/ic_calendar"
-                        app:startIconTint="#757575"
-                        app:endIconTint="#757575">
+                        app:startIconTint="#FFC107"
+                        app:endIconTint="#FFC107"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView
                             android:id="@+id/spinnerPlanDuration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="none"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="15sp"
                             android:padding="14dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -196,25 +198,26 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/fee_amount"
                         android:layout_marginBottom="8dp"
-                        app:boxStrokeColor="#BCBBBB"
-                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeColor="#FF6B00"
+                        app:boxStrokeWidth="1dp"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
                         app:boxCornerRadiusTopStart="10dp"
-                        app:hintTextColor="#EF5350"
+                        app:hintTextColor="#FFC107"
                         app:startIconDrawable="@drawable/ic_money"
-                        app:startIconTint="#757575"
+                        app:startIconTint="#FFC107"
                         app:prefixText="₹ "
                         app:helperText="@string/fee_helper"
-                        app:helperTextTextColor="#757575">
+                        app:helperTextTextColor="#9E9E9E"
+                        app:boxBackgroundColor="#2C2C2C">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etFee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:textColor="#212121"
+                            android:textColor="#FFFFFF"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:padding="14dp" />
@@ -233,7 +236,7 @@
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                app:backgroundTint="#F44336"
+                app:backgroundTint="#FF6B00"
                 app:cornerRadius="10dp"
                 app:elevation="4dp"
                 app:icon="@android:drawable/ic_menu_save"
@@ -246,9 +249,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                app:cardBackgroundColor="#FFF3E0"
+                app:cardBackgroundColor="#1E1E1E"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="0dp">
+                app:cardElevation="0dp"
+                app:strokeColor="#FFC107"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -262,14 +267,14 @@
                         android:text="@string/plan_tip_title"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="#E65100"
+                        android:textColor="#FFC107"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/plan_tips"
-                        android:textColor="#F57C00"
+                        android:textColor="#E0E0E0"
                         android:textSize="13sp"
                         android:lineSpacingExtra="4dp" />
 
