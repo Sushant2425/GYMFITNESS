@@ -39,7 +39,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Payment Manager"
+                    android:text="@string/payment_manager"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -84,7 +84,7 @@
                         android:id="@+id/btnPrevMonth"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:contentDescription="Previous Month"
+                        android:contentDescription="@string/previous_month"
                         android:src="@drawable/ic_chevron_left"
                         android:background="@drawable/bg_ripple_circle"
                         app:tint="#FF6B00"
@@ -104,14 +104,13 @@
                             android:id="@+id/tvCurrentMonth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="January"
+                            android:text="@string/january"
                             android:textColor="#FFFFFF"
                             android:textSize="22sp"
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
                             android:letterSpacing="0.02"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
 
                         <TextView
                             android:id="@+id/tvMonthYear"
@@ -122,8 +121,7 @@
                             android:textSize="13sp"
                             android:fontFamily="sans-serif"
                             android:layout_marginTop="2dp"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
                     </LinearLayout>
 
                     <ImageButton
@@ -133,7 +131,7 @@
                         android:src="@drawable/ic_chevron_right"
                         android:background="@drawable/bg_ripple_circle"
                         app:tint="#FF6B00"
-                        android:contentDescription="Next Month"
+                        android:contentDescription="@string/next_month"
                         android:scaleType="centerInside"
                         android:padding="8dp" />
                 </LinearLayout>
@@ -167,12 +165,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pending"
+                            android:text="@string/pending"
                             android:textColor="#9E9E9E"
                             android:textSize="11sp"
                             android:fontFamily="sans-serif"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
 
                         <TextView
                             android:id="@+id/tvPendingCount"
@@ -184,8 +181,7 @@
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="4dp"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
                     </LinearLayout>
 
                     <!-- Paid Card -->
@@ -203,12 +199,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Paid"
+                            android:text="@string/paid"
                             android:textColor="#9E9E9E"
                             android:textSize="11sp"
                             android:fontFamily="sans-serif"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
 
                         <TextView
                             android:id="@+id/tvPaidCount"
@@ -220,8 +215,7 @@
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="4dp"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
                     </LinearLayout>
 
                     <!-- Total Amount Card -->
@@ -239,12 +233,11 @@
                             android:id="@+id/tvMemberCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 members"
+                            android:text="@string/members_count_zero"
                             android:textColor="#BDBDBD"
                             android:textSize="11sp"
                             android:fontFamily="sans-serif"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
 
                         <TextView
                             android:id="@+id/tvTotalAmount"
@@ -256,8 +249,7 @@
                             android:textStyle="bold"
                             android:fontFamily="sans-serif-medium"
                             android:layout_marginTop="4dp"
-                            android:maxLines="1"
-                            tools:ignore="HardcodedText" />
+                            android:maxLines="1" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -308,7 +300,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="Refresh Data"
+        android:contentDescription="@string/refresh_data"
         app:backgroundTint="#FF6B00"
         app:tint="#FFFFFF"
         app:srcCompat="@drawable/ic_refresh"

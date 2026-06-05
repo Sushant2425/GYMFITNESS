@@ -24,7 +24,8 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:src="@drawable/logogym"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            android:contentDescription="@string/gym_logo_desc" />
 
     </androidx.cardview.widget.CardView>
 
@@ -90,7 +91,7 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/english"
                         android:scaleType="centerCrop"
-                        android:contentDescription="English" />
+                        android:contentDescription="@string/english" />
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -110,7 +111,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="English"
+                        android:text="@string/english"
                         android:textSize="14sp"
                         android:textColor="#9E9E9E"
                         android:layout_marginTop="2dp" />
@@ -158,7 +159,7 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/marathi"
                         android:scaleType="centerCrop"
-                        android:contentDescription="Marathi" />
+                        android:contentDescription="@string/marathi" />
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -178,7 +179,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मराठी"
+                        android:text="@string/marathi"
                         android:textSize="14sp"
                         android:textColor="#9E9E9E"
                         android:layout_marginTop="2dp" />

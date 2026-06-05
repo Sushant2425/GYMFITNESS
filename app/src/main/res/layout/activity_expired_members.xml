@@ -14,7 +14,7 @@
         android:layout_height="56dp"
         android:background="@drawable/gradient_orange_header"
         android:elevation="0dp"
-        app:title="Expired &amp; Expiring Plans"
+        app:title="@string/expired_expiring_plans"
         app:titleTextColor="#FFFFFF"
         app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:navigationIcon="@drawable/ic_arrow_back"
@@ -80,7 +80,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Expired"
+                                android:text="@string/expired"
                                 android:textSize="11sp"
                                 android:textColor="#9E9E9E" />
 
@@ -132,7 +132,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Dues"
+                                    android:text="@string/dues"
                                     android:textSize="11sp"
                                     android:textColor="#9E9E9E" />
 
@@ -186,7 +186,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Amount"
+                                    android:text="@string/amount"
                                     android:textSize="11sp"
                                     android:textColor="#9E9E9E" />
 
@@ -245,7 +245,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:hint="Search by name or phone..."
+                                android:hint="@string/search_by_name_or_phone"
                                 android:background="@null"
                                 android:paddingStart="12dp"
                                 android:paddingEnd="8dp"
@@ -283,7 +283,7 @@
                             android:id="@+id/chipAll"
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
-                            android:text="All Members"
+                            android:text="@string/all_members"
                             android:textSize="12sp"
                             android:checked="true"
                             app:chipCornerRadius="18dp"
@@ -298,7 +298,7 @@
                             android:id="@+id/chipWithDues"
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
-                            android:text="With Dues"
+                            android:text="@string/with_dues"
                             android:textSize="12sp"
                             app:chipCornerRadius="18dp"
                             app:chipMinHeight="32dp"
@@ -312,7 +312,7 @@
                             android:id="@+id/chipClearDues"
                             android:layout_width="wrap_content"
                             android:layout_height="36dp"
-                            android:text="Clear Dues"
+                            android:text="@string/clear_dues"
                             android:textSize="12sp"
                             app:chipCornerRadius="18dp"
                             app:chipMinHeight="32dp"
@@ -341,7 +341,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Members List"
+                    android:text="@string/members_list"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF" />
@@ -418,7 +418,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="All Clear!"
+                        android:text="@string/all_clear"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -427,7 +427,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No expired or expiring plans found"
+                        android:text="@string/no_expired_expiring_plans"
                         android:textSize="13sp"
                         android:textColor="#9E9E9E"
                         android:layout_marginTop="6dp"

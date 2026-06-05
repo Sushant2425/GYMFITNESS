@@ -25,11 +25,10 @@ public class AddPlanActivity extends BaseActivity {
     private MaterialAutoCompleteTextView spinnerPlanDuration;
     private TextInputEditText etFee;
     private MaterialButton btnSavePlan;
-    private ImageView btnViewPlans; // Changed to ImageView
+    private ImageView btnViewPlans;
     private DatabaseReference plansRef;
     private PrefManager prefManager;
 
-    // Dynamic 1-12 months
     private final String[] planDurations = new String[12];
     private final int[] planMonths = new int[12];
 
@@ -57,7 +56,7 @@ public class AddPlanActivity extends BaseActivity {
     private void initPlansArray() {
         for (int i = 1; i <= 12; i++) {
             planMonths[i - 1] = i;
-            planDurations[i - 1] = i + " Month" + (i > 1 ? "s" : "");
+            planDurations[i - 1] = i + " " + getString(R.string.month) + (i > 1 ? getString(R.string.suffix_s) : "");
         }
     }
 
@@ -65,14 +64,13 @@ public class AddPlanActivity extends BaseActivity {
         spinnerPlanDuration = findViewById(R.id.spinnerPlanDuration);
         etFee = findViewById(R.id.etFee);
         btnSavePlan = findViewById(R.id.btnSavePlan);
-        btnViewPlans = findViewById(R.id.btnViewPlans); // Initialize ImageView
+        btnViewPlans = findViewById(R.id.btnViewPlans);
 
         btnSavePlan.setOnClickListener(v -> savePlanToFirebase());
-        btnViewPlans.setOnClickListener(v -> navigateToViewPlans()); // Set click listener
+        btnViewPlans.setOnClickListener(v -> navigateToViewPlans());
 
-        // Optional: Add ripple effect programmatically
         btnViewPlans.setOnLongClickListener(v -> {
-            Toast.makeText(this, "View All Plans", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.view_all_plans), Toast.LENGTH_SHORT).show();
             return true;
         });
     }
@@ -92,7 +90,6 @@ public class AddPlanActivity extends BaseActivity {
     private void navigateToViewPlans() {
         Intent intent = new Intent(AddPlanActivity.this, ViewPlansActivity.class);
         startActivity(intent);
-        // Optional: add animation
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
@@ -100,7 +97,6 @@ public class AddPlanActivity extends BaseActivity {
         String selectedPlan = spinnerPlanDuration.getText().toString().trim();
         String feeStr = etFee.getText().toString().trim();
 
-        // Validation
         if (TextUtils.isEmpty(selectedPlan)) {
             Toast.makeText(this, getString(R.string.select_plan_duration), Toast.LENGTH_SHORT).show();
             spinnerPlanDuration.requestFocus();
@@ -124,18 +120,16 @@ public class AddPlanActivity extends BaseActivity {
             String ownerEmail = prefManager.getUserEmail();
 
             if (ownerEmail == null) {
-                Toast.makeText(this, "❌ Please login first!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.please_login_first), Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Show loading
             btnSavePlan.setEnabled(false);
             btnSavePlan.setText(getString(R.string.saving));
 
             int duration = getDurationFromPlan(selectedPlan);
             Plan plan = new Plan(selectedPlan, fee, duration);
 
-            // Firebase path: GYM/{ownerEmail}/gym_plans/
             String safeEmail = ownerEmail.replace(".", ",");
             plansRef = FirebaseDatabase.getInstance()
                     .getReference("GYM")
@@ -149,17 +143,16 @@ public class AddPlanActivity extends BaseActivity {
                             btnSavePlan.setEnabled(true);
                             btnSavePlan.setText(getString(R.string.save_plan));
                             Toast.makeText(this,
-                                    "✅ " + getString(R.string.plan_saved),
+                                    getString(R.string.plan_saved_success_with_icon),
                                     Toast.LENGTH_LONG).show();
 
-                            // Show success dialog
                             showSuccessDialog();
                         })
                         .addOnFailureListener(e -> {
                             btnSavePlan.setEnabled(true);
                             btnSavePlan.setText(getString(R.string.save_plan));
                             Toast.makeText(this,
-                                    "❌ " + getString(R.string.plan_save_failed) + ": " + e.getMessage(),
+                                    getString(R.string.plan_save_failed_with_message, e.getMessage()),
                                     Toast.LENGTH_SHORT).show();
                         });
             }
@@ -191,7 +184,7 @@ public class AddPlanActivity extends BaseActivity {
                 return planMonths[i];
             }
         }
-        return 1; // Default to 1 month
+        return 1;
     }
 
     private void clearFields() {
@@ -203,7 +196,6 @@ public class AddPlanActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        // Optional: add back animation
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

@@ -123,6 +123,7 @@ public class MemberDetailActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
+
     private void loadMemberDetails() {
         progressBar.setVisibility(View.VISIBLE);
         String ownerEmail = new PrefManager(this).getUserEmail().replace(".", ",");

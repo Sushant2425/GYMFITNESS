@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.AllPaymentsAdapter;
+import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.MemberModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AllPaymentsActivity extends AppCompatActivity {
+public class AllPaymentsActivity extends BaseActivity {
 
     private RecyclerView rvAllPayments;
     private ProgressBar progressBar;
@@ -42,7 +43,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
 
         memberPhone = getIntent().getStringExtra("phone");
         if (memberPhone == null) {
-            Toast.makeText(this, "Invalid member", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.invalid_member), Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -56,7 +57,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("All Payments");
+            getSupportActionBar().setTitle(getString(R.string.all_payments));
         }
 
         rvAllPayments = findViewById(R.id.rvAllPayments);
@@ -84,7 +85,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
 
                 if (!snapshot.exists()) {
                     Toast.makeText(AllPaymentsActivity.this,
-                            "Member not found", Toast.LENGTH_SHORT).show();
+                            getString(R.string.member_not_found), Toast.LENGTH_SHORT).show();
                     finish();
                     return;
                 }
@@ -113,8 +114,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
                                 Integer amountPaid = planSnap.child("amountPaid").getValue(Integer.class);
 
                                 // Log for debugging
-                                Log.d("AllPayments", "Payment Plan: " + planId +
-                                        " AmountPaid: " + amountPaid + " TotalFee: " + totalFee);
+                                Log.d("AllPayments", getString(R.string.payment_plan_log, planId, amountPaid, totalFee));
 
                                 if (planStartDate == null) planStartDate = "";
                                 if (forMonth == null) forMonth = "";
@@ -123,7 +123,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
                                 if (amountPaid == null) amountPaid = 0;
 
                                 String monthYear = formatMonthYear(planId);
-                                if (monthYear.equals("Unknown")) {
+                                if (monthYear.equals(getString(R.string.unknown))) {
                                     // Try to get from forMonth field
                                     monthYear = formatForMonth(forMonth);
                                 }
@@ -140,7 +140,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
 
                                 String title;
                                 if (isCurrent) {
-                                    title = "Current: " + monthYear;
+                                    title = getString(R.string.current_plan_prefix, monthYear);
                                 } else {
                                     title = monthYear;
                                 }
@@ -164,8 +164,8 @@ public class AllPaymentsActivity extends AppCompatActivity {
                     }
 
                     // Update UI - Show TOTAL PAID
-                    tvTotalAmount.setText("Total Paid: ₹" + totalPaid);
-                    Log.d("AllPayments", "Total Paid: " + totalPaid);
+                    tvTotalAmount.setText(getString(R.string.total_paid_amount, totalPaid));
+                    Log.d("AllPayments", getString(R.string.total_paid_log, totalPaid));
 
                     if (allPaymentItems.isEmpty()) {
                         tvNoPayments.setVisibility(View.VISIBLE);
@@ -176,10 +176,9 @@ public class AllPaymentsActivity extends AppCompatActivity {
 
                         // Log each item
                         for (PaymentItem item : allPaymentItems) {
-                            Log.d("AllPayments", "Item: " + item.getTitle() +
-                                    " Paid: " + item.getAmountPaid() +
-                                    " Total: " + item.getTotalFee() +
-                                    " IsCurrent: " + item.isCurrentPlan());
+                            Log.d("AllPayments", getString(R.string.payment_item_log,
+                                    item.getTitle(), item.getAmountPaid(),
+                                    item.getTotalFee(), item.isCurrentPlan()));
                         }
 
                         AllPaymentsAdapter adapter = new AllPaymentsAdapter(allPaymentItems,
@@ -194,7 +193,7 @@ public class AllPaymentsActivity extends AppCompatActivity {
                                             startActivity(intent);
                                         } else {
                                             Toast.makeText(AllPaymentsActivity.this,
-                                                    "View current plan in member details",
+                                                    getString(R.string.view_current_plan_message),
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -205,9 +204,9 @@ public class AllPaymentsActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(AllPaymentsActivity.this,
-                            "Error loading payments: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_loading_payments, e.getMessage()), Toast.LENGTH_SHORT).show();
                     tvNoPayments.setVisibility(View.VISIBLE);
-                    Log.e("AllPayments", "Error: " + e.getMessage());
+                    Log.e("AllPayments", getString(R.string.error_log, e.getMessage()));
                 }
             }
 
@@ -215,14 +214,15 @@ public class AllPaymentsActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(AllPaymentsActivity.this,
-                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("AllPayments", "Database error: " + error.getMessage());
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
+                Log.e("AllPayments", getString(R.string.database_error_log, error.getMessage()));
             }
         });
     }
+
     // Add this helper method
     private String formatForMonth(String forMonth) {
-        if (forMonth == null || forMonth.isEmpty()) return "Unknown";
+        if (forMonth == null || forMonth.isEmpty()) return getString(R.string.unknown);
 
         try {
             // forMonth format: "2026-01"
@@ -231,11 +231,17 @@ public class AllPaymentsActivity extends AppCompatActivity {
                 int year = Integer.parseInt(parts[0]);
                 int month = Integer.parseInt(parts[1]);
 
-                String[] monthNames = {"January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"};
+                String[] monthNames = {
+                        getString(R.string.january), getString(R.string.february),
+                        getString(R.string.march), getString(R.string.april),
+                        getString(R.string.may), getString(R.string.june),
+                        getString(R.string.july), getString(R.string.august),
+                        getString(R.string.september), getString(R.string.october),
+                        getString(R.string.november), getString(R.string.december)
+                };
 
                 if (month >= 1 && month <= 12) {
-                    return monthNames[month-1] + " " + year;
+                    return monthNames[month - 1] + " " + year;
                 }
             }
         } catch (Exception e) {
@@ -243,8 +249,9 @@ public class AllPaymentsActivity extends AppCompatActivity {
         }
         return forMonth;
     }
+
     private String formatMonthYear(String planId) {
-        if (planId == null || planId.isEmpty()) return "Unknown";
+        if (planId == null || planId.isEmpty()) return getString(R.string.unknown);
 
         try {
             String[] parts = planId.split("-");
@@ -263,32 +270,19 @@ public class AllPaymentsActivity extends AppCompatActivity {
 
     private String getMonthName(String code) {
         switch (code) {
-            case "JAN":
-                return "January";
-            case "FEB":
-                return "February";
-            case "MAR":
-                return "March";
-            case "APR":
-                return "April";
-            case "MAY":
-                return "May";
-            case "JUN":
-                return "June";
-            case "JUL":
-                return "July";
-            case "AUG":
-                return "August";
-            case "SEP":
-                return "September";
-            case "OCT":
-                return "October";
-            case "NOV":
-                return "November";
-            case "DEC":
-                return "December";
-            default:
-                return code;
+            case "JAN": return getString(R.string.january);
+            case "FEB": return getString(R.string.february);
+            case "MAR": return getString(R.string.march);
+            case "APR": return getString(R.string.april);
+            case "MAY": return getString(R.string.may);
+            case "JUN": return getString(R.string.june);
+            case "JUL": return getString(R.string.july);
+            case "AUG": return getString(R.string.august);
+            case "SEP": return getString(R.string.september);
+            case "OCT": return getString(R.string.october);
+            case "NOV": return getString(R.string.november);
+            case "DEC": return getString(R.string.december);
+            default: return code;
         }
     }
 
@@ -298,7 +292,6 @@ public class AllPaymentsActivity extends AppCompatActivity {
         return true;
     }
 
-    // Model class for payment items
     // Model class for payment items
     public static class PaymentItem {
         private String planId;

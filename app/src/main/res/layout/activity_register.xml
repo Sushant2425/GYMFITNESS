@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-   android:fitsSystemWindows="true" android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="#FFFFFF"
-            app:title="Registration"
+            app:title="@string/registration"
             app:titleTextColor="#FFFFFF"
             app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
@@ -61,6 +61,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:src="@drawable/logogym"
+                        android:contentDescription="@string/gym_logo_desc"
                         android:tint="#FF6B00" />
                 </androidx.cardview.widget.CardView>
 
@@ -132,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🏢 Gym Details"
+                        android:text="@string/gym_details_section"
                         android:textColor="#FF9800"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -189,7 +190,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="👤 Owner Details"
+                        android:text="@string/owner_details_section"
                         android:textColor="#FF9800"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -305,7 +306,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🔒 Security"
+                        android:text="@string/security_section"
                         android:textColor="#FF9800"
                         android:textSize="16sp"
                         android:textStyle="bold"

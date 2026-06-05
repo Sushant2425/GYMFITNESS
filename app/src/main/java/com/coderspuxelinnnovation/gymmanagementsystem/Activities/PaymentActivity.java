@@ -18,7 +18,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView; // Changed from MaterialAutoCompleteTextView
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -54,13 +54,13 @@ public class PaymentActivity extends BaseActivity {
     private String planId, planStartDate;
     private CheckBox checkboxSMS, checkboxWhatsApp;
     private TextInputEditText etTotalFee, etPaidAmount, etRemainingAmount;
-    private AutoCompleteTextView spinnerPaymentMode; // Changed type
+    private AutoCompleteTextView spinnerPaymentMode;
     private MaterialButton btnSave;
     private int totalFee;
     private ProgressBar progressBar;
     private static final int SMS_PERMISSION_CODE = 100;
     private String memberPhone;
-    private MaterialToolbar toolbar; // Added toolbar
+    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +71,13 @@ public class PaymentActivity extends BaseActivity {
         setupPaymentModeSpinner();
         loadIntentData();
         setupCheckboxes();
-        setupToolbar(); // Added
+        setupToolbar();
 
-        // ✅ ADD THESE 10 LINES - Permission popup on activity start
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
-            Log.d("SMS", "🚨 Permission requested");
+            Log.d("SMS", getString(R.string.sms_permission_requested));
         } else {
-            Log.d("SMS", "✅ SMS permission already granted");
+            Log.d("SMS", getString(R.string.sms_permission_granted_log));
         }
 
         setupListeners();
@@ -86,14 +85,13 @@ public class PaymentActivity extends BaseActivity {
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.toolbar); // Initialize toolbar
+        toolbar = findViewById(R.id.toolbar);
         etTotalFee = findViewById(R.id.etTotalFee);
         etPaidAmount = findViewById(R.id.etPaidAmount);
         etRemainingAmount = findViewById(R.id.etRemainingAmount);
         spinnerPaymentMode = findViewById(R.id.spinnerPaymentMode);
         btnSave = findViewById(R.id.btnSavePayment);
-
-        this.progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         checkboxSMS = findViewById(R.id.checkbox_sms);
         checkboxWhatsApp = findViewById(R.id.checkbox_whatsapp);
     }
@@ -105,28 +103,28 @@ public class PaymentActivity extends BaseActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        // Handle back arrow click
         toolbar.setNavigationOnClickListener(v -> {
-            // Check if there's any unsaved data
             String paidText = etPaidAmount.getText().toString().trim();
             if (!TextUtils.isEmpty(paidText)) {
                 showExitConfirmationDialog();
+            } else {
+                finish();
             }
         });
     }
 
     private void showExitConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Discard Changes?");
-        builder.setMessage("You have unsaved changes. Are you sure you want to exit?");
-        builder.setPositiveButton("Exit", (dialog, which) -> finish());
-        builder.setNegativeButton("Cancel", null);
+        builder.setTitle(getString(R.string.discard_changes_title));
+        builder.setMessage(getString(R.string.discard_changes_message));
+        builder.setPositiveButton(getString(R.string.exit), (dialog, which) -> finish());
+        builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
     }
 
     private void setupCheckboxes() {
-        checkboxSMS.setChecked(true);      // SMS default ON
-        checkboxWhatsApp.setChecked(false); // WhatsApp default OFF
+        checkboxSMS.setChecked(true);
+        checkboxWhatsApp.setChecked(false);
     }
 
     private String appendPlanSuffix(String basePlanId) {
@@ -134,16 +132,16 @@ public class PaymentActivity extends BaseActivity {
     }
 
     private void setupPaymentModeSpinner() {
-        String[] modes = {"Cash", "Online"};
+        String[] modes = {getString(R.string.cash), getString(R.string.online)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, modes);
         spinnerPaymentMode.setAdapter(adapter);
-        spinnerPaymentMode.setText(modes[0], false); // Set default value
+        spinnerPaymentMode.setText(modes[0], false);
     }
 
     private void loadIntentData() {
         totalFee = getIntent().getIntExtra("totalFee", 0);
-        etTotalFee.setText("₹" + totalFee);
+        etTotalFee.setText(getString(R.string.rupee_prefix) + totalFee);
         planId = getIntent().getStringExtra("planId");
         planStartDate = getIntent().getStringExtra("startDate");
         memberPhone = getIntent().getStringExtra("phone");
@@ -172,12 +170,12 @@ public class PaymentActivity extends BaseActivity {
             try {
                 int paid = Integer.parseInt(paidText);
                 int remaining = Math.max(0, totalFee - paid);
-                etRemainingAmount.setText("₹" + remaining);
+                etRemainingAmount.setText(getString(R.string.rupee_prefix) + remaining);
             } catch (NumberFormatException e) {
-                etRemainingAmount.setText("₹" + totalFee);
+                etRemainingAmount.setText(getString(R.string.rupee_prefix) + totalFee);
             }
         } else {
-            etRemainingAmount.setText("₹" + totalFee);
+            etRemainingAmount.setText(getString(R.string.rupee_prefix) + totalFee);
         }
     }
 
@@ -186,24 +184,24 @@ public class PaymentActivity extends BaseActivity {
         String paymentMode = spinnerPaymentMode.getText().toString().trim();
 
         if (TextUtils.isEmpty(paidText)) {
-            etPaidAmount.setError("Enter paid amount");
+            etPaidAmount.setError(getString(R.string.error_enter_amount));
             return;
         }
 
         if (TextUtils.isEmpty(paymentMode)) {
-            spinnerPaymentMode.setError("Select payment mode");
+            spinnerPaymentMode.setError(getString(R.string.select_payment_mode));
             return;
         }
 
         try {
             int paidAmount = Integer.parseInt(paidText);
             if (paidAmount <= 0) {
-                etPaidAmount.setError("Amount must be greater than 0");
+                etPaidAmount.setError(getString(R.string.amount_greater_than_zero));
                 return;
             }
 
             if (paidAmount > totalFee) {
-                etPaidAmount.setError("Paid amount cannot be greater than Total Fee");
+                etPaidAmount.setError(getString(R.string.paid_amount_exceeds));
                 return;
             }
 
@@ -211,7 +209,7 @@ public class PaymentActivity extends BaseActivity {
 
             saveCompleteMemberData(paidAmount, totalFee - paidAmount, paymentMode);
         } catch (NumberFormatException e) {
-            etPaidAmount.setError("Invalid amount");
+            etPaidAmount.setError(getString(R.string.invalid_amount));
         }
     }
 
@@ -240,14 +238,10 @@ public class PaymentActivity extends BaseActivity {
     }
 
     private void saveCompleteMemberData(int paidAmount, int remaining, String mode) {
-        // 1️⃣ FIRST declare variables
         String ownerEmail = new PrefManager(this).getUserEmail().replace(".", ",");
         String paymentId = UUID.randomUUID().toString();
+        String finalPlanId = appendPlanSuffix(planId);
 
-        // 2️⃣ FINAL planId तयार कर
-        String finalPlanId = appendPlanSuffix(planId); // 🔥 IMPORTANT
-
-        // 3️⃣ Payment data
         HashMap<String, Object> paymentData = new HashMap<>();
         paymentData.put("paymentId", paymentId);
         paymentData.put("amountPaid", paidAmount);
@@ -255,19 +249,17 @@ public class PaymentActivity extends BaseActivity {
         paymentData.put("remaining", remaining);
         paymentData.put("mode", mode);
         paymentData.put("date", System.currentTimeMillis());
-        paymentData.put("status", "PAID");
+        paymentData.put("status", getString(R.string.paid_status));
         paymentData.put("forMonth", getForMonth(planStartDate));
         paymentData.put("planStartDate", planStartDate);
         paymentData.put("planId", finalPlanId);
 
-        // 4️⃣ Firebase reference
         DatabaseReference memberRef = FirebaseDatabase.getInstance()
                 .getReference("GYM")
                 .child(ownerEmail)
                 .child("members")
                 .child(memberPhone);
 
-        // 5️⃣ Member info
         HashMap<String, Object> memberInfo = new HashMap<>();
         memberInfo.put("name", getIntent().getStringExtra("name"));
         memberInfo.put("phone", memberPhone);
@@ -276,23 +268,20 @@ public class PaymentActivity extends BaseActivity {
         memberInfo.put("joinDate", getIntent().getStringExtra("joinDate"));
         memberInfo.put("status", "ACTIVE");
 
-        // 6️⃣ Current plan (🔥 SAME finalPlanId)
         HashMap<String, Object> currentPlan = new HashMap<>();
-        currentPlan.put("planId", finalPlanId);   // 🔥 FIXED
+        currentPlan.put("planId", finalPlanId);
         currentPlan.put("planType", getIntent().getStringExtra("planType"));
         currentPlan.put("startDate", planStartDate);
         currentPlan.put("endDate", getIntent().getStringExtra("endDate"));
         currentPlan.put("totalFee", totalFee);
         currentPlan.put("status", "ACTIVE");
 
-        // 7️⃣ Save sequence
         memberRef.child("info").setValue(memberInfo)
                 .addOnSuccessListener(unused -> {
                     memberRef.child("currentPlan").setValue(currentPlan)
                             .addOnSuccessListener(unused2 -> {
                                 memberRef.child("payments")
-//                                        .child(paymentId)
-                                        .child(finalPlanId)  // NEW: Use planId as key
+                                        .child(finalPlanId)
                                         .setValue(paymentData)
                                         .addOnSuccessListener(unused3 -> {
                                             hideProgress();
@@ -308,57 +297,41 @@ public class PaymentActivity extends BaseActivity {
 
                                                 runOnUiThread(() -> {
                                                     if (pdfUri != null) {
-
-                                                        // 1️⃣ Open WhatsApp chat FIRST
-                                                        if (pdfUri != null) {
-                                                            sendPdfOnWhatsApp(pdfUri); // ✅ DIRECT WhatsApp with PDF
-                                                        }
-                                                        // ⏱ WhatsApp open hone ka time
+                                                        sendPdfOnWhatsApp(pdfUri);
                                                     }
 
-
-                                                    // ✅ SMS only
                                                     if (checkboxSMS.isChecked()) {
                                                         sendWelcomeSMS(paidAmount);
                                                     }
                                                 });
                                             }).start();
-
-
-
-
                                         })
                                         .addOnFailureListener(e -> {
                                             hideProgress();
-                                            Toast.makeText(PaymentActivity.this, "❌ Payment failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PaymentActivity.this,
+                                                    getString(R.string.payment_failed, e.getMessage()),
+                                                    Toast.LENGTH_SHORT).show();
                                         });
                             })
                             .addOnFailureListener(e -> {
                                 hideProgress();
-                                Toast.makeText(
-                                        PaymentActivity.this,
-                                        "❌ Plan save failed: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT
-                                ).show();
+                                Toast.makeText(PaymentActivity.this,
+                                        getString(R.string.plan_save_failed, e.getMessage()),
+                                        Toast.LENGTH_SHORT).show();
                             });
                 })
                 .addOnFailureListener(e -> {
                     hideProgress();
-                    Toast.makeText(
-                            PaymentActivity.this,
-                            "❌ Member info failed: " + e.getMessage(),
-                            Toast.LENGTH_SHORT
-                    ).show();
-
-
+                    Toast.makeText(PaymentActivity.this,
+                            getString(R.string.member_info_failed, e.getMessage()),
+                            Toast.LENGTH_SHORT).show();
                 });
     }
 
-    // 🔥 1. MAIN NOTIFICATION METHOD
     private void sendPdfOnWhatsApp(Uri pdfUri) {
         try {
             if (memberPhone == null || memberPhone.length() < 10) {
-                Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.invalid_phone_number), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -370,37 +343,34 @@ public class PaymentActivity extends BaseActivity {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("application/pdf");
             intent.putExtra(Intent.EXTRA_STREAM, pdfUri);
-            intent.putExtra(Intent.EXTRA_TEXT, "Here is your Gym Payment Receipt 📄");
-            intent.putExtra("jid", phone + "@s.whatsapp.net"); // 🔥 MOST IMPORTANT
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.whatsapp_receipt_message));
+            intent.putExtra("jid", phone + "@s.whatsapp.net");
             intent.setPackage("com.whatsapp");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             startActivity(intent);
 
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.whatsapp_not_installed), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "WhatsApp error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.whatsapp_error, e.getMessage()), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
-    // 🔥 2. WHATSAPP DIRECT CHAT (तुझ्या exact requirement प्रमाणे)
-
     private void sendWelcomeSMS(int paidAmount) {
-        Log.d("SMS_DEBUG", "Sending to: " + memberPhone);
+        Log.d("SMS_DEBUG", getString(R.string.sending_to, memberPhone));
 
         if (memberPhone == null || memberPhone.length() < 10) {
-            Log.e("SMS", "Invalid phone: " + memberPhone);
+            Log.e("SMS", getString(R.string.invalid_phone_error, memberPhone));
             return;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "ℹ️ Enable SMS permission in Settings", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.enable_sms_permission), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // ✅ FETCH GYM NAME FROM FIREBASE (Sagar Gym path)
         String ownerEmail = new PrefManager(this).getUserEmail().replace(".", ",");
         DatabaseReference gymRef = FirebaseDatabase.getInstance()
                 .getReference("GYM").child(ownerEmail).child("ownerInfo").child("gymName");
@@ -409,17 +379,16 @@ public class PaymentActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String gymName = snapshot.getValue(String.class);
-                if (gymName == null) gymName = "Sagar Gym";  // Fallback
+                if (gymName == null) gymName = getString(R.string.default_gym_name);
 
-                String message = String.format("Welcome to %s! Membership active from %s (₹%d paid).",
-                        gymName, planStartDate, paidAmount);
-
+                String message = getString(R.string.welcome_sms_message, gymName, planStartDate, paidAmount);
                 sendSmsDirect(message);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                sendSmsDirect("Welcome to Sagar Gym! Membership active from " + planStartDate + " (₹" + totalFee + " paid).");
+                String message = getString(R.string.welcome_sms_message_fallback, planStartDate, totalFee);
+                sendSmsDirect(message);
             }
         });
     }
@@ -427,11 +396,11 @@ public class PaymentActivity extends BaseActivity {
     private void sendSmsDirect(String message) {
         try {
             SmsManager.getDefault().sendTextMessage(memberPhone, null, message, null, null);
-            Toast.makeText(PaymentActivity.this, "📱 SMS sent to " + memberPhone, Toast.LENGTH_SHORT).show();
-            Log.d("SMS", "Sent: " + message);
+            Toast.makeText(PaymentActivity.this, getString(R.string.sms_sent_to_phone, memberPhone), Toast.LENGTH_SHORT).show();
+            Log.d("SMS", getString(R.string.sms_sent_log, message));
         } catch (Exception e) {
-            Toast.makeText(PaymentActivity.this, "⚠️ SMS failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.e("SMS", "Error: " + e.getMessage());
+            Toast.makeText(PaymentActivity.this, getString(R.string.sms_failed_message, e.getMessage()), Toast.LENGTH_SHORT).show();
+            Log.e("SMS", getString(R.string.sms_error_log, e.getMessage()));
         }
     }
 
@@ -440,26 +409,20 @@ public class PaymentActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("SMS", "✅ Permission GRANTED - SMS ready");
-                Toast.makeText(this, "✅ SMS permission OK", Toast.LENGTH_SHORT).show();
+                Log.d("SMS", getString(R.string.sms_permission_granted_log));
+                Toast.makeText(this, getString(R.string.sms_permission_ok), Toast.LENGTH_SHORT).show();
             } else {
-                Log.e("SMS", "🚫 Permission DENIED");
-                Toast.makeText(this, "⚠️ SMS permission denied - Enable manually in Settings", Toast.LENGTH_LONG).show();
+                Log.e("SMS", getString(R.string.sms_permission_denied_log));
+                Toast.makeText(this, getString(R.string.sms_permission_denied_message), Toast.LENGTH_LONG).show();
             }
         }
     }
-    private Uri generatePaymentPdf(
-            String memberName,
-            String phone,
-            int paidAmount,
-            int remaining,
-            String paymentMode
-    ) {
+
+    private Uri generatePaymentPdf(String memberName, String phone, int paidAmount, int remaining, String paymentMode) {
         try {
-            // 🔥 ADD NULL CHECKS HERE FIRST
-            if (memberName == null) memberName = "Member";
-            if (phone == null) phone = "N/A";
-            if (paymentMode == null) paymentMode = "Cash";
+            if (memberName == null) memberName = getString(R.string.member_default);
+            if (phone == null) phone = getString(R.string.na);
+            if (paymentMode == null) paymentMode = getString(R.string.cash);
 
             PdfDocument pdfDocument = new PdfDocument();
             Paint paint = new Paint();
@@ -467,25 +430,20 @@ public class PaymentActivity extends BaseActivity {
             Paint headerPaint = new Paint();
             Paint footerPaint = new Paint();
 
-            // Page setup - A4 size (595x842 points = 210x297mm)
-            PdfDocument.PageInfo pageInfo =
-                    new PdfDocument.PageInfo.Builder(595, 842, 1).create();
+            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
             PdfDocument.Page page = pdfDocument.startPage(pageInfo);
             Canvas canvas = page.getCanvas();
 
-            // Background color
             Paint bgPaint = new Paint();
             bgPaint.setColor(0xFFF8F9FA);
             canvas.drawRect(0, 0, 595, 842, bgPaint);
 
-            // Colors
-            int primaryColor = 0xFF2C3E50;  // Dark Blue
-            int secondaryColor = 0xFF3498DB; // Blue
-            int accentColor = 0xFF2ECC71;   // Green
-            int grayColor = 0xFF7F8C8D;     // Gray
-            int lightGrayColor = 0xFFECF0F1; // Light Gray
+            int primaryColor = 0xFF2C3E50;
+            int secondaryColor = 0xFF3498DB;
+            int accentColor = 0xFF2ECC71;
+            int grayColor = 0xFF7F8C8D;
+            int lightGrayColor = 0xFFECF0F1;
 
-            // Title section with gradient effect
             Paint titleBg = new Paint();
             titleBg.setColor(primaryColor);
             canvas.drawRect(0, 0, 595, 120, titleBg);
@@ -495,8 +453,7 @@ public class PaymentActivity extends BaseActivity {
             titlePaint.setFakeBoldText(true);
             titlePaint.setTextAlign(Paint.Align.CENTER);
 
-            // Gym Name (fetch from preferences or use default)
-            String gymName = "FITNESS CENTER"; // Default
+            String gymName = getString(R.string.fitness_center);
             try {
                 String prefGymName = new PrefManager(this).getGymName();
                 if (prefGymName != null && !prefGymName.isEmpty()) {
@@ -510,20 +467,18 @@ public class PaymentActivity extends BaseActivity {
 
             titlePaint.setTextSize(20);
             titlePaint.setColor(0xFFBDC3C7);
-            canvas.drawText("PAYMENT RECEIPT", 297, 85, titlePaint);
+            canvas.drawText(getString(R.string.pdf_title), 297, 85, titlePaint);
 
-            // Receipt number and date
             paint.setTextSize(12);
             paint.setColor(grayColor);
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault());
             String currentDate = sdf.format(new Date());
-            String receiptNo = "REC-" + System.currentTimeMillis() % 100000;
+            String receiptNo = getString(R.string.receipt_prefix) + (System.currentTimeMillis() % 100000);
 
-            canvas.drawText("Receipt No: " + receiptNo, 40, 140, paint);
-            canvas.drawText("Date: " + currentDate, 400, 140, paint);
+            canvas.drawText(getString(R.string.receipt_no, receiptNo), 40, 140, paint);
+            canvas.drawText(getString(R.string.date_label, currentDate), 400, 140, paint);
 
-            // Separator line
             Paint linePaint = new Paint();
             linePaint.setColor(0xFF3498DB);
             linePaint.setStrokeWidth(2);
@@ -531,14 +486,12 @@ public class PaymentActivity extends BaseActivity {
 
             int y = 180;
 
-            // Member Info Section
             headerPaint.setTextSize(16);
             headerPaint.setColor(primaryColor);
             headerPaint.setFakeBoldText(true);
-            canvas.drawText("MEMBER INFORMATION", 40, y, headerPaint);
+            canvas.drawText(getString(R.string.member_info_section), 40, y, headerPaint);
             y += 30;
 
-            // Info box background
             Paint infoBoxPaint = new Paint();
             infoBoxPaint.setColor(lightGrayColor);
             canvas.drawRoundRect(new RectF(40, y - 10, 555, y + 100), 8, 8, infoBoxPaint);
@@ -546,33 +499,30 @@ public class PaymentActivity extends BaseActivity {
             paint.setTextSize(14);
             paint.setColor(0xFF2C3E50);
 
-            canvas.drawText("Name:", 60, y + 20, paint);
+            canvas.drawText(getString(R.string.name_label), 60, y + 20, paint);
             paint.setFakeBoldText(true);
-            canvas.drawText(memberName != null ? memberName : "N/A", 150, y + 20, paint);
+            canvas.drawText(memberName, 150, y + 20, paint);
             paint.setFakeBoldText(false);
 
-            canvas.drawText("Phone:", 60, y + 45, paint);
-            canvas.drawText(phone != null ? phone : "N/A", 150, y + 45, paint);
+            canvas.drawText(getString(R.string.phone_label), 60, y + 45, paint);
+            canvas.drawText(phone, 150, y + 45, paint);
 
-            canvas.drawText("Plan:", 60, y + 70, paint);
+            canvas.drawText(getString(R.string.plan_label), 60, y + 70, paint);
             String planType = getIntent().getStringExtra("planType");
-            canvas.drawText(planType != null ? planType : "Regular", 150, y + 70, paint);
+            canvas.drawText(planType != null ? planType : getString(R.string.regular_plan), 150, y + 70, paint);
 
-            canvas.drawText("Start Date:", 300, y + 20, paint);
-            canvas.drawText(planStartDate != null ? planStartDate : "N/A", 390, y + 20, paint);
+            canvas.drawText(getString(R.string.start_date_label), 300, y + 20, paint);
+            canvas.drawText(planStartDate != null ? planStartDate : getString(R.string.na), 390, y + 20, paint);
 
-            canvas.drawText("Duration:", 300, y + 45, paint);
-            // 🔥 FIXED LINE - ADD NULL CHECK FOR DURATION
+            canvas.drawText(getString(R.string.duration_label), 300, y + 45, paint);
             String duration = getIntent().getStringExtra("duration");
-            canvas.drawText(duration != null ? duration : "1 Month", 390, y + 45, paint);
+            canvas.drawText(duration != null ? duration : getString(R.string.one_month), 390, y + 45, paint);
 
             y += 120;
 
-            // Payment Details Section
-            canvas.drawText("PAYMENT DETAILS", 40, y, headerPaint);
+            canvas.drawText(getString(R.string.payment_details_section), 40, y, headerPaint);
             y += 30;
 
-            // Table header
             Paint tableHeaderPaint = new Paint();
             tableHeaderPaint.setColor(secondaryColor);
             canvas.drawRect(40, y, 555, y + 30, tableHeaderPaint);
@@ -582,22 +532,19 @@ public class PaymentActivity extends BaseActivity {
             headerTextPaint.setTextSize(14);
             headerTextPaint.setFakeBoldText(true);
 
-            canvas.drawText("DESCRIPTION", 60, y + 20, headerTextPaint);
-            canvas.drawText("AMOUNT (₹)", 400, y + 20, headerTextPaint);
+            canvas.drawText(getString(R.string.description_label), 60, y + 20, headerTextPaint);
+            canvas.drawText(getString(R.string.amount_label), 400, y + 20, headerTextPaint);
 
             y += 40;
 
-            // Table rows
             paint.setTextSize(14);
             paint.setColor(0xFF2C3E50);
 
-            // Row 1: Total Fee
-            canvas.drawText("Total Membership Fee", 60, y, paint);
+            canvas.drawText(getString(R.string.total_fee_label), 60, y, paint);
             canvas.drawText(String.valueOf(totalFee), 420, y, paint);
             y += 25;
 
-            // Row 2: Paid Amount
-            canvas.drawText("Amount Paid", 60, y, paint);
+            canvas.drawText(getString(R.string.amount_paid_label), 60, y, paint);
             paint.setColor(accentColor);
             paint.setFakeBoldText(true);
             canvas.drawText(String.valueOf(paidAmount), 420, y, paint);
@@ -605,28 +552,24 @@ public class PaymentActivity extends BaseActivity {
             paint.setFakeBoldText(false);
             y += 25;
 
-            // Row 3: Remaining Amount
-            canvas.drawText("Balance Due", 60, y, paint);
+            canvas.drawText(getString(R.string.balance_due_label), 60, y, paint);
             if (remaining > 0) {
-                paint.setColor(0xFFE74C3C); // Red for pending
+                paint.setColor(0xFFE74C3C);
             } else {
-                paint.setColor(accentColor); // Green if paid fully
+                paint.setColor(accentColor);
             }
             canvas.drawText(String.valueOf(remaining), 420, y, paint);
             paint.setColor(0xFF2C3E50);
             y += 25;
 
-            // Separator line
             canvas.drawLine(40, y, 555, y, linePaint);
             y += 10;
 
-            // Row 4: Payment Mode
-            canvas.drawText("Payment Mode", 60, y, paint);
-            canvas.drawText(paymentMode != null ? paymentMode : "Cash", 420, y, paint);
+            canvas.drawText(getString(R.string.payment_mode_label), 60, y, paint);
+            canvas.drawText(paymentMode, 420, y, paint);
             y += 35;
 
-            // Status box
-            String status = remaining > 0 ? "PARTIALLY PAID" : "FULLY PAID";
+            String status = remaining > 0 ? getString(R.string.partially_paid) : getString(R.string.fully_paid);
             int statusColor = remaining > 0 ? 0xFFF39C12 : accentColor;
 
             Paint statusBg = new Paint();
@@ -642,22 +585,20 @@ public class PaymentActivity extends BaseActivity {
 
             y += 40;
 
-            // Footer section
             Paint footerBg = new Paint();
-            footerBg.setColor(0xFF2C3E50);
+            footerBg.setColor(primaryColor);
             canvas.drawRect(0, y, 595, 842, footerBg);
 
             footerPaint.setTextSize(12);
             footerPaint.setColor(0xFFBDC3C7);
             footerPaint.setTextAlign(Paint.Align.CENTER);
 
-            canvas.drawText("Thank you for your payment!", 297, y + 30, footerPaint);
+            canvas.drawText(getString(R.string.thank_you_message), 297, y + 30, footerPaint);
             footerPaint.setTextSize(10);
-            canvas.drawText("This is a computer generated receipt", 297, y + 50, footerPaint);
-            canvas.drawText("No signature required", 297, y + 65, footerPaint);
+            canvas.drawText(getString(R.string.computer_generated), 297, y + 50, footerPaint);
+            canvas.drawText(getString(R.string.no_signature_required), 297, y + 65, footerPaint);
 
-            // Contact info at bottom
-            String contactPhone = "N/A";
+            String contactPhone = getString(R.string.na);
             try {
                 String prefPhone = new PrefManager(this).getPhone();
                 if (prefPhone != null && !prefPhone.isEmpty()) {
@@ -669,46 +610,36 @@ public class PaymentActivity extends BaseActivity {
             String contactInfo = gymName + " | " + contactPhone;
             canvas.drawText(contactInfo, 297, y + 85, footerPaint);
 
-            // Watermark
             Paint watermarkPaint = new Paint();
-            watermarkPaint.setColor(0x0D000000); // Very light gray
+            watermarkPaint.setColor(0x0D000000);
             watermarkPaint.setTextSize(80);
             watermarkPaint.setTextAlign(Paint.Align.CENTER);
             watermarkPaint.setAlpha(30);
-            canvas.drawText("PAID", 297, 500, watermarkPaint);
+            canvas.drawText(getString(R.string.paid_watermark), 297, 500, watermarkPaint);
 
             pdfDocument.finishPage(page);
 
-            // Create directory if not exists
-            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Gym Receipts");
+            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), getString(R.string.gym_receipts_folder));
             if (!dir.exists()) {
                 dir.mkdirs();
             }
 
-            // Create file with timestamp
-            String fileName = "Receipt_" + memberName.replace(" ", "_") +
-                    "_" + System.currentTimeMillis() + ".pdf";
+            String fileName = getString(R.string.receipt_filename, memberName.replace(" ", "_"), System.currentTimeMillis());
             File file = new File(dir, fileName);
 
-            // Save PDF
             pdfDocument.writeTo(new FileOutputStream(file));
             pdfDocument.close();
 
-            // Show success message
             runOnUiThread(() ->
-                    Toast.makeText(this, "✅ Receipt saved: " + fileName, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.receipt_saved, fileName), Toast.LENGTH_SHORT).show()
             );
 
-            return FileProvider.getUriForFile(
-                    this,
-                    getPackageName() + ".fileprovider",
-                    file
-            );
+            return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", file);
 
         } catch (Exception e) {
             e.printStackTrace();
             runOnUiThread(() ->
-                    Toast.makeText(this, "❌ PDF Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.pdf_error, e.getMessage()), Toast.LENGTH_SHORT).show()
             );
             return null;
         }
@@ -716,7 +647,6 @@ public class PaymentActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        // Check if there's any unsaved data
         String paidText = etPaidAmount.getText().toString().trim();
         if (!TextUtils.isEmpty(paidText)) {
             showExitConfirmationDialog();

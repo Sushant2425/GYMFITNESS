@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-   android:fitsSystemWindows="true"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:background="#000000">
 
@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:title="Plan Expiry Reminders"
+            android:title="@string/plan_expiry_reminders"
             android:background="@drawable/gradient_orange_header"
             android:titleTextColor="#FFFFFF"
             android:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
@@ -54,6 +54,7 @@
         android:layout_margin="16dp"
         android:visibility="gone"
         android:src="@android:drawable/ic_menu_send"
+        android:contentDescription="@string/send_all"
         app:backgroundTint="#FF6B00"
         app:tint="#FFFFFF"
         app:elevation="6dp"

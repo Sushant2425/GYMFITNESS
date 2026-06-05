@@ -32,7 +32,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Collect Payment"
+                    android:text="@string/collect_payment"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -41,7 +41,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Search and collect payment"
+                    android:text="@string/collect_payment_subtitle"
                     android:textColor="#FFE0B2"
                     android:textSize="12sp"
                     android:layout_marginTop="2dp" />
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="12dp"
-                            android:text="Search Member"
+                            android:text="@string/search_member"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#FFFFFF" />
@@ -110,7 +110,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter phone number or name"
+                        android:hint="@string/search_member_hint"
                         android:layout_marginBottom="16dp"
                         app:startIconDrawable="@drawable/ic_search"
                         app:startIconTint="#FF9800"
@@ -137,7 +137,7 @@
                         android:id="@+id/btnSearchMember"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:text="Search Member"
+                        android:text="@string/search_member"
                         android:textAllCaps="false"
                         android:textStyle="bold"
                         app:backgroundTint="#FF6B00"
@@ -188,7 +188,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="12dp"
-                            android:text="Member Details"
+                            android:text="@string/member_details"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#FFFFFF" />
@@ -213,7 +213,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Name"
+                                android:text="@string/full_name"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -240,7 +240,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Phone"
+                                android:text="@string/phone_number"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -266,7 +266,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Plan"
+                                android:text="@string/current_plan"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -292,7 +292,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Plan Period"
+                                android:text="@string/plan_period"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -318,7 +318,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Total Fee"
+                                android:text="@string/total_fee"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -345,7 +345,7 @@
                             <TextView
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
-                                android:text="Total Paid"
+                                android:text="@string/total_paid"
                                 android:textSize="13sp"
                                 android:textColor="#FF9800"/>
 
@@ -381,7 +381,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Remaining Balance"
+                                    android:text="@string/remaining_balance"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     android:textColor="#FFFFFF"/>
@@ -441,7 +441,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="12dp"
-                            android:text="Add Payment"
+                            android:text="@string/add_payment"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#FFFFFF" />
@@ -453,7 +453,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Payment Amount"
+                        android:hint="@string/payment_amount"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_money"
                         app:startIconTint="#FF9800"
@@ -482,7 +482,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment Mode"
+                        android:text="@string/payment_mode"
                         android:textStyle="bold"
                         android:textSize="15sp"
                         android:textColor="#FFFFFF"
@@ -502,7 +502,7 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cash"
+                            android:text="@string/payment_mode_cash"
                             android:checked="true"
                             app:chipBackgroundColor="#2C2C2C"
                             app:chipStrokeColor="#FF6B00"
@@ -514,7 +514,7 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="UPI"
+                            android:text="@string/payment_mode_upi"
                             app:chipBackgroundColor="#2C2C2C"
                             app:chipStrokeColor="#FF6B00"
                             app:chipStrokeWidth="2dp"
@@ -525,7 +525,7 @@
                             style="@style/Widget.MaterialComponents.Chip.Choice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Card"
+                            android:text="@string/payment_mode_card"
                             app:chipBackgroundColor="#2C2C2C"
                             app:chipStrokeColor="#FF6B00"
                             app:chipStrokeWidth="2dp"
@@ -538,7 +538,7 @@
                         android:id="@+id/btnCollectPayment"
                         android:layout_width="match_parent"
                         android:layout_height="58dp"
-                        android:text="Collect Payment"
+                        android:text="@string/collect_payment_button"
                         android:textAllCaps="false"
                         android:textStyle="bold"
                         app:backgroundTint="#FF6B00"

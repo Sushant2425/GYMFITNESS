@@ -21,7 +21,7 @@
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="#FFFFFF"
             app:titleTextColor="#FFFFFF"
-            app:title="Payment History" />
+            app:title="@string/payment_history" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -85,7 +85,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Total Fee:"
+                            android:text="@string/total_fee_label"
                             android:textSize="14sp"
                             android:textColor="#9E9E9E" />
 
@@ -109,7 +109,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Amount Paid:"
+                            android:text="@string/amount_paid_label"
                             android:textSize="14sp"
                             android:textColor="#9E9E9E" />
 
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Payment History"
+                    android:text="@string/payment_history"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF" />
@@ -158,7 +158,7 @@
                     android:id="@+id/tvPaymentCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(0 payments)"
+                    android:text="@string/payments_count_zero"
                     android:textSize="12sp"
                     android:textColor="#9E9E9E" />
 
@@ -177,7 +177,7 @@
                 android:id="@+id/tvNoPayments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No payment history available"
+                android:text="@string/no_payment_history"
                 android:textSize="14sp"
                 android:textColor="#9E9E9E"
                 android:gravity="center"

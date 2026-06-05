@@ -6,7 +6,10 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#1A1A1A"
+    app:strokeColor="#FF6B00"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,14 +21,14 @@
             android:id="@+id/tvName"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#212121"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tvPhone"
             android:textSize="14sp"
-            android:textColor="#616161"
+            android:textColor="#BDBDBD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"/>
@@ -42,12 +45,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:textColor="#424242"/>
+                android:textColor="#9E9E9E"/>
 
             <TextView
                 android:id="@+id/tvEndDate"
                 android:textSize="14sp"
-                android:textColor="#D32F2F"
+                android:textColor="#FF6B00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -56,9 +59,10 @@
             android:id="@+id/chipStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EXPIRED"
+            android:text="@string/expired"
             android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            app:chipBackgroundColor="#D32F2F" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,9 +77,10 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="📱 SMS"
+                android:text="@string/sms_text"
                 app:iconTint="@android:color/white"
-                app:backgroundTint="#4CAF50"/>
+                app:backgroundTint="#4CAF50"
+                app:cornerRadius="8dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWhatsapp"
@@ -84,9 +89,10 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="💬 WhatsApp"
+                android:text="@string/whatsapp_text"
                 app:iconTint="@android:color/white"
-                app:backgroundTint="#25D366"/>
+                app:backgroundTint="#25D366"
+                app:cornerRadius="8dp"/>
         </LinearLayout>
 
     </LinearLayout>

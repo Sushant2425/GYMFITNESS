@@ -84,7 +84,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Member Name"
+                        android:text="@string/member_name"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF"
@@ -95,7 +95,7 @@
                         android:id="@+id/tvStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="EXPIRED"
+                        android:text="@string/expired"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         android:paddingTop="3dp"
@@ -119,7 +119,8 @@
                         android:layout_width="12dp"
                         android:layout_height="12dp"
                         android:src="@android:drawable/stat_sys_phone_call"
-                        app:tint="#9E9E9E" />
+                        app:tint="#9E9E9E"
+                        android:contentDescription="@string/phone" />
 
                     <TextView
                         android:id="@+id/tvMemberPhone"
@@ -156,7 +157,7 @@
                             android:id="@+id/tvPlanType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 Month"
+                            android:text="@string/one_month_short"
                             android:textSize="11sp"
                             android:textColor="#FF9800"
                             android:textStyle="bold" />
@@ -180,7 +181,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pending:"
+                            android:text="@string/pending_colon"
                             android:textSize="10sp"
                             android:textColor="#9E9E9E" />
 
@@ -215,14 +216,15 @@
                             android:layout_width="14dp"
                             android:layout_height="14dp"
                             android:src="@android:drawable/ic_menu_recent_history"
-                            app:tint="#FF6B00" />
+                            app:tint="#FF6B00"
+                            android:contentDescription="@string/expired" />
 
                         <TextView
                             android:id="@+id/tvEndDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:text="5 days ago"
+                            android:text="@string/days_ago"
                             android:textSize="11sp"
                             android:textColor="#FF6B00"
                             android:textStyle="bold"
@@ -252,7 +254,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Outstanding Balance:"
+                        android:text="@string/outstanding_balance_colon"
                         android:textSize="11sp"
                         android:textColor="#FF9800" />
 
@@ -295,7 +297,7 @@
                 android:id="@+id/btnRenewPlan"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:text=" Renew Plan"
+                android:text="@string/renew_plan"
                 android:textSize="12sp"
                 android:textAllCaps="false"
                 android:textStyle="bold"

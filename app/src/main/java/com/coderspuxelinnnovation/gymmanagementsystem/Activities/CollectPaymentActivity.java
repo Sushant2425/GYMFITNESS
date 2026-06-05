@@ -70,7 +70,6 @@ public class CollectPaymentActivity extends BaseActivity {
     private String forMonth;
     private static final int SMS_PERMISSION_CODE = 100;
 
-    // Store payment data like PaymentActivity
     private String paymentId;
     private int remainingAmount;
 
@@ -84,12 +83,11 @@ public class CollectPaymentActivity extends BaseActivity {
         initializeFirebase();
         setupListeners();
 
-        // Request SMS permission like PaymentActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
-            Log.d("SMS", "🚨 Permission requested from CollectPayment");
+            Log.d("SMS", getString(R.string.sms_permission_requested));
         } else {
-            Log.d("SMS", "✅ SMS permission already granted in CollectPayment");
+            Log.d("SMS", getString(R.string.sms_permission_granted_log));
         }
     }
 
@@ -108,7 +106,7 @@ public class CollectPaymentActivity extends BaseActivity {
         rbCash = findViewById(R.id.rbCash);
         rbUPI = findViewById(R.id.rbUPI);
         rbCard = findViewById(R.id.rbCard);
-        tvPlanDates = findViewById(R.id.tvPlanDates); // Add this line
+        tvPlanDates = findViewById(R.id.tvPlanDates);
 
         cardMemberDetails = findViewById(R.id.cardMemberDetails);
         cardPaymentForm = findViewById(R.id.cardPaymentForm);
@@ -133,7 +131,6 @@ public class CollectPaymentActivity extends BaseActivity {
         btnSearchMember.setOnClickListener(v -> searchMember());
         btnCollectPayment.setOnClickListener(v -> collectPayment());
 
-        // Set cash as default
         rbCash.setChecked(true);
     }
 
@@ -141,12 +138,12 @@ public class CollectPaymentActivity extends BaseActivity {
         String searchQuery = etSearchMember.getText().toString().trim();
 
         if (searchQuery.isEmpty()) {
-            Toast.makeText(this, "Please enter phone or name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.please_enter_phone_or_name), Toast.LENGTH_SHORT).show();
             return;
         }
 
         btnSearchMember.setEnabled(false);
-        btnSearchMember.setText("Searching...");
+        btnSearchMember.setText(getString(R.string.searching));
 
         DatabaseReference membersRef = databaseReference.child("GYM")
                 .child(ownerEmail).child("members");
@@ -170,7 +167,6 @@ public class CollectPaymentActivity extends BaseActivity {
                         if ((phone != null && phone.contains(searchQuery)) ||
                                 (name != null && name.toLowerCase().contains(searchQuery.toLowerCase()))) {
 
-                            // Add to results list
                             MemberSearchResult result = new MemberSearchResult();
                             result.memberId = memberId;
                             result.phone = phone;
@@ -183,17 +179,15 @@ public class CollectPaymentActivity extends BaseActivity {
 
                 if (searchResults.isEmpty()) {
                     Toast.makeText(CollectPaymentActivity.this,
-                            "❌ No members found", Toast.LENGTH_SHORT).show();
+                            getString(R.string.no_members_found_error), Toast.LENGTH_SHORT).show();
                     cardMemberDetails.setVisibility(View.GONE);
                     cardPaymentForm.setVisibility(View.GONE);
                 } else if (searchResults.size() == 1) {
-                    // Only one result - show directly
                     MemberSearchResult result = searchResults.get(0);
                     currentMemberId = result.memberId;
                     currentMemberPhone = result.phone;
                     displayMemberDetails(result.snapshot, result.phone, result.name, result.memberId);
                 } else {
-                    // Multiple results - show dialog to choose
                     showMemberSelectionDialog(searchResults);
                 }
             }
@@ -203,15 +197,15 @@ public class CollectPaymentActivity extends BaseActivity {
                 btnSearchMember.setEnabled(true);
                 btnSearchMember.setText(getString(R.string.search_member));
                 Toast.makeText(CollectPaymentActivity.this,
-                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void showMemberSelectionDialog(List<MemberSearchResult> results) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Member (" + results.size() + " found)");
+        builder.setTitle(getString(R.string.select_member_found, results.size()));
 
-        // Create array of display strings
         String[] items = new String[results.size()];
         for (int i = 0; i < results.size(); i++) {
             MemberSearchResult result = results.get(i);
@@ -225,20 +219,20 @@ public class CollectPaymentActivity extends BaseActivity {
             displayMemberDetails(selected.snapshot, selected.phone, selected.name, selected.memberId);
         });
 
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
     }
+
     private void displayMemberDetails(DataSnapshot memberSnapshot, String phone, String name, String memberId) {
         DataSnapshot currentPlanSnap = memberSnapshot.child("currentPlan");
 
         if (!currentPlanSnap.exists()) {
-            Toast.makeText(this, "❌ Member has no active plan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_active_plan_error), Toast.LENGTH_SHORT).show();
             cardMemberDetails.setVisibility(View.GONE);
             cardPaymentForm.setVisibility(View.GONE);
             return;
         }
 
-        // Get plan details
         planStartDate = currentPlanSnap.child("startDate").getValue(String.class);
         String planEndDate = currentPlanSnap.child("endDate").getValue(String.class);
         Integer fee = currentPlanSnap.child("totalFee").getValue(Integer.class);
@@ -246,11 +240,9 @@ public class CollectPaymentActivity extends BaseActivity {
         planId = currentPlanSnap.child("planId").getValue(String.class);
         String planType = currentPlanSnap.child("planType").getValue(String.class);
 
-        // Store member details
         memberName = name;
         forMonth = getForMonth(planStartDate);
 
-        // Calculate total paid for CURRENT PLAN ONLY
         int totalPaidForCurrentPlan = 0;
         int remaining = totalFee;
 
@@ -259,14 +251,12 @@ public class CollectPaymentActivity extends BaseActivity {
             for (DataSnapshot paymentSnap : paymentsSnap.getChildren()) {
                 String paymentPlanId = paymentSnap.child("planId").getValue(String.class);
 
-                // Check if this payment belongs to CURRENT PLAN
                 if (paymentPlanId != null && paymentPlanId.equals(planId)) {
                     Integer amountPaid = paymentSnap.child("amountPaid").getValue(Integer.class);
                     if (amountPaid != null) {
                         totalPaidForCurrentPlan += amountPaid;
                     }
 
-                    // Get remaining from this current plan's payment
                     Integer rem = paymentSnap.child("remaining").getValue(Integer.class);
                     if (rem != null) {
                         remaining = rem;
@@ -275,48 +265,42 @@ public class CollectPaymentActivity extends BaseActivity {
             }
         }
 
-        // Display member details
         tvMemberName.setText(name);
         tvMemberPhone.setText(phone);
-        tvPlanType.setText(planType != null ? planType : "Regular");
+        tvPlanType.setText(planType != null ? planType : getString(R.string.regular_plan));
 
-        // Show both dates if available
-        String startDateDisplay = planStartDate != null ? planStartDate : "N/A";
-        String endDateDisplay = planEndDate != null ? planEndDate : "N/A";
-        tvPlanDates.setText(startDateDisplay + " to " + endDateDisplay); // Shows "01/02/2026 to 28/02/2026"
+        String startDateDisplay = planStartDate != null ? planStartDate : getString(R.string.na);
+        String endDateDisplay = planEndDate != null ? planEndDate : getString(R.string.na);
+        tvPlanDates.setText(startDateDisplay + " " + getString(R.string.to) + " " + endDateDisplay);
 
-        tvTotalFee.setText("₹" + totalFee);
-        tvTotalPaid.setText("₹" + totalPaidForCurrentPlan);
-        tvRemaining.setText("₹" + remaining);
+        tvTotalFee.setText(getString(R.string.rupee_prefix) + totalFee);
+        tvTotalPaid.setText(getString(R.string.rupee_prefix) + totalPaidForCurrentPlan);
+        tvRemaining.setText(getString(R.string.rupee_prefix) + remaining);
 
-        // Show cards with animation
         cardMemberDetails.setVisibility(View.VISIBLE);
         cardPaymentForm.setVisibility(View.VISIBLE);
 
-        // Auto-fill remaining amount
         if (remaining > 0) {
             etAmount.setText(String.valueOf(remaining));
             btnCollectPayment.setEnabled(true);
         } else {
             etAmount.setText("");
-            Toast.makeText(this, "✅ This member has fully paid!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.fully_paid_message), Toast.LENGTH_SHORT).show();
             btnCollectPayment.setEnabled(false);
         }
 
-        // Debug log
-        Log.d("PaymentDebug", "Plan: " + planStartDate + " to " + planEndDate);
+        Log.d("PaymentDebug", getString(R.string.plan_dates_log, planStartDate, planEndDate));
     }
 
     private void collectPayment() {
         if (currentMemberPhone == null || currentMemberId == null) {
-            Toast.makeText(this, "Please search and select a member first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.search_member_first), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Validate amount
         String amountStr = etAmount.getText().toString().trim();
         if (amountStr.isEmpty()) {
-            etAmount.setError("Amount is required");
+            etAmount.setError(getString(R.string.amount_required));
             etAmount.requestFocus();
             return;
         }
@@ -325,18 +309,17 @@ public class CollectPaymentActivity extends BaseActivity {
         try {
             amountPaid = Integer.parseInt(amountStr);
         } catch (NumberFormatException e) {
-            etAmount.setError("Invalid amount");
+            etAmount.setError(getString(R.string.invalid_amount));
             etAmount.requestFocus();
             return;
         }
 
         if (amountPaid <= 0) {
-            etAmount.setError("Amount must be greater than 0");
+            etAmount.setError(getString(R.string.amount_greater_than_zero));
             etAmount.requestFocus();
             return;
         }
 
-        // Get current remaining from TextView
         String remainingStr = tvRemaining.getText().toString().replace("₹", "").trim();
         int currentRemaining;
         try {
@@ -346,38 +329,33 @@ public class CollectPaymentActivity extends BaseActivity {
         }
 
         if (amountPaid > currentRemaining) {
-            etAmount.setError("Amount exceeds remaining balance (₹" + currentRemaining + ")");
+            etAmount.setError(getString(R.string.amount_exceeds_remaining, currentRemaining));
             etAmount.requestFocus();
             return;
         }
 
-        // Get payment mode
-        String paymentMode = "Cash";
+        String paymentMode = getString(R.string.cash);
         if (rbUPI.isChecked()) {
-            paymentMode = "UPI";
+            paymentMode = getString(R.string.upi);
         } else if (rbCard.isChecked()) {
-            paymentMode = "Card";
+            paymentMode = getString(R.string.card);
         }
 
-        // Calculate new values
         int newRemaining = Math.max(0, currentRemaining - amountPaid);
         remainingAmount = newRemaining;
 
-        // Check if this is an existing payment or new payment
         checkAndUpdatePayment(amountPaid, paymentMode, newRemaining);
     }
 
     private void checkAndUpdatePayment(int amountPaid, String paymentMode, int newRemaining) {
-        // Show loading
         btnCollectPayment.setEnabled(false);
-        btnCollectPayment.setText("Processing...");
+        btnCollectPayment.setText(getString(R.string.processing));
 
         DatabaseReference memberRef = databaseReference.child("GYM")
                 .child(ownerEmail)
                 .child("members")
                 .child(currentMemberId);
 
-        // First, check if there's an existing payment for this month
         memberRef.child("payments").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -397,10 +375,8 @@ public class CollectPaymentActivity extends BaseActivity {
                 }
 
                 if (existingPaymentFound) {
-                    // Update existing payment (same as PendingDuesActivity)
                     updateExistingPayment(existingPaymentId, amountPaid, paymentMode, newRemaining, currentPaidAmount);
                 } else {
-                    // Create new payment (same as PaymentActivity)
                     createNewPayment(amountPaid, paymentMode, newRemaining);
                 }
             }
@@ -411,7 +387,7 @@ public class CollectPaymentActivity extends BaseActivity {
                     btnCollectPayment.setEnabled(true);
                     btnCollectPayment.setText(getString(R.string.collect_payment_button));
                     Toast.makeText(CollectPaymentActivity.this,
-                            "❌ Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -426,9 +402,8 @@ public class CollectPaymentActivity extends BaseActivity {
                 .child("payments")
                 .child(existingPaymentId);
 
-        // Calculate new total paid
         int newTotalPaid = currentPaidAmount + amountPaid;
-        String status = newRemaining == 0 ? "PAID" : "PARTIAL";
+        String status = newRemaining == 0 ? getString(R.string.paid_status) : getString(R.string.partial_status);
 
         HashMap<String, Object> updates = new HashMap<>();
         updates.put("amountPaid", newTotalPaid);
@@ -438,7 +413,6 @@ public class CollectPaymentActivity extends BaseActivity {
         updates.put("lastPaymentDate", System.currentTimeMillis());
         updates.put("lastPaymentMode", paymentMode);
 
-        // Create transaction for paymentHistory
         String transactionId = UUID.randomUUID().toString();
         HashMap<String, Object> transactionData = new HashMap<>();
         transactionData.put("transactionId", transactionId);
@@ -447,7 +421,6 @@ public class CollectPaymentActivity extends BaseActivity {
         transactionData.put("date", System.currentTimeMillis());
         transactionData.put("remainingAfter", newRemaining);
 
-        // Add to paymentHistory
         updates.put("paymentHistory/" + transactionId, transactionData);
 
         paymentRef.updateChildren(updates).addOnCompleteListener(task -> {
@@ -458,7 +431,7 @@ public class CollectPaymentActivity extends BaseActivity {
                     btnCollectPayment.setEnabled(true);
                     btnCollectPayment.setText(getString(R.string.collect_payment_button));
                     Toast.makeText(CollectPaymentActivity.this,
-                            "❌ Failed to update payment: " + task.getException().getMessage(),
+                            getString(R.string.failed_to_update_payment, task.getException().getMessage()),
                             Toast.LENGTH_SHORT).show();
                 });
             }
@@ -468,7 +441,6 @@ public class CollectPaymentActivity extends BaseActivity {
     private void createNewPayment(int amountPaid, String paymentMode, int newRemaining) {
         paymentId = UUID.randomUUID().toString();
 
-        // Payment data (SAME structure as PaymentActivity)
         HashMap<String, Object> paymentData = new HashMap<>();
         paymentData.put("paymentId", paymentId);
         paymentData.put("amountPaid", amountPaid);
@@ -476,7 +448,7 @@ public class CollectPaymentActivity extends BaseActivity {
         paymentData.put("remaining", newRemaining);
         paymentData.put("mode", paymentMode);
         paymentData.put("date", System.currentTimeMillis());
-        paymentData.put("status", newRemaining == 0 ? "PAID" : "PARTIAL");
+        paymentData.put("status", newRemaining == 0 ? getString(R.string.paid_status) : getString(R.string.partial_status));
         paymentData.put("forMonth", forMonth);
         paymentData.put("planStartDate", planStartDate);
         paymentData.put("planId", planId);
@@ -496,7 +468,7 @@ public class CollectPaymentActivity extends BaseActivity {
                     btnCollectPayment.setEnabled(true);
                     btnCollectPayment.setText(getString(R.string.collect_payment_button));
                     Toast.makeText(CollectPaymentActivity.this,
-                            "❌ Failed to save payment: " + task.getException().getMessage(),
+                            getString(R.string.failed_to_save_payment, task.getException().getMessage()),
                             Toast.LENGTH_SHORT).show();
                 });
             }
@@ -504,7 +476,6 @@ public class CollectPaymentActivity extends BaseActivity {
     }
 
     private void completePaymentProcess(int amountPaid, String paymentMode, int newRemaining, String pId) {
-        // Update current plan
         if (newRemaining == 0) {
             HashMap<String, Object> planUpdate = new HashMap<>();
             planUpdate.put("status", "ACTIVE");
@@ -517,10 +488,7 @@ public class CollectPaymentActivity extends BaseActivity {
                     .updateChildren(planUpdate);
         }
 
-        // Generate PDF receipt
         Uri pdfUri = generatePaymentPdf(amountPaid, paymentMode, newRemaining);
-
-        // Send notifications
         sendPaymentNotifications(amountPaid, paymentMode, newRemaining, pdfUri);
 
         runOnUiThread(() -> {
@@ -528,14 +496,11 @@ public class CollectPaymentActivity extends BaseActivity {
             btnCollectPayment.setText(getString(R.string.collect_payment_button));
 
             Toast.makeText(this,
-                    "✅ Payment of ₹" + amountPaid + " collected successfully!",
+                    getString(R.string.payment_collected_success, amountPaid),
                     Toast.LENGTH_LONG).show();
 
-            // Refresh member details
             searchMember();
             etAmount.setText("");
-
-            // Reset to cash
             rbCash.setChecked(true);
         });
     }
@@ -576,39 +541,36 @@ public class CollectPaymentActivity extends BaseActivity {
 
             int y = 50;
 
-            // Title - SAME as PaymentActivity
-            canvas.drawText("GYM PAYMENT RECEIPT", 150, y, titlePaint);
+            canvas.drawText(getString(R.string.pdf_title), 150, y, titlePaint);
             y += 40;
 
-            // Lines - SAME as PaymentActivity
             canvas.drawLine(20, y, 575, y, paint);
             y += 30;
 
-            canvas.drawText("Member Name : " + memberName, 40, y, paint); y += 25;
-            canvas.drawText("Phone       : " + currentMemberPhone, 40, y, paint); y += 25;
-            canvas.drawText("Plan Start  : " + planStartDate, 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_member_name, memberName), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_phone, currentMemberPhone), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_plan_start, planStartDate), 40, y, paint); y += 25;
 
             canvas.drawLine(20, y, 575, y, paint);
             y += 30;
 
-            canvas.drawText("Total Fee   : ₹" + totalFee, 40, y, paint); y += 25;
-            canvas.drawText("Paid Amount : ₹" + amount, 40, y, paint); y += 25;
-            canvas.drawText("Remaining   : ₹" + remaining, 40, y, paint); y += 25;
-            canvas.drawText("Payment Via : " + mode, 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_total_fee, totalFee), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_paid_amount, amount), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_remaining, remaining), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_payment_via, mode), 40, y, paint); y += 25;
 
             canvas.drawLine(20, y, 575, y, paint);
             y += 40;
 
             paint.setFakeBoldText(true);
-            canvas.drawText("Thank you for your payment!", 150, y, paint);
+            canvas.drawText(getString(R.string.pdf_thank_you), 150, y, paint);
 
             pdfDocument.finishPage(page);
 
-            // File - SAME as PaymentActivity
-            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Bills");
+            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), getString(R.string.bills_folder));
             if (!dir.exists()) dir.mkdirs();
 
-            File file = new File(dir, "Bill_" + System.currentTimeMillis() + ".pdf");
+            File file = new File(dir, getString(R.string.bill_filename, System.currentTimeMillis()));
             pdfDocument.writeTo(new FileOutputStream(file));
             pdfDocument.close();
 
@@ -620,16 +582,14 @@ public class CollectPaymentActivity extends BaseActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "PDF error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.pdf_error, e.getMessage()), Toast.LENGTH_SHORT).show();
             return null;
         }
     }
 
     private void sendPaymentNotifications(int amount, String mode, int remaining, Uri pdfUri) {
-        // Send SMS - SAME as PaymentActivity
         sendPaymentSMS(amount, mode, remaining);
 
-        // Send WhatsApp with PDF - SAME as PaymentActivity
         if (pdfUri != null) {
             sendPaymentWhatsApp(pdfUri);
         }
@@ -637,28 +597,25 @@ public class CollectPaymentActivity extends BaseActivity {
 
     private void sendPaymentSMS(int amount, String mode, int remaining) {
         try {
-            // Get gym name
             String gymName = getGymName();
-
-            // Create better message with plan details
-            String message = String.format("Payment Received: ₹%d via %s for plan %s to %s. Remaining: ₹%d. Thank you from %s!",
-                    amount, mode, planStartDate, getForMonth(planStartDate), remaining, gymName);
+            String message = getString(R.string.sms_payment_message, amount, mode, planStartDate, getForMonth(planStartDate), remaining, gymName);
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                 SmsManager.getDefault().sendTextMessage(currentMemberPhone, null, message, null, null);
-                Toast.makeText(this, "📱 SMS sent to " + currentMemberPhone, Toast.LENGTH_SHORT).show();
-                Log.d("SMS", "Sent: " + message);
+                Toast.makeText(this, getString(R.string.sms_sent_to_phone, currentMemberPhone), Toast.LENGTH_SHORT).show();
+                Log.d("SMS", getString(R.string.sms_sent_log, message));
             }
 
         } catch (Exception e) {
-            Toast.makeText(this, "⚠️ SMS failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.e("SMS", "Error: " + e.getMessage());
+            Toast.makeText(this, getString(R.string.sms_failed_message, e.getMessage()), Toast.LENGTH_SHORT).show();
+            Log.e("SMS", getString(R.string.sms_error_log, e.getMessage()));
         }
     }
+
     private void sendPaymentWhatsApp(Uri pdfUri) {
         try {
             if (currentMemberPhone == null || currentMemberPhone.length() < 10) {
-                Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.invalid_phone_number), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -670,7 +627,7 @@ public class CollectPaymentActivity extends BaseActivity {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("application/pdf");
             intent.putExtra(Intent.EXTRA_STREAM, pdfUri);
-            intent.putExtra(Intent.EXTRA_TEXT, "Here is your Gym Payment Receipt 📄");
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.whatsapp_receipt_message));
             intent.putExtra("jid", phone + "@s.whatsapp.net");
             intent.setPackage("com.whatsapp");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -678,16 +635,16 @@ public class CollectPaymentActivity extends BaseActivity {
             startActivity(intent);
 
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.whatsapp_not_installed), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "WhatsApp error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.whatsapp_error, e.getMessage()), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
     private String getGymName() {
         try {
-            final String[] gymName = {"Sagar Gym"};
+            final String[] gymName = {getString(R.string.default_gym_name)};
 
             DatabaseReference gymRef = databaseReference.child("GYM")
                     .child(ownerEmail)
@@ -710,7 +667,7 @@ public class CollectPaymentActivity extends BaseActivity {
 
             return gymName[0];
         } catch (Exception e) {
-            return "Sagar Gym";
+            return getString(R.string.default_gym_name);
         }
     }
 
@@ -719,11 +676,11 @@ public class CollectPaymentActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("SMS", "✅ Permission GRANTED - SMS ready");
-                Toast.makeText(this, "✅ SMS permission OK", Toast.LENGTH_SHORT).show();
+                Log.d("SMS", getString(R.string.sms_permission_granted_log));
+                Toast.makeText(this, getString(R.string.sms_permission_ok), Toast.LENGTH_SHORT).show();
             } else {
-                Log.e("SMS", "🚫 Permission DENIED");
-                Toast.makeText(this, "⚠️ SMS permission denied - Enable manually in Settings", Toast.LENGTH_LONG).show();
+                Log.e("SMS", getString(R.string.sms_permission_denied_log));
+                Toast.makeText(this, getString(R.string.sms_permission_denied_message), Toast.LENGTH_LONG).show();
             }
         }
     }

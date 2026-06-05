@@ -20,7 +20,7 @@
             app:cardCornerRadius="0dp"
             app:cardElevation="0dp"
             android:backgroundTint="@color/black"
-         >
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,7 +141,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Sagar Gym"
+                            android:text="@string/gym_name"
                             android:textColor="#FFFFFF"
                             android:textSize="28sp"
                             android:textStyle="bold"
@@ -174,7 +174,7 @@
                             android:layout_height="28dp"
                             android:layout_gravity="center"
                             android:src="@drawable/logogym"
-                           />
+                            android:contentDescription="@string/gym_logo_desc" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -537,7 +537,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Financial Overview"
+                    android:text="@string/financial_overview"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -547,7 +547,7 @@
                     android:id="@+id/tv_chart_period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last 7 Days"
+                    android:text="@string/last_7_days"
                     android:textColor="#FF9800"
                     android:textSize="10sp"
                     android:paddingStart="6dp"
@@ -603,7 +603,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Monthly Revenue"
+                                        android:text="@string/monthly_revenue"
                                         android:textColor="#9E9E9E"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
@@ -624,7 +624,7 @@
                                     android:id="@+id/tv_revenue_percentage"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="+0% vs last month"
+                                    android:text="@string/revenue_percentage_zero"
                                     android:textColor="#FF6B00"
                                     android:textSize="9sp"
                                     android:textStyle="bold"
@@ -656,7 +656,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="No Data"
+                                        android:text="@string/no_data"
                                         android:textColor="#BDBDBD"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
@@ -664,7 +664,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Add payments to see chart"
+                                        android:text="@string/add_payments_chart_hint"
                                         android:textColor="#E0E0E0"
                                         android:textSize="8sp"
                                         android:layout_marginTop="1dp" />
@@ -698,7 +698,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Today"
+                                android:text="@string/today"
                                 android:textColor="#BDBDBD"
                                 android:textSize="8sp"
                                 android:gravity="end" />
@@ -743,7 +743,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Pending Dues"
+                                        android:text="@string/pending_dues"
                                         android:textColor="#9E9E9E"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
@@ -764,7 +764,7 @@
                                     android:id="@+id/tv_dues_percentage"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="0% of total fees"
+                                    android:text="@string/dues_percentage_zero"
                                     android:textColor="#FF9800"
                                     android:textSize="9sp"
                                     android:textStyle="bold"
@@ -795,7 +795,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="No Dues"
+                                        android:text="@string/no_dues"
                                         android:textColor="#BDBDBD"
                                         android:textSize="10sp"
                                         android:textStyle="bold" />
@@ -803,7 +803,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="All payments collected!"
+                                        android:text="@string/all_payments_collected"
                                         android:textColor="#E0E0E0"
                                         android:textSize="8sp"
                                         android:layout_marginTop="1dp" />
@@ -825,7 +825,7 @@
                                 android:id="@+id/tv_total_expected"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Expected: ₹0"
+                                android:text="@string/total_expected_zero"
                                 android:textColor="#BDBDBD"
                                 android:textSize="8sp" />
 

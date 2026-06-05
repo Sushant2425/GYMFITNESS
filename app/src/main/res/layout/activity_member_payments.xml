@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             app:titleTextColor="#FFFFFF"
             android:layout_height="?attr/actionBarSize"
-            app:title="Payment History"
+            app:title="@string/payment_history"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="#FFFFFF" />
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="No payments found"
+        android:text="@string/no_payments_found"
         android:textSize="16sp"
         android:textColor="#9E9E9E"
         android:visibility="gone"

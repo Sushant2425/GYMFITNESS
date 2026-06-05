@@ -46,7 +46,7 @@
                     android:id="@+id/tvPaymentMode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cash"
+                    android:text="@string/payment_mode_cash"
                     android:textSize="11sp"
                     android:textColor="#FF9800"
                     android:textStyle="bold"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="ID: 7251bd74-e585-47d4-805b-ba7d20fe41b5"
+            android:text="@string/id_prefix"
             android:textSize="12sp"
             android:textColor="#9E9E9E" />
 
@@ -93,7 +93,7 @@
                 android:id="@+id/tvNotes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Additional notes here"
+                android:text="@string/notes_text"
                 android:textSize="12sp"
                 android:textColor="#BDBDBD"
                 android:fontFamily="sans-serif" />
@@ -115,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Balance After Payment:"
+                android:text="@string/balance_after_payment"
                 android:textSize="12sp"
                 android:textColor="#9E9E9E" />
 

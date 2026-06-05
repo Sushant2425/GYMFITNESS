@@ -49,7 +49,6 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Force status bar color to orange
         forceStatusBarColor();
 
         initViews();
@@ -66,15 +65,11 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         }
     }
 
-    // Force status bar color method - sets orange color
     private void forceStatusBarColor() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            // Change color here
-            getWindow().setStatusBarColor(Color.parseColor("#FF8C42" +
-                    ""));
+            getWindow().setStatusBarColor(Color.parseColor("#FF8C42"));
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 getWindow().getDecorView().setSystemUiVisibility(
@@ -84,10 +79,10 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             }
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Ensure status bar color is set when returning to activity
         forceStatusBarColor();
     }
 
@@ -106,7 +101,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             if (userEmail != null) {
                 String emailKey = userEmail.replace(".", ",");
                 databaseReference = FirebaseDatabase.getInstance().getReference("GYM").child(emailKey);
-                Log.d("Dashboard", "Firebase path: GYM/" + emailKey);
+                Log.d("Dashboard", getString(R.string.firebase_path_log, emailKey));
             }
         }
     }
@@ -115,44 +110,44 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setTitle("Loading...");
+            getSupportActionBar().setTitle(getString(R.string.loading));
         }
         loadGymNameToToolbar();
     }
 
     private void loadGymNameToToolbar() {
         if (databaseReference == null) {
-            Log.e("Dashboard", "Database null for toolbar");
+            Log.e("Dashboard", getString(R.string.database_null_toolbar));
             return;
         }
 
-        Log.d("Toolbar", "Loading gym name for toolbar");
+        Log.d("Toolbar", getString(R.string.loading_gym_name));
 
         databaseReference.child("ownerInfo").child("gymName")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String gymName = snapshot.getValue(String.class);
-                        Log.d("Toolbar", "Toolbar gymName raw: '" + gymName + "'");
+                        Log.d("Toolbar", getString(R.string.toolbar_gym_name_raw, gymName));
 
                         if (gymName != null && !gymName.trim().isEmpty()) {
                             if (getSupportActionBar() != null) {
                                 getSupportActionBar().setTitle(gymName);
-                                Log.d("Toolbar", "✅ Toolbar SET: " + gymName);
+                                Log.d("Toolbar", getString(R.string.toolbar_set_success, gymName));
                             }
                         } else {
                             if (getSupportActionBar() != null) {
-                                getSupportActionBar().setTitle("My Gym");
+                                getSupportActionBar().setTitle(getString(R.string.my_gym));
                             }
-                            Log.w("Toolbar", "gymName empty, fallback used");
+                            Log.w("Toolbar", getString(R.string.toolbar_fallback_warning));
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("Toolbar", "Failed: " + error.getMessage());
+                        Log.e("Toolbar", getString(R.string.toolbar_failed, error.getMessage()));
                         if (getSupportActionBar() != null) {
-                            getSupportActionBar().setTitle("Gym Manager");
+                            getSupportActionBar().setTitle(getString(R.string.gym_manager));
                         }
                     }
                 });
@@ -191,7 +186,7 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
 
     private void loadNavigationHeader() {
         if (databaseReference == null) {
-            Log.e("Dashboard", "Database reference is null");
+            Log.e("Dashboard", getString(R.string.database_ref_null));
             return;
         }
 
@@ -199,45 +194,45 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
         TextView tvGymName = headerView.findViewById(R.id.nav_header_gym_name);
         TextView tvEmail = headerView.findViewById(R.id.nav_header_email);
 
-        tvGymName.setText("Loading...");
-        tvEmail.setText("Loading...");
+        tvGymName.setText(getString(R.string.loading));
+        tvEmail.setText(getString(R.string.loading));
 
-        Log.d("Dashboard", "Loading header for email: " + userEmail);
+        Log.d("Dashboard", getString(R.string.loading_header_log, userEmail));
 
         databaseReference.child("ownerInfo").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("Dashboard", "ownerInfo snapshot exists: " + snapshot.exists());
+                Log.d("Dashboard", getString(R.string.owner_info_exists, snapshot.exists()));
 
                 if (snapshot.exists()) {
                     String gymName = snapshot.child("gymName").getValue(String.class);
                     String email = snapshot.child("email").getValue(String.class);
 
-                    Log.d("Dashboard", "Raw gymName: '" + gymName + "', email: '" + email + "'");
+                    Log.d("Dashboard", getString(R.string.owner_info_raw, gymName, email));
 
                     if (gymName != null && !gymName.isEmpty()) {
                         tvGymName.setText(gymName);
-                        Log.d("Dashboard", "Gym name set: " + gymName);
+                        Log.d("Dashboard", getString(R.string.gym_name_set, gymName));
                     } else {
-                        tvGymName.setText("My Gym");
-                        Log.w("Dashboard", "gymName null/empty, using fallback");
+                        tvGymName.setText(getString(R.string.my_gym));
+                        Log.w("Dashboard", getString(R.string.gym_name_fallback));
                     }
 
                     if (email != null && !email.isEmpty()) {
                         tvEmail.setText(email);
                     }
                 } else {
-                    Log.w("Dashboard", "ownerInfo node not found");
-                    tvGymName.setText("My Gym");
+                    Log.w("Dashboard", getString(R.string.owner_info_not_found));
+                    tvGymName.setText(getString(R.string.my_gym));
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Dashboard", "Failed to load ownerInfo: " + error.getMessage());
+                Log.e("Dashboard", getString(R.string.failed_load_owner_info, error.getMessage()));
                 View headerViewRetry = navigationView.getHeaderView(0);
                 TextView tvGymNameRetry = headerViewRetry.findViewById(R.id.nav_header_gym_name);
-                tvGymNameRetry.setText("Error loading");
+                tvGymNameRetry.setText(getString(R.string.error_loading));
             }
         });
     }
@@ -332,10 +327,10 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
     private void showTrialExpiredPopup() {
         androidx.appcompat.app.AlertDialog dialog =
                 new androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setTitle("Trial Expired")
-                        .setMessage("Your free trial has expired.\n\nTo continue using all features,\nplease upgrade to Premium.")
+                        .setTitle(getString(R.string.trial_expired_title))
+                        .setMessage(getString(R.string.trial_expired_message))
                         .setCancelable(false)
-                        .setPositiveButton("Buy Premium", (d, which) -> {
+                        .setPositiveButton(getString(R.string.buy_premium), (d, which) -> {
                             openPremiumScreen();
                         })
                         .create();

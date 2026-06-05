@@ -110,7 +110,7 @@
                 app:hintTextColor="#FF6B00"
                 app:startIconDrawable="@drawable/ic_calendar"
                 app:startIconTint="#FF9800"
-                app:suffixText=" months"
+                app:suffixText="@string/months"
                 app:suffixTextColor="#9E9E9E"
                 app:boxBackgroundColor="#2C2C2C">
 

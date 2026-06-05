@@ -64,6 +64,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
         btnLifetime = findViewById(R.id.btnLifetime);
         tvCurrentPlan = findViewById(R.id.tvCurrentPlan);
     }
+
     private void loadCurrentPlan() {
         subscriptionRef.child("currentPlan")
                 .get()
@@ -76,11 +77,12 @@ public class PremiumSelectionActivity extends AppCompatActivity
                         String endDate = snapshot.child("endDate").getValue(String.class);
 
                         tvCurrentPlan.setText(
-                                "Current Plan: " + plan + " (Valid till " + endDate + ")"
+                                getString(R.string.current_plan_text, plan, endDate)
                         );
                     }
                 });
     }
+
     private void checkTrialStatus() {
         subscriptionRef.child("trial").child("used")
                 .get()
@@ -89,7 +91,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
                     Boolean used = snapshot.getValue(Boolean.class);
                     if (used != null && used) {
                         btnTrial.setEnabled(false);
-                        btnTrial.setText("Free Trial Used");
+                        btnTrial.setText(getString(R.string.free_trial_used));
                         btnTrial.setAlpha(0.6f);
                     }
                 });
@@ -110,7 +112,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
             Boolean used = snapshot.child("used").getValue(Boolean.class);
             if (used != null && used) {
                 Toast.makeText(this,
-                        "Free trial already used. Please buy premium.",
+                        getString(R.string.trial_already_used),
                         Toast.LENGTH_LONG).show();
                 return;
             }
@@ -140,7 +142,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
             subscriptionRef.updateChildren(updates)
                     .addOnSuccessListener(unused -> {
                         Toast.makeText(this,
-                                "7 Days Free Trial Activated",
+                                getString(R.string.trial_activated),
                                 Toast.LENGTH_SHORT).show();
                         goToDashboard();
                     });
@@ -158,8 +160,8 @@ public class PremiumSelectionActivity extends AppCompatActivity
 
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "Gym Management App");
-            options.put("description", plan + " Premium Plan");
+            options.put("name", getString(R.string.gym_management_app));
+            options.put("description", getString(R.string.premium_plan_description, plan));
             options.put("currency", "INR");
             options.put("amount", amount);
             options.put("prefill.email", prefManager.getUserEmail());
@@ -169,7 +171,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
 
         } catch (Exception e) {
             Toast.makeText(this,
-                    "Payment error: " + e.getMessage(),
+                    getString(R.string.payment_error, e.getMessage()),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -197,7 +199,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
         long endMillis = PremiumStatusManager.getPremiumEndDate(selectedPlan);
 
         String endDate = endMillis == -1
-                ? "Lifetime"
+                ? getString(R.string.lifetime)
                 : PremiumStatusManager.formatDate(endMillis);
 
         String txnId = UUID.randomUUID().toString();
@@ -221,7 +223,6 @@ public class PremiumSelectionActivity extends AppCompatActivity
         history.put("source", "RAZORPAY");
         history.put("paymentId", razorpayPaymentId);
 
-
         currentPlan.put("amountPaid", getPlanAmount(selectedPlan) / 100);
         currentPlan.put("currency", "INR");
         currentPlan.put("paymentGateway", "RAZORPAY");
@@ -234,7 +235,7 @@ public class PremiumSelectionActivity extends AppCompatActivity
         subscriptionRef.updateChildren(updates)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(this,
-                            "Premium Activated 🎉",
+                            getString(R.string.premium_activated),
                             Toast.LENGTH_SHORT).show();
                     goToDashboard();
                 });
@@ -244,10 +245,10 @@ public class PremiumSelectionActivity extends AppCompatActivity
     @Override
     public void onPaymentError(int code, String response) {
         new AlertDialog.Builder(this)
-                .setTitle("Payment Failed")
-                .setMessage("Payment was not completed.\n\nPlease try again.")
-                .setPositiveButton("Retry", (d, w) -> startPremiumPayment(selectedPlan))
-                .setNegativeButton("Cancel", null)
+                .setTitle(getString(R.string.payment_failed))
+                .setMessage(getString(R.string.payment_failed_message))
+                .setPositiveButton(getString(R.string.retry), (d, w) -> startPremiumPayment(selectedPlan))
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show();
     }
 

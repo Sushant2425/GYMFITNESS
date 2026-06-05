@@ -95,7 +95,7 @@ public class ViewPlansActivity extends BaseActivity {
         String ownerEmail = prefManager.getUserEmail();
 
         if (ownerEmail == null) {
-            Toast.makeText(this, "Please login first!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.please_login_first), Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -131,14 +131,14 @@ public class ViewPlansActivity extends BaseActivity {
             public void onCancelled(DatabaseError databaseError) {
                 showLoading(false);
                 Toast.makeText(ViewPlansActivity.this,
-                        "Failed to load plans: " + databaseError.getMessage(),
+                        getString(R.string.failed_to_load_plans_error, databaseError.getMessage()),
                         Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void updateUI() {
-        tvPlanCount.setText(planList.size() + " Plans Available");
+        tvPlanCount.setText(getString(R.string.plans_available_count, planList.size()));
 
         if (planList.isEmpty()) {
             emptyState.setVisibility(View.VISIBLE);
@@ -166,22 +166,20 @@ public class ViewPlansActivity extends BaseActivity {
             MaterialButton btnEdit = planView.findViewById(R.id.btnEdit);
             MaterialButton btnDelete = planView.findViewById(R.id.btnDelete);
 
-            // Set plan data
             tvPlanName.setText(plan.getPlanName());
-            tvPlanDuration.setText(plan.getDuration() + (plan.getDuration() > 1 ? "M" : "M"));
+            tvPlanDuration.setText(plan.getDuration() + getString(R.string.months_short));
             tvPlanFee.setText(currencyFormat.format(plan.getFee()));
-            tvMonths.setText(plan.getDuration() + " Month" + (plan.getDuration() > 1 ? "s" : ""));
+            tvMonths.setText(plan.getDuration() + getString(R.string.month_suffix) + (plan.getDuration() > 1 ? getString(R.string.s) : ""));
 
-            // Set status with proper colors
             if (plan.isActive()) {
-                tvStatus.setText("Active");
+                tvStatus.setText(getString(R.string.active));
                 tvStatus.setTextColor(ContextCompat.getColor(this, R.color.status_active_text));
                 tvStatus.setBackgroundTintList(ColorStateList.valueOf(
                         ContextCompat.getColor(this, R.color.status_active_bg)));
                 tvStatus.setCompoundDrawableTintList(ColorStateList.valueOf(
                         ContextCompat.getColor(this, R.color.status_active_icon)));
             } else {
-                tvStatus.setText("Inactive");
+                tvStatus.setText(getString(R.string.inactive));
                 tvStatus.setTextColor(ContextCompat.getColor(this, R.color.status_inactive_text));
                 tvStatus.setBackgroundTintList(ColorStateList.valueOf(
                         ContextCompat.getColor(this, R.color.status_inactive_bg)));
@@ -189,7 +187,6 @@ public class ViewPlansActivity extends BaseActivity {
                         ContextCompat.getColor(this, R.color.status_inactive_icon)));
             }
 
-            // Set different colors for different durations
             int durationColor;
             if (plan.getDuration() == 1) {
                 durationColor = ContextCompat.getColor(this, R.color.duration_1_month);
@@ -206,7 +203,6 @@ public class ViewPlansActivity extends BaseActivity {
                     ContextCompat.getColor(this, R.color.duration_bg)));
             tvMonths.setTextColor(durationColor);
 
-            // Set fee color based on amount
             if (plan.getFee() > 2000) {
                 tvPlanFee.setTextColor(ContextCompat.getColor(this, R.color.fee_high));
             } else if (plan.getFee() > 1000) {
@@ -215,7 +211,6 @@ public class ViewPlansActivity extends BaseActivity {
                 tvPlanFee.setTextColor(ContextCompat.getColor(this, R.color.fee_low));
             }
 
-            // Set click listeners
             cardView.setOnClickListener(v -> showPlanDetails(plan));
             btnEdit.setOnClickListener(v -> showEditBottomSheet(plan));
             btnDelete.setOnClickListener(v -> deletePlan(plan));
@@ -237,42 +232,38 @@ public class ViewPlansActivity extends BaseActivity {
         TextView tvDialogCreated = dialogView.findViewById(R.id.tvDialogCreated);
 
         tvDialogPlanName.setText(plan.getPlanName());
-        tvDialogDuration.setText(plan.getDuration() + " Month(s)");
+        tvDialogDuration.setText(plan.getDuration() + getString(R.string.month_s_plural));
         tvDialogFee.setText(currencyFormat.format(plan.getFee()));
 
-        // Format created date
         String createdAt = plan.getCreatedAt();
         if (createdAt != null && !createdAt.isEmpty()) {
             try {
                 long timestamp = Long.parseLong(createdAt);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
                 String dateStr = sdf.format(new Date(timestamp));
-                tvDialogCreated.setText("Created: " + dateStr);
+                tvDialogCreated.setText(getString(R.string.created_prefix) + dateStr);
             } catch (Exception e) {
-                tvDialogCreated.setText("Created: Recently");
+                tvDialogCreated.setText(getString(R.string.created_recently));
             }
         } else {
-            tvDialogCreated.setText("Created: Recently");
+            tvDialogCreated.setText(getString(R.string.created_recently));
         }
 
         builder.setView(dialogView)
-                .setPositiveButton("OK", null)
+                .setPositiveButton(getString(R.string.ok), null)
                 .show();
     }
 
     private void showEditBottomSheet(Plan plan) {
         try {
-            // Inflate bottom sheet view
             View bottomSheetView = LayoutInflater.from(this)
                     .inflate(R.layout.layout_bottom_sheet_edit_plan, null);
 
-            // Create bottom sheet dialog
             BottomSheetDialog editBottomSheet = new BottomSheetDialog(this);
             editBottomSheet.setContentView(bottomSheetView);
             editBottomSheet.setCancelable(true);
             editBottomSheet.setCanceledOnTouchOutside(true);
 
-            // Initialize views
             TextInputEditText etPlanName = bottomSheetView.findViewById(R.id.etPlanName);
             TextInputEditText etPlanFee = bottomSheetView.findViewById(R.id.etPlanFee);
             TextInputEditText etDuration = bottomSheetView.findViewById(R.id.etDuration);
@@ -281,27 +272,22 @@ public class ViewPlansActivity extends BaseActivity {
             MaterialButton btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
             MaterialButton btnUpdate = bottomSheetView.findViewById(R.id.btnUpdate);
 
-            // Also get TextInputLayouts for validation
             TextInputLayout tilPlanName = bottomSheetView.findViewById(R.id.tilPlanName);
             TextInputLayout tilPlanFee = bottomSheetView.findViewById(R.id.tilPlanFee);
             TextInputLayout tilDuration = bottomSheetView.findViewById(R.id.tilDuration);
 
-            // Fill data from plan
             etPlanName.setText(plan.getPlanName());
             etPlanFee.setText(String.valueOf((int) plan.getFee()));
             etDuration.setText(String.valueOf(plan.getDuration()));
 
-            // Set status toggle
             if (plan.isActive()) {
                 toggleStatus.check(R.id.btnActive);
             } else {
                 toggleStatus.check(R.id.btnInactive);
             }
 
-            // Setup button colors based on status
             setupToggleButtonColors(toggleStatus, bottomSheetView);
 
-            // Setup listeners
             btnClose.setOnClickListener(v -> editBottomSheet.dismiss());
             btnCancel.setOnClickListener(v -> editBottomSheet.dismiss());
 
@@ -322,15 +308,13 @@ public class ViewPlansActivity extends BaseActivity {
                 }
             });
 
-            // Add text watchers for real-time validation
             addTextWatchers(etPlanName, etPlanFee, etDuration, tilPlanName, tilPlanFee, tilDuration);
 
-            // Show bottom sheet
             editBottomSheet.show();
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Failed to open editor", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.failed_to_open_editor), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -418,10 +402,10 @@ public class ViewPlansActivity extends BaseActivity {
 
     private boolean validatePlanName(String name, TextInputLayout inputLayout) {
         if (name.isEmpty()) {
-            inputLayout.setError("Plan name is required");
+            inputLayout.setError(getString(R.string.plan_name_required));
             return false;
         } else if (name.length() < 3) {
-            inputLayout.setError("Plan name must be at least 3 characters");
+            inputLayout.setError(getString(R.string.plan_name_min_length));
             return false;
         } else {
             inputLayout.setError(null);
@@ -431,48 +415,48 @@ public class ViewPlansActivity extends BaseActivity {
 
     private boolean validatePlanFee(String feeStr, TextInputLayout inputLayout) {
         if (feeStr.isEmpty()) {
-            inputLayout.setError("Fee is required");
+            inputLayout.setError(getString(R.string.fee_required));
             return false;
         }
 
         try {
             double fee = Double.parseDouble(feeStr);
             if (fee <= 0) {
-                inputLayout.setError("Fee must be greater than 0");
+                inputLayout.setError(getString(R.string.fee_positive));
                 return false;
             } else if (fee > 100000) {
-                inputLayout.setError("Fee is too high");
+                inputLayout.setError(getString(R.string.fee_too_high));
                 return false;
             } else {
                 inputLayout.setError(null);
                 return true;
             }
         } catch (NumberFormatException e) {
-            inputLayout.setError("Invalid fee amount");
+            inputLayout.setError(getString(R.string.invalid_fee_amount));
             return false;
         }
     }
 
     private boolean validateDuration(String durationStr, TextInputLayout inputLayout) {
         if (durationStr.isEmpty()) {
-            inputLayout.setError("Duration is required");
+            inputLayout.setError(getString(R.string.duration_required));
             return false;
         }
 
         try {
             int duration = Integer.parseInt(durationStr);
             if (duration <= 0) {
-                inputLayout.setError("Duration must be greater than 0");
+                inputLayout.setError(getString(R.string.duration_positive));
                 return false;
             } else if (duration > 36) {
-                inputLayout.setError("Maximum duration is 36 months");
+                inputLayout.setError(getString(R.string.duration_max));
                 return false;
             } else {
                 inputLayout.setError(null);
                 return true;
             }
         } catch (NumberFormatException e) {
-            inputLayout.setError("Invalid duration");
+            inputLayout.setError(getString(R.string.invalid_duration));
             return false;
         }
     }
@@ -489,7 +473,6 @@ public class ViewPlansActivity extends BaseActivity {
                 .child("gym_plans")
                 .child(planId);
 
-        // Update plan data
         planRef.child("planName").setValue(planName);
         planRef.child("fee").setValue(fee);
         planRef.child("duration").setValue(duration);
@@ -497,11 +480,11 @@ public class ViewPlansActivity extends BaseActivity {
                 .addOnSuccessListener(aVoid -> {
                     dialog.dismiss();
                     showLoading(false);
-                    Toast.makeText(this, "Plan updated successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.plan_updated_success), Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     showLoading(false);
-                    Toast.makeText(this, "Failed to update plan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.plan_update_failed, e.getMessage()), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -509,9 +492,9 @@ public class ViewPlansActivity extends BaseActivity {
         androidx.appcompat.app.AlertDialog.Builder builder =
                 new androidx.appcompat.app.AlertDialog.Builder(this);
 
-        builder.setTitle("Delete Plan")
-                .setMessage("Are you sure you want to delete " + plan.getPlanName() + "?")
-                .setPositiveButton("Delete", (dialog, which) -> {
+        builder.setTitle(getString(R.string.delete_plan_title))
+                .setMessage(getString(R.string.delete_plan_confirmation, plan.getPlanName()))
+                .setPositiveButton(getString(R.string.delete), (dialog, which) -> {
                     String ownerEmail = prefManager.getUserEmail();
                     String safeEmail = ownerEmail.replace(".", ",");
 
@@ -524,16 +507,16 @@ public class ViewPlansActivity extends BaseActivity {
                     planRef.removeValue()
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(ViewPlansActivity.this,
-                                        "Plan deleted successfully",
+                                        getString(R.string.plan_deleted_success),
                                         Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(ViewPlansActivity.this,
-                                        "Failed to delete plan: " + e.getMessage(),
+                                        getString(R.string.plan_delete_failed, e.getMessage()),
                                         Toast.LENGTH_SHORT).show();
                             });
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show();
     }
 

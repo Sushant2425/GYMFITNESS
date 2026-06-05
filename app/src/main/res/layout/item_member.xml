@@ -33,7 +33,8 @@
                 android:layout_height="28dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_active"
-                app:tint="#FF6B00" />
+                app:tint="#FF6B00"
+                android:contentDescription="@string/status" />
 
         </androidx.cardview.widget.CardView>
 
@@ -48,7 +49,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
+                android:text="@string/full_name"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
@@ -66,7 +67,8 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_phone"
-                    app:tint="#9E9E9E" />
+                    app:tint="#9E9E9E"
+                    android:contentDescription="@string/phone" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -119,7 +121,7 @@
                     android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Active"
+                    android:text="@string/active"
                     android:textSize="11sp"
                     android:textColor="#FF6B00"
                     android:textStyle="bold"

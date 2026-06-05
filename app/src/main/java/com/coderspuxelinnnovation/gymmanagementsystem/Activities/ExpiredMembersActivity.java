@@ -73,20 +73,22 @@ public class ExpiredMembersActivity extends BaseActivity {
     private String currentFilter = "ALL";
     private String currentSort = "Name (A-Z)";
 
-    private final String[] sortOptions = {
-            "Name (A-Z)",
-            "Name (Z-A)",
-            "Most Expired First",
-            "Recently Expired",
-            "Expiring Soon First",
-            "Highest Dues",
-            "Lowest Dues"
-    };
+    private String[] sortOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expired_members);
+
+        sortOptions = new String[]{
+                getString(R.string.sort_name_az),
+                getString(R.string.sort_name_za),
+                getString(R.string.sort_most_expired),
+                getString(R.string.sort_recently_expired),
+                getString(R.string.sort_expiring_soon),
+                getString(R.string.sort_highest_dues),
+                getString(R.string.sort_lowest_dues)
+        };
 
         initViews();
         setupFirebase();
@@ -164,7 +166,6 @@ public class ExpiredMembersActivity extends BaseActivity {
                     textView.setPadding(16, 12, 16, 12);
                     textView.setTextSize(14f);
 
-                    // Add separator line between items
                     if (position < getCount() - 1) {
                         textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                     }
@@ -175,26 +176,20 @@ public class ExpiredMembersActivity extends BaseActivity {
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSort.setAdapter(spinnerAdapter);
-
-        // Set custom background for spinner
         spinnerSort.setBackground(ContextCompat.getDrawable(this, R.drawable.spinner_background_black));
 
-        // Set popup background color for dropdown (for API 16+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             spinnerSort.setPopupBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.spinner_popup_background));
         }
     }
+
     private void setupListeners() {
-        // Toolbar back button
         toolbar.setNavigationOnClickListener(v -> finish());
 
-        // Filter button
         btnFilter.setOnClickListener(v -> {
-            // Show sort options or additional filters
-            Toast.makeText(this, "Use chips to filter members", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.use_chips_to_filter), Toast.LENGTH_SHORT).show();
         });
 
-        // Search functionality
         etSearchExpired.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -209,17 +204,15 @@ public class ExpiredMembersActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        // Clear search button
         btnClearSearch.setOnClickListener(v -> {
             etSearchExpired.setText("");
             btnClearSearch.setVisibility(View.GONE);
         });
 
-        // Filter chips - Fixed implementation
         chipAll.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 currentFilter = "ALL";
-                Log.d(TAG, "Filter changed to: ALL");
+                Log.d(TAG, getString(R.string.filter_changed_all));
                 filterMembers(etSearchExpired.getText().toString().trim());
             }
         });
@@ -227,7 +220,7 @@ public class ExpiredMembersActivity extends BaseActivity {
         chipWithDues.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 currentFilter = "WITH_DUES";
-                Log.d(TAG, "Filter changed to: WITH_DUES");
+                Log.d(TAG, getString(R.string.filter_changed_dues));
                 filterMembers(etSearchExpired.getText().toString().trim());
             }
         });
@@ -235,17 +228,16 @@ public class ExpiredMembersActivity extends BaseActivity {
         chipClearDues.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 currentFilter = "CLEAR_DUES";
-                Log.d(TAG, "Filter changed to: CLEAR_DUES");
+                Log.d(TAG, getString(R.string.filter_changed_clear));
                 filterMembers(etSearchExpired.getText().toString().trim());
             }
         });
 
-        // Sort spinner
         spinnerSort.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
                 currentSort = sortOptions[position];
-                Log.d(TAG, "Sort changed to: " + currentSort);
+                Log.d(TAG, getString(R.string.sort_changed, currentSort));
                 sortMembers();
             }
 
@@ -256,7 +248,7 @@ public class ExpiredMembersActivity extends BaseActivity {
 
     private void loadExpiredMembers() {
         if (databaseReference == null) {
-            Toast.makeText(this, "Unable to connect to database", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.unable_to_connect), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -280,7 +272,7 @@ public class ExpiredMembersActivity extends BaseActivity {
                 Calendar expiringSoonDate = Calendar.getInstance();
                 expiringSoonDate.add(Calendar.DAY_OF_MONTH, EXPIRING_SOON_DAYS);
 
-                Log.d(TAG, "Loading members - Today: " + today.getTime());
+                Log.d(TAG, getString(R.string.loading_members_log, today.getTime()));
 
                 if (snapshot.exists()) {
                     for (DataSnapshot memberSnapshot : snapshot.getChildren()) {
@@ -291,36 +283,31 @@ public class ExpiredMembersActivity extends BaseActivity {
                                 String endDate = member.getCurrentPlan().getEndDate();
 
                                 if (isPlanExpiredOrExpiringSoon(endDate, today, expiringSoonDate)) {
-                                    // Calculate balance BEFORE adding to list
                                     int balance = calculateOutstandingBalance(memberSnapshot, member);
                                     member.setOutstandingBalance(balance);
 
-                                    // Calculate days expired
                                     long daysExpired = calculateDaysExpired(member, today);
                                     member.setDaysExpired(daysExpired);
 
-                                    // Set status
                                     if (daysExpired >= 0) {
-                                        member.getCurrentPlan().setStatus("EXPIRED");
+                                        member.getCurrentPlan().setStatus(getString(R.string.expired_status));
                                     } else {
-                                        member.getCurrentPlan().setStatus("EXPIRING_SOON");
+                                        member.getCurrentPlan().setStatus(getString(R.string.expiring_soon_status));
                                     }
 
                                     allExpiredMembers.add(member);
 
-                                    Log.d(TAG, "Member: " + member.getName() +
-                                            ", Days: " + daysExpired +
-                                            ", Balance: " + balance +
-                                            ", Has Dues: " + member.hasPendingDues());
+                                    Log.d(TAG, getString(R.string.member_log,
+                                            member.getName(), daysExpired, balance, member.hasPendingDues()));
                                 }
                             }
                         } catch (Exception e) {
-                            Log.e(TAG, "Error parsing member: " + e.getMessage(), e);
+                            Log.e(TAG, getString(R.string.error_parsing_member, e.getMessage()), e);
                         }
                     }
                 }
 
-                Log.d(TAG, "Total expired/expiring members: " + allExpiredMembers.size());
+                Log.d(TAG, getString(R.string.total_expired_members, allExpiredMembers.size()));
 
                 updateStats();
                 filterMembers(etSearchExpired.getText().toString().trim());
@@ -331,8 +318,8 @@ public class ExpiredMembersActivity extends BaseActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 hideProgress();
                 Toast.makeText(ExpiredMembersActivity.this,
-                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Firebase error: " + error.getMessage());
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, getString(R.string.firebase_error, error.getMessage()));
             }
         };
 
@@ -353,7 +340,7 @@ public class ExpiredMembersActivity extends BaseActivity {
             return !endCal.after(today) ||
                     (endCal.after(today) && !endCal.after(expiringSoonDate));
         } catch (ParseException e) {
-            Log.e(TAG, "Date parse error: " + e.getMessage());
+            Log.e(TAG, getString(R.string.date_parse_error, e.getMessage()));
             return false;
         }
     }
@@ -395,14 +382,12 @@ public class ExpiredMembersActivity extends BaseActivity {
             return new GymMember(name, phone, email, gender, joinDate, status, currentPlan);
 
         } catch (Exception e) {
-            Log.e(TAG, "Error parsing member data: " + e.getMessage());
+            Log.e(TAG, getString(R.string.error_parsing_member_data, e.getMessage()));
             return null;
         }
     }
 
     private int calculateOutstandingBalance(DataSnapshot memberSnapshot, GymMember member) {
-
-        // 1) First priority: remaining in currentPlan (latest & correct)
         DataSnapshot planSnap = memberSnapshot.child("currentPlan").child("remaining");
         if (planSnap.exists()) {
             Object obj = planSnap.getValue();
@@ -412,7 +397,6 @@ public class ExpiredMembersActivity extends BaseActivity {
             if (obj instanceof String) return Integer.parseInt((String) obj);
         }
 
-        // 2) Fallback: last payment remaining (old records)
         DataSnapshot paymentsSnapshot = memberSnapshot.child("payments");
 
         long latestTimestamp = 0;
@@ -431,9 +415,6 @@ public class ExpiredMembersActivity extends BaseActivity {
         return latestRemaining;
     }
 
-
-
-    // Helper method to format timestamp for logging
     private String formatDate(long timestamp) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
@@ -442,6 +423,7 @@ public class ExpiredMembersActivity extends BaseActivity {
             return String.valueOf(timestamp);
         }
     }
+
     private long calculateDaysExpired(GymMember member, Calendar today) {
         if (member.getCurrentPlan() == null || member.getCurrentPlan().getEndDate() == null) {
             return 0;
@@ -459,7 +441,7 @@ public class ExpiredMembersActivity extends BaseActivity {
             long diffMillis = today.getTimeInMillis() - endDate.getTimeInMillis();
             return diffMillis / (1000 * 60 * 60 * 24);
         } catch (ParseException e) {
-            Log.e(TAG, "Date calculation error: " + e.getMessage());
+            Log.e(TAG, getString(R.string.date_calc_error, e.getMessage()));
             return 0;
         }
     }
@@ -467,14 +449,12 @@ public class ExpiredMembersActivity extends BaseActivity {
     private void filterMembers(String query) {
         filteredMembers.clear();
 
-        Log.d(TAG, "Filtering - Query: '" + query + "', Filter: " + currentFilter +
-                ", Total members: " + allExpiredMembers.size());
+        Log.d(TAG, getString(R.string.filtering_log, query, currentFilter, allExpiredMembers.size()));
 
         for (GymMember member : allExpiredMembers) {
             boolean matchesSearch = true;
             boolean matchesFilter = true;
 
-            // Search filter
             if (!query.isEmpty()) {
                 String lowerQuery = query.toLowerCase();
                 matchesSearch = (member.getName() != null &&
@@ -483,15 +463,14 @@ public class ExpiredMembersActivity extends BaseActivity {
                                 member.getPhone().contains(lowerQuery));
             }
 
-            // Dues filter - FIXED
             if (currentFilter.equals("WITH_DUES")) {
                 matchesFilter = member.hasPendingDues();
-                Log.d(TAG, member.getName() + " - Has dues: " + member.hasPendingDues() +
-                        ", Balance: " + member.getOutstandingBalance());
+                Log.d(TAG, member.getName() + getString(R.string.has_dues_log) + member.hasPendingDues() +
+                        getString(R.string.balance_log) + member.getOutstandingBalance());
             } else if (currentFilter.equals("CLEAR_DUES")) {
                 matchesFilter = !member.hasPendingDues();
-                Log.d(TAG, member.getName() + " - Clear dues: " + !member.hasPendingDues() +
-                        ", Balance: " + member.getOutstandingBalance());
+                Log.d(TAG, member.getName() + getString(R.string.clear_dues_log) + !member.hasPendingDues() +
+                        getString(R.string.balance_log) + member.getOutstandingBalance());
             }
 
             if (matchesSearch && matchesFilter) {
@@ -499,52 +478,38 @@ public class ExpiredMembersActivity extends BaseActivity {
             }
         }
 
-        Log.d(TAG, "Filtered members count: " + filteredMembers.size());
+        Log.d(TAG, getString(R.string.filtered_count_log, filteredMembers.size()));
         sortMembers();
     }
 
     private void sortMembers() {
-        switch (currentSort) {
-            case "Name (A-Z)":
-                Collections.sort(filteredMembers, (m1, m2) -> {
-                    String name1 = m1.getName() != null ? m1.getName() : "";
-                    String name2 = m2.getName() != null ? m2.getName() : "";
-                    return name1.compareToIgnoreCase(name2);
-                });
-                break;
-
-            case "Name (Z-A)":
-                Collections.sort(filteredMembers, (m1, m2) -> {
-                    String name1 = m1.getName() != null ? m1.getName() : "";
-                    String name2 = m2.getName() != null ? m2.getName() : "";
-                    return name2.compareToIgnoreCase(name1);
-                });
-                break;
-
-            case "Most Expired First":
-                Collections.sort(filteredMembers, (m1, m2) ->
-                        Long.compare(m2.getDaysExpired(), m1.getDaysExpired()));
-                break;
-
-            case "Recently Expired":
-                Collections.sort(filteredMembers, (m1, m2) ->
-                        Long.compare(m1.getDaysExpired(), m2.getDaysExpired()));
-                break;
-
-            case "Expiring Soon First":
-                Collections.sort(filteredMembers, (m1, m2) ->
-                        Long.compare(m1.getDaysExpired(), m2.getDaysExpired()));
-                break;
-
-            case "Highest Dues":
-                Collections.sort(filteredMembers, (m1, m2) ->
-                        Integer.compare(m2.getOutstandingBalance(), m1.getOutstandingBalance()));
-                break;
-
-            case "Lowest Dues":
-                Collections.sort(filteredMembers, (m1, m2) ->
-                        Integer.compare(m1.getOutstandingBalance(), m2.getOutstandingBalance()));
-                break;
+        if (currentSort.equals(getString(R.string.sort_name_az))) {
+            Collections.sort(filteredMembers, (m1, m2) -> {
+                String name1 = m1.getName() != null ? m1.getName() : "";
+                String name2 = m2.getName() != null ? m2.getName() : "";
+                return name1.compareToIgnoreCase(name2);
+            });
+        } else if (currentSort.equals(getString(R.string.sort_name_za))) {
+            Collections.sort(filteredMembers, (m1, m2) -> {
+                String name1 = m1.getName() != null ? m1.getName() : "";
+                String name2 = m2.getName() != null ? m2.getName() : "";
+                return name2.compareToIgnoreCase(name1);
+            });
+        } else if (currentSort.equals(getString(R.string.sort_most_expired))) {
+            Collections.sort(filteredMembers, (m1, m2) ->
+                    Long.compare(m2.getDaysExpired(), m1.getDaysExpired()));
+        } else if (currentSort.equals(getString(R.string.sort_recently_expired))) {
+            Collections.sort(filteredMembers, (m1, m2) ->
+                    Long.compare(m1.getDaysExpired(), m2.getDaysExpired()));
+        } else if (currentSort.equals(getString(R.string.sort_expiring_soon))) {
+            Collections.sort(filteredMembers, (m1, m2) ->
+                    Long.compare(m1.getDaysExpired(), m2.getDaysExpired()));
+        } else if (currentSort.equals(getString(R.string.sort_highest_dues))) {
+            Collections.sort(filteredMembers, (m1, m2) ->
+                    Integer.compare(m2.getOutstandingBalance(), m1.getOutstandingBalance()));
+        } else if (currentSort.equals(getString(R.string.sort_lowest_dues))) {
+            Collections.sort(filteredMembers, (m1, m2) ->
+                    Integer.compare(m1.getOutstandingBalance(), m2.getOutstandingBalance()));
         }
 
         adapter.updateList(filteredMembers);
@@ -569,10 +534,9 @@ public class ExpiredMembersActivity extends BaseActivity {
 
         tvTotalExpired.setText(String.valueOf(totalExpired));
         tvWithDues.setText(String.valueOf(withDues));
-        tvTotalDuesAmount.setText("₹" + totalDuesAmount);
+        tvTotalDuesAmount.setText(getString(R.string.rupee_prefix) + totalDuesAmount);
 
-        Log.d(TAG, "Stats - Expired: " + totalExpired + ", With Dues: " + withDues +
-                ", Total Dues: ₹" + totalDuesAmount);
+        Log.d(TAG, getString(R.string.stats_log, totalExpired, withDues, totalDuesAmount));
     }
 
     private void updateEmptyState() {
@@ -606,6 +570,5 @@ public class ExpiredMembersActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Auto-refresh via ValueEventListener
     }
 }

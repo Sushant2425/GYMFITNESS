@@ -41,9 +41,8 @@ import java.util.Locale;
 
 public class PlanExpiryReminderActivity extends BaseActivity {
 
-    // Make these class fields so they're accessible everywhere
     private ViewPager2 viewPager;
-    private TabLayout tabLayout;  // New: For updating tab titles
+    private TabLayout tabLayout;
     private final List<PlanExpiryModel> todayList = new ArrayList<>();
     private final List<PlanExpiryModel> soonList = new ArrayList<>();
     private final List<PlanExpiryModel> expiredList = new ArrayList<>();
@@ -54,22 +53,17 @@ public class PlanExpiryReminderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_expiry_reminder);
 
-        // Initialize toolbar and set title
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Make sure title is shown
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setTitle("Plan Expiry Reminders");
+            getSupportActionBar().setTitle(getString(R.string.plan_expiry_reminders));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         }
 
-        // Set navigation click listener
         toolbar.setNavigationOnClickListener(v -> finish());
         toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
-
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -79,46 +73,44 @@ public class PlanExpiryReminderActivity extends BaseActivity {
 
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> {
-                    // Initial text (counts added later)
                     switch (position) {
                         case 0:
-                            tab.setText("Expiring Today");
+                            tab.setText(getString(R.string.expiring_today));
                             break;
                         case 1:
-                            tab.setText("Expiring Soon");
+                            tab.setText(getString(R.string.expiring_soon));
                             break;
                         case 2:
-                            tab.setText("Expired");
+                            tab.setText(getString(R.string.expired));
                             break;
                     }
                 }).attach();
 
-        // Find and setup FAB
         FloatingActionButton fabSendAll = findViewById(R.id.fabSendAll);
         fabSendAll.setOnClickListener(v -> {
             int total = todayList.size() + soonList.size() + expiredList.size();
             if (total == 0) {
-                Toast.makeText(this, "No members found!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_members_found), Toast.LENGTH_SHORT).show();
                 return;
             }
             new AlertDialog.Builder(this)
-                    .setTitle("Send All Reminders?")
-                    .setMessage("Send SMS + WhatsApp to " + total + " members?")
-                    .setPositiveButton("Send All", (dialog, which) -> sendAllReminders())
-                    .setNegativeButton("Cancel", null)
+                    .setTitle(getString(R.string.send_all_reminders))
+                    .setMessage(getString(R.string.send_all_reminders_message, total))
+                    .setPositiveButton(getString(R.string.send_all), (dialog, which) -> sendAllReminders())
+                    .setNegativeButton(getString(R.string.cancel), null)
                     .show();
         });
 
-        // Make FAB visible
         fabSendAll.setVisibility(View.INVISIBLE);
 
         fetchExpiringMembers();
     }
+
     private void sendAllReminders() {
         sendRemindersFromList(todayList);
         sendRemindersFromList(soonList);
         sendRemindersFromList(expiredList);
-        Toast.makeText(this, "All reminders sent successfully!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.all_reminders_sent), Toast.LENGTH_LONG).show();
     }
 
     private void sendRemindersFromList(List<PlanExpiryModel> list) {
@@ -136,56 +128,53 @@ public class PlanExpiryReminderActivity extends BaseActivity {
             return;
         }
 
-        // New: Different message templates based on remainingDays
-        PlanExpiryModel model = findModelByPhone(phone);  // Helper to get model for remainingDays
+        PlanExpiryModel model = findModelByPhone(phone);
         String message;
         if (model != null) {
             int days = model.remainingDays;
             if (days < 0) {
-                message = "🚨 " + name + ", your plan expired " + Math.abs(days) + " days ago! Please renew. SUSHANT GYM";
+                message = getString(R.string.sms_plan_expired, name, Math.abs(days));
             } else if (days == 0) {
-                message = "⏰ " + name + ", your plan expires today! Renew now to continue. SUSHANT GYM";
+                message = getString(R.string.sms_plan_expires_today, name);
             } else {
-                message = "⏰ " + name + ", your plan expires in " + days + " days. Renew soon! SUSHANT GYM";
+                message = getString(R.string.sms_plan_expires_in, name, days);
             }
         } else {
-            message = "⏰ REMINDER " + name + "! Your plan expires soon. Renew now! SUSHANT GYM";  // Fallback
+            message = getString(R.string.sms_plan_expires_soon_fallback, name);
         }
 
         try {
             SmsManager.getDefault().sendTextMessage(phone, null, message, null, null);
-            Toast.makeText(this, "SMS sent to " + name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.sms_sent_to, name), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "SMS failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.sms_failed, e.getMessage()), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void sendReminderWhatsApp(String phone, String name, String status) {
         try {
-            // New: Different message templates based on remainingDays
-            PlanExpiryModel model = findModelByPhone(phone);  // Helper to get model
+            PlanExpiryModel model = findModelByPhone(phone);
             String message;
             if (model != null) {
                 int days = model.remainingDays;
                 if (days < 0) {
-                    message = "🚨 " + name + ", your plan expired " + Math.abs(days) + " days ago! Please renew. SUSHANT GYM";
+                    message = getString(R.string.whatsapp_plan_expired, name, Math.abs(days));
                 } else if (days == 0) {
-                    message = "⏰ " + name + ", your plan expires today! Renew now. SUSHANT GYM";
+                    message = getString(R.string.whatsapp_plan_expires_today, name);
                 } else {
-                    message = "⏰ " + name + ", your plan expires in " + days + " days. Renew soon! SUSHANT GYM";
+                    message = getString(R.string.whatsapp_plan_expires_in, name, days);
                 }
             } else {
-                message = "⏰ REMINDER " + name + "! Plan expires soon. Renew now! SUSHANT GYM";  // Fallback
+                message = getString(R.string.whatsapp_plan_expires_soon_fallback, name);
             }
             String encodedMsg = URLEncoder.encode(message, "UTF-8");
             String url = "https://wa.me/91" + phone + "?text=" + encodedMsg;
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         } catch (Exception e) {
-            Toast.makeText(this, "WhatsApp failed to open", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.whatsapp_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
-    // New: Helper to find model by phone (since we need remainingDays in send methods)
     private PlanExpiryModel findModelByPhone(String phone) {
         for (PlanExpiryModel m : todayList) if (m.phone.equals(phone)) return m;
         for (PlanExpiryModel m : soonList) if (m.phone.equals(phone)) return m;
@@ -199,9 +188,9 @@ public class PlanExpiryReminderActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_PERMISSION_CODE && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "SMS permission granted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.sms_permission_granted), Toast.LENGTH_SHORT).show();
         } else if (requestCode == SMS_PERMISSION_CODE) {
-            Toast.makeText(this, "SMS permission denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.sms_permission_denied), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -234,7 +223,6 @@ public class PlanExpiryReminderActivity extends BaseActivity {
                     long endMillis = parseDate(endDateStr);
                     if (endMillis == 0) continue;
 
-                    // New: Calculate remaining days
                     long millisDiff = endMillis - today;
                     int remainingDays = (int) (millisDiff / (24 * 60 * 60 * 1000));
 
@@ -242,45 +230,42 @@ public class PlanExpiryReminderActivity extends BaseActivity {
                     model.remainingDays = remainingDays;
 
                     if (remainingDays < 0) {
-                        model.status = "EXPIRED";
+                        model.status = getString(R.string.expired_uppercase);
                         expiredList.add(model);
                     } else if (remainingDays == 0) {
-                        model.status = "EXPIRING TODAY";
+                        model.status = getString(R.string.expiring_today_uppercase);
                         todayList.add(model);
                     } else if (endMillis <= next3Days) {
-                        model.status = "EXPIRING SOON";
+                        model.status = getString(R.string.expiring_soon_uppercase);
                         soonList.add(model);
                     }
                 }
 
-                // New: Sort lists alphabetically by name for better UX
                 sortListByName(todayList);
                 sortListByName(soonList);
                 sortListByName(expiredList);
 
-                // Now we can safely access viewPager
                 if (viewPager != null && viewPager.getAdapter() != null) {
                     viewPager.getAdapter().notifyDataSetChanged();
-                    updateTabTitles();  // New: Update tabs with counts
+                    updateTabTitles();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(PlanExpiryReminderActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlanExpiryReminderActivity.this,
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    // New: Update tab titles with counts
     private void updateTabTitles() {
         if (tabLayout == null) return;
-        tabLayout.getTabAt(0).setText("Expiring Today (" + todayList.size() + ")");
-        tabLayout.getTabAt(1).setText("Expiring Soon (" + soonList.size() + ")");
-        tabLayout.getTabAt(2).setText("Expired (" + expiredList.size() + ")");
+        tabLayout.getTabAt(0).setText(getString(R.string.expiring_today_with_count, todayList.size()));
+        tabLayout.getTabAt(1).setText(getString(R.string.expiring_soon_with_count, soonList.size()));
+        tabLayout.getTabAt(2).setText(getString(R.string.expired_with_count, expiredList.size()));
     }
 
-    // New: Sort helper
     private void sortListByName(List<PlanExpiryModel> list) {
         Collections.sort(list, Comparator.comparing(m -> m.name.toLowerCase(Locale.getDefault())));
     }

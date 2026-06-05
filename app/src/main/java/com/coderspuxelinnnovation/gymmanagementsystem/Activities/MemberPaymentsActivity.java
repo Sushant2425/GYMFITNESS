@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.PaymentsAdapter;
+import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.PaymentModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MemberPaymentsActivity extends AppCompatActivity {
+public class MemberPaymentsActivity extends BaseActivity {
 
     private RecyclerView recyclerPayments;
     private PaymentsAdapter adapter;
@@ -68,14 +69,12 @@ public class MemberPaymentsActivity extends AppCompatActivity {
                 .child("payments");
 
         ref.addValueEventListener(new ValueEventListener() {
-            // Replace onDataChange() only:
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.GONE);
                 ArrayList<PaymentModel> payments = new ArrayList<>();
 
                 for (DataSnapshot paymentSnapshot : snapshot.getChildren()) {
-                    // ✅ SAFE: Manual parse instead of getValue()
                     try {
                         String paymentId = paymentSnapshot.getKey();
                         Long date = paymentSnapshot.child("date").getValue(Long.class);
@@ -109,7 +108,6 @@ public class MemberPaymentsActivity extends AppCompatActivity {
                     adapter.updatePayments(payments);
                 }
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

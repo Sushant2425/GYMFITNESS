@@ -53,15 +53,15 @@ public class ExpiryPagerAdapter extends RecyclerView.Adapter<ExpiryPagerAdapter.
         switch (position) {
             case 0:
                 currentList = todayList;
-                emptyMessage = "No members expiring today 🎉";
+                emptyMessage = context.getString(R.string.no_members_expiring_today);
                 break;
             case 1:
                 currentList = soonList;
-                emptyMessage = "No members expiring soon 🎉";
+                emptyMessage = context.getString(R.string.no_members_expiring_soon);
                 break;
             default:
                 currentList = expiredList;
-                emptyMessage = "No expired plans 🎉";
+                emptyMessage = context.getString(R.string.no_expired_plans);
                 break;
         }
 
@@ -69,7 +69,6 @@ public class ExpiryPagerAdapter extends RecyclerView.Adapter<ExpiryPagerAdapter.
         holder.recyclerView.setAdapter(adapter);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        // Fixed - compatible with Java 8 & 11
         adapter.setOnReminderClickListener(new PlanExpiryAdapter.OnReminderClickListener() {
             @Override
             public void onSmsClick(String phone, String name, String status) {
@@ -91,7 +90,6 @@ public class ExpiryPagerAdapter extends RecyclerView.Adapter<ExpiryPagerAdapter.
         holder.tvEmpty.setText(emptyMessage);
         holder.tvEmpty.setVisibility(currentList.isEmpty() ? View.VISIBLE : View.GONE);
 
-        // New: Search filter
         holder.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -115,7 +113,7 @@ public class ExpiryPagerAdapter extends RecyclerView.Adapter<ExpiryPagerAdapter.
     static class PageViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
         TextView tvEmpty;
-        EditText etSearch;  // New: For search
+        EditText etSearch;
 
         PageViewHolder(@NonNull View itemView) {
             super(itemView);

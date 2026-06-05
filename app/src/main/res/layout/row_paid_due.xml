@@ -37,14 +37,13 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Member Name"
+                    android:text="@string/member_name"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    tools:ignore="HardcodedText" />
+                    android:ellipsize="end" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -54,15 +53,14 @@
                     android:textColor="#BDBDBD"
                     android:textSize="13sp"
                     android:layout_marginTop="2dp"
-                    android:maxLines="1"
-                    tools:ignore="HardcodedText" />
+                    android:maxLines="1" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PAID"
+                android:text="@string/paid_uppercase"
                 android:textColor="#FFFFFF"
                 android:textSize="11sp"
                 android:textStyle="bold"
@@ -70,8 +68,7 @@
                 android:background="@drawable/bg_status_paid"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
-                android:elevation="1dp"
-                tools:ignore="HardcodedText" />
+                android:elevation="1dp" />
         </LinearLayout>
 
         <!-- Thin Divider -->
@@ -94,23 +91,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Monthly Plan"
+                android:text="@string/monthly_plan"
                 android:textColor="#9E9E9E"
                 android:textSize="13sp"
                 android:maxLines="1"
-                android:ellipsize="end"
-                tools:ignore="HardcodedText" />
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/tvMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jan 2025"
+                android:text="@string/jan_2025"
                 android:textColor="#FF9800"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:maxLines="1"
-                tools:ignore="HardcodedText" />
+                android:maxLines="1" />
         </LinearLayout>
 
         <!-- Thin Divider -->
@@ -138,21 +133,19 @@
                     android:id="@+id/tvPaidAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid Amount"
+                    android:text="@string/paid_amount"
                     android:textColor="#9E9E9E"
-                    android:textSize="12sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvPaymentDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5 days ago"
+                    android:text="@string/days_ago"
                     android:textColor="#FFC107"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="2dp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="2dp" />
             </LinearLayout>
 
             <TextView
@@ -163,8 +156,7 @@
                 android:textColor="#FF6B00"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
-                tools:ignore="HardcodedText" />
+                android:fontFamily="sans-serif-medium" />
         </LinearLayout>
 
         <!-- Success Footer -->
@@ -182,17 +174,16 @@
                 android:layout_height="18dp"
                 android:src="@drawable/ic_check_circle"
                 app:tint="#FF6B00"
-                android:contentDescription="Success" />
+                android:contentDescription="@string/success" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Payment Completed"
+                android:text="@string/payment_completed"
                 android:textColor="#FF6B00"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginStart="6dp"
-                tools:ignore="HardcodedText" />
+                android:layout_marginStart="6dp" />
         </LinearLayout>
 
     </LinearLayout>

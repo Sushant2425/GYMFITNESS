@@ -1,7 +1,6 @@
 package com.coderspuxelinnnovation.gymmanagementsystem.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,6 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
             ivStatus = itemView.findViewById(R.id.ivStatus);
             cvStatusBadge = itemView.findViewById(R.id.cvStatusBadge);
 
-            // Find the parent CardView of the icon
             View iconContainer = itemView.findViewById(R.id.ivStatus).getParent() instanceof CardView ?
                     (View) itemView.findViewById(R.id.ivStatus).getParent() : null;
             if (iconContainer instanceof CardView) {
@@ -98,24 +96,19 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
             MemberModel.Info info = member.getInfo();
             MemberModel.CurrentPlan plan = member.getCurrentPlan();
 
-            // Set basic info
             tvName.setText(info.getName());
             tvPhone.setText(info.getPhone());
 
-            // Set plan info
             if (plan != null) {
                 String planText = plan.getPlanType() + " (₹" + plan.getTotalFee() + ")";
                 tvPlan.setText(planText);
 
-                // Determine status
                 boolean isActive = "ACTIVE".equals(plan.getStatus());
                 boolean isExpiringSoon = isExpiringSoon(plan.getEndDate());
 
-                // Set status text and colors - Black & Orange Theme
                 if (isActive) {
                     if (isExpiringSoon) {
-                        // Expiring soon - Orange/Amber theme
-                        tvStatus.setText("Expiring Soon");
+                        tvStatus.setText(getString(R.string.expiring_soon_status));
                         tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pending_text));
                         cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_pending_bg));
 
@@ -125,8 +118,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
                             cvIconBackground.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_pending_bg));
                         }
                     } else {
-                        // Active - Orange theme (instead of green)
-                        tvStatus.setText("Active");
+                        tvStatus.setText(getString(R.string.active_status));
                         tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_active_text));
                         cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_active_bg));
 
@@ -137,8 +129,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
                         }
                     }
                 } else {
-                    // Expired - Red theme
-                    tvStatus.setText("Expired");
+                    tvStatus.setText(getString(R.string.expired_status));
                     tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_expired_text));
                     cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_expired_bg));
 
@@ -149,12 +140,11 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
                     }
                 }
 
-                // Set expiry date
                 tvExpiry.setText(plan.getEndDate());
 
             } else {
-                tvPlan.setText("No active plan");
-                tvStatus.setText("Inactive");
+                tvPlan.setText(getString(R.string.no_active_plan));
+                tvStatus.setText(getString(R.string.inactive_status));
                 tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_default_text));
                 cvStatusBadge.setCardBackgroundColor(ContextCompat.getColor(context, R.color.status_default_bg));
                 tvExpiry.setText("--");
@@ -166,6 +156,10 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
             }
         }
 
+        private String getString(int resId) {
+            return context.getString(resId);
+        }
+
         private boolean isExpiringSoon(String endDateStr) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -173,7 +167,7 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MemberVi
 
                 if (endDate != null) {
                     Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.DAY_OF_YEAR, 7); // Next 7 days
+                    cal.add(Calendar.DAY_OF_YEAR, 7);
                     Date weekFromNow = cal.getTime();
 
                     Date today = new Date();

@@ -15,7 +15,7 @@
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No expiring plans 🎉"
+        android:text="@string/no_expiring_plans"
         android:textSize="16sp"
         android:textColor="#9E9E9E"
         android:visibility="gone"

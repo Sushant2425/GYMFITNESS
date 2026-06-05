@@ -46,79 +46,71 @@ public class ExpiredMemberAdapter extends RecyclerView.Adapter<ExpiredMemberAdap
     public void onBindViewHolder(@NonNull ExpiredMemberViewHolder holder, int position) {
         GymMember member = expiredMembersList.get(position);
 
-        // Set initial (first letter of name)
         if (member.getName() != null && !member.getName().isEmpty()) {
             holder.tvInitial.setText(String.valueOf(member.getName().charAt(0)).toUpperCase());
         } else {
             holder.tvInitial.setText("?");
         }
 
-        // Set member basic info
-        holder.tvMemberName.setText(member.getName() != null ? member.getName() : "Unknown");
-        holder.tvMemberPhone.setText("+91 " + member.getPhone());
+        holder.tvMemberName.setText(member.getName() != null ? member.getName() : context.getString(R.string.unknown));
+        holder.tvMemberPhone.setText(context.getString(R.string.phone_with_code, member.getPhone()));
 
-        // Set plan details
         if (member.getCurrentPlan() != null) {
             GymMember.PlanDetails plan = member.getCurrentPlan();
 
-            holder.tvPlanType.setText(plan.getPlanType() != null ? plan.getPlanType() : "No Plan");
+            holder.tvPlanType.setText(plan.getPlanType() != null ? plan.getPlanType() : context.getString(R.string.no_plan));
 
-            // Show expiry information
             if (member.getDaysExpired() > 0) {
-                holder.tvEndDate.setText(member.getDaysExpired() + " days ago");
-                holder.tvStatus.setText("EXPIRED");
-                holder.tvStatus.setBackgroundColor(Color.parseColor("#EF5350")); // Red
+                holder.tvEndDate.setText(context.getString(R.string.days_ago_format, member.getDaysExpired()));
+                holder.tvStatus.setText(context.getString(R.string.expired_uppercase));
+                holder.tvStatus.setBackgroundColor(Color.parseColor("#EF5350"));
                 holder.statusIndicator.setCardBackgroundColor(Color.parseColor("#EF5350"));
                 holder.viewBottomIndicator.setBackgroundColor(Color.parseColor("#EF5350"));
                 holder.ivExpiryIcon.setColorFilter(Color.parseColor("#EF5350"));
                 holder.tvEndDate.setTextColor(Color.parseColor("#EF5350"));
             } else if (member.getDaysExpired() < 0) {
                 long daysRemaining = Math.abs(member.getDaysExpired());
-                holder.tvEndDate.setText("Expires in " + daysRemaining + " days");
-                holder.tvStatus.setText("EXPIRING");
-                holder.tvStatus.setBackgroundColor(Color.parseColor("#FF9800")); // Orange
+                holder.tvEndDate.setText(context.getString(R.string.expires_in_days, daysRemaining));
+                holder.tvStatus.setText(context.getString(R.string.expiring_uppercase));
+                holder.tvStatus.setBackgroundColor(Color.parseColor("#FF9800"));
                 holder.statusIndicator.setCardBackgroundColor(Color.parseColor("#FF9800"));
                 holder.viewBottomIndicator.setBackgroundColor(Color.parseColor("#FF9800"));
                 holder.ivExpiryIcon.setColorFilter(Color.parseColor("#FF9800"));
                 holder.tvEndDate.setTextColor(Color.parseColor("#FF9800"));
             } else {
-                holder.tvEndDate.setText("Expires today");
-                holder.tvStatus.setText("EXPIRED");
+                holder.tvEndDate.setText(context.getString(R.string.expires_today));
+                holder.tvStatus.setText(context.getString(R.string.expired_uppercase));
                 holder.tvStatus.setBackgroundColor(Color.parseColor("#EF5350"));
                 holder.statusIndicator.setCardBackgroundColor(Color.parseColor("#EF5350"));
                 holder.viewBottomIndicator.setBackgroundColor(Color.parseColor("#EF5350"));
             }
         } else {
-            holder.tvPlanType.setText("No Active Plan");
-            holder.tvEndDate.setText("Plan not found");
-            holder.tvStatus.setText("NO PLAN");
+            holder.tvPlanType.setText(context.getString(R.string.no_active_plan));
+            holder.tvEndDate.setText(context.getString(R.string.plan_not_found));
+            holder.tvStatus.setText(context.getString(R.string.no_plan_uppercase));
             holder.tvStatus.setBackgroundColor(Color.parseColor("#9E9E9E"));
         }
 
-        // Show/hide dues layout
         if (member.hasPendingDues()) {
             holder.layoutDues.setVisibility(View.VISIBLE);
-            holder.tvOutstandingBalance.setText("₹" + member.getOutstandingBalance());
-            Log.d(TAG, member.getName() + " - Showing dues: ₹" + member.getOutstandingBalance());
+            holder.tvOutstandingBalance.setText(context.getString(R.string.rupee_prefix) + member.getOutstandingBalance());
+            Log.d(TAG, member.getName() + context.getString(R.string.showing_dues_log) + member.getOutstandingBalance());
         } else {
             holder.layoutDues.setVisibility(View.GONE);
-            Log.d(TAG, member.getName() + " - No dues");
+            Log.d(TAG, member.getName() + context.getString(R.string.no_dues_log));
         }
 
-        // Always show renew button and divider
         holder.layoutExpiredActions.setVisibility(View.VISIBLE);
         holder.dividerLine.setVisibility(View.VISIBLE);
 
-        // Update button text based on dues
         if (member.hasPendingDues()) {
-            holder.btnRenewPlan.setText(" Renew Plan");
-            holder.btnRenewPlan.setBackgroundColor(Color.parseColor("#FF9800")); // Orange for dues
+            holder.btnRenewPlan.setText(context.getString(R.string.renew_plan_text));
+            holder.btnRenewPlan.setBackgroundColor(Color.parseColor("#FF9800"));
         } else {
-            holder.btnRenewPlan.setText(" Renew Plan");
-            holder.btnRenewPlan.setBackgroundColor(Color.parseColor("#EF5350")); // Red for normal
+            holder.btnRenewPlan.setText(context.getString(R.string.renew_plan_text));
+            holder.btnRenewPlan.setBackgroundColor(Color.parseColor("#EF5350"));
         }
 
-        // Renew Plan Button Click
         holder.btnRenewPlan.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlanRenewalActivity.class);
             intent.putExtra("phone", member.getPhone());
@@ -126,7 +118,6 @@ public class ExpiredMemberAdapter extends RecyclerView.Adapter<ExpiredMemberAdap
             context.startActivity(intent);
         });
 
-        // Card Click - Show details
         holder.cardMember.setOnClickListener(v -> {
             showMemberDetailsToast(member);
         });
@@ -140,7 +131,7 @@ public class ExpiredMemberAdapter extends RecyclerView.Adapter<ExpiredMemberAdap
     public void updateList(List<GymMember> newList) {
         this.expiredMembersList = newList;
         notifyDataSetChanged();
-        Log.d(TAG, "List updated with " + newList.size() + " members");
+        Log.d(TAG, context.getString(R.string.list_updated_log, newList.size()));
     }
 
     private void showMemberDetailsToast(GymMember member) {
@@ -148,14 +139,14 @@ public class ExpiredMemberAdapter extends RecyclerView.Adapter<ExpiredMemberAdap
         message.append(member.getName()).append("\n");
 
         if (member.getCurrentPlan() != null) {
-            message.append("Plan: ").append(member.getCurrentPlan().getPlanType()).append("\n");
-            message.append("Fee: ₹").append(member.getCurrentPlan().getTotalFee()).append("\n");
+            message.append(context.getString(R.string.plan_label)).append(member.getCurrentPlan().getPlanType()).append("\n");
+            message.append(context.getString(R.string.fee_label)).append(context.getString(R.string.rupee_prefix)).append(member.getCurrentPlan().getTotalFee()).append("\n");
         }
 
         if (member.hasPendingDues()) {
-            message.append("Pending: ₹").append(member.getOutstandingBalance());
+            message.append(context.getString(R.string.pending_label)).append(context.getString(R.string.rupee_prefix)).append(member.getOutstandingBalance());
         } else {
-            message.append("No pending dues");
+            message.append(context.getString(R.string.no_pending_dues_message));
         }
 
         android.widget.Toast.makeText(context, message.toString(), android.widget.Toast.LENGTH_SHORT).show();

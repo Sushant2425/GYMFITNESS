@@ -74,7 +74,6 @@ public class MembersListActivity extends BaseActivity {
         emptyState = findViewById(R.id.emptyState);
         tvTitle = findViewById(R.id.tvTitle);
 
-        // Filter chips
         chipAll = findViewById(R.id.chipAll);
         chipActive = findViewById(R.id.chipActive);
         chipExpired = findViewById(R.id.chipExpired);
@@ -99,7 +98,6 @@ public class MembersListActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
-        // Add scroll listener for FAB
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -121,45 +119,32 @@ public class MembersListActivity extends BaseActivity {
     private void setupSearch() {
         SearchView searchView = findViewById(R.id.searchView);
 
-        // Get the SearchView's EditText and style it
         android.widget.EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
 
         if (searchEditText != null) {
-            // Set text color to WHITE for visibility on dark background
             searchEditText.setTextColor(Color.WHITE);
-
-            // Set hint text color to light gray
             searchEditText.setHintTextColor(Color.parseColor("#9E9E9E"));
-
-            // Set background color
             searchEditText.setBackgroundColor(Color.TRANSPARENT);
-
-            // Set text size
             searchEditText.setTextSize(14);
         }
 
-        // Style the search plate background
         View searchPlate = searchView.findViewById(androidx.appcompat.R.id.search_plate);
         if (searchPlate != null) {
             searchPlate.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        // Style the close/clear button
         ImageView closeButton = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
         if (closeButton != null) {
             closeButton.setColorFilter(Color.parseColor("#FF9800"));
         }
 
-        // Style the search icon (if visible)
         ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
         if (searchIcon != null) {
             searchIcon.setColorFilter(Color.parseColor("#FF9800"));
         }
 
-        // Set query hint
-        searchView.setQueryHint("Search by name or phone");
+        searchView.setQueryHint(getString(R.string.search_by_name_or_phone));
 
-        // Handle search query
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -174,8 +159,6 @@ public class MembersListActivity extends BaseActivity {
             }
         });
     }
-
-
 
     private void setupFilterChips() {
         chipAll.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -238,10 +221,7 @@ public class MembersListActivity extends BaseActivity {
                     }
                 }
 
-                // Update title
                 updateTitle();
-
-                // Apply current filter
                 applyFilter();
             }
 
@@ -256,7 +236,7 @@ public class MembersListActivity extends BaseActivity {
     }
 
     private void updateTitle() {
-        tvTitle.setText("Members (" + memberList.size() + ")");
+        tvTitle.setText(getString(R.string.members_count, memberList.size()));
     }
 
     private void applyFilter() {
@@ -287,7 +267,6 @@ public class MembersListActivity extends BaseActivity {
             }
         }
 
-        // Apply search query if exists
         String query = searchView.getQuery().toString();
         if (!query.isEmpty()) {
             filterMembers(query);
@@ -309,7 +288,7 @@ public class MembersListActivity extends BaseActivity {
 
             if (endDate != null) {
                 Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.DAY_OF_YEAR, 7); // Next 7 days
+                cal.add(Calendar.DAY_OF_YEAR, 7);
                 Date weekFromNow = cal.getTime();
 
                 Date today = new Date();

@@ -83,7 +83,7 @@ public class SettingsFragment extends Fragment {
         String userEmail = prefManager.getUserEmail();
 
         if (userEmail == null || userEmail.isEmpty()) {
-            Log.e(TAG, "User email not found in preferences");
+            Log.e(TAG, getString(R.string.user_email_not_found));
             loadUserInfoFromPrefs();
             return;
         }
@@ -119,11 +119,11 @@ public class SettingsFragment extends Fragment {
                                 // Update UI
                                 updateUI(gymName, email);
 
-                                Log.d(TAG, "Owner info loaded successfully from Firebase");
+                                Log.d(TAG, getString(R.string.owner_info_loaded_success));
                                 break;
                             }
                         } else {
-                            Log.e(TAG, "No gym found for email: " + userEmail);
+                            Log.e(TAG, getString(R.string.no_gym_found, userEmail));
                             // Fallback to preferences
                             loadUserInfoFromPrefs();
                         }
@@ -131,7 +131,7 @@ public class SettingsFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e(TAG, "Firebase error: " + error.getMessage());
+                        Log.e(TAG, getString(R.string.firebase_error_log, error.getMessage()));
                         showToast(getString(R.string.error_loading_data));
                         // Fallback to preferences
                         loadUserInfoFromPrefs();

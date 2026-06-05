@@ -66,7 +66,7 @@
                     android:src="@drawable/logogym"
                     android:layout_centerInParent="true"
                     android:scaleType="centerInside"
-                />
+                    android:contentDescription="@string/gym_logo_desc" />
 
                 <!-- Animated Pulse Ring -->
                 <View
@@ -200,7 +200,8 @@
         android:layout_alignParentStart="true"
         android:layout_margin="32dp"
         android:alpha="0.15"
-        app:tint="#FF6B00"/>
+        app:tint="#FF6B00"
+        android:contentDescription="@string/expire_plan"/>
 
     <ImageView
         android:id="@+id/floatingIcon2"
@@ -211,7 +212,8 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="40dp"
         android:alpha="0.15"
-        app:tint="#FF6B00"/>
+        app:tint="#FF6B00"
+        android:contentDescription="@string/open_24_7"/>
 
     <ImageView
         android:id="@+id/floatingIcon3"
@@ -222,6 +224,7 @@
         android:layout_alignParentStart="true"
         android:layout_margin="48dp"
         android:alpha="0.15"
-        app:tint="#FF6B00"/>
+        app:tint="#FF6B00"
+        android:contentDescription="@string/modern_equipment"/>
 
 </RelativeLayout>

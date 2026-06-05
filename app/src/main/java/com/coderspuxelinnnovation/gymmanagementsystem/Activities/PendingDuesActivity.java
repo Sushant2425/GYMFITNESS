@@ -32,6 +32,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.PaymentTabsAdapter;
+import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.PendingDueModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -61,8 +62,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.UUID;
 
-public class PendingDuesActivity extends AppCompatActivity {
-
+public class PendingDuesActivity extends BaseActivity {
     private MaterialToolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
@@ -101,7 +101,6 @@ public class PendingDuesActivity extends AppCompatActivity {
         setupFirebase();
         setupListeners();
 
-        // Request SMS permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE);
         }
@@ -162,24 +161,18 @@ public class PendingDuesActivity extends AppCompatActivity {
             applyFilters();
         });
 
-        // Open calendar picker when clicking on month container
         View monthContainer = findViewById(R.id.monthContainer);
         monthContainer.setOnClickListener(v -> {
             openMonthPicker();
         });
     }
 
-    /**
-     * Opens Material Date Picker for month selection
-     */
     private void openMonthPicker() {
-        // Create calendar instance for selected month
         Calendar calendar = Calendar.getInstance();
         if (!showAllMonths) {
             calendar.setTime(currentCalendar.getTime());
         }
 
-        // Get start of month
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -187,31 +180,29 @@ public class PendingDuesActivity extends AppCompatActivity {
         calendar.set(Calendar.MILLISECOND, 0);
         long selectedDate = calendar.getTimeInMillis();
 
-        // Build Material Date Picker
         MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select Month")
+                .setTitleText(getString(R.string.select_month))
                 .setSelection(selectedDate)
                 .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
                 .build();
 
         datePicker.addOnPositiveButtonClickListener(selection -> {
-            // Convert selection to calendar
             Calendar selectedCal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
             selectedCal.setTimeInMillis(selection);
 
-            // Update current calendar to selected month
             currentCalendar.set(Calendar.YEAR, selectedCal.get(Calendar.YEAR));
             currentCalendar.set(Calendar.MONTH, selectedCal.get(Calendar.MONTH));
             currentCalendar.set(Calendar.DAY_OF_MONTH, 1);
 
-            // Update UI and filters
             showAllMonths = false;
             selectedMonthYear = monthYearFormat.format(currentCalendar.getTime());
             updateMonthDisplay();
             applyFilters();
 
             Toast.makeText(this,
-                    "Selected: " + monthFormat.format(currentCalendar.getTime()) + " " + yearFormat.format(currentCalendar.getTime()),
+                    getString(R.string.selected_month,
+                            monthFormat.format(currentCalendar.getTime()),
+                            yearFormat.format(currentCalendar.getTime())),
                     Toast.LENGTH_SHORT).show();
         });
 
@@ -224,8 +215,8 @@ public class PendingDuesActivity extends AppCompatActivity {
 
     private void updateMonthDisplay() {
         if (showAllMonths) {
-            tvCurrentMonth.setText("All Months");
-            tvMonthYear.setText("Complete History");
+            tvCurrentMonth.setText(getString(R.string.all_months));
+            tvMonthYear.setText(getString(R.string.complete_history));
             btnPrevMonth.setAlpha(0.5f);
             btnNextMonth.setAlpha(0.5f);
         } else {
@@ -253,9 +244,9 @@ public class PendingDuesActivity extends AppCompatActivity {
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             if (position == 0) {
-                tab.setText("Pending");
+                tab.setText(getString(R.string.pending_tab));
             } else {
-                tab.setText("Paid");
+                tab.setText(getString(R.string.paid_tab));
             }
         }).attach();
 
@@ -273,7 +264,7 @@ public class PendingDuesActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search member...");
+        searchView.setQueryHint(getString(R.string.search_member_hint));
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -312,15 +303,15 @@ public class PendingDuesActivity extends AppCompatActivity {
 
     private void showQuickFilters() {
         String[] filterOptions = {
-                "All Months",
-                "This Month",
-                "Last Month",
-                "Last 3 Months",
-                "Custom Month (Calendar)"
+                getString(R.string.all_months_filter),
+                getString(R.string.this_month),
+                getString(R.string.last_month),
+                getString(R.string.last_3_months),
+                getString(R.string.custom_month)
         };
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Quick Filters")
+                .setTitle(getString(R.string.quick_filters))
                 .setItems(filterOptions, (dialog, which) -> {
                     switch (which) {
                         case 0:
@@ -340,15 +331,14 @@ public class PendingDuesActivity extends AppCompatActivity {
                             showAllMonths = false;
                             break;
                         case 4:
-                            // Open calendar picker
                             openMonthPicker();
-                            return; // Don't update immediately, wait for picker
+                            return;
                     }
                     selectedMonthYear = monthYearFormat.format(currentCalendar.getTime());
                     updateMonthDisplay();
                     applyFilters();
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show();
     }
 
@@ -362,7 +352,7 @@ public class PendingDuesActivity extends AppCompatActivity {
         }
         updateMonthDisplay();
         applyFilters();
-        Toast.makeText(this, "Filters cleared", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.filters_cleared), Toast.LENGTH_SHORT).show();
     }
 
     private void setupFirebase() {
@@ -373,7 +363,7 @@ public class PendingDuesActivity extends AppCompatActivity {
     private void setupListeners() {
         fabRefresh.setOnClickListener(v -> {
             loadAllPayments();
-            Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.refreshing), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -393,8 +383,7 @@ public class PendingDuesActivity extends AppCompatActivity {
 
                     if (name == null || phone == null) continue;
 
-                    // Get plan type from currentPlan
-                    String planType = "Regular";
+                    String planType = getString(R.string.regular_plan);
                     DataSnapshot currentPlanSnap = memberSnap.child("currentPlan");
                     if (currentPlanSnap.exists()) {
                         String type = currentPlanSnap.child("planType").getValue(String.class);
@@ -431,17 +420,14 @@ public class PendingDuesActivity extends AppCompatActivity {
                             due.setTotalFee(totalFee);
                             due.setAmountPaid(amountPaid != null ? amountPaid : 0);
 
-                            // Get payment status
                             String status = paySnap.child("status").getValue(String.class);
-                            due.setStatus(status != null ? status : "PENDING");
+                            due.setStatus(status != null ? status : getString(R.string.pending_status));
 
-                            // Get payment mode if exists
                             String paymentMode = paySnap.child("mode").getValue(String.class);
                             if (paymentMode != null) {
                                 due.setPaymentMode(paymentMode);
                             }
 
-                            // Store plan info
                             due.setPlanId(planId);
                             due.setPlanStartDate(planStartDate);
 
@@ -466,7 +452,7 @@ public class PendingDuesActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(PendingDuesActivity.this,
-                            "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -551,12 +537,12 @@ public class PendingDuesActivity extends AppCompatActivity {
         tvPaidCount.setText(String.valueOf(paid.size()));
 
         if (currentTab == 0) {
-            tvTotalAmount.setText("₹" + String.format(Locale.getDefault(), "%,d", totalPending));
-            tvMemberCount.setText(pending.size() + " members");
+            tvTotalAmount.setText(getString(R.string.rupee_prefix) + String.format(Locale.getDefault(), "%,d", totalPending));
+            tvMemberCount.setText(getString(R.string.members_count_format, pending.size()));
             tvTotalAmount.setTextColor(ContextCompat.getColor(this, R.color.red));
         } else {
-            tvTotalAmount.setText("₹" + String.format(Locale.getDefault(), "%,d", totalPaid));
-            tvMemberCount.setText(paid.size() + " members");
+            tvTotalAmount.setText(getString(R.string.rupee_prefix) + String.format(Locale.getDefault(), "%,d", totalPaid));
+            tvMemberCount.setText(getString(R.string.members_count_format, paid.size()));
             tvTotalAmount.setTextColor(ContextCompat.getColor(this, R.color.green));
         }
     }
@@ -574,39 +560,41 @@ public class PendingDuesActivity extends AppCompatActivity {
 
         etAmount.setText(String.valueOf(suggestedAmount));
 
-        String[] paymentModes = {"Cash", "UPI", "Card", "Bank Transfer", "Cheque"};
+        String[] paymentModes = {getString(R.string.cash), getString(R.string.upi),
+                getString(R.string.card), getString(R.string.bank_transfer),
+                getString(R.string.cheque)};
         android.widget.ArrayAdapter<String> modeAdapter = new android.widget.ArrayAdapter<>(this,
                 R.layout.dropdown_item, paymentModes);
         etPaymentMode.setAdapter(modeAdapter);
-        etPaymentMode.setText("Cash", false);
+        etPaymentMode.setText(getString(R.string.cash), false);
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Collect Payment")
-                .setMessage("Member: " + due.getName() + "\nRemaining: ₹" + due.getRemaining())
+                .setTitle(getString(R.string.collect_payment))
+                .setMessage(getString(R.string.collect_payment_message, due.getName(), due.getRemaining()))
                 .setView(dialogView)
-                .setPositiveButton("Collect", (dialog, which) -> {
+                .setPositiveButton(getString(R.string.collect), (dialog, which) -> {
                     String amountStr = etAmount.getText().toString();
                     String mode = etPaymentMode.getText().toString();
                     String notes = etNotes.getText().toString();
 
                     if (amountStr.isEmpty()) {
-                        Toast.makeText(this, "Enter amount", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.enter_amount), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     try {
                         int amount = Integer.parseInt(amountStr);
                         if (amount > due.getRemaining()) {
-                            Toast.makeText(this, "Amount exceeds due", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.amount_exceeds_due), Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if (mode.isEmpty()) mode = "Cash";
+                        if (mode.isEmpty()) mode = getString(R.string.cash);
                         collectPayment(due, amount, mode, notes);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.invalid_amount), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show();
     }
 
@@ -621,7 +609,7 @@ public class PendingDuesActivity extends AppCompatActivity {
                 if (!snapshot.exists()) {
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(PendingDuesActivity.this, "Payment record not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PendingDuesActivity.this, getString(R.string.payment_record_not_found), Toast.LENGTH_SHORT).show();
                     });
                     return;
                 }
@@ -636,14 +624,14 @@ public class PendingDuesActivity extends AppCompatActivity {
                 if (currentRemaining == null || totalFee == null) {
                     runOnUiThread(() -> {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(PendingDuesActivity.this, "Invalid payment data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PendingDuesActivity.this, getString(R.string.invalid_payment_data), Toast.LENGTH_SHORT).show();
                     });
                     return;
                 }
 
                 int newPaidAmount = (currentPaid != null ? currentPaid : 0) + amount;
                 int newRemaining = Math.max(0, currentRemaining - amount);
-                String status = newRemaining == 0 ? "PAID" : "PARTIAL";
+                String status = newRemaining == 0 ? getString(R.string.paid_status) : getString(R.string.partial_status);
 
                 String transactionId = UUID.randomUUID().toString();
 
@@ -677,14 +665,14 @@ public class PendingDuesActivity extends AppCompatActivity {
 
                             runOnUiThread(() -> {
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(PendingDuesActivity.this, "✓ Payment collected", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PendingDuesActivity.this, getString(R.string.payment_collected_message), Toast.LENGTH_SHORT).show();
                                 loadAllPayments();
                             });
                         })
                         .addOnFailureListener(e -> {
                             runOnUiThread(() -> {
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(PendingDuesActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PendingDuesActivity.this, getString(R.string.error_prefix, e.getMessage()), Toast.LENGTH_SHORT).show();
                             });
                         });
             }
@@ -693,7 +681,7 @@ public class PendingDuesActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(PendingDuesActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PendingDuesActivity.this, getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -708,7 +696,7 @@ public class PendingDuesActivity extends AppCompatActivity {
                         String currentPlanIdInDb = snapshot.child("planId").getValue(String.class);
                         if (currentPlanIdInDb != null && currentPlanIdInDb.equals(planId)) {
                             HashMap<String, Object> planUpdate = new HashMap<>();
-                            planUpdate.put("status", "ACTIVE");
+                            planUpdate.put("status", getString(R.string.active_status));
                             memberRef.child("currentPlan").updateChildren(planUpdate);
                         }
                     }
@@ -739,37 +727,37 @@ public class PendingDuesActivity extends AppCompatActivity {
 
             int y = 50;
 
-            canvas.drawText("GYM PAYMENT RECEIPT", 150, y, titlePaint);
+            canvas.drawText(getString(R.string.pdf_title), 150, y, titlePaint);
             y += 40;
 
             canvas.drawLine(20, y, 575, y, paint);
             y += 30;
 
-            canvas.drawText("Member Name : " + due.getName(), 40, y, paint); y += 25;
-            canvas.drawText("Phone       : " + due.getPhone(), 40, y, paint); y += 25;
-            canvas.drawText("For Month   : " + due.getForMonth(), 40, y, paint); y += 25;
-            canvas.drawText("Plan Type   : " + due.getPlanType(), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_member_name, due.getName()), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_phone, due.getPhone()), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_for_month, due.getForMonth()), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_plan_type, due.getPlanType()), 40, y, paint); y += 25;
 
             canvas.drawLine(20, y, 575, y, paint);
             y += 30;
 
-            canvas.drawText("Total Fee   : ₹" + due.getTotalFee(), 40, y, paint); y += 25;
-            canvas.drawText("Paid Amount : ₹" + amount, 40, y, paint); y += 25;
-            canvas.drawText("Remaining   : ₹" + remaining, 40, y, paint); y += 25;
-            canvas.drawText("Payment Via : " + mode, 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_total_fee, due.getTotalFee()), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_paid_amount, amount), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_remaining, remaining), 40, y, paint); y += 25;
+            canvas.drawText(getString(R.string.pdf_payment_via, mode), 40, y, paint); y += 25;
 
             canvas.drawLine(20, y, 575, y, paint);
             y += 40;
 
             paint.setFakeBoldText(true);
-            canvas.drawText("Thank you for your payment!", 150, y, paint);
+            canvas.drawText(getString(R.string.pdf_thank_you), 150, y, paint);
 
             pdfDocument.finishPage(page);
 
-            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "Bills");
+            File dir = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), getString(R.string.bills_folder));
             if (!dir.exists()) dir.mkdirs();
 
-            File file = new File(dir, "Payment_" + System.currentTimeMillis() + ".pdf");
+            File file = new File(dir, getString(R.string.payment_filename, System.currentTimeMillis()));
             pdfDocument.writeTo(new FileOutputStream(file));
             pdfDocument.close();
 
@@ -781,7 +769,7 @@ public class PendingDuesActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("PDF", "Error generating PDF: " + e.getMessage());
+            Log.e("PDF", getString(R.string.pdf_error_log, e.getMessage()));
             return null;
         }
     }
@@ -798,21 +786,20 @@ public class PendingDuesActivity extends AppCompatActivity {
         try {
             String gymName = getGymName();
 
-            String message = String.format("Payment Received: ₹%d via %s for %s. Remaining: ₹%d. Thank you from %s!",
-                    amount, mode, due.getForMonth(), remaining, gymName);
+            String message = getString(R.string.sms_payment_message, amount, mode, due.getForMonth(), remaining, gymName);
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(due.getPhone(), null, message, null, null);
 
                 runOnUiThread(() -> {
-                    Toast.makeText(PendingDuesActivity.this, "📱 SMS sent to " + due.getPhone(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PendingDuesActivity.this, getString(R.string.sms_sent_to_phone, due.getPhone()), Toast.LENGTH_SHORT).show();
                 });
             }
 
-            Log.d("PaymentSMS", "SMS sent: " + message + " to " + due.getPhone());
+            Log.d("PaymentSMS", getString(R.string.sms_sent_log, message, due.getPhone()));
         } catch (Exception e) {
-            Log.e("PaymentSMS", "Error: " + e.getMessage());
+            Log.e("PaymentSMS", getString(R.string.error_log, e.getMessage()));
         }
     }
 
@@ -830,7 +817,7 @@ public class PendingDuesActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("application/pdf");
             intent.putExtra(Intent.EXTRA_STREAM, pdfUri);
-            intent.putExtra(Intent.EXTRA_TEXT, "Here is your Gym Payment Receipt 📄");
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.whatsapp_receipt_message));
             intent.putExtra("jid", phone + "@s.whatsapp.net");
             intent.setPackage("com.whatsapp");
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -839,16 +826,16 @@ public class PendingDuesActivity extends AppCompatActivity {
 
         } catch (ActivityNotFoundException e) {
             runOnUiThread(() -> {
-                Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.whatsapp_not_installed), Toast.LENGTH_SHORT).show();
             });
         } catch (Exception e) {
-            Log.e("WhatsApp", "Error: " + e.getMessage());
+            Log.e("WhatsApp", getString(R.string.error_log, e.getMessage()));
         }
     }
 
     private String getGymName() {
         try {
-            final String[] gymName = {"Sagar Gym"};
+            final String[] gymName = {getString(R.string.default_gym_name)};
 
             DatabaseReference gymRef = rootRef.child("ownerInfo").child("gymName");
             gymRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -866,7 +853,7 @@ public class PendingDuesActivity extends AppCompatActivity {
 
             return gymName[0];
         } catch (Exception e) {
-            return "Sagar Gym";
+            return getString(R.string.default_gym_name);
         }
     }
 
@@ -875,9 +862,9 @@ public class PendingDuesActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == SMS_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("SMS", "✅ Permission GRANTED - SMS ready");
+                Log.d("SMS", getString(R.string.sms_permission_granted_log));
             } else {
-                Log.e("SMS", "🚫 Permission DENIED");
+                Log.e("SMS", getString(R.string.sms_permission_denied_log));
             }
         }
     }

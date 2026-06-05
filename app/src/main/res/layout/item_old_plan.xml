@@ -47,7 +47,7 @@
                     android:id="@+id/tvPlanStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PAID"
+                    android:text="@string/paid_uppercase"
                     android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="#FF6B00"
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Duration:"
+                android:text="@string/duration_colon"
                 android:textSize="12sp"
                 android:textColor="#9E9E9E" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total Fee:"
+                android:text="@string/total_fee_colon"
                 android:textSize="12sp"
                 android:textColor="#9E9E9E" />
 
@@ -125,7 +125,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Paid:"
+                android:text="@string/paid_colon"
                 android:textSize="12sp"
                 android:textColor="#9E9E9E" />
 
@@ -142,7 +142,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mode:"
+                android:text="@string/mode_colon"
                 android:textSize="12sp"
                 android:textColor="#9E9E9E" />
 
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="Cash"
+                android:text="@string/payment_mode_cash"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF" />
 

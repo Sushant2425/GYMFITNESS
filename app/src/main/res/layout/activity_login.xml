@@ -36,7 +36,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:src="@drawable/logogym"
-                   />
+                    android:contentDescription="@string/gym_logo_desc" />
             </androidx.cardview.widget.CardView>
 
             <TextView

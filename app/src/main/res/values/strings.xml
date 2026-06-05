@@ -1,70 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Gym Management System</string>
-
     <!-- Toolbar / Common -->
     <string name="welcome">Welcome</string>
-
     <!-- Bottom Navigation -->
     <string name="menu_home">Home</string>
     <string name="menu_members">Members</string>
     <string name="menu_payments">Payments</string>
     <string name="menu_profile">Profile</string>
-
     <!-- Navigation Drawer -->
     <string name="nav_dashboard">Dashboard</string>
     <string name="nav_add_member">Add Member</string>
     <string name="nav_all_members">All Members</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_logout">Logout</string>
-
     <string name="nav_reports">Reports</string>
     <string name="nav_inventory">Remaing Payment</string>
     <string name="nav_inventory_list">View Stock</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <!-- Login Screen -->
     <string name="login_title">ServiceControl Manager</string>
-
     <string name="forgot_password">Forgot password?</string>
     <string name="login">Login</string>
     <string name="no_account">Dont have an account?</string>
-
     <!-- Errors / Messages -->
     <string name="error_enter_email">Enter email</string>
     <string name="login_success">Login Successful</string>
     <string name="owner_not_found">Owner data not found</string>
     <string name="reset_link_sent">Reset link sent to your email.</string>
-
     <!-- Errors / Messages -->
     <string name="error_enter_password">Enter password</string>
     <string name="account_disabled">Account is disabled. Contact Admin</string>
-
     <string name="login_failed">Login Failed: </string>
     <string name="error_enter_email_reset">Enter your email to reset password</string>
     <string name="failed_prefix">Failed: </string>
-
     <!-- Register Screen -->
     <string name="register_title">Create Account</string>
-
     <string name="error_enter_phone">Enter phone</string>
-
-
     <!-- Splash Screen -->
     <string name="splash_title">ServiceControl Manager</string>
-
     <!-- Splash Messages -->
     <string name="no_internet">No Internet Connection</string>
     <string name="account_disabled_login">Account disabled! Please Login.</string>
     <string name="login_expired">Login expired, Please Login again</string>
-
     <string name="settings">Settings</string>
     <string name="language">Language</string>
     <string name="lang_english">English</string>
     <string name="lang_marathi">Marathi</string>
-
     <string name="gym_registration">GYM REGISTRATION</string>
     <string name="join_fitness_journey">Join Your Fitness Journey Today</string>
     <string name="hint_full_name">Full Name</string>
@@ -75,13 +58,11 @@
     <string name="hint_emergency_contact">Emergency Contact Number</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
-
     <!-- Gender -->
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
-
     <!-- Membership Plans -->
     <string name="membership_plan">Membership Plan</string>
     <string name="select_plan">Select Membership Plan</string>
@@ -89,13 +70,11 @@
     <string name="plan_quarterly">Quarterly (3 Months) - ₹2700</string>
     <string name="plan_half_yearly">Half Yearly (6 Months) - ₹5000</string>
     <string name="plan_yearly">Yearly (12 Months) - ₹9000</string>
-
     <!-- Terms & Buttons -->
     <string name="agree_terms">I agree to Terms &amp; Conditions and Privacy Policy</string>
     <string name="register">REGISTER NOW</string>
     <string name="already_member">Already a member?</string>
     <string name="back_to_login">Login</string>
-
     <!-- Validation Errors -->
     <string name="error_enter_name">Please enter your full name</string>
     <string name="error_enter_valid_phone">Please enter valid 10 digit phone number</string>
@@ -108,41 +87,55 @@
     <string name="error_password_min">Password must be at least 6 characters</string>
     <string name="error_password_mismatch">Passwords do not match</string>
     <string name="error_accept_terms">Please accept Terms &amp; Conditions</string>
-
     <!-- Success & Error Messages -->
     <string name="register_success">Registration successful! Please login.</string>
     <string name="register_failed">Registration failed: </string>
     <string name="register_data_failed">Failed to save user data</string>
     <string name="error_prefix">Error: </string>
-
     <string name="gym_name">GYM MASTER</string>
     <string name="welcome_back">Welcome Back! Login to Continue</string>
-
     <string name="register_now">Register Now</string>
     <string name="failed_reset">Failed to send reset email</string>
-
     <string name="open_24_7">24/7 Access</string>
     <string name="expert_trainers">Expert Trainers</string>
     <string name="modern_equipment">Modern Equipment</string>
-
     <string name="register_your_gym">Register Your Gym With Us</string>
-
     <string name="error_enter_gym_name">Please enter gym name</string>
     <string name="hint_gym_name">Gym Name</string>
     <string name="hint_owner_name">Owner Name</string>
-
     <string name="welcome_app">Welcome!</string>
     <string name="select_language">Please select your preferred language</string>
     <string name="choose_language">Choose Language</string>
     <string name="english">English</string>
     <string name="marathi">मराठी (Marathi)</string>
     <string name="continue_text">Continue</string>
-
+    <string name="membership_renewal">Membership Renewal</string>
+    <string name="phone_prefix">Phone: +91</string>
+    <string name="plan_status_expired">Plan Status: EXPIRED</string>
+    <string name="previous_plan_details">📋 Previous Plan Details</string>
+    <string name="plan_type_label">Plan Type</string>
+    <string name="start_date_label">Start Date</string>
+    <string name="end_date_label">End Date</string>
+    <string name="previous_fee">Previous Fee</string>
+    <string name="outstanding_balance">⚠️ Outstanding Balance</string>
+    <string name="renew_new_plan">🔄 Renew / New Plan</string>
+    <string name="quick_renew_same_plan">Quick Renew (Same Plan)</string>
+    <string name="or_select_new_plan">OR Select New Plan</string>
+    <string name="select_new_plan">Select New Plan</string>
+    <string name="new_start_date">New Start Date</string>
+    <string name="end_date_auto_calculated">End Date (Auto-calculated)</string>
+    <string name="plan_fee">Plan Fee</string>
+    <string name="payment_summary">💰 Payment Summary</string>
+    <string name="new_plan_fee">New Plan Fee</string>
+    <string name="plus_previous_due">+ Previous Due</string>
+    <string name="total_payable">Total Payable</string>
+    <string name="proceed_to_payment">Proceed to Payment</string>
     <!-- Settings Screen -->
     <string name="language_settings">Language</string>
     <string name="powered_by">Powered by</string>
     <string name="company_name">Sandhya Softtech Pvt Ltd</string>
-
+    <string name="plan_expiry_reminders">Plan Expiry Reminders</string>
+    <string name="send_all">Send All</string>
     <string name="add_member">Add New Member</string>
     <string name="full_name">Full Name *</string>
     <string name="phone_number">Phone Number *</string>
@@ -154,19 +147,31 @@
     <string name="select_gender">Select gender</string>
     <string name="select_join_date">Select join date</string>
     <string name="error_adding_member">Failed to add member</string>
-
+    <string name="payment_manager">Payment Manager</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="next_month">Next Month</string>
+    <string name="january">January</string>
+    <string name="pending">Pending</string>
+    <string name="paid">Paid</string>
+    <string name="members_count_zero">0 members</string>
+    <string name="refresh_data">Refresh Data</string>
     <string name="title_add_member">Add Member</string>
     <string name="hint_mobile_number">Mobile Number</string>
     <string name="hint_email_optional">Email (Optional)</string>
     <string name="hint_gender">Gender</string>
     <string name="hint_join_date">Join Date</string>
     <string name="btn_next_select_plan">Next → Select Plan</string>
-
+    <string name="total_fee_label">Total Fee:</string>
+    <string name="amount_paid_label">Amount Paid:</string>
+    <string name="payments_count_zero">(0 payments)</string>
+    <string name="no_payment_history">No payment history available</string>
     <string name="total_fee">Total Fee</string>
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
     <string name="next_payment">Next → Payment</string>
-
+    <string name="payment_history">Payment History</string>
+    <string name="send_sms_confirmation">Send SMS confirmation</string>
+    <string name="send_whatsapp">Send WhatsApp</string>
     <string name="title_payment">Payment</string>
     <string name="paid_amount">Paid Amount</string>
     <string name="remaining_amount">Remaining Amount</string>
@@ -174,12 +179,11 @@
     <string name="save_payment">Save Payment</string>
     <string name="payment_saved">Payment saved successfully</string>
     <string name="error_enter_amount">Enter paid amount</string>
-
+    <string name="members_title">Members (0)</string>
     <string name="dashboard">Dashboard</string>
     <string name="members_list">Members List</string>
     <string name="reports">Reports</string>
     <string name="profile">Profile</string>
-
     <string name="overview">Overview</string>
     <string name="total_members">Total Members</string>
     <string name="active_members">Active Members</string>
@@ -188,23 +192,17 @@
     <string name="quick_actions">Quick Actions</string>
     <string name="view_members">View Members</string>
     <string name="expire_plan">expire plan</string>
-
     <string name="collect_payment">Collect Payment</string>
     <string name="expiring_soon">Expiring Soon</string>
     <string name="no_expiring_members">No memberships expiring soon</string>
     <string name="expires_on">Expires On</string>
     <!-- Add to your existing English strings.xml -->
-
     <string name="gym_logo_desc">Gym Logo</string>
     <string name="nav_header_email">gmail</string>
-
     <string name="nav_member_list">Member list</string>
-
-
     <!-- res/values/strings.xml -->
     <string name="add_member_title">Add New Member</string>
     <string name="hint_phone_number">Phone Number</string>
-
     <string name="btn_next_plan">Next: Select Plan</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
@@ -217,44 +215,31 @@
     <string name="error_member_exists">Member already exists!</string>
     <string name="error_generic">Error: %1$s</string>
     <!-- res/values/strings.xml -->
-
     <string name="logout_dialog_title">Logout</string>
     <string name="logout_dialog_message">Are you sure you want to logout?</string>
-
     <string name="logout_confirm">Logging out...</string>
-
     <!-- Add Member Screen -->
     <string name="add_member_subtitle">Fill in member details</string>
     <string name="member_info_hint">Please enter accurate member information for registration</string>
     <string name="personal_details">Personal Details</string>
-
     <string name="step_1_of_3">Step 1 of 3 - Member Information</string>
-
-
     <!-- Select Plan Screen -->
-
     <string name="select_plan_subtitle">Choose your fitness plan</string>
     <string name="plan_selection_hint">Select a membership plan that suits your fitness goals</string>
     <string name="plan_details">Plan Details</string>
     <string name="step_2_of_3">Step 2 of 3 - Plan Selection</string>
-
-
     <string name="payment_subtitle">Complete your payment</string>
     <string name="payment_info_hint">Enter payment details to complete member registration</string>
     <string name="payment_information">Payment Information</string>
-
     <string name="step_3_of_3">Step 3 of 3 - Payment Complete</string>
-
     <!-- Payment Modes -->
     <string name="payment_mode_cash">Cash</string>
     <string name="payment_mode_card">Card</string>
     <string name="payment_mode_upi">UPI</string>
     <string name="payment_mode_bank_transfer">Bank Transfer</string>
     <string name="payment_mode_cheque">Cheque</string>
-
     <!-- Members List Strings -->
     <string name="error_loading_members">Error loading members</string>
-
     <!-- Members List Screen -->
     <string name="manage_members_subtitle">View and manage all members</string>
     <string name="all_members">All</string>
@@ -263,8 +248,6 @@
     <string name="no_members_found">No Members Found</string>
     <string name="add_first_member">Add your first member to get started</string>
     <string name="search_members">Search members...</string>
-
-
     <!-- Member Detail Screen -->
     <string name="member_detail_subtitle">View member information</string>
     <string name="personal_info">Personal Information</string>
@@ -272,32 +255,25 @@
     <string name="edit_member">Edit</string>
     <string name="view_payments">Payments</string>
     <string name="delete_member">Delete Member</string>
-
-
     <!-- Member Edit Screen -->
     <string name="edit_member_subtitle">Update member information</string>
     <string name="edit_info_hint">Phone number cannot be changed as it\'s used as the unique identifier</string>
     <string name="member_information">Member Information</string>
     <string name="phone_locked_hint">Phone number is locked</string>
     <string name="update_member">Update</string>
-
     <!-- Collect Payment Screen -->
     <string name="collect_payment_subtitle">Search and collect payment</string>
     <string name="search_member_hint">Enter phone number or name</string>
     <string name="search_member">Search Member</string>
     <string name="member_details">Member Details</string>
     <string name="payment_amount">Payment Amount (₹)</string>
-
-
     <string name="settings_subtitle">Configure app preferences</string>
-
     <string name="language_info">App will restart to apply language changes</string>
     <string name="app_info">App Information</string>
     <string name="app_version">Version</string>
     <string name="developed_by">Developed By</string>
     <string name="collect_payment_button">Collect Payment</string>
     <!-- Add Plan Screen -->
-
     <string name="add_plan">Add Gym Plan</string>
     <string name="add_plan_subtitle">Create new membership plan</string>
     <string name="plan_duration">Plan Duration</string>
@@ -314,7 +290,6 @@
     <string name="plan_save_failed">Failed to save plan</string>
     <string name="saving">Saving...</string>
     <string name="fee_helper">Enter the membership fee for this plan</string>
-
     <string name="change_app_language">Change app language</string>
     <string name="manage_plans">Manage Plans</string>
     <string name="add_edit_plans">Add or edit membership plans</string>
@@ -323,17 +298,14 @@
     <string name="app_version_info">App version and information</string>
     <string name="logout">Logout</string>
     <string name="my_gym">My Gym</string>
-
     <string name="version">Version</string>
     <string name="logout_confirmation">Are you sure you want to logout?</string>
     <string name="ok">OK</string>
     <string name="profile_coming_soon">Profile feature coming soon!</string>
     <string name="app_description">A comprehensive gym management system to manage members, plans, and payments efficiently.</string>
-
     <string name="hindi">हिंदी</string>
     <string name="loading">Loading...</string>
     <string name="error_loading_data">Error loading data</string>
-
     <!-- View Plans Activity -->
     <string name="all_plans">All Plans</string>
     <string name="loading_plans">Loading plans...</string>
@@ -359,5 +331,495 @@
     <string name="one_month">1 Month</string>
     <string name="status_label">Status</string>
     <string name="duration_in_months">Duration (in Months)</string>
+    <string name="financial_overview">Financial Overview</string>
+    <string name="last_7_days">Last 7 Days</string>
+    <string name="revenue_percentage_zero">+0% vs last month</string>
+    <string name="no_data">No Data</string>
+    <string name="add_payments_chart_hint">Add payments to see chart</string>
+    <string name="today">Today</string>
+    <string name="no_dues">No Dues</string>
+    <string name="all_payments_collected">All payments collected!</string>
+    <string name="total_expected_zero">Total Expected: ₹0</string>
+    <string name="dues_percentage_zero">0% of total fees</string>
+    <string name="no_pending_dues">No pending dues</string>
+    <string name="all_payments">All Payments</string>
+    <string name="total_amount_paid">Total Amount Paid</string>
+    <string name="all_payment_plans">All Payment Plans</string>
+    <string name="no_payments_found">No payments found</string>
+    <string name="plan_period">Plan Period</string>
+    <string name="total_paid">Total Paid</string>
+    <string name="remaining_balance">Remaining Balance</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="expired_expiring_plans">Expired &amp; Expiring Plans</string>
+    <string name="expired">Expired</string>
+    <string name="dues">Dues</string>
+    <string name="amount">Amount</string>
+    <string name="search_by_name_or_phone">Search by name or phone...</string>
+    <string name="with_dues">With Dues</string>
+    <string name="clear_dues">Clear Dues</string>
+    <string name="all_clear">All Clear!</string>
+    <string name="no_expired_expiring_plans">No expired or expiring plans found</string>
+    <string name="member_detail_title">Member Details</string>
+    <string name="active_uppercase">ACTIVE</string>
+    <string name="joined_date_prefix">Joined: </string>
+    <string name="plan_type">Plan Type</string>
+    <string name="amount_paid">Amount Paid</string>
+    <string name="payment_progress">Payment Progress</string>
+    <string name="previous_plans">Previous Plans</string>
+    <string name="no_previous_plans">No previous plans found</string>
+    <string name="choose_your_plan">Choose Your Plan</string>
+    <string name="unlock_all_features">Unlock all features and manage your gym smoothly</string>
+    <string name="trial_plan">7 Days Free Trial (₹0)</string>
+    <string name="six_months_plan">6 Months Premium – ₹499</string>
+    <string name="one_year_plan">1 Year Premium – ₹899 ⭐ Recommended</string>
+    <string name="lifetime_plan">Lifetime Premium – ₹1999</string>
+    <string name="upgrade_footer">Upgrade anytime • Secure payments • No hidden charges</string>
+    <string name="registration">Registration</string>
+    <string name="gym_details_section">🏢 Gym Details</string>
+    <string name="owner_details_section">👤 Owner Details</string>
+    <string name="security_section">🔒 Security</string>
+    <string name="remaining_prefix">Remaining: ₹</string>
+    <string name="notes_optional">Notes (Optional)</string>
+    <string name="info">Info</string>
+    <string name="plan_name_label">Plan Name</string>
+    <string name="created_on">Created On</string>
+    <string name="plan_id_prefix">Plan ID: </string>
+    <string name="no_expiring_plans">No expiring plans 🎉</string>
+    <string name="current_plan_prefix">Current: </string>
+    <string name="date_range">01/02/2026 to 28/02/2026</string>
+    <string name="view">View</string>
+    <string name="member">Member</string>
+    <string name="member_name">Member Name</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="phone">Phone</string>
+    <string name="pending_colon">Pending:</string>
+    <string name="renew_plan">Renew Plan</string>
+    <string name="paid_uppercase">PAID</string>
+    <string name="duration_colon">Duration:</string>
+    <string name="total_fee_colon">Total Fee:</string>
+    <string name="paid_colon">Paid:</string>
+    <string name="mode_colon">Mode:</string>
+    <string name="id_prefix">ID: </string>
+    <string name="paid_amount_display">₹200 Paid</string>
+    <string name="cash">Cash</string>
+    <string name="date_prefix">Date: </string>
+    <string name="remaining_prefix_short">Remaining: ₹</string>
+    <string name="notes_text">Additional notes here</string>
+    <string name="balance_after_payment">Balance After Payment:</string>
+    <string name="plan_name_uppercase">PLAN NAME</string>
+    <string name="fee_rupee">FEE (₹)</string>
+    <string name="duration_uppercase">DURATION</string>
+    <string name="status_uppercase">STATUS</string>
+    <string name="premium_plan">Premium Plan</string>
+    <string name="three_months">3 Months</string>
+    <string name="edit_uppercase">EDIT</string>
+    <string name="delete_uppercase">DELETE</string>
+    <string name="phone_prefix_number">+91 98765 43210</string>
+    <string name="end_date_sample">31 Dec 2024</string>
+    <string name="days_remaining">5 days remaining</string>
+    <string name="sms_reminder">SMS Reminder</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="amount_uppercase">AMOUNT</string>
+    <string name="mode_uppercase">MODE</string>
+    <string name="date_uppercase">DATE</string>
+    <string name="remaining_colon">Remaining:</string>
+    <string name="id_colon">ID:</string>
+    <string name="months">months</string>
+    <string name="search">Search</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="no_reminders_found">No reminders found</string>
+    <string name="payment_completed">Payment Completed</string>
+    <string name="success">Success</string>
+    <string name="monthly_plan">Monthly Plan</string>
+    <string name="jan_2025">Jan 2025</string>
+    <string name="pending_uppercase">PENDING</string>
+    <string name="total_colon">Total: ₹</string>
+    <string name="paid_colon_short">Paid: ₹</string>
+    <string name="remaining">Remaining</string>
+    <string name="collect">Collect</string>
+    <string name="days_overdue">15 days overdue</string>
+    <string name="sms_text">📱 SMS</string>
+    <string name="whatsapp_text">💬 WhatsApp</string>
+    <string name="days_ago">5 days ago</string>
+    <string name="outstanding_balance_colon">Outstanding Balance:</string>
+    <!-- Plan Expiry Reminder Activity Strings -->
+    <string name="expiring_today">Expiring Today</string>
+    <string name="send_all_reminders">Send All Reminders?</string>
+    <string name="send_all_reminders_message">Send SMS + WhatsApp to %d members?</string>
+    <string name="all_reminders_sent">All reminders sent successfully!</string>
+    <string name="sms_plan_expired">🚨 %s, your plan expired %d days ago! Please renew. SUSHANT GYM</string>
+    <string name="sms_plan_expires_today">⏰ %s, your plan expires today! Renew now to continue. SUSHANT GYM</string>
+    <string name="sms_plan_expires_in">⏰ %s, your plan expires in %d days. Renew soon! SUSHANT GYM</string>
+    <string name="sms_plan_expires_soon_fallback">⏰ REMINDER %s! Your plan expires soon. Renew now! SUSHANT GYM</string>
+    <string name="sms_sent_to">SMS sent to %s</string>
+    <string name="sms_failed">SMS failed: %s</string>
+    <string name="whatsapp_plan_expired">🚨 %s, your plan expired %d days ago! Please renew. SUSHANT GYM</string>
+    <string name="whatsapp_plan_expires_today">⏰ %s, your plan expires today! Renew now. SUSHANT GYM</string>
+    <string name="whatsapp_plan_expires_in">⏰ %s, your plan expires in %d days. Renew soon! SUSHANT GYM</string>
+    <string name="whatsapp_plan_expires_soon_fallback">⏰ REMINDER %s! Plan expires soon. Renew now! SUSHANT GYM</string>
+    <string name="whatsapp_failed">WhatsApp failed to open</string>
+    <string name="sms_permission_granted">SMS permission granted</string>
+    <string name="sms_permission_denied">SMS permission denied</string>
+    <string name="expired_uppercase">EXPIRED</string>
+    <string name="expiring_today_uppercase">EXPIRING TODAY</string>
+    <string name="expiring_soon_uppercase">EXPIRING SOON</string>
+    <string name="expiring_today_with_count">Expiring Today (%d)</string>
+    <string name="expiring_soon_with_count">Expiring Soon (%d)</string>
+    <string name="expired_with_count">Expired (%d)</string>
+    <!-- Expiry Pager Adapter Strings -->
+    <string name="no_members_expiring_today">No members expiring today 🎉</string>
+    <string name="no_members_expiring_soon">No members expiring soon 🎉</string>
+    <string name="no_expired_plans">No expired plans 🎉</string>
+    <!-- Members List Activity Strings -->
+    <string name="members_count">Members (%d)</string>
+    <string name="active_status">Active</string>
+    <string name="expired_status">Expired</string>
+    <string name="expiring_soon_status">Expiring Soon</string>
+    <string name="inactive_status">Inactive</string>
+    <string name="no_active_plan">No active plan</string>
+    <!-- Collect Payment Activity Strings -->
+    <string name="sms_permission_requested">🚨 Permission requested from CollectPayment</string>
+    <string name="sms_permission_granted_log">✅ SMS permission already granted in CollectPayment</string>
+    <string name="please_enter_phone_or_name">Please enter phone or name</string>
+    <string name="searching">Searching...</string>
+    <string name="no_members_found_error">❌ No members found</string>
+    <string name="select_member_found">Select Member (%d found)</string>
+    <string name="no_active_plan_error">❌ Member has no active plan</string>
+    <string name="regular_plan">Regular</string>
+    <string name="na">N/A</string>
+    <string name="to">to</string>
+    <string name="rupee_prefix">₹</string>
+    <string name="fully_paid_message">✅ This member has fully paid!</string>
+    <string name="plan_dates_log">Plan: %s to %s</string>
+    <string name="search_member_first">Please search and select a member first</string>
+    <string name="amount_required">Amount is required</string>
+    <string name="invalid_amount">Invalid amount</string>
+    <string name="amount_greater_than_zero">Amount must be greater than 0</string>
+    <string name="amount_exceeds_remaining">Amount exceeds remaining balance (₹%d)</string>
+    <string name="upi">UPI</string>
+    <string name="card">Card</string>
+    <string name="processing">Processing...</string>
+    <string name="paid_status">PAID</string>
+    <string name="partial_status">PARTIAL</string>
+    <string name="failed_to_update_payment">❌ Failed to update payment: %s</string>
+    <string name="failed_to_save_payment">❌ Failed to save payment: %s</string>
+    <string name="payment_collected_success">✅ Payment of ₹%d collected successfully!</string>
+    <string name="pdf_title">GYM PAYMENT RECEIPT</string>
+    <string name="pdf_member_name">Member Name : %s</string>
+    <string name="pdf_phone">Phone       : %s</string>
+    <string name="pdf_plan_start">Plan Start  : %s</string>
+    <string name="pdf_total_fee">Total Fee   : ₹%d</string>
+    <string name="pdf_paid_amount">Paid Amount : ₹%d</string>
+    <string name="pdf_remaining">Remaining   : ₹%d</string>
+    <string name="pdf_payment_via">Payment Via : %s</string>
+    <string name="pdf_thank_you">Thank you for your payment!</string>
+    <string name="bills_folder">Bills</string>
+    <string name="bill_filename">Bill_%d.pdf</string>
+    <string name="pdf_error">PDF error: %s</string>
+    <string name="sms_payment_message">Payment Received: ₹%d via %s for plan %s to %s. Remaining: ₹%d. Thank you from %s!</string>
+    <string name="sms_sent_to_phone">📱 SMS sent to %s</string>
+    <string name="sms_sent_log">Sent: %s</string>
+    <string name="sms_failed_message">⚠️ SMS failed: %s</string>
+    <string name="sms_error_log">Error: %s</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="whatsapp_receipt_message">Here is your Gym Payment Receipt 📄</string>
+    <string name="whatsapp_not_installed">WhatsApp not installed</string>
+    <string name="whatsapp_error">WhatsApp error: %s</string>
+    <string name="default_gym_name">Sagar Gym</string>
+    <string name="sms_permission_ok">✅ SMS permission OK</string>
+    <string name="sms_permission_denied_message">⚠️ SMS permission denied - Enable manually in Settings</string>
+    <string name="sms_permission_denied_log">🚫 Permission DENIED</string>
+    <!-- Add Plan Activity Strings -->
+    <string name="month">Month</string>
+    <string name="suffix_s">s</string>
+    <string name="view_all_plans">View All Plans</string>
+    <string name="please_login_first">❌ Please login first!</string>
+    <string name="plan_saved_success_with_icon">✅ Plan Saved Successfully!</string>
+    <string name="plan_save_failed_with_message">❌ Plan save failed: %s</string>
+    <!-- All Payments Activity Strings -->
+    <string name="invalid_member">Invalid member</string>
+    <string name="member_not_found">Member not found</string>
+    <string name="payment_plan_log">Payment Plan: %s AmountPaid: %s TotalFee: %s</string>
+    <string name="unknown">Unknown</string>
+    <string name="total_paid_amount">Total Paid: ₹%d</string>
+    <string name="total_paid_log">Total Paid: %d</string>
+    <string name="payment_item_log">Item: %s Paid: %d Total: %d IsCurrent: %b</string>
+    <string name="view_current_plan_message">View current plan in member details</string>
+    <string name="error_loading_payments">Error loading payments: %s</string>
+    <string name="error_log">Error: %s</string>
+    <string name="database_error_log">Database error: %s</string>
+    <string name="amount_paid_total">₹%d / ₹%d</string>
+    <string name="current">Current</string>
+    <!-- Month Names -->
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <!-- Dashboard Activity Strings -->
+    <string name="firebase_path_log">Firebase path: GYM/%s</string>
+    <string name="database_null_toolbar">Database null for toolbar</string>
+    <string name="loading_gym_name">Loading gym name for toolbar</string>
+    <string name="toolbar_gym_name_raw">Toolbar gymName raw: %s</string>
+    <string name="toolbar_set_success">Toolbar SET: %s</string>
+    <string name="toolbar_fallback_warning">gymName empty, fallback used</string>
+    <string name="toolbar_failed">Failed: %s</string>
+    <string name="gym_manager">Gym Manager</string>
+    <string name="database_ref_null">Database reference is null</string>
+    <string name="loading_header_log">Loading header for email: %s</string>
+    <string name="owner_info_exists">ownerInfo snapshot exists: %b</string>
+    <string name="owner_info_raw">Raw gymName: %s, email: %s</string>
+    <string name="gym_name_set">Gym name set: %s</string>
+    <string name="gym_name_fallback">gymName null/empty, using fallback</string>
+    <string name="owner_info_not_found">ownerInfo node not found</string>
+    <string name="failed_load_owner_info">Failed to load ownerInfo: %s</string>
+    <string name="error_loading">Error loading</string>
+    <string name="trial_expired_title">Trial Expired</string>
+    <string name="trial_expired_message">Your free trial has expired.\n\nTo continue using all features,\nplease upgrade to Premium.</string>
+    <string name="buy_premium">Buy Premium</string>
+    <!-- Expired Members Activity Strings -->
+    <string name="sort_name_az">Name (A-Z)</string>
+    <string name="sort_name_za">Name (Z-A)</string>
+    <string name="sort_most_expired">Most Expired First</string>
+    <string name="sort_recently_expired">Recently Expired</string>
+    <string name="sort_expiring_soon">Expiring Soon First</string>
+    <string name="sort_highest_dues">Highest Dues</string>
+    <string name="sort_lowest_dues">Lowest Dues</string>
+    <string name="use_chips_to_filter">Use chips to filter members</string>
+    <string name="filter_changed_all">Filter changed to: ALL</string>
+    <string name="filter_changed_dues">Filter changed to: WITH_DUES</string>
+    <string name="filter_changed_clear">Filter changed to: CLEAR_DUES</string>
+    <string name="sort_changed">Sort changed to: %s</string>
+    <string name="unable_to_connect">Unable to connect to database</string>
+    <string name="loading_members_log">Loading members - Today: %s</string>
+    <string name="error_parsing_member">Error parsing member: %s</string>
+    <string name="total_expired_members">Total expired/expiring members: %d</string>
+    <string name="firebase_error">Firebase error: %s</string>
+    <string name="date_parse_error">Date parse error: %s</string>
+    <string name="error_parsing_member_data">Error parsing member data: %s</string>
+    <string name="date_calc_error">Date calculation error: %s</string>
+    <string name="filtering_log">Filtering - Query: %s Filter: %s Total members: %d</string>
+    <string name="has_dues_log"> - Has dues: </string>
+    <string name="balance_log">, Balance: </string>
+    <string name="clear_dues_log"> - Clear dues: </string>
+    <string name="filtered_count_log">Filtered members count: %d</string>
+    <string name="stats_log">Stats - Expired: %d, With Dues: %d, Total Dues: ₹%d</string>
+    <string name="renew_plan_text"> Renew Plan</string>
+    <string name="phone_with_code">+91 %s</string>
+    <string name="no_plan">No Plan</string>
+    <string name="days_ago_format">%d days ago</string>
+    <string name="expires_in_days">Expires in %d days</string>
+    <string name="expires_today">Expires today</string>
+    <string name="expiring_uppercase">EXPIRING</string>
+    <string name="plan_not_found">Plan not found</string>
+    <string name="no_plan_uppercase">NO PLAN</string>
+    <string name="showing_dues_log"> - Showing dues: ₹</string>
+    <string name="no_dues_log"> - No dues</string>
+    <string name="list_updated_log">List updated with %d members</string>
+    <string name="plan_label">Plan: </string>
+    <string name="fee_label">Fee: </string>
+    <string name="pending_label">Pending: </string>
+    <string name="no_pending_dues_message">No pending dues</string>
+    <string name="member_log">Member: %s, Days: %d, Balance: %d, Has Dues: %b</string>
+    <string name="please_select_language">Please select a language first</string>
+    <string name="speak_full_name">Speak full name</string>
+    <string name="voice_input_not_supported">Voice input not supported</string>
+    <string name="no_changes_detected">No changes detected</string>
+    <string name="updating">Updating...</string>
+    <string name="member_updated_success">✅ Member updated successfully!</string>
+    <string name="update_failed">❌ Update failed: %s</string>
+    <string name="delete_confirmation_message">Are you sure? This will delete all data permanently!</string>
+    <string name="member_deleted_success">✅ Member deleted successfully!</string>
+    <string name="delete_failed">❌ Delete failed: %s</string>
+    <!-- Payment Activity Strings -->
+    <string name="discard_changes_title">Discard Changes?</string>
+    <string name="discard_changes_message">You have unsaved changes. Are you sure you want to exit?</string>
+    <string name="exit">Exit</string>
+    <string name="online">Online</string>
+    <string name="select_payment_mode">Select payment mode</string>
+    <string name="paid_amount_exceeds">Paid amount cannot be greater than Total Fee</string>
+    <string name="payment_failed">❌ Payment failed: %s</string>
+    <string name="member_info_failed">❌ Member info failed: %s</string>
+    <string name="sending_to">Sending to: %s</string>
+    <string name="invalid_phone_error">Invalid phone: %s</string>
+    <string name="enable_sms_permission">ℹ️ Enable SMS permission in Settings</string>
+    <string name="welcome_sms_message">Welcome to %s! Membership active from %s (₹%d paid).</string>
+    <string name="welcome_sms_message_fallback">Welcome to Sagar Gym! Membership active from %s (₹%d paid).</string>
+    <string name="member_default">Member</string>
+    <string name="fitness_center">FITNESS CENTER</string>
+    <string name="receipt_prefix">REC-</string>
+    <string name="receipt_no">Receipt No: %s</string>
+    <string name="date_label">Date: %s</string>
+    <string name="member_info_section">MEMBER INFORMATION</string>
+    <string name="name_label">Name:</string>
+    <string name="phone_label">Phone:</string>
+    <string name="duration_label">Duration:</string>
+    <string name="payment_details_section">PAYMENT DETAILS</string>
+    <string name="description_label">DESCRIPTION</string>
+    <string name="amount_label">AMOUNT (₹)</string>
+    <string name="balance_due_label">Balance Due</string>
+    <string name="payment_mode_label">Payment Mode</string>
+    <string name="partially_paid">PARTIALLY PAID</string>
+    <string name="fully_paid">FULLY PAID</string>
+    <string name="thank_you_message">Thank you for your payment!</string>
+    <string name="computer_generated">This is a computer generated receipt</string>
+    <string name="no_signature_required">No signature required</string>
+    <string name="paid_watermark">PAID</string>
+    <string name="gym_receipts_folder">Gym Receipts</string>
+    <string name="receipt_filename">Receipt_%s_%d.pdf</string>
+    <string name="receipt_saved">✅ Receipt saved: %s</string>
+    <string name="invalid_data">Invalid data</string>
+    <string name="payment_plan_not_found">Payment plan not found</string>
+    <string name="plan_payment_prefix">plan_payment_</string>
+    <string name="initial_payment_for">Initial payment for </string>
+    <string name="additional_payment_for">Additional payment for </string>
+    <string name="payments_count">(%d payments)</string>
+    <!-- Pending Dues Activity Strings -->
+    <string name="select_month">Select Month</string>
+    <string name="selected_month">Selected: %s %s</string>
+    <string name="all_months">All Months</string>
+    <string name="complete_history">Complete History</string>
+    <string name="pending_tab">Pending</string>
+    <string name="paid_tab">Paid</string>
+    <string name="all_months_filter">All Months</string>
+    <string name="this_month">This Month</string>
+    <string name="last_month">Last Month</string>
+    <string name="last_3_months">Last 3 Months</string>
+    <string name="custom_month">Custom Month (Calendar)</string>
+    <string name="quick_filters">Quick Filters</string>
+    <string name="filters_cleared">Filters cleared</string>
+    <string name="refreshing">Refreshing...</string>
+    <string name="pending_status">PENDING</string>
+    <string name="bank_transfer">Bank Transfer</string>
+    <string name="cheque">Cheque</string>
+    <string name="collect_payment_message">Member: %s\nRemaining: ₹%d</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="amount_exceeds_due">Amount exceeds due</string>
+    <string name="payment_record_not_found">Payment record not found</string>
+    <string name="invalid_payment_data">Invalid payment data</string>
+    <string name="payment_collected_message">✓ Payment collected</string>
+    <string name="payment_filename">Payment_%d.pdf</string>
+    <string name="pdf_error_log">Error generating PDF: %s</string>
+    <string name="pdf_for_month">For Month   : %s</string>
+    <string name="members_count_format">%d members</string>
+    <string name="pdf_plan_type">Plan Type   : %s</string>
+    <!-- Plan Renewal Activity Strings -->
+    <string name="plan_1_month">1 Month</string>
+    <string name="plan_3_months">3 Months</string>
+    <string name="plan_6_months">6 Months</string>
+    <string name="plan_1_year">1 Year</string>
+    <string name="invalid_member_data">Invalid member data</string>
+    <string name="failed_to_load_plans">Failed to load plans</string>
+    <string name="plan_status_label">Plan Status: %s</string>
+    <string name="invalid_fee">Invalid fee: %s</string>
+    <string name="no_previous_plan_found">No previous plan found</string>
+    <string name="same_plan_selected">✅ Same plan selected</string>
+    <string name="similar_plan_selected">✅ Similar plan selected</string>
+    <string name="previous_plan_not_available">Previous plan type not available</string>
+    <string name="date_calculation_error">Date calculation error: %s</string>
+    <string name="select_plan_type">Select plan type</string>
+    <string name="please_select_plan">Please select a plan</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="enter_fee_amount">Enter fee amount</string>
+    <string name="plan_id_generation_error">Plan ID generation error: %s</string>
+    <string name="plan_prefix">PLAN-</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="refresh">Refresh</string>
+    <string name="clear">Clear</string>
+    <!-- Plan Select Activity Strings -->
+    <string name="starting_to_load_plans">Starting to load plans from Firebase</string>
+    <string name="owner_email_null">Owner email is null or empty</string>
+    <string name="safe_email_log">Safe email: %s</string>
+    <string name="on_data_change_log">onDataChange called, has children: %b, Children count: %d</string>
+    <string name="snapshot_key_log">Snapshot key: %s</string>
+    <string name="snapshot_value_log">Snapshot value: %s</string>
+    <string name="plan_object_log">Plan object created: %s</string>
+    <string name="added_plan_name_log">Added plan name to list: %s</string>
+    <string name="default_plan_name">Plan %d</string>
+    <string name="added_default_plan_log">Added default plan name</string>
+    <string name="plan_inactive_skipping">Plan is not active, skipping</string>
+    <string name="failed_to_parse_plan">Failed to parse plan from snapshot</string>
+    <string name="error_parsing_plan">Error parsing plan: %s</string>
+    <string name="total_plans_loaded">Total plans loaded: %d, Total plan names: %d</string>
+    <string name="no_active_plans_found">No active plans found</string>
+    <string name="no_plans_available">No plans available</string>
+    <string name="plans_loaded_message">%d plans loaded</string>
+    <string name="no_data_found">No data found at this path</string>
+    <string name="no_plans_found_message">No plans found. Please add plans first.</string>
+    <string name="firebase_error_log">Firebase error: %s, Code: %d</string>
+    <string name="error_loading_plans_message">Error loading plans: %s</string>
+    <string name="adapter_updated_log">Adapter updated with %d items</string>
+    <string name="member_data_log">Member Data: Name=%s, Phone=%s, JoinDate=%s</string>
+    <string name="plan_selected_log">Plan selected at position: %d</string>
+    <string name="selected_plan_log">Selected plan: %s</string>
+    <string name="updated_details_log">Updated details: Fee=%d, Duration=%d</string>
+    <string name="no_plans_wait_message">No plans available. Please wait for loading.</string>
+    <string name="invalid_start_date">Invalid start date</string>
+    <string name="invalid_end_date">Invalid end date</string>
+    <string name="invalid_date">Invalid Date</string>
+    <string name="proceeding_to_payment_log">Proceeding to payment with plan: %s</string>
+    <string name="plan_id_generation_error_log">Error generating plan ID: %s</string>
+    <string name="calculated_end_date_log">Calculated end date: %s for %d months</string>
+    <string name="date_calculation_error_log">Date calculation error: %s</string>
+    <!-- Premium Selection Activity Strings -->
+    <string name="current_plan_text">Current Plan: %s (Valid till %s)</string>
+    <string name="free_trial_used">Free Trial Used</string>
+    <string name="trial_already_used">Free trial already used. Please buy premium.</string>
+    <string name="trial_activated">7 Days Free Trial Activated</string>
+    <string name="gym_management_app">Gym Management App</string>
+    <string name="premium_plan_description">%s Premium Plan</string>
+    <string name="payment_error">Payment error: %s</string>
+    <string name="lifetime">Lifetime</string>
+    <string name="premium_activated">Premium Activated 🎉</string>
+    <string name="payment_failed_message">Payment was not completed.\n\nPlease try again.</string>
+    <string name="retry">Retry</string>
+    <!-- View Plans Activity Strings -->
+    <string name="plans_available_count">%d Plans Available</string>
+    <string name="failed_to_load_plans_error">Failed to load plans: %s</string>
+    <string name="months_short">M</string>
+    <string name="month_suffix"> Month</string>
+    <string name="s">s</string>
+    <string name="month_s_plural"> Month(s)</string>
+    <string name="created_prefix">Created: </string>
+    <string name="created_recently">Created: Recently</string>
+    <string name="failed_to_open_editor">Failed to open editor</string>
+    <string name="plan_name_required">Plan name is required</string>
+    <string name="plan_name_min_length">Plan name must be at least 3 characters</string>
+    <string name="fee_too_high">Fee is too high</string>
+    <string name="invalid_fee_amount">Invalid fee amount</string>
+    <string name="duration_required">Duration is required</string>
+    <string name="duration_positive">Duration must be greater than 0</string>
+    <string name="duration_max">Maximum duration is 36 months</string>
+    <string name="invalid_duration">Invalid duration</string>
+    <string name="plan_updated_success">Plan updated successfully</string>
+    <string name="plan_update_failed">Failed to update plan: %s</string>
+    <string name="delete_plan_title">Delete Plan</string>
+    <string name="delete_plan_confirmation">Are you sure you want to delete %s?</string>
+    <string name="plan_deleted_success">Plan deleted successfully</string>
+    <string name="plan_delete_failed">Failed to delete plan: %s</string>
+    <string name="language_changed">Language changed</string>
+    <string name="restarting_app">Restarting app...</string>
+    <!-- Dashboard Fragment Strings -->
+    <string name="today_prefix">Today: </string>
+    <string name="navigation_not_available">Navigation drawer not available</string>
+    <string name="notification_message">Notifications: %d members expiring soon</string>
+    <string name="select_member_payment">Select a member to collect payment</string>
+    <string name="welcome_owner">Welcome, %s!</string>
+    <string name="error_loading_gym_info">Error loading gym info</string>
+    <string name="total_expected">Total Expected: ₹%s</string>
+    <string name="revenue_percentage_format">%+.1f%% vs last month</string>
+    <string name="dues_percentage_format">%.1f%% of total fees</string>
+    <string name="revenue">Revenue</string>
+    <!-- Settings Fragment Strings -->
+    <string name="user_email_not_found">User email not found in preferences</string>
+    <string name="owner_info_loaded_success">Owner info loaded successfully from Firebase</string>
+    <string name="no_gym_found">No gym found for email: %s</string>
 
 </resources>

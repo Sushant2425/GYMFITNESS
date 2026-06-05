@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.coderspuxelinnnovation.gymmanagementsystem.R;
 import com.coderspuxelinnnovation.gymmanagementsystem.Utils.PrefManager;
 import com.coderspuxelinnnovation.gymmanagementsystem.adapters.PaymentHistoryAdapter;
+import com.coderspuxelinnnovation.gymmanagementsystem.base.BaseActivity;
 import com.coderspuxelinnnovation.gymmanagementsystem.models.MemberModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PaymentHistoryActivity extends AppCompatActivity {
+public class PaymentHistoryActivity extends BaseActivity {
 
     private RecyclerView rvPaymentHistory;
     private ProgressBar progressBar;
@@ -43,7 +44,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
         planId = getIntent().getStringExtra("planId");
 
         if (memberPhone == null || planId == null) {
-            Toast.makeText(this, "Invalid data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.invalid_data), Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -57,7 +58,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Payment History");
+            getSupportActionBar().setTitle(getString(R.string.payment_history));
         }
 
         rvPaymentHistory = findViewById(R.id.rvPaymentHistory);
@@ -91,7 +92,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
 
                 if (!snapshot.exists()) {
                     Toast.makeText(PaymentHistoryActivity.this,
-                            "Payment plan not found", Toast.LENGTH_SHORT).show();
+                            getString(R.string.payment_plan_not_found), Toast.LENGTH_SHORT).show();
                     finish();
                     return;
                 }
@@ -103,8 +104,8 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                     // Show plan info
                     cardPlanInfo.setVisibility(View.VISIBLE);
                     tvPlanId.setText(paymentPlan.getPlanId() != null ? paymentPlan.getPlanId() : planId);
-                    tvTotalFee.setText("₹" + paymentPlan.getTotalFee());
-                    tvAmountPaid.setText("₹" + paymentPlan.getAmountPaid());
+                    tvTotalFee.setText(getString(R.string.rupee_prefix) + paymentPlan.getTotalFee());
+                    tvAmountPaid.setText(getString(R.string.rupee_prefix) + paymentPlan.getAmountPaid());
 
                     // Create list for ALL payments
                     List<Map<String, Object>> historyList = new ArrayList<>();
@@ -129,10 +130,10 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                         if (paymentPlan.getDate() > 0 && paymentPlan.getAmountPaid() > 0) {
                             Map<String, Object> mainPayment = new java.util.HashMap<>();
                             mainPayment.put("transactionId", paymentPlan.getPaymentId() != null ?
-                                    paymentPlan.getPaymentId() : "plan_payment_" + planId);
+                                    paymentPlan.getPaymentId() : getString(R.string.plan_payment_prefix) + planId);
                             mainPayment.put("amount", paymentPlan.getAmountPaid());
                             mainPayment.put("date", paymentPlan.getDate());
-                            mainPayment.put("notes", "Initial payment for " + paymentPlan.getForMonth());
+                            mainPayment.put("notes", getString(R.string.initial_payment_for) + paymentPlan.getForMonth());
                             mainPayment.put("paymentMode", paymentPlan.getMode() != null ?
                                     paymentPlan.getMode() : paymentPlan.getLastPaymentMode());
                             mainPayment.put("remainingAfter", paymentPlan.getRemaining());
@@ -159,10 +160,10 @@ public class PaymentHistoryActivity extends AppCompatActivity {
 
                             Map<String, Object> mainPayment = new java.util.HashMap<>();
                             mainPayment.put("transactionId", paymentPlan.getPaymentId() != null ?
-                                    paymentPlan.getPaymentId() : "plan_payment_" + planId);
+                                    paymentPlan.getPaymentId() : getString(R.string.plan_payment_prefix) + planId);
                             mainPayment.put("amount", (int) difference);
                             mainPayment.put("date", paymentPlan.getDate());
-                            mainPayment.put("notes", "Additional payment for " + paymentPlan.getForMonth());
+                            mainPayment.put("notes", getString(R.string.additional_payment_for) + paymentPlan.getForMonth());
                             mainPayment.put("paymentMode", paymentPlan.getMode() != null ?
                                     paymentPlan.getMode() : paymentPlan.getLastPaymentMode());
                             mainPayment.put("remainingAfter", paymentPlan.getRemaining());
@@ -184,7 +185,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
                         tvNoPayments.setVisibility(View.GONE);
 
                         // Update count
-                        tvPaymentCount.setText("(" + historyList.size() + " payments)");
+                        tvPaymentCount.setText(getString(R.string.payments_count, historyList.size()));
 
                         // Also show total payments made
                         double totalPayments = 0;
@@ -211,7 +212,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(PaymentHistoryActivity.this,
-                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -230,7 +231,7 @@ public class PaymentHistoryActivity extends AppCompatActivity {
     private void showNoPayments() {
         tvNoPayments.setVisibility(View.VISIBLE);
         rvPaymentHistory.setVisibility(View.GONE);
-        tvPaymentCount.setText("(0 payments)");
+        tvPaymentCount.setText(getString(R.string.payments_count_zero));
     }
 
     @Override
@@ -239,9 +240,3 @@ public class PaymentHistoryActivity extends AppCompatActivity {
         return true;
     }
 }
-
-
-
-
-
-

@@ -47,44 +47,37 @@ public class AllPaymentsAdapter extends RecyclerView.Adapter<AllPaymentsAdapter.
         holder.tvDate.setText(item.getDate());
         holder.tvStatus.setText(item.getStatus());
 
-        // Show Paid/Total amount
-        holder.tvAmount.setText("₹" + item.getAmountPaid() + " / ₹" + item.getTotalFee());
+        holder.tvAmount.setText(getString(holder, R.string.amount_paid_total, item.getAmountPaid(), item.getTotalFee()));
 
-        // Set status color based on status type
         int textColor, bgColor;
-        switch (item.getStatus().toUpperCase()) {
-            case "PAID":
-                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_text);
-                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_bg);
-                break;
-            case "ACTIVE":
-                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_text);
-                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_bg);
-                break;
-            case "PENDING":
-                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_text);
-                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_bg);
-                break;
-            case "EXPIRED":
-                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_text);
-                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_bg);
-                break;
-            default:
-                textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_text);
-                bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_bg);
-                break;
+        String status = item.getStatus().toUpperCase();
+
+        if (status.equals("PAID")) {
+            textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_text);
+            bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_paid_bg);
+        } else if (status.equals("ACTIVE")) {
+            textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_text);
+            bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_active_bg);
+        } else if (status.equals("PENDING")) {
+            textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_text);
+            bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_pending_bg);
+        } else if (status.equals("EXPIRED")) {
+            textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_text);
+            bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_expired_bg);
+        } else {
+            textColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_text);
+            bgColor = ContextCompat.getColor(holder.itemView.getContext(), R.color.status_default_bg);
         }
 
         holder.tvStatus.setTextColor(textColor);
         holder.cvStatus.setCardBackgroundColor(bgColor);
 
-        // Show/hide view button based on plan type
         if (item.isCurrentPlan()) {
-            holder.btnViewDetails.setText("Current");
+            holder.btnViewDetails.setText(getString(holder, R.string.current));
             holder.btnViewDetails.setEnabled(false);
             holder.btnViewDetails.setAlpha(0.5f);
         } else {
-            holder.btnViewDetails.setText("View");
+            holder.btnViewDetails.setText(getString(holder, R.string.view));
             holder.btnViewDetails.setEnabled(true);
             holder.btnViewDetails.setAlpha(1f);
         }
@@ -95,12 +88,15 @@ public class AllPaymentsAdapter extends RecyclerView.Adapter<AllPaymentsAdapter.
             }
         });
 
-        // Whole item click
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onPaymentClick(item);
             }
         });
+    }
+
+    private String getString(ViewHolder holder, int resId, Object... args) {
+        return holder.itemView.getContext().getString(resId, args);
     }
 
     @Override

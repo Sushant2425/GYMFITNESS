@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Amount"
+        android:hint="@string/amount"
         app:prefixText="₹ "
         app:prefixTextColor="#FF6B00"
         app:startIconDrawable="@drawable/ic_money"
@@ -35,8 +35,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:maxLines="1"
-            android:imeOptions="actionNext"
-            tools:ignore="HardcodedText" />
+            android:imeOptions="actionNext" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Payment Mode Dropdown -->
@@ -46,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Payment Mode"
+        android:hint="@string/payment_mode"
         app:startIconDrawable="@drawable/ic_payment_mode"
         app:startIconTint="#FF9800"
         app:boxStrokeColor="#FF6B00"
@@ -61,8 +60,7 @@
             android:inputType="none"
             android:textSize="15sp"
             android:textColor="#FFFFFF"
-            android:maxLines="1"
-            tools:ignore="HardcodedText,LabelFor" />
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Notes Input -->
@@ -72,15 +70,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="Notes (Optional)"
+        android:hint="@string/notes_optional"
         app:startIconDrawable="@drawable/ic_notes"
         app:startIconTint="#9E9E9E"
         app:boxStrokeColor="#FF6B00"
         app:hintTextColor="#9E9E9E"
         app:boxBackgroundColor="#2C2C2C"
         app:counterEnabled="true"
-        app:counterMaxLength="100"
-    >
+        app:counterMaxLength="100">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etNotes"
@@ -93,8 +90,7 @@
             android:minLines="2"
             android:maxLength="100"
             android:gravity="top|start"
-            android:imeOptions="actionDone"
-            tools:ignore="HardcodedText" />
+            android:imeOptions="actionDone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Info Card -->
@@ -120,18 +116,17 @@
                 android:layout_height="20dp"
                 android:src="@drawable/ic_info"
                 app:tint="#FF9800"
-                android:contentDescription="Info"
+                android:contentDescription="@string/info"
                 android:layout_marginEnd="10dp" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Payment will be recorded in transaction history and receipt will be generated"
+                android:text="@string/payment_info_hint"
                 android:textColor="#FFE0B2"
                 android:textSize="12sp"
-                android:lineSpacingExtra="2dp"
-                tools:ignore="HardcodedText" />
+                android:lineSpacingExtra="2dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

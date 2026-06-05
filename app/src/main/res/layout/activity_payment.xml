@@ -273,7 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Send SMS confirmation"
+                android:text="@string/send_sms_confirmation"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:checked="true"
@@ -285,7 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Send WhatsApp"
+                android:text="@string/send_whatsapp"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 app:buttonTint="#25D366" />

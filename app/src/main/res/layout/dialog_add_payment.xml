@@ -11,7 +11,7 @@
         android:id="@+id/tvRemaining"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Remaining: ₹500"
+        android:text="@string/remaining_prefix"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#FFC107"
@@ -20,7 +20,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Amount"
+        android:hint="@string/amount"
         app:boxStrokeColor="#FF6B00"
         app:hintTextColor="#FF6B00"
         app:startIconDrawable="@drawable/ic_money"

@@ -35,7 +35,7 @@ public class PaymentTabsAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2; // Pending and Paid tabs
+        return 2;
     }
 
     public void updatePendingList(List<PendingDueModel> list) {

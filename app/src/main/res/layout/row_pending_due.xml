@@ -37,14 +37,13 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Member Name"
+                    android:text="@string/member_name"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    tools:ignore="HardcodedText" />
+                    android:ellipsize="end" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -54,15 +53,14 @@
                     android:textColor="#BDBDBD"
                     android:textSize="13sp"
                     android:layout_marginTop="2dp"
-                    android:maxLines="1"
-                    tools:ignore="HardcodedText" />
+                    android:maxLines="1" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PENDING"
+                android:text="@string/pending_uppercase"
                 android:textColor="#FFFFFF"
                 android:textSize="11sp"
                 android:textStyle="bold"
@@ -70,8 +68,7 @@
                 android:background="@drawable/bg_status_pending"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
-                android:elevation="1dp"
-                tools:ignore="HardcodedText" />
+                android:elevation="1dp" />
         </LinearLayout>
 
         <!-- Thin Divider -->
@@ -94,23 +91,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Monthly Plan"
+                android:text="@string/monthly_plan"
                 android:textColor="#9E9E9E"
                 android:textSize="13sp"
                 android:maxLines="1"
-                android:ellipsize="end"
-                tools:ignore="HardcodedText" />
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/tvMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jan 2025"
+                android:text="@string/jan_2025"
                 android:textColor="#FF9800"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:maxLines="1"
-                tools:ignore="HardcodedText" />
+                android:maxLines="1" />
         </LinearLayout>
 
         <!-- Thin Divider -->
@@ -138,21 +133,19 @@
                     android:id="@+id/tvTotalFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total: ₹3000"
+                    android:text="@string/total_colon"
                     android:textColor="#9E9E9E"
-                    android:textSize="12sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvPaidAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid: ₹1000"
+                    android:text="@string/paid_colon_short"
                     android:textColor="#FFC107"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="3dp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="3dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,10 +157,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remaining"
+                    android:text="@string/remaining"
                     android:textColor="#9E9E9E"
-                    android:textSize="11sp"
-                    tools:ignore="HardcodedText" />
+                    android:textSize="11sp" />
 
                 <TextView
                     android:id="@+id/tvRemaining"
@@ -178,8 +170,7 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:fontFamily="sans-serif-medium"
-                    android:layout_marginTop="2dp"
-                    tools:ignore="HardcodedText" />
+                    android:layout_marginTop="2dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -213,8 +204,7 @@
                 android:textColor="#FF6B00"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:maxLines="1"
-                tools:ignore="HardcodedText" />
+                android:maxLines="1" />
         </LinearLayout>
 
         <!-- Thin Divider -->
@@ -237,19 +227,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="15 days overdue"
+                android:text="@string/days_overdue"
                 android:textColor="#FFC107"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:maxLines="1"
-                android:ellipsize="end"
-                tools:ignore="HardcodedText" />
+                android:ellipsize="end" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCollect"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
-                android:text="Collect"
+                android:text="@string/collect"
                 android:textSize="13sp"
                 android:textAllCaps="false"
                 android:textStyle="bold"

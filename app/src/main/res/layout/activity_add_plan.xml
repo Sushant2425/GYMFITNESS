@@ -147,8 +147,7 @@
                         <ImageView
                             android:layout_width="28dp"
                             android:layout_height="28dp"
-                            android:src="@drawable/img_1"
-                        />
+                            android:src="@drawable/img_1" />
 
                         <TextView
                             android:layout_width="0dp"

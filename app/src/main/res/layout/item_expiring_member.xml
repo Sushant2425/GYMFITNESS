@@ -23,7 +23,8 @@
             android:src="@drawable/ic_person"
             android:padding="8dp"
             android:background="@drawable/circle_orange_bg"
-            app:tint="#FFFFFF" />
+            app:tint="#FFFFFF"
+            android:contentDescription="@string/member" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,7 +37,7 @@
                 android:id="@+id/tv_member_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Member Name"
+                android:text="@string/member_name"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Phone Number"
+                android:text="@string/phone_number_label"
                 android:textColor="#BDBDBD"
                 android:textSize="12sp" />
 
@@ -61,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expires On"
+                android:text="@string/expires_on"
                 android:textColor="#9E9E9E"
                 android:textSize="10sp" />
 

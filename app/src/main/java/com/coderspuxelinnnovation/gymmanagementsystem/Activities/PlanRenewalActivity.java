@@ -141,7 +141,7 @@ public class PlanRenewalActivity extends BaseActivity {
         memberName = getIntent().getStringExtra("name");
 
         if (memberPhone == null) {
-            Toast.makeText(this, "Invalid member data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.invalid_member_data), Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -153,8 +153,8 @@ public class PlanRenewalActivity extends BaseActivity {
                 .child("members")
                 .child(memberPhone);
 
-        tvMemberName.setText(memberName != null ? memberName : "Member");
-        tvMemberPhone.setText("Phone: +91 " + memberPhone);
+        tvMemberName.setText(memberName != null ? memberName : getString(R.string.member));
+        tvMemberPhone.setText(getString(R.string.phone_with_code, memberPhone));
     }
 
     private void setupPlanSpinner() {
@@ -221,7 +221,7 @@ public class PlanRenewalActivity extends BaseActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(PlanRenewalActivity.this,
-                        "Failed to load plans", Toast.LENGTH_SHORT).show();
+                        getString(R.string.failed_to_load_plans), Toast.LENGTH_SHORT).show();
                 // Fallback to default plans
                 loadDefaultPlans();
             }
@@ -235,21 +235,23 @@ public class PlanRenewalActivity extends BaseActivity {
             planFeeMap.put(planTypes[i], planFees[i]);
             planMonthMap.put(planTypes[i], planMonths[i]);
         }
-    }    private void updateSummary() {
+    }
+
+    private void updateSummary() {
         // Show new plan fee
-        tvSummaryNewPlan.setText("₹" + newPlanFee);
+        tvSummaryNewPlan.setText(getString(R.string.rupee_prefix) + newPlanFee);
 
         // Show previous due if any
         if (outstandingBalance > 0) {
             layoutPreviousDue.setVisibility(View.VISIBLE);
-            tvSummaryPreviousDue.setText("₹" + outstandingBalance);
+            tvSummaryPreviousDue.setText(getString(R.string.rupee_prefix) + outstandingBalance);
         } else {
             layoutPreviousDue.setVisibility(View.GONE);
         }
 
         // Calculate total payable = new plan fee + old due
-        int total = newPlanFee ;
-        tvTotalPayable.setText("₹" + total);
+        int total = newPlanFee + outstandingBalance;
+        tvTotalPayable.setText(getString(R.string.rupee_prefix) + total);
     }
 
 
@@ -265,7 +267,7 @@ public class PlanRenewalActivity extends BaseActivity {
                 } else {
                     hideProgress();
                     Toast.makeText(PlanRenewalActivity.this,
-                            "Member not found", Toast.LENGTH_SHORT).show();
+                            getString(R.string.member_not_found), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -274,7 +276,7 @@ public class PlanRenewalActivity extends BaseActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 hideProgress();
                 Toast.makeText(PlanRenewalActivity.this,
-                        "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -305,11 +307,11 @@ public class PlanRenewalActivity extends BaseActivity {
             String status = planSnapshot.child("status").getValue(String.class);
 
             // Update UI
-            tvPreviousPlanType.setText(previousPlanType != null ? previousPlanType : "N/A");
-            tvPreviousStartDate.setText(previousStartDate != null ? previousStartDate : "N/A");
-            tvPreviousEndDate.setText(previousEndDate != null ? previousEndDate : "N/A");
-            tvPreviousFee.setText("₹" + previousTotalFee);
-            tvPlanStatus.setText("Plan Status: " + (status != null ? status : "EXPIRED"));
+            tvPreviousPlanType.setText(previousPlanType != null ? previousPlanType : getString(R.string.na));
+            tvPreviousStartDate.setText(previousStartDate != null ? previousStartDate : getString(R.string.na));
+            tvPreviousEndDate.setText(previousEndDate != null ? previousEndDate : getString(R.string.na));
+            tvPreviousFee.setText(getString(R.string.rupee_prefix) + previousTotalFee);
+            tvPlanStatus.setText(getString(R.string.plan_status_label, status != null ? status : getString(R.string.expired)));
 
             // Set default new start date (today or next day after expiry)
             setDefaultStartDate();
@@ -338,13 +340,14 @@ public class PlanRenewalActivity extends BaseActivity {
 
         if (outstandingBalance > 0) {
             cardOutstandingBalance.setVisibility(View.VISIBLE);
-            tvOutstandingBalance.setText("₹" + outstandingBalance);
+            tvOutstandingBalance.setText(getString(R.string.rupee_prefix) + outstandingBalance);
             layoutPreviousDue.setVisibility(View.VISIBLE);
-            tvSummaryPreviousDue.setText("₹" + outstandingBalance);
-            updateTotalPayable();
+            tvSummaryPreviousDue.setText(getString(R.string.rupee_prefix) + outstandingBalance);
+            updateSummary();
         } else {
             cardOutstandingBalance.setVisibility(View.GONE);
             layoutPreviousDue.setVisibility(View.GONE);
+            updateSummary();
         }
     }
 
@@ -369,7 +372,7 @@ public class PlanRenewalActivity extends BaseActivity {
                     etNewStartDate.setText(sdf.format(cal.getTime()));
                 }
             } catch (ParseException e) {
-                Log.e(TAG, "Date parse error: " + e.getMessage());
+                Log.e(TAG, getString(R.string.date_parse_error, e.getMessage()));
                 etNewStartDate.setText(today);
             }
         } else {
@@ -383,6 +386,7 @@ public class PlanRenewalActivity extends BaseActivity {
             calculateEndDate(planMonthMap.get(planType));
         }
     }
+
     private void setupListeners() {
         // Quick Renew Button
         btnQuickRenew.setOnClickListener(v -> quickRenewSamePlan());
@@ -402,7 +406,7 @@ public class PlanRenewalActivity extends BaseActivity {
                     calculateEndDate(planMonthMap.get(selectedPlan));
                 }
             }
-            updateTotalPayable();
+            updateSummary();
         });
 
         // Fee Change Listener
@@ -418,10 +422,10 @@ public class PlanRenewalActivity extends BaseActivity {
                 try {
                     if (!TextUtils.isEmpty(s.toString())) {
                         newPlanFee = Integer.parseInt(s.toString());
-                        updateTotalPayable();
+                        updateSummary();
                     }
                 } catch (NumberFormatException e) {
-                    Log.e(TAG, "Invalid fee: " + e.getMessage());
+                    Log.e(TAG, getString(R.string.invalid_fee, e.getMessage()));
                 }
             }
         });
@@ -432,7 +436,7 @@ public class PlanRenewalActivity extends BaseActivity {
 
     private void quickRenewSamePlan() {
         if (previousPlanType == null) {
-            Toast.makeText(this, "No previous plan found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_previous_plan_found), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -448,16 +452,16 @@ public class PlanRenewalActivity extends BaseActivity {
                     calculateEndDate(planMonthMap.get(previousPlanType));
                 }
             }
-            updateTotalPayable();
+            updateSummary();
 
-            Toast.makeText(this, "✅ Same plan selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.same_plan_selected), Toast.LENGTH_SHORT).show();
         } else {
             // If previous plan not in list, try to match by duration
             for (String plan : planNames) {
-                if (plan.contains("1 Month") && previousPlanType.contains("1 Month") ||
-                        plan.contains("3 Months") && previousPlanType.contains("3 Months") ||
-                        plan.contains("6 Months") && previousPlanType.contains("6 Months") ||
-                        plan.contains("1 Year") && previousPlanType.contains("1 Year")) {
+                if (plan.contains(getString(R.string.plan_1_month)) && previousPlanType.contains(getString(R.string.plan_1_month)) ||
+                        plan.contains(getString(R.string.plan_3_months)) && previousPlanType.contains(getString(R.string.plan_3_months)) ||
+                        plan.contains(getString(R.string.plan_6_months)) && previousPlanType.contains(getString(R.string.plan_6_months)) ||
+                        plan.contains(getString(R.string.plan_1_year)) && previousPlanType.contains(getString(R.string.plan_1_year))) {
 
                     spinnerNewPlanType.setText(plan, false);
 
@@ -469,16 +473,17 @@ public class PlanRenewalActivity extends BaseActivity {
                             calculateEndDate(planMonthMap.get(plan));
                         }
                     }
-                    updateTotalPayable();
+                    updateSummary();
 
-                    Toast.makeText(this, "✅ Similar plan selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.similar_plan_selected), Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
 
-            Toast.makeText(this, "Previous plan type not available", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.previous_plan_not_available), Toast.LENGTH_SHORT).show();
         }
     }
+
     private void showDatePicker() {
         Calendar cal = Calendar.getInstance();
         DatePickerDialog picker = new DatePickerDialog(this,
@@ -523,13 +528,14 @@ public class PlanRenewalActivity extends BaseActivity {
 
             etNewEndDate.setText(sdf.format(cal.getTime()));
         } catch (ParseException e) {
-            Log.e(TAG, "Date calculation error: " + e.getMessage());
+            Log.e(TAG, getString(R.string.date_calculation_error, e.getMessage()));
         }
     }
+
     private void updateTotalPayable() {
-        int total = newPlanFee ;
-        tvSummaryNewPlan.setText("₹" + newPlanFee);
-        tvTotalPayable.setText("₹" + total);
+        int total = newPlanFee + outstandingBalance;
+        tvSummaryNewPlan.setText(getString(R.string.rupee_prefix) + newPlanFee);
+        tvTotalPayable.setText(getString(R.string.rupee_prefix) + total);
     }
 
     private void proceedToPayment() {
@@ -540,35 +546,35 @@ public class PlanRenewalActivity extends BaseActivity {
 
         // Validation
         if (TextUtils.isEmpty(planType)) {
-            spinnerNewPlanType.setError("Select plan type");
-            Toast.makeText(this, "Please select a plan", Toast.LENGTH_SHORT).show();
+            spinnerNewPlanType.setError(getString(R.string.select_plan_type));
+            Toast.makeText(this, getString(R.string.please_select_plan), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(startDate)) {
-            etNewStartDate.setError("Select start date");
+            etNewStartDate.setError(getString(R.string.select_start_date));
             return;
         }
 
         if (TextUtils.isEmpty(feeText)) {
-            etNewPlanFee.setError("Enter fee amount");
+            etNewPlanFee.setError(getString(R.string.enter_fee_amount));
             return;
         }
 
         try {
             newPlanFee = Integer.parseInt(feeText);
             if (newPlanFee <= 0) {
-                etNewPlanFee.setError("Invalid fee");
+                etNewPlanFee.setError(getString(R.string.invalid_fee));
                 return;
             }
         } catch (NumberFormatException e) {
-            etNewPlanFee.setError("Invalid fee");
+            etNewPlanFee.setError(getString(R.string.invalid_fee));
             return;
         }
 
         // Generate Plan ID
         String planId = generatePlanId(startDate, planType);
-        int totalPayable = newPlanFee;
+        int totalPayable = newPlanFee + outstandingBalance;
 
         // Navigate to Payment Activity
         Intent intent = new Intent(this, PaymentActivity.class);
@@ -589,30 +595,6 @@ public class PlanRenewalActivity extends BaseActivity {
         finish();
     }
 
-//    private String generatePlanId(String startDate, String planType) {
-//        try {
-//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-//            Calendar cal = Calendar.getInstance();
-//            cal.setTime(sdf.parse(startDate));
-//
-//            String month = new SimpleDateFormat("MMM", Locale.getDefault())
-//                    .format(cal.getTime()).toUpperCase();
-//            int year = cal.get(Calendar.YEAR);
-//
-//            String planCode = "";
-//            if (planType.contains("1 Month")) planCode = "1M";
-//            else if (planType.contains("3 Months")) planCode = "3M";
-//            else if (planType.contains("6 Months")) planCode = "6M";
-//            else if (planType.contains("1 Year")) planCode = "1Y";
-//
-//            return month + "-" + year + "-" + planCode;
-//
-//        } catch (ParseException e) {
-//            Log.e(TAG, "Plan ID generation error: " + e.getMessage());
-//            return "PLAN-" + System.currentTimeMillis();
-//        }
-//    }
-
     private String generatePlanId(String startDate, String planType) {
         try {
             SimpleDateFormat monthYearFormat = new SimpleDateFormat("MMM-yyyy", Locale.US);
@@ -623,10 +605,10 @@ public class PlanRenewalActivity extends BaseActivity {
 
             // Get plan code
             String planCode = "";
-            if (planType.contains("1 Month")) planCode = "1M";
-            else if (planType.contains("3 Months")) planCode = "3M";
-            else if (planType.contains("6 Months")) planCode = "6M";
-            else if (planType.contains("1 Year")) planCode = "1Y";
+            if (planType.contains(getString(R.string.plan_1_month))) planCode = "1M";
+            else if (planType.contains(getString(R.string.plan_3_months))) planCode = "3M";
+            else if (planType.contains(getString(R.string.plan_6_months))) planCode = "6M";
+            else if (planType.contains(getString(R.string.plan_1_year))) planCode = "1Y";
             else {
                 // Extract number from plan name
                 planCode = planType.replaceAll("[^0-9]", "") + "M";
@@ -649,8 +631,8 @@ public class PlanRenewalActivity extends BaseActivity {
             return planId;
 
         } catch (ParseException e) {
-            Log.e(TAG, "Plan ID generation error: " + e.getMessage());
-            return "PLAN-" + System.currentTimeMillis();
+            Log.e(TAG, getString(R.string.plan_id_generation_error, e.getMessage()));
+            return getString(R.string.plan_prefix) + System.currentTimeMillis();
         }
     }
 

@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 public class MemberAddActivity extends BaseActivity {
 
-    private TextInputEditText etName, etPhone, etEmail, etJoinDate;
+    private TextInputEditText etName, etPhone, etJoinDate;
     private MaterialAutoCompleteTextView spinnerGender;
     private MaterialButton btnNext;
     private ProgressBar progressBar;
@@ -61,23 +61,19 @@ public class MemberAddActivity extends BaseActivity {
         initViews();
         setupGenderSpinner();
         setupClickListeners();
-        setupToolbar();  // Add this line
-
+        setupToolbar();
     }
 
     private void initViews() {
         etName = findViewById(R.id.etMemberName);
         etPhone = findViewById(R.id.etMemberPhone);
-//        etEmail = findViewById(R.id.etMemberEmail);
         etJoinDate = findViewById(R.id.etJoinDate);
         spinnerGender = findViewById(R.id.spinnerGender);
         btnNext = findViewById(R.id.btnNext);
         progressBar = findViewById(R.id.progressBar);
         nameInputLayout = findViewById(R.id.tilMemberName);
         phoneInputLayout = findViewById(R.id.tilMemberPhone);
-        toolbar = findViewById(R.id.toolbar);  // Add this line
-
-
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void setupGenderSpinner() {
@@ -86,6 +82,7 @@ public class MemberAddActivity extends BaseActivity {
                 android.R.layout.simple_dropdown_item_1line, genders);
         spinnerGender.setAdapter(adapter);
     }
+
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -93,7 +90,6 @@ public class MemberAddActivity extends BaseActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        // Handle back arrow click - direct close
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -106,10 +102,10 @@ public class MemberAddActivity extends BaseActivity {
                     RecognizerIntent.EXTRA_RESULTS);
 
             if (result != null && !result.isEmpty()) {
-                etName.setText(result.get(0)); // Full name auto set
+                etName.setText(result.get(0));
             }
         }
-        // 📞 Contact picker
+
         if (requestCode == REQ_CODE_CONTACT && resultCode == RESULT_OK && data != null) {
             Uri contactUri = data.getData();
             if (contactUri == null) return;
@@ -166,23 +162,21 @@ public class MemberAddActivity extends BaseActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak full name");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speak_full_name));
 
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH);
         } catch (Exception e) {
-            Toast.makeText(this, "Voice input not supported", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.voice_input_not_supported), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void validateAndProceed() {
         String name = etName.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
-//        String email = etEmail.getText().toString().trim();
         String gender = spinnerGender.getText().toString().trim();
         String joinDate = etJoinDate.getText().toString().trim();
 
-        // Validation with string resources
         if (TextUtils.isEmpty(name)) {
             etName.setError(getString(R.string.error_name_required));
             return;
@@ -191,10 +185,6 @@ public class MemberAddActivity extends BaseActivity {
             etPhone.setError(getString(R.string.error_phone_valid));
             return;
         }
-//        if (TextUtils.isEmpty(email) || !Pattern.matches(EMAIL_PATTERN, email)) {
-//            etEmail.setError(getString(R.string.error_email_valid));
-//            return;
-//        }
         if (TextUtils.isEmpty(gender)) {
             spinnerGender.setError(getString(R.string.error_gender_required));
             return;
@@ -204,9 +194,9 @@ public class MemberAddActivity extends BaseActivity {
             return;
         }
 
-        // Check if member already exists
         checkMemberExists(phone);
     }
+
     private void checkMemberExists(String phone) {
         progressBar.setVisibility(View.VISIBLE);
         btnNext.setEnabled(false);
@@ -241,13 +231,12 @@ public class MemberAddActivity extends BaseActivity {
                         getString(R.string.error_generic, error.getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
-        }
+    }
 
     private void proceedToPlanSelect() {
         Intent intent = new Intent(this, PlanSelectActivity.class);
         intent.putExtra("name", etName.getText().toString().trim());
         intent.putExtra("phone", etPhone.getText().toString().trim());
-//        intent.putExtra("email", etEmail.getText().toString().trim());
         intent.putExtra("gender", spinnerGender.getText().toString().trim());
         intent.putExtra("joinDate", etJoinDate.getText().toString().trim());
         startActivity(intent);

@@ -37,7 +37,6 @@ public class PlanSelectActivity extends BaseActivity {
     private MaterialButton btnNext;
 
     private MaterialToolbar toolbar;
-    // Member data
     private String name, phone, email, gender, joinDate;
     private PrefManager prefManager;
     private List<Plan> plansList = new ArrayList<>();
@@ -57,144 +56,124 @@ public class PlanSelectActivity extends BaseActivity {
         loadPlansFromFirebase();
         setupClickListeners();
         setInitialDates();
-        setupToolbar();  // Add this line
-
+        setupToolbar();
     }
 
     private void loadPlansFromFirebase() {
-        Log.d(TAG, "Starting to load plans from Firebase");
+        Log.d(TAG, getString(R.string.starting_to_load_plans));
 
         String ownerEmail = prefManager.getUserEmail();
         if (ownerEmail == null || ownerEmail.isEmpty()) {
-            Log.e(TAG, "Owner email is null or empty");
-            Toast.makeText(this, "⚠️ Please login first!", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, getString(R.string.owner_email_null));
+            Toast.makeText(this, getString(R.string.please_login_first), Toast.LENGTH_SHORT).show();
             return;
         }
 
         String safeEmail = ownerEmail.replace(".", ",");
-        Log.d(TAG, "Safe email: " + safeEmail);
+        Log.d(TAG, getString(R.string.safe_email_log, safeEmail));
 
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference("GYM")
                 .child(safeEmail)
                 .child("gym_plans");
 
-        Log.d(TAG, "Firebase path: " + ref.toString());
+        Log.d(TAG, getString(R.string.firebase_path_log, ref.toString()));
 
-        // Clear previous data
         plansList.clear();
         planNamesList.clear();
 
-        // Show loading state
         btnNext.setEnabled(false);
-        btnNext.setText("Loading plans...");
+        btnNext.setText(getString(R.string.loading_plans));
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onDataChange called, has children: " + dataSnapshot.hasChildren());
-                Log.d(TAG, "Children count: " + dataSnapshot.getChildrenCount());
+                Log.d(TAG, getString(R.string.on_data_change_log, dataSnapshot.hasChildren(), dataSnapshot.getChildrenCount()));
 
-                // Clear lists
                 plansList.clear();
                 planNamesList.clear();
 
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Log.d(TAG, "Snapshot key: " + snapshot.getKey());
-                        Log.d(TAG, "Snapshot value: " + snapshot.getValue());
+                        Log.d(TAG, getString(R.string.snapshot_key_log, snapshot.getKey()));
+                        Log.d(TAG, getString(R.string.snapshot_value_log, String.valueOf(snapshot.getValue())));
 
                         try {
-                            // Get the Plan object from Firebase
                             Plan plan = snapshot.getValue(Plan.class);
 
                             if (plan != null) {
-                                Log.d(TAG, "Plan object created: " + plan.getPlanName());
-
-                                // Set the planId from Firebase key
+                                Log.d(TAG, getString(R.string.plan_object_log, plan.getPlanName()));
                                 plan.setPlanId(snapshot.getKey());
 
-                                // Only add active plans
                                 if (plan.isActive()) {
                                     plansList.add(plan);
 
                                     String planName = plan.getPlanName();
                                     if (planName != null && !planName.trim().isEmpty()) {
                                         planNamesList.add(planName);
-                                        Log.d(TAG, "Added plan name to list: " + planName);
+                                        Log.d(TAG, getString(R.string.added_plan_name_log, planName));
                                     } else {
-                                        planNamesList.add("Plan " + plansList.size());
-                                        Log.d(TAG, "Added default plan name");
+                                        planNamesList.add(getString(R.string.default_plan_name, plansList.size()));
+                                        Log.d(TAG, getString(R.string.added_default_plan_log));
                                     }
                                 } else {
-                                    Log.d(TAG, "Plan is not active, skipping");
+                                    Log.d(TAG, getString(R.string.plan_inactive_skipping));
                                 }
                             } else {
-                                Log.e(TAG, "Failed to parse plan from snapshot");
+                                Log.e(TAG, getString(R.string.failed_to_parse_plan));
                             }
                         } catch (Exception e) {
-                            Log.e(TAG, "Error parsing plan: " + e.getMessage());
+                            Log.e(TAG, getString(R.string.error_parsing_plan, e.getMessage()));
                             e.printStackTrace();
                         }
                     }
 
-                    Log.d(TAG, "Total plans loaded: " + plansList.size());
-                    Log.d(TAG, "Total plan names: " + planNamesList.size());
+                    Log.d(TAG, getString(R.string.total_plans_loaded, plansList.size(), planNamesList.size()));
 
-                    // Update UI on main thread
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updatePlanAdapter();
-                            btnNext.setEnabled(true);
-                            btnNext.setText(getString(R.string.next_payment));
+                    runOnUiThread(() -> {
+                        updatePlanAdapter();
+                        btnNext.setEnabled(true);
+                        btnNext.setText(getString(R.string.next_payment));
 
-                            if (plansList.isEmpty()) {
-                                Toast.makeText(PlanSelectActivity.this,
-                                        "No active plans found", Toast.LENGTH_LONG).show();
-                                spinnerPlan.setHint("No plans available");
-                            } else {
-                                // Auto-select first plan
-                                selectedPlan = plansList.get(0);
-                                spinnerPlan.setText(selectedPlan.getPlanName(), false);
-                                updatePlanDetails(selectedPlan);
+                        if (plansList.isEmpty()) {
+                            Toast.makeText(PlanSelectActivity.this,
+                                    getString(R.string.no_active_plans_found), Toast.LENGTH_LONG).show();
+                            spinnerPlan.setHint(getString(R.string.no_plans_available));
+                        } else {
+                            selectedPlan = plansList.get(0);
+                            spinnerPlan.setText(selectedPlan.getPlanName(), false);
+                            updatePlanDetails(selectedPlan);
 
-                                Toast.makeText(PlanSelectActivity.this,
-                                        plansList.size() + " plans loaded", Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(PlanSelectActivity.this,
+                                    getString(R.string.plans_loaded_message, plansList.size()), Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 } else {
-                    Log.d(TAG, "No data found at this path");
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            btnNext.setEnabled(true);
-                            btnNext.setText(getString(R.string.next_payment));
-                            Toast.makeText(PlanSelectActivity.this,
-                                    "No plans found. Please add plans first.", Toast.LENGTH_LONG).show();
-                            spinnerPlan.setHint("No plans available");
-                        }
+                    Log.d(TAG, getString(R.string.no_data_found));
+                    runOnUiThread(() -> {
+                        btnNext.setEnabled(true);
+                        btnNext.setText(getString(R.string.next_payment));
+                        Toast.makeText(PlanSelectActivity.this,
+                                getString(R.string.no_plans_found_message), Toast.LENGTH_LONG).show();
+                        spinnerPlan.setHint(getString(R.string.no_plans_available));
                     });
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                Log.e(TAG, "Firebase error: " + error.getMessage() + ", Code: " + error.getCode());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnNext.setEnabled(true);
-                        btnNext.setText(getString(R.string.next_payment));
-                        Toast.makeText(PlanSelectActivity.this,
-                                "Error loading plans: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                Log.e(TAG, getString(R.string.firebase_error_log, error.getMessage(), error.getCode()));
+                runOnUiThread(() -> {
+                    btnNext.setEnabled(true);
+                    btnNext.setText(getString(R.string.next_payment));
+                    Toast.makeText(PlanSelectActivity.this,
+                            getString(R.string.error_loading_plans_message, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });
     }
+
     private void setupToolbar() {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -202,7 +181,6 @@ public class PlanSelectActivity extends BaseActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        // Handle back arrow click - direct close
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -218,7 +196,7 @@ public class PlanSelectActivity extends BaseActivity {
         }
         spinnerPlan.setAdapter(planAdapter);
         planAdapter.notifyDataSetChanged();
-        Log.d(TAG, "Adapter updated with " + planNamesList.size() + " items");
+        Log.d(TAG, getString(R.string.adapter_updated_log, planNamesList.size()));
     }
 
     private void initViews() {
@@ -227,8 +205,7 @@ public class PlanSelectActivity extends BaseActivity {
         etStartDate = findViewById(R.id.etStartDate);
         etEndDate = findViewById(R.id.etEndDate);
         btnNext = findViewById(R.id.btnNext);
-        toolbar = findViewById(R.id.toolbar);  // Add this line
-
+        toolbar = findViewById(R.id.toolbar);
     }
 
     private void getIntentData() {
@@ -238,12 +215,10 @@ public class PlanSelectActivity extends BaseActivity {
         gender = getIntent().getStringExtra("gender");
         joinDate = getIntent().getStringExtra("joinDate");
 
-        Log.d(TAG, "Member Data: Name=" + name + ", Phone=" + phone + ", JoinDate=" + joinDate);
+        Log.d(TAG, getString(R.string.member_data_log, name, phone, joinDate));
     }
 
-
     private void setupPlanSpinner() {
-        // Initialize with empty adapter
         planNamesList = new ArrayList<>();
         planAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,
@@ -251,18 +226,17 @@ public class PlanSelectActivity extends BaseActivity {
         spinnerPlan.setAdapter(planAdapter);
 
         spinnerPlan.setOnItemClickListener((parent, view, position, id) -> {
-            Log.d(TAG, "Plan selected at position: " + position);
+            Log.d(TAG, getString(R.string.plan_selected_log, position));
             if (position >= 0 && position < plansList.size()) {
                 selectedPlan = plansList.get(position);
-                Log.d(TAG, "Selected plan: " + selectedPlan.getPlanName());
+                Log.d(TAG, getString(R.string.selected_plan_log, selectedPlan.getPlanName()));
                 updatePlanDetails(selectedPlan);
             }
         });
 
-        // Show dropdown on click
         spinnerPlan.setOnClickListener(v -> {
             if (plansList.isEmpty()) {
-                Toast.makeText(this, "No plans available. Please wait for loading.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_plans_wait_message), Toast.LENGTH_SHORT).show();
             } else {
                 spinnerPlan.showDropDown();
             }
@@ -271,9 +245,9 @@ public class PlanSelectActivity extends BaseActivity {
 
     private void updatePlanDetails(Plan plan) {
         if (plan != null) {
-            etTotalFee.setText("₹" + plan.getFee());
+            etTotalFee.setText(getString(R.string.rupee_prefix) + plan.getFee());
             calculateEndDate(plan.getDuration());
-            Log.d(TAG, "Updated details: Fee=" + plan.getFee() + ", Duration=" + plan.getDuration());
+            Log.d(TAG, getString(R.string.updated_details_log, plan.getFee(), plan.getDuration()));
         }
     }
 
@@ -285,13 +259,12 @@ public class PlanSelectActivity extends BaseActivity {
         if (joinDate != null && !joinDate.isEmpty()) {
             etStartDate.setText(joinDate);
         } else {
-            // Set default to today
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String today = sdf.format(Calendar.getInstance().getTime());
             etStartDate.setText(today);
-            joinDate = today; // Update joinDate
+            joinDate = today;
         }
-        etEndDate.setText("Select Plan");
+        etEndDate.setText(getString(R.string.select_plan));
     }
 
     private void calculateEndDate(int months) {
@@ -308,16 +281,16 @@ public class PlanSelectActivity extends BaseActivity {
             String endDate = sdf.format(cal.getTime());
             etEndDate.setText(endDate);
 
-            Log.d(TAG, "Calculated end date: " + endDate + " for " + months + " months");
+            Log.d(TAG, getString(R.string.calculated_end_date_log, endDate, months));
         } catch (ParseException e) {
-            etEndDate.setText("Invalid Date");
-            Log.e(TAG, "Date calculation error: " + e.getMessage());
+            etEndDate.setText(getString(R.string.invalid_date));
+            Log.e(TAG, getString(R.string.date_calculation_error_log, e.getMessage()));
         }
     }
 
     private void validateAndProceed() {
         if (selectedPlan == null) {
-            Toast.makeText(this, "Please select a plan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.please_select_plan), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -325,16 +298,16 @@ public class PlanSelectActivity extends BaseActivity {
         String endDate = etEndDate.getText().toString().trim();
 
         if (TextUtils.isEmpty(startDate)) {
-            Toast.makeText(this, "Invalid start date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.invalid_start_date), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(endDate) || endDate.equals("Select Plan") || endDate.equals("Invalid Date")) {
-            Toast.makeText(this, "Invalid end date", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(endDate) || endDate.equals(getString(R.string.select_plan)) || endDate.equals(getString(R.string.invalid_date))) {
+            Toast.makeText(this, getString(R.string.invalid_end_date), Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Log.d(TAG, "Proceeding to payment with plan: " + selectedPlan.getPlanName());
+        Log.d(TAG, getString(R.string.proceeding_to_payment_log, selectedPlan.getPlanName()));
 
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra("name", name);
@@ -363,7 +336,6 @@ public class PlanSelectActivity extends BaseActivity {
 
             int year = cal.get(Calendar.YEAR);
 
-            // Extract duration (e.g., "1 Month" → "1M")
             String duration = "1M";
             if (planType != null && planType.contains(" ")) {
                 String[] parts = planType.split(" ");
@@ -374,8 +346,8 @@ public class PlanSelectActivity extends BaseActivity {
 
             return month + "-" + year + "-" + duration;
         } catch (Exception e) {
-            Log.e(TAG, "Error generating plan ID: " + e.getMessage());
-            return "PLAN-" + System.currentTimeMillis();
+            Log.e(TAG, getString(R.string.plan_id_generation_error_log, e.getMessage()));
+            return getString(R.string.plan_prefix) + System.currentTimeMillis();
         }
     }
 }

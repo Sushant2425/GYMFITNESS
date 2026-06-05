@@ -88,7 +88,8 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_no_plans"
-                        app:tint="#FF6B00" />
+                        app:tint="#FF6B00"
+                        android:contentDescription="@string/no_plans_found" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -146,6 +147,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_plan"
         app:backgroundTint="#FF6B00"
         app:tint="#FFFFFF"
         app:elevation="6dp"

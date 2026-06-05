@@ -24,17 +24,14 @@ public class LanguageSelectionActivity extends BaseActivity {
 
         prefManager = new PrefManager(this);
 
-        // Direct RadioButton references (NO RadioGroup needed)
         rbEnglish = findViewById(R.id.rbEnglish);
         rbMarathi = findViewById(R.id.rbMarathi);
         btnContinue = findViewById(R.id.btnContinue);
 
-        // Default to English
         if (rbEnglish != null) {
             rbEnglish.setChecked(true);
         }
 
-        // Handle individual RadioButton clicks
         if (rbEnglish != null) {
             rbEnglish.setOnClickListener(v -> {
                 rbMarathi.setChecked(false);
@@ -51,13 +48,11 @@ public class LanguageSelectionActivity extends BaseActivity {
 
         if (btnContinue != null) {
             btnContinue.setOnClickListener(v -> {
-                // Check which button is selected
                 boolean isEnglish = rbEnglish != null && rbEnglish.isChecked();
                 boolean isMarathi = rbMarathi != null && rbMarathi.isChecked();
 
                 if (!isEnglish && !isMarathi) {
-                    // No selection - show validation
-                    btnContinue.setText("Please select a language first");
+                    btnContinue.setText(getString(R.string.please_select_language));
                     btnContinue.postDelayed(() ->
                             btnContinue.setText(getString(R.string.continue_text)), 2000);
                     return;
@@ -65,14 +60,11 @@ public class LanguageSelectionActivity extends BaseActivity {
 
                 String langCode = isEnglish ? "en" : "mr";
 
-                // Save language preference
                 prefManager.setLanguage(langCode);
                 prefManager.setFirstTimeLaunch(false);
 
-                // Apply language with smooth transition
                 LocaleHelper.setLocale(this, langCode);
 
-                // Navigate to Login
                 Intent intent = new Intent(LanguageSelectionActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

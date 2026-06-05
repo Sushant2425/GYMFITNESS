@@ -19,6 +19,7 @@
             android:background="@android:color/transparent"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="#FFFFFF"
+            app:title="@string/all_payments"
             app:titleTextColor="#FFFFFF" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -63,7 +64,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Amount Paid"
+                        android:text="@string/total_amount_paid"
                         android:textSize="14sp"
                         android:textColor="#FFE0B2"
                         android:textStyle="bold" />
@@ -96,7 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="All Payment Plans"
+                    android:text="@string/all_payment_plans"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF" />
@@ -116,7 +117,7 @@
                 android:id="@+id/tvNoPayments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No payments found"
+                android:text="@string/no_payments_found"
                 android:textSize="14sp"
                 android:textColor="#9E9E9E"
                 android:gravity="center"

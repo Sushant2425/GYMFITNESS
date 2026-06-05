@@ -33,27 +33,25 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
         return new PaymentViewHolder(view);
     }
 
-// Replace onBindViewHolder() method only:
     @Override
     public void onBindViewHolder(@NonNull PaymentViewHolder holder, int position) {
         PaymentModel payment = paymentsList.get(position);
+        String context = holder.itemView.getContext().getString(R.string.id_prefix);
 
-        holder.tvPaymentId.setText("ID: " + payment.getPaymentId().substring(0, 8) + "...");
-        holder.tvAmount.setText("₹" + payment.getAmountPaid() + " Paid");
+        holder.tvPaymentId.setText(context + payment.getPaymentId().substring(0, 8) + "...");
+        holder.tvAmount.setText(holder.itemView.getContext().getString(R.string.paid_amount_display, payment.getAmountPaid()));
         holder.tvMode.setText(payment.getMode());
         holder.tvStatus.setText(payment.getStatus());
-        holder.tvRemaining.setText("Remaining: ₹" + payment.getRemaining());
+        holder.tvRemaining.setText(holder.itemView.getContext().getString(R.string.remaining_prefix_short) + payment.getRemaining());
 
-        // ✅ FIXED: Long timestamp → readable date
         if (payment.getDate() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
             String dateStr = sdf.format(new Date(payment.getDate()));
-            holder.tvDate.setText("Date: " + dateStr);
+            holder.tvDate.setText(holder.itemView.getContext().getString(R.string.date_prefix) + dateStr);
         } else {
-            holder.tvDate.setText("Date: N/A");
+            holder.tvDate.setText(holder.itemView.getContext().getString(R.string.date_prefix) + holder.itemView.getContext().getString(R.string.na));
         }
     }
-
 
     @Override
     public int getItemCount() {
