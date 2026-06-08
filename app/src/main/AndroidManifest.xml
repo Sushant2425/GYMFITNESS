@@ -40,6 +40,12 @@
         </provider>
 
         <!-- Activities -->
+        <activity android:name=".Activities.AllMembersReportActivity" android:exported="false" />
+        <activity android:name=".Activities.MonthlyRevenueReportActivity" android:exported="false" />
+        <activity android:name=".Activities.ExpiringSoonReportActivity" android:exported="false" />
+        <activity android:name=".Activities.PendingDuesReportActivity" android:exported="false" />
+        <activity android:name=".Activities.PaymentCollectionReportActivity" android:exported="false" />
+        <activity android:name=".Activities.ReportsActivity" android:exported="false" />
         <activity android:name=".Activities.PremiumSelectionActivity" android:exported="false" />
         <activity android:name=".Activities.AllPaymentsActivity" android:exported="false" />
         <activity android:name=".Activities.PaymentHistoryActivity" android:exported="false" />

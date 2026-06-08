@@ -255,7 +255,8 @@ public class DashboardActivity extends BaseActivity implements NavigationView.On
             fragment = new DashboardFragment();
             bottomNav.setSelectedItemId(R.id.nav_dashboard);
         } else if (id == R.id.nav_reports) {
-            fragment = new ReportsFragment();
+            startActivity(new Intent(this, ReportsActivity.class));
+            return true;
         } else if (id == R.id.nav_profile) {
             fragment = new ProfileFragment();
         } else if (id == R.id.nav_settings) {

@@ -819,5 +819,85 @@
     <!-- Settings Fragment Strings - Marathi -->
     <string name="user_email_not_found">प्राधान्यांमध्ये वापरकर्ता ईमेल सापडला नाही</string>
     <string name="owner_info_loaded_success">मालकाची माहिती फायरबेस वरून यशस्वीरित्या लोड केली</string>
+    <!-- Reports Activity Strings - Marathi -->
+    <string name="reports_coming_soon">अहवाल वैशिष्ट्य लवकरच येत आहे!</string>
     <string name="no_gym_found">ईमेलसाठी जिम सापडला नाही: %s</string>
+    <!-- Reports Activity Strings - Marathi -->
+    <string name="financial_reports">💰 आर्थिक अहवाल</string>
+    <string name="member_reports">👥 सदस्य अहवाल</string>
+    <string name="payment_collection_report">पेमेंट संकलन</string>
+    <string name="pending_dues_report">प्रलंबित थकबाकी</string>
+    <string name="monthly_revenue_report">मासिक उत्पन्न</string>
+    <string name="expiring_soon_report">लवकरच कालबाह्य</string>
+    <string name="all_members_report">सर्व सदस्य</string>
+    <string name="active_members_report">सक्रिय सदस्य</string>
+    <string name="expired_members_report">कालबाह्य सदस्य</string>
+    <string name="plan_report">सदस्यत्व योजना</string>
+    <string name="outstanding_payments">थकबाकी रक्कम</string>
+    <string name="revenue_by_month">महिन्यानुसार उत्पन्न</string>
+    <string name="members_expiring_soon">लवकरच कालबाह्य होणारे सदस्य</string>
+    <string name="complete_member_list">संपूर्ण सदस्य यादी</string>
+    <string name="currently_active_members">सध्याचे सक्रिय सदस्य</string>
+    <string name="members_with_expired_plans">कालबाह्य योजना असलेले सदस्य</string>
+    <string name="all_membership_plans">सर्व सदस्यत्व योजना</string>
+    <!-- Payment Collection Report Strings - Marathi -->
+    <string name="report_type">अहवाल प्रकार</string>
+    <string name="year">वर्ष</string>
+    <string name="generate_report">अहवाल तयार करा</string>
+    <string name="summary">सारांश</string>
+    <string name="total_amount">एकूण रक्कम</string>
+    <string name="total_payments">एकूण पेमेंट</string>
+    <string name="payment_details">पेमेंट तपशील</string>
+    <string name="view_pdf">पीडीएफ पहा</string>
+    <string name="share_pdf">पीडीएफ शेअर करा</string>
+    <string name="pdf_generated">पीडीएफ यशस्वीरित्या तयार झाला!</string>
+    <string name="no_pdf_generated">पीडीएफ तयार नाही. प्रथम अहवाल तयार करा.</string>
+    <string name="pdf_file_not_found">पीडीएफ फाइल सापडली नाही.</string>
+    <string name="no_pdf_viewer">पीडीएफ व्यूअर सापडला नाही. कृपया पीडीएफ व्यूअर अॅप स्थापित करा.</string>
+    <string name="payment_report_subject">पेमेंट संकलन अहवाल</string>
+    <string name="payment_report_message">कृपया पेमेंट संकलन अहवाल संलग्न पहा.</string>
+    <string name="share_pdf_via">पीडीएफ शेअर करा</string>
+    <string name="storage_permission_granted">स्टोरेज परवानगी दिली</string>
+    <string name="storage_permission_denied">स्टोरेज परवानगी नाकारली. पीडीएफ जतन करू शकत नाही.</string>
+    <string name="no_payments_found_period">निवडलेल्या कालावधीसाठी कोणतेही पेमेंट सापडले नाहीत.</string>
+    <!-- Pending Dues Report Strings - Marathi -->
+    <string name="filter_by">फिल्टर करा</string>
+    <string name="total_pending_dues">एकूण प्रलंबित थकबाकी</string>
+    <string name="members_with_dues">थकबाकी असलेले सदस्य</string>
+    <string name="low_dues">कमी थकबाकी (&lt;₹2000)</string>
+    <string name="medium_dues">मध्यम थकबाकी (₹2000-₹5000)</string>
+    <string name="high_dues">उच्च थकबाकी (&gt;₹5000)</string>
+    <string name="dues_details">थकबाकी तपशील</string>
+    <string name="pending_dues_report_subject">प्रलंबित थकबाकी अहवाल</string>
+    <string name="pending_dues_report_message">कृपया प्रलंबित थकबाकी अहवाल संलग्न पहा.</string>
+    <string name="no_dues_found">निवडलेल्या फिल्टरसाठी कोणतीही थकबाकी सापडली नाही.</string>
+    <!-- Expiring Soon Report Strings - Marathi -->
+    <string name="filter_by_days">दिवसानुसार फिल्टर करा</string>
+    <string name="total_expiring">एकूण कालबाह्य होणारे</string>
+    <string name="next_7_days">पुढील ७ दिवस</string>
+    <string name="next_15_days">पुढील १५ दिवस</string>
+    <string name="next_30_days">पुढील ३० दिवस</string>
+    <string name="expiring_members_list">कालबाह्य होणारे सदस्य यादी</string>
+    <string name="expiring_soon_report_subject">लवकरच कालबाह्य होणारा अहवाल</string>
+    <string name="expiring_soon_report_message">कृपया लवकरच कालबाह्य होणारा अहवाल संलग्न पहा.</string>
+    <string name="no_expiring_members_found">निवडलेल्या फिल्टरसाठी कोणतेही कालबाह्य होणारे सदस्य सापडले नाहीत.</string>
+    <!-- Monthly Revenue Report Strings - Marathi -->
+    <string name="select_year">वर्ष निवडा</string>
+    <string name="total_revenue">एकूण उत्पन्न</string>
+    <string name="average_monthly">सरासरी मासिक</string>
+    <string name="highest_month">सर्वाधिक उत्पन्न महिना</string>
+    <string name="lowest_month">सर्वात कमी उत्पन्न महिना</string>
+    <string name="monthly_revenue_details">मासिक उत्पन्न तपशील</string>
+    <string name="monthly_revenue_report_subject">मासिक उत्पन्न अहवाल</string>
+    <string name="monthly_revenue_report_message">कृपया मासिक उत्पन्न अहवाल संलग्न पहा.</string>
+    <string name="no_revenue_found">निवडलेल्या वर्षासाठी कोणतेही उत्पन्न सापडले नाही.</string>
+    <!-- All Members Report Strings - Marathi -->
+    <string name="filter_by_status">स्थितीनुसार फिल्टर करा</string>
+    <string name="sort_by">क्रमवारी लावा</string>
+    <string name="expired_members">कालबाह्य सदस्य</string>
+    <string name="expiring_soon_7d">लवकरच कालबाह्य (७ दिवस)</string>
+    <string name="members_details">सदस्य तपशील</string>
+    <string name="all_members_report_subject">सर्व सदस्य अहवाल</string>
+    <string name="all_members_report_message">कृपया सर्व सदस्य अहवाल संलग्न पहा.</string>
+    <string name="no_members_found_filter">निवडलेल्या फिल्टरसाठी कोणतेही सदस्य सापडले नाहीत.</string>
 </resources>

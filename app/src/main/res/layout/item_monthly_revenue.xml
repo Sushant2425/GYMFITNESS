@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="#1A1A1A"
+    android:layout_marginBottom="2dp">
+
+    <TextView
+        android:id="@+id/tvSerial"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textColor="#FF6B00"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="January"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:maxLines="1" />
+
+    <TextView
+        android:id="@+id/tvTotalRevenue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="₹0"
+        android:textColor="#FF6B00"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/tvPaymentCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:text="0"
+        android:textColor="#BDBDBD"
+        android:textSize="12sp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvCashAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹0"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/tvUpiAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹0"
+        android:textColor="#2196F3"
+        android:textSize="12sp"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/tvCardAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹0"
+        android:textColor="#FF9800"
+        android:textSize="12sp"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/tvAvgPerPayment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="₹0"
+        android:textColor="#9E9E9E"
+        android:textSize="12sp"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:text="Active"
+        android:textColor="#4CAF50"
+        android:textSize="11sp"
+        android:gravity="center" />
+
+</LinearLayout>

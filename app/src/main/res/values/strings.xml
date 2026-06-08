@@ -821,5 +821,84 @@
     <string name="user_email_not_found">User email not found in preferences</string>
     <string name="owner_info_loaded_success">Owner info loaded successfully from Firebase</string>
     <string name="no_gym_found">No gym found for email: %s</string>
-
+    <!-- Reports Activity Strings -->
+    <string name="reports_coming_soon">Reports feature coming soon!</string>
+    <!-- Reports Activity Strings -->
+    <string name="financial_reports">💰 Financial Reports</string>
+    <string name="member_reports">👥 Member Reports</string>
+    <string name="payment_collection_report">Payment Collection</string>
+    <string name="pending_dues_report">Pending Dues</string>
+    <string name="monthly_revenue_report">Monthly Revenue</string>
+    <string name="expiring_soon_report">Expiring Soon</string>
+    <string name="all_members_report">All Members</string>
+    <string name="active_members_report">Active Members</string>
+    <string name="expired_members_report">Expired Members</string>
+    <string name="plan_report">Membership Plans</string>
+    <string name="outstanding_payments">Outstanding payments</string>
+    <string name="revenue_by_month">Revenue by month</string>
+    <string name="members_expiring_soon">Members expiring soon</string>
+    <string name="complete_member_list">Complete member list</string>
+    <string name="currently_active_members">Currently active members</string>
+    <string name="members_with_expired_plans">Members with expired plans</string>
+    <string name="all_membership_plans">All membership plans</string>
+    <!-- Payment Collection Report Strings -->
+    <string name="report_type">Report Type</string>
+    <string name="year">Year</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="summary">Summary</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="total_payments">Total Payments</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="view_pdf">View PDF</string>
+    <string name="share_pdf">Share PDF</string>
+    <string name="pdf_generated">PDF generated successfully!</string>
+    <string name="no_pdf_generated">No PDF generated. Generate report first.</string>
+    <string name="pdf_file_not_found">PDF file not found.</string>
+    <string name="no_pdf_viewer">No PDF viewer found. Please install a PDF viewer app.</string>
+    <string name="payment_report_subject">Payment Collection Report</string>
+    <string name="payment_report_message">Please find attached the payment collection report.</string>
+    <string name="share_pdf_via">Share PDF via</string>
+    <string name="storage_permission_granted">Storage permission granted</string>
+    <string name="storage_permission_denied">Storage permission denied. Cannot save PDF.</string>
+    <string name="no_payments_found_period">No payments found for selected period.</string>
+    <!-- Pending Dues Report Strings -->
+    <string name="filter_by">Filter By</string>
+    <string name="total_pending_dues">Total Pending Dues</string>
+    <string name="members_with_dues">Members with Dues</string>
+    <string name="low_dues">Low Dues (&lt;₹2000)</string>
+    <string name="medium_dues">Medium Dues (₹2000-₹5000)</string>
+    <string name="high_dues">High Dues (&gt;₹5000)</string>
+    <string name="dues_details">Dues Details</string>
+    <string name="pending_dues_report_subject">Pending Dues Report</string>
+    <string name="pending_dues_report_message">Please find attached the pending dues report.</string>
+    <string name="no_dues_found">No pending dues found for the selected filter.</string>
+    <!-- Expiring Soon Report Strings -->
+    <string name="filter_by_days">Filter By Days</string>
+    <string name="total_expiring">Total Expiring</string>
+    <string name="next_7_days">Next 7 Days</string>
+    <string name="next_15_days">Next 15 Days</string>
+    <string name="next_30_days">Next 30 Days</string>
+    <string name="expiring_members_list">Expiring Members List</string>
+    <string name="expiring_soon_report_subject">Expiring Soon Report</string>
+    <string name="expiring_soon_report_message">Please find attached the expiring soon report.</string>
+    <string name="no_expiring_members_found">No expiring members found for the selected filter.</string>
+    <!-- Monthly Revenue Report Strings -->
+    <string name="select_year">Select Year</string>
+    <string name="total_revenue">Total Revenue</string>
+    <string name="average_monthly">Average Monthly</string>
+    <string name="highest_month">Highest Month</string>
+    <string name="lowest_month">Lowest Month</string>
+    <string name="monthly_revenue_details">Monthly Revenue Details</string>
+    <string name="monthly_revenue_report_subject">Monthly Revenue Report</string>
+    <string name="monthly_revenue_report_message">Please find attached the monthly revenue report.</string>
+    <string name="no_revenue_found">No revenue found for the selected year.</string>
+    <!-- All Members Report Strings -->
+    <string name="filter_by_status">Filter by Status</string>
+    <string name="sort_by">Sort By</string>
+    <string name="expired_members">Expired Members</string>
+    <string name="expiring_soon_7d">Expiring (7d)</string>
+    <string name="members_details">Members Details</string>
+    <string name="all_members_report_subject">All Members Report</string>
+    <string name="all_members_report_message">Please find attached the all members report.</string>
+    <string name="no_members_found_filter">No members found for the selected filter.</string>
 </resources>
