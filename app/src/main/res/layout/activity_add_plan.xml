@@ -238,7 +238,6 @@
                 app:backgroundTint="#FF6B00"
                 app:cornerRadius="10dp"
                 app:elevation="4dp"
-                app:icon="@android:drawable/ic_menu_save"
                 app:iconGravity="start"
                 app:iconTint="#FFFFFF"
                 android:textColor="#FFFFFF" />
