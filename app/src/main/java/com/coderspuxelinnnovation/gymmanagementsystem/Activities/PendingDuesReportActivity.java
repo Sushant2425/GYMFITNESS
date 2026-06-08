@@ -238,7 +238,7 @@ public class PendingDuesReportActivity extends BaseActivity {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(PendingDuesReportActivity.this,
-                            getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_with_message, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });

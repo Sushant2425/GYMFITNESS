@@ -900,4 +900,5 @@
     <string name="all_members_report_subject">सर्व सदस्य अहवाल</string>
     <string name="all_members_report_message">कृपया सर्व सदस्य अहवाल संलग्न पहा.</string>
     <string name="no_members_found_filter">निवडलेल्या फिल्टरसाठी कोणतेही सदस्य सापडले नाहीत.</string>
+    <string name="error_with_message">त्रुटी: %s</string>
 </resources>

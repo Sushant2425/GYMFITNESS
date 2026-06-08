@@ -250,7 +250,7 @@ public class MonthlyRevenueReportActivity extends BaseActivity {
                 runOnUiThread(() -> {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(MonthlyRevenueReportActivity.this,
-                            getString(R.string.error_prefix, error.getMessage()), Toast.LENGTH_SHORT).show();
+                            getString(R.string.error_with_message, error.getMessage()), Toast.LENGTH_SHORT).show();
                 });
             }
         });
